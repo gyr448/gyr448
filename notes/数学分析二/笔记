@@ -1,0 +1,1662 @@
+% !TeX program = xelatex
+\documentclass[lang=cn,newtx,11pt,color=blue,scheme=chinese]{elegantbook}
+\title{数学分析（二）学习笔记}
+\author{郭玉润}
+\institute{北京大学工学院}
+\date{\today}
+\cover{logo.jpg}
+\graphicspath{{images/}}
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[L]{\small 数学分析（二）学习笔记}\fancyhead[R]{\small\leftmark}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0.4pt}}
+\begin{document}
+\maketitle\tableofcontents\mainmatter
+
+% === 第一章  Class 1（3.4） ===
+\chapter{定积分复习与中值定理}
+\begin{flushright}\small 日期：3月4日\quad 原 Class 1\end{flushright}
+
+\section{课程说明与定积分回顾}
+\textbf{成绩构成：}平时作业 $20\%$ + 期中考试 $40\%$ + 期末考试 $40\%$。
+
+\subsection{定积分回顾}
+划分 $P: a=x_0<\cdots<x_n=b$，$\Delta x_i=x_i-x_{i-1}$，$\|P\|=\max\Delta x_i$。介点 $\xi_i$，Riemann 和 $\sigma(f,P,\xi)=\sum f(\xi_i)\Delta x_i$。若 $\lim_{\|P\|\to0}\sigma$ 存在，称 $f\in R[a,b]$，$\int_a^b f=\lim\sigma$。
+
+\begin{center}\includegraphics[width=0.3\textwidth]{images/0_171_461_519_404_0.jpg}\end{center}
+
+\subsection{Darboux 上下和}
+$M_i=\sup_{[x_{i-1},x_i]}f$，$m_i=\inf_{[x_{i-1},x_i]}f$。$U(f,P)=\sum M_i\Delta x_i$，$L(f,P)=\sum m_i\Delta x_i$。可积充要：$\lim_{\|P\|\to0}(U-L)=0\iff\forall\varepsilon>0,\sum\omega_i\Delta x_i<\varepsilon$。
+
+\subsection{可积函数运算}
+$f,g\in R[a,b]\Rightarrow f\pm g,fg\in R$；若 $|g|>c>0$，$f/g\in R$。极限与加法可交换。
+
+\subsection{Newton-Leibniz 公式}
+$\int_a^b f=F(b)-F(a)$（$F'=f$）。变上限：$\frac{d}{dx}\int_{u(x)}^{v(x)}f(t)dt=f(v)v'-f(u)u'$。
+
+\section{旋转体侧面积}
+\begin{center}\includegraphics[width=0.3\textwidth]{images/0_172_1531_480_336_0.jpg}\end{center}
+$ds=\sqrt{dx^2+dy^2}$，$dA=2\pi y\,ds=2\pi y\sqrt{1+(y')^2}dx$。
+
+\section{积分中值定理}
+\subsection{第一中值定理}
+$f\in C[a,b],m\le f\le M\Rightarrow m(b-a)\le\int_a^b f\le M(b-a)$。$\exists c,f(c)=\frac{1}{b-a}\int_a^b f$。推广（带权）：$g>0$ 时 $\exists c,f(c)=\frac{\int fg}{\int g}$。
+
+\subsection{第二中值定理}
+\begin{theorem}设 $f>0,f'<0$（$f$ 递减），$g\in R[a,b]$。则 $\exists c\in[a,b],\int_a^b fg=f(a)\int_a^c g$。\end{theorem}
+\begin{center}\includegraphics[width=0.3\textwidth]{images/1_169_893_463_370_0.jpg}\end{center}
+注：条件可弱化为 $f$ 单调递减。取 $g\equiv1$：$\int_a^b f=f(a)(c-a)=f(c)(b-a)$。
+\begin{proof}令 $G(x)=\int_a^x g$，则 $G\in C[a,b]$。分部积分：$\int_a^b fg=\int_a^b f\,dG=f(b)G(b)-\int_a^b Gf'=f(b)G(b)+\int_a^b G(-f')$。由 $-f'\ge0$ 放缩：$\ge f(b)G(b)+\min G\int_a^b(-f')=f(a)\min G$。同理 $\le f(a)\max G$。由 $G$ 连续及介值定理 $\exists c$ 使 $G(c)=\frac{1}{f(a)}\int fg$。\end{proof}
+
+\section{Abel 变换与分部积分}
+离散：$\sum\alpha_{i-1}(\beta_i-\beta_{i-1})=\sum(\alpha_{i-1}-\alpha_i)\beta_i+\alpha_n\beta_n-\alpha_0\beta_0$。连续即 $\int ydx+\int xdy=xy\big|$。Riemann-Stieltjes 形式用于证明第二中值定理：对 $P$，$\sum f(x_{i-1})\int_{x_{i-1}}^{x_i}g\xrightarrow{\text{Abel}}-\sum G(x_i)(f(x_i)-f(x_{i-1}))+G(b)f(b)$。
+
+\begin{flushright}\small $\square$ 第一章完\end{flushright}
+
+% === 第二章  Class 2（3.6） ===
+\chapter{第二中值定理续与定积分近似计算}
+\begin{flushright}\small 日期：3月6日\quad 原 Class 2\end{flushright}
+
+\section{第二中值定理的 Abel 变换证明（续）}
+\begin{theorem}[完整形式]设 $f\ge0$ 单调递减，$g\in R[a,b]$。则 $\exists c\in[a,b],\int_a^b fg=f(a)\int_a^c g$。\end{theorem}
+\begin{center}\includegraphics[width=0.2\textwidth]{images/2_175_806_390_314_0.jpg}\end{center}
+\begin{proof}对划分 $P$，$S(P)=\sum f(x_{i-1})\int_{x_{i-1}}^{x_i}g$。令 $G(x)=\int_a^x g$，由 Abel 变换放缩得 $f(a)\min G\le S(P)\le f(a)\max G$。误差 $|S(P)-\int fg|\le\sum\int|f(x_{i-1})-f(x)|\cdot|g|$。由 $g$ 有界 $|g|<L$，误差 $\le L\sum\omega_i(f)\Delta x_i$。由 $f\in R[a,b]$，$\|P\|\to0$ 时 $\to0$。取极限并用 $G$ 的介值性即得。\end{proof}
+
+\section{定积分的近似计算}
+\subsection{Taylor 展开预备}
+$\varphi(h)=\int_{-h}^h f$。$\varphi'=f(h)+f(-h)$，$\varphi''=f'(h)-f'(-h)$，$\varphi'''=f''(h)+f''(-h)$。$\varphi'(0)=2f(0),\varphi''(0)=0,\varphi'''(0)=2f''(0)$。Taylor：$\varphi(h)=2hf(0)+\frac{h^3}{3}f''(0)+\cdots$。目标：找 $\varphi(h)\approx\sum c_i h\varphi'(p_i)$。
+
+\subsection{矩形公式}$p_1=0$：$\varphi(h)\approx h\varphi'(0)=2hf(0)$，误差 $O(h^3)$。
+
+\subsection{梯形公式}$p_1=h$：$\varphi(h)\approx h\varphi'(h)=h(f(h)+f(-h))$。$h\varphi'(h)=h\varphi'(0)+\frac{h^3}{2}\varphi'''(0)+\cdots$，误差 $O(h^3)$。等分推广：$\int_a^b f\approx\sum\frac{f(x_{i-1})+f(x_i)}{2}\Delta x$。误差 $\le\frac{1}{12}\max|f''|\frac{(b-a)^3}{N^2}$。
+
+\subsection{Simpson 公式}
+设 $\varphi(h)\approx c_1h\varphi'(p_1)+c_2h\varphi'(p_2)$。用 $\varphi'(p)=\varphi'(0)+\frac12p^2\varphi'''(0)+\cdots$ 比对系数得 $\begin{cases}c_1+c_2=1\\c_1p_1^2+c_2p_2^2=h^2/3\end{cases}$。选 $p_1=0,p_2=h$ 得 $c_1=2/3,c_2=1/3$。故 $\varphi(h)\approx\frac{h}{3}(f(-h)+4f(0)+f(h))$。几何解释：等价于用二次抛物线逼近被积函数，对三次多项式精确。
+
+\begin{flushright}\small $\square$ 第二章完\end{flushright}
+
+% === 第三章  Class 3（3.11） ===
+\chapter{广义积分（反常积分）}
+\begin{flushright}\small 日期：3月11日\quad 原 Class 3\end{flushright}
+
+Riemann 积分要求区间有限且被积函数有界。本节推广到无限区间和无界函数。
+
+\section{无穷限积分}
+\begin{definition}$\forall A>a,f\in R[a,A]$。若 $\lim_{A\to+\infty}\int_a^A f$ 存在，记 $\int_a^{+\infty}f=\lim_{A\to+\infty}\int_a^A f$。\end{definition}
+引例：第一宇宙速度 $W=\int_R^{+\infty}\frac{GMm}{r^2}dr$。
+
+\begin{example}[$\int_1^{+\infty}r^{-p}dr$]$p>1$ 收敛于 $\frac1{p-1}$；$p\le1$ 发散。\end{example}
+\begin{example}[$\int_1^{+\infty}e^{-x}dx=1/e$]$\int_1^{+\infty}\sin xdx$ 发散（$\cos1-\cos A$ 无极限）。\end{example}
+
+\subsection{双边无穷限与 Cauchy 主值}
+$\int_{-\infty}^{+\infty}f=\lim_{a\to-\infty}\int_a^c f+\lim_{A\to+\infty}\int_c^A f$。$\text{V.P.}\int_{-\infty}^{+\infty}f=\lim_{H\to+\infty}\int_{-H}^H f$。Cauchy 主值存在不代表广义积分收敛（例：$\text{V.P.}\int_{-\infty}^{+\infty}\sin x=0$）。Cauchy 主值受换元影响，非积分不变量。广义 N-L：$\int_a^{+\infty}f=\lim_{b\to+\infty}F(b)-F(a)$。
+
+\section{瑕积分}
+$b$ 为瑕点：$\lim_{\eta\to0^+}\int_a^{b-\eta}f$ 存在。$\int_0^1 x^{-p}dx$：$p<1$ 收敛于 $\frac1{1-p}$；$p\ge1$ 发散。对比 $\int_1^{+\infty}x^{-p}$（$p>1$ 收敛），二者在 $p=1$ 均发散——$1/x$ 的特殊地位。
+\begin{center}\includegraphics[width=0.4\textwidth]{images/6_1080_161_598_324_0.jpg}\end{center}
+内部瑕点 $c\in(a,b)$：$\int_a^b f=\lim_{\eta\to0^+}\int_a^{c-\eta}f+\lim_{\varepsilon\to0^+}\int_{c+\varepsilon}^b f$。Cauchy 主值（有限区间）：$\text{V.P.}\int_a^b f=\lim_{\eta\to0^+}(\int_a^{c-\eta}f+\int_{c+\eta}^b f)$。
+
+\section{运算性质}线性、分部积分、换元积分（均需积分收敛）。
+
+\section{综合例题}
+\begin{example}[$\int_0^{+\infty}\frac{\ln x}{1+x^2}dx$]令 $x=1/s$ 得原式 $=-\int_0^{+\infty}\frac{\ln s}{1+s^2}ds$，故 $=0$。收敛验证：$x\to\infty$ 时 $<x^{-3/2}$ 收敛；$x\to0^+$ 时 $\sim\ln x$ 而 $\int_0^1\ln xdx=-1$ 收敛。\end{example}
+\begin{example}[$\int_0^1 x^{-1}dx=+\infty$ 发散]\end{example}
+\begin{flushright}\small $\square$ 第三章完\end{flushright}
+
+% === 第四章  Class 4 ===
+\chapter{定积分习题课}
+\begin{flushright}\small 原 Class 4（习题课）\end{flushright}
+
+\section{常用数学符号书写}
+\subsection{希腊字母}
+\begin{tabular}{lll}\toprule 序号&字母&常见用途\\\midrule 1&$\alpha$&角加速度\\2&$\beta$&角度\\3&$\gamma$&欧拉常数\\4&$\delta,\Delta$&变分、$\Delta=\nabla^2$\\5&$\varepsilon,E$&介电常数\\6&$\zeta$&Riemann $\zeta$\\7&$\eta$&效率\\8&$\theta,\Theta$&角度\\9&$\kappa$&曲率\\10&$\lambda,\Lambda$&特征值\\11&$\mu$&测度\\12&$\sigma,\Sigma$&应力、求和\\13&$\tau$&挠率\\14&$\phi,\varphi,\Phi$&电势\\15&$\psi,\Psi$&波函数\\16&$\omega,\Omega$&角频率\\17&$\chi$&电极化率\\\bottomrule\end{tabular}
+
+\subsection{花体} $\mathcal{A}$集合系,$\mathcal{B}$Borel,$\mathcal{C}$连续函数,$\mathcal{D}$区域,$\mathcal{F}$Fourier,$\mathcal{H}$Hilbert,$\mathcal{L}$Laplace/Lebesgue,$\mathcal{R}$Riemann。
+
+\section{定积分理论系统复习}
+可积充要：$\lim_{\|P\|\to0}(U-L)=0\iff\forall\varepsilon,\sum\omega_i\Delta x_i<\varepsilon$。Dirichlet 函数 $D(x)$ 不可积。Riemann 函数 $R(x)=1/q$（$x=p/q$ 既约）可积且 $\int R=0$。三个充分条件：连续、单调、有界仅有限间断。性质：线性、$|f|$ 可积、乘积可积。中值定理一般形式：$f$ 单调 $\Rightarrow\exists c,\int_a^b fg=f(a)\int_a^c g+f(b)\int_c^b g$。
+
+\section{思考题与反例}
+复合函数可积性：(1) $\varphi\in C,f\in R\Rightarrow\varphi\circ f\in R$。(2) $\varphi\in R,f\in R\nRightarrow\varphi\circ f\in R$（反例：$R(x)\mapsto D(x)$）。(3) 均不可积也可能复合后可积（$\varphi=D,f=1-D,\varphi\circ f\equiv0$）。取整函数：$f\in R\nRightarrow[f]\in R$（$f=1-R(x)$ 时 $[f]=D(x)$）。
+
+证明题：$f\in C[0,\infty),\varphi=f\int_0^x f$，若 $\varphi\le0$ 则 $f\equiv0$。令 $F=\int_0^x f$，$\varphi=FF'=\frac d{dx}(\frac12F^2)$。$\int_0^x\varphi=\frac12F^2\ge0$ 且 $\le0$，故 $F\equiv0,f\equiv0$。
+
+Riemann 积分的缺陷：$\mathbb{Q}$ 可数，用总长 $<\varepsilon$ 的区间覆盖 $\mathbb{Q}\cap[0,1]$ 可"证明" $\int D(x)\le\varepsilon$。矛盾源于 $D(x)$ 振幅恒为1。需 Lebesgue 积分处理零测集间断。
+\begin{flushright}\small $\square$ 第四章完\end{flushright}
+
+% === 第五章  Class 5（3.11续） ===
+\chapter{广义积分的收敛判别法}
+\begin{flushright}\small 日期：3月11日\quad 原 Class 5\end{flushright}
+
+\section{无穷限积分的收敛判别}
+\subsection{Cauchy 原理}$\int_a^{+\infty}f$ 收敛 $\iff\forall\varepsilon,\exists\Delta,\forall H_2\ge H_1>\Delta:|\int_{H_1}^{H_2}f|<\varepsilon$。
+
+\subsection{比较判别法}$|f|\le g$ 且 $\int g$ 收敛 $\Rightarrow\int|f|$ 绝对收敛。绝对收敛 $\Rightarrow$ 收敛。条件收敛：$\int f$ 收敛但 $\int|f|$ 不收敛。
+
+\subsection{极限比较} $g>0,\lim\frac{|f|}{g}=B$。$0<B<\infty$ 同敛散；$B=0$ 且 $\int g$ 收敛 $\Rightarrow\int|f|$ 收敛；$B=\infty$ 且 $\int g$ 发散 $\Rightarrow\int|f|$ 发散。
+
+\subsection{$p$-判别法} $\lim x^p|f|=B$。$p>1,B<\infty$ 绝对收敛；$p\le1,B>0$ 不绝对收敛。
+
+例：$\int_1^\infty\frac{\sin x}{x^{3/2}}$ 绝对收敛（$p=3/2$）。$\int_1^\infty x^m e^{-x}$ 绝对收敛（$p=2,B=0$）。$\int_1^\infty\frac{\arctan x}{x^p}$：$p\le1$ 不绝对收敛，$p>1$ 绝对收敛。
+
+\subsection{Dirichlet判别法}$f\downarrow0$，$|\int g|$ 有界 $\Rightarrow\int fg$ 收敛。
+\subsection{Abel判别法}$f$ 单调有界，$\int g$ 收敛 $\Rightarrow\int fg$ 收敛。
+
+\begin{example}[$\int_1^\infty\frac{\sin x}{x}dx$ 条件收敛] 收敛（Dirichlet：$1/x\downarrow0,|\int\sin x|\le2$）。不绝对收敛：$|\frac{\sin x}{x}|\ge\frac{\sin^2 x}{x}=\frac1{2x}-\frac{\cos2x}{2x}$，前者发散，后者收敛。\end{example}
+
+\section{瑕积分收敛判别}理论完全平行：Cauchy原理、比较、$p$-判别（$g=1/(x-a)^p$，$p<1$ 收敛）、Dirichlet/Abel。
+
+\section{综合例题}
+$\int_0^\infty\frac{\sin x}{x\sqrt{x}}dx$ 绝对收敛（拆分 $\int_0^1+\int_1^\infty$）。$\int_0^1\frac{\ln x}{1-x^2}dx$ 绝对收敛。Beta函数 $B(\alpha,\beta)$ 收敛域 $\alpha,\beta>0$。Gamma函数 $\Gamma(p)$ 收敛域 $p>0$。$\int_0^1\frac{\sin(1/x)}{x^p}dx$：换元 $t=1/x$，$p<1$ 绝对收敛，$1\le p<2$ 条件收敛，$p\ge2$ 发散。
+\begin{flushright}\small $\square$ 第五章完\end{flushright}
+
+% === 第六章  Class 6（3.18） ===
+\chapter{度量空间与拓扑初步}
+\begin{flushright}\small 日期：3月18日\quad 原 Class 6\end{flushright}
+
+\section{线性空间}加法公理（交换、结合、零元、逆元）、数乘公理。例：$X=\{a,b\},a+b=b+a=b,a+a=a,b+b=a$。$a$ 为零元，$a,b$ 各为逆元。线性相关/无关、基、维数。
+
+\section{度量空间}
+\begin{definition}$d(x,y)\ge0$，$=0\iff x=y$；对称；三角不等式。\end{definition}
+\begin{center}\includegraphics[width=0.3\textwidth]{images/17_302_453_480_163_0.jpg}\end{center}
+
+\section{赋范空间}$\|x\|\ge0,=0\iff x=0$；$\|\lambda x\|=|\lambda|\|x\|$；三角不等式。范数诱导距离 $d=\|x-y\|$。$\mathbb{R}^m$ 中：$\|x\|_2,\|x\|_p,\|x\|_\infty$。
+\begin{center}\includegraphics[width=0.3\textwidth]{images/18_214_181_522_358_0.jpg}\includegraphics[width=0.4\textwidth]{images/18_173_535_537_280_0.jpg}\end{center}
+等价范数：$c_1\|x\|_a\le\|x\|_b\le c_2\|x\|_a$。有限维空间所有范数等价。
+
+\section{拓扑概念}
+开球 $U(x,r)$。开集。平庸距离 $d(x,y)=1(x\neq y)$。由 $f$ 单调构造距离：$d(x_1,x_2)=f(|x_1-x_2|)$，例 $d=\sqrt{|x_1-x_2|}$。收敛、函数极限。
+\begin{center}\includegraphics[width=0.2\textwidth]{images/18_1390_919_227_225_0.jpg}\end{center}
+
+点集分类：内点、外点、边界点、聚点（$\forall r,\overset{\circ}{U}(x,r)\cap E\neq\varnothing$）、孤立点。
+\begin{center}\includegraphics[width=0.2\textwidth]{images/19_1291_374_244_264_0.jpg}\includegraphics[width=0.2\textwidth]{images/19_1310_1061_284_277_0.jpg}\end{center}
+闭集：$X\setminus F$ 开 $\iff$ $F$ 对极限封闭。闭包 $\overline{E}=E\cup\partial E$。
+\begin{flushright}\small $\square$ 第六章完\end{flushright}
+% ============================================================
+% 第七章  Class 7（3.18习题课）  广义积分习题课
+% ============================================================
+\chapter{广义积分习题课}
+\begin{flushright}\small 原 Class 7（习题课）\end{flushright}
+
+\section{习题选讲}
+
+\begin{problem}[一致连续 + 积分收敛 $\Rightarrow$ 极限为0]
+若 $f(x)$ 在 $[0,+\infty)$ 一致连续，且 $\int_0^{+\infty}f(x)dx$ 收敛，证明 $\lim_{x\to+\infty}f(x)=0$。若仅知道 $f\in C[0,+\infty)$ 且积分收敛，结论是否仍成立？
+\end{problem}
+
+\begin{proof}
+假设 $\lim f(x)\neq0$，则 $\exists\varepsilon_0>0,\forall M>0,\exists M_1>M$ 使 $|f(M_1)|\ge\varepsilon_0$。不妨设 $f(M_1)>0$。由一致连续，对 $\varepsilon_0/2$，$\exists\delta>0$ 使 $M_1<x<M_1+\delta$ 时 $|f(x)-f(M_1)|<\varepsilon_0/2$，故 $f(x)>\varepsilon_0/2$。于是 $\int_{M_1}^{M_1+\delta}f(x)dx>\frac{\varepsilon_0}{2}\delta>0$。可找到无穷多这样的区间（每个贡献固定正面积），与 $\int_0^{+\infty}f$ 收敛（Cauchy准则）矛盾。$\therefore\lim f(x)=0$。
+
+若仅连续，结论不成立。反例：在整数 $n$ 处构造高度为1、宽度为 $1/n^2$ 的三角形脉冲——函数连续、积分收敛（总面积 $\sim\sum1/n^2$），但 $\lim f\neq0$。
+\end{proof}
+
+\begin{center}\includegraphics[width=0.4\textwidth]{images/20_936_368_658_453_0.jpg}\end{center}
+
+\begin{problem}[与参数无关的积分]
+设 $a\ge1$，证明 $\int_0^{+\infty}\frac{dx}{(1+x^2)(1+x^a)}$ 的值与 $a$ 无关。
+\end{problem}
+
+\begin{proof}
+令 $x=1/t$，则 $I=\int_{+\infty}^0\frac{-dt/t^2}{(1+1/t^2)(1+1/t^a)}=\int_0^{+\infty}\frac{t^a dt}{(1+t^2)(1+t^a)}$。于是 $2I=\int_0^{+\infty}\frac{1+x^a}{(1+x^2)(1+x^a)}dx=\int_0^{+\infty}\frac{dx}{1+x^2}=\frac{\pi}{2}$，故 $I=\pi/4$，与 $a$ 无关。此法类似 $\int_0^{+\infty}\frac{\ln x}{1+x^2}dx=0$。
+\end{proof}
+
+\begin{problem}[$\int_0^{+\infty}\frac{\sin x}{x^p}dx$ 的敛散性，$p>0$]
+两个可疑点：$0$ 和 $+\infty$。
+
+$x\to0^+$：$\frac{\sin x}{x^p}\sim x^{1-p}$。$1-p>-1$（即 $p<2$）时瑕积分收敛；$p\ge2$ 发散。
+
+$x\to+\infty$：由 Dirichlet 判别法（$1/x^p\downarrow0$，$\int\sin x$ 有界），$p>0$ 时收敛。更精细地用第二中值定理：$|\int_H^{H'}\frac{\sin x}{x^p}dx|\le\frac1{H^p}|\int_H^{H'}\sin xdx|\le\frac2{H^p}\to0$，Cauchy 收敛原理保证收敛。
+
+绝对收敛性：$\int|\frac{\sin x}{x^p}|dx\ge\int\frac{\sin^2 x}{x^p}dx=\frac12\int\frac{1-\cos2x}{x^p}dx$。$\int_1^\infty\frac{dx}{x^p}$ 当 $p>1$ 收敛，故绝对收敛 $\iff p>1$。
+
+总结：$0<p\le1$ 条件收敛（$0$ 处绝对收敛，$+\infty$ 处条件收敛）；$1<p<2$ 绝对收敛；$p\ge2$ 发散。
+\end{problem}
+
+\begin{problem}[$\int_0^{+\infty}\frac{\sin x}{x^p+\sin x}dx$ 的敛散性]
+$x\to0^+$：$\lim_{x\to0}\frac{\sin x}{x^p+\sin x}=\begin{cases}1,&p>1\\\frac12,&p=1\\0,&p<1\end{cases}$。$0$ 不是瑕点（极限有限）。只需讨论 $\int_1^{+\infty}$。
+
+拆分：$\frac{\sin x}{x^p+\sin x}=\frac{\sin x}{x^p}-\frac{\sin^2 x}{x^p(x^p+\sin x)}$。第一项 $\frac{\sin x}{x^p}$ 当 $p>0$ 条件收敛（Dirichlet）。第二项：$x$ 充分大时 $\frac{\sin^2 x}{x^p(x^p+\sin x)}\ge\frac{\sin^2 x}{x^p(x^p+1)}\sim\frac{\sin^2 x}{x^{2p}}$。$\int^{+\infty}\frac{\sin^2 x}{x^{2p}}dx$ 当 $2p>1$（$p>1/2$）收敛，$p\le1/2$ 发散。
+
+总结：$0<p\le\frac12$ 发散；$\frac12<p\le1$ 条件收敛；$p>1$ 绝对收敛。
+\end{problem}
+
+\begin{problem}[$\int_0^{+\infty}\frac{xdx}{1+x^6\sin^2 x}$ 的收敛性]
+$f(x)=\frac{x}{1+x^6\sin^2 x}>0$。令 $F(A)=\int_0^A f$。考虑 $F(n\pi)=\sum_{k=1}^n u_k$，$u_k=\int_{(k-1)\pi}^{k\pi}f$。
+
+在 $[0,\pi/2]$ 上 $\sin x\ge\frac{2x}{\pi}$。于是
+\begin{align*}
+u_k &\le\int_{(k-1)\pi}^{k\pi}\frac{k\pi\,dx}{1+(k-1)^6\pi^6\sin^2 x}
+\le 2k\pi\int_0^{\pi/2}\frac{dx}{1+4(k-1)^6\pi^4 x^2}.
+\end{align*}
+令 $t=2(k-1)^3\pi^2 x$，$u_k\le\frac{k}{\pi(k-1)^3}\int_0^{(k-1)^3\pi^2}\frac{dt}{1+t^2}\le\frac{k}{2(k-1)^3}$。当 $k\to\infty$ 时 $u_k\sim\frac1{2k^2}$，故 $\sum u_k$ 收敛。由 $F(A)$ 单调有界，原积分收敛。进一步 $F(n\pi)<\frac12\sum\frac1{k^2}<1$。
+\end{problem}
+
+\begin{problem}[对称换元]
+设 $a,b>0$，讨论 $\int_0^{+\infty}f(ax+\frac{b}{x})dx$ 的收敛性。
+\end{problem}
+
+\begin{center}\includegraphics[width=0.4\textwidth]{images/22_1123_741_565_412_0.jpg}\end{center}
+
+\begin{proof}
+令 $t=ax-\frac{b}{x}$，则 $ax+\frac{b}{x}=\sqrt{t^2+4ab}$。解 $a x^2-\sqrt{t^2+4ab}\,x+b=0$ 得 $x_{1,2}=\frac{\sqrt{t^2+4ab}\pm t}{2a}$。$x_1:0\to\sqrt{b/a}$ 对应 $t:+\infty\to0$；$x_2:\sqrt{b/a}\to+\infty$ 对应 $t:0\to+\infty$。分别换元并相加：
+\begin{align*}
+\int_0^{\sqrt{b/a}}f(ax+\frac{b}{x})dx&=\int_0^\infty f(\sqrt{t^2+4ab})\Bigl[\frac{dt}{2a}-\frac{t\,dt}{2a\sqrt{t^2+4ab}}\Bigr],\\
+\int_{\sqrt{b/a}}^{+\infty}f(ax+\frac{b}{x})dx&=\int_0^\infty f(\sqrt{t^2+4ab})\Bigl[\frac{dt}{2a}+\frac{t\,dt}{2a\sqrt{t^2+4ab}}\Bigr].
+\end{align*}
+相加得 $\int_0^{+\infty}f(ax+\frac{b}{x})dx=\frac1a\int_0^{+\infty}f(\sqrt{t^2+4ab})dt$。此换元将含参数积分化为规范形式。
+\end{proof}
+
+\begin{flushright}\small $\square$ 第七章完\end{flushright}
+
+% ============================================================
+% 第八章  Class 8（3.20）  完备性与多元函数极限
+% ============================================================
+\chapter{完备性与多元函数极限}
+\begin{flushright}\small 日期：3月20日\quad 原 Class 8\end{flushright}
+
+\section{完备度量空间与 Banach 不动点定理}
+
+\subsection{Cauchy 列与完备性}
+$\{x_n\}$ 为 Cauchy 列：$\forall\varepsilon>0,\exists N,\forall n>N,\forall p\in\mathbb{N}:d(x_n,x_{n+p})<\varepsilon$。收敛 $\Rightarrow$ Cauchy：$d(x_n,x_{n+p})\le d(x_n,x^*)+d(x_{n+p},x^*)<2\varepsilon$。反之不成立：如 $\mathbb{Q}$ 中逼近 $\sqrt{2}$ 的有理数列是 Cauchy 列但不收敛于 $\mathbb{Q}$ 中。
+
+若空间上每个 Cauchy 列均收敛于该空间内，称该空间\textbf{完备}。
+
+\subsection{Banach 不动点定理}
+\begin{theorem}[Banach 不动点定理]
+设 $(X,d)$ 完备，$\varphi:X\to X$ 为压缩映射，即 $\exists\alpha\in[0,1),d(\varphi(x),\varphi(y))\le\alpha d(x,y),\forall x,y\in X$。则 $\varphi$ 在 $X$ 中存在\textbf{唯一不动点} $x^*$：$\varphi(x^*)=x^*$。
+\end{theorem}
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/23_222_895_285_157_0.jpg}\end{center}
+
+\begin{proof}
+\textbf{存在性：}任取 $x_0\in X$，构造迭代 $x_{n+1}=\varphi(x_n)$。则 $d(x_{n+1},x_n)=d(\varphi(x_n),\varphi(x_{n-1}))\le\alpha d(x_n,x_{n-1})\le\cdots\le\alpha^n d(x_1,x_0)$。对任意 $n,p$：
+\begin{align*}
+d(x_{n+p},x_n)&\le\sum_{k=0}^{p-1}d(x_{n+k+1},x_{n+k})\le\sum_{k=0}^{p-1}\alpha^{n+k}d(x_1,x_0)\\
+&=\alpha^n\frac{1-\alpha^p}{1-\alpha}d(x_1,x_0)<\frac{\alpha^n}{1-\alpha}d(x_1,x_0)\to0\quad(n\to\infty).
+\end{align*}
+故 $\{x_n\}$ 为 Cauchy 列。由完备性 $\exists x^*$ 使 $x_n\to x^*$。证 $\varphi(x^*)=x^*$：
+\begin{align*}
+d(\varphi(x^*),x^*)&\le d(\varphi(x^*),\varphi(x_n))+d(\varphi(x_n),x^*)\\
+&\le\alpha d(x^*,x_n)+d(x_{n+1},x^*)\to0\quad(n\to\infty).
+\end{align*}
+故 $d(\varphi(x^*),x^*)=0$，$\varphi(x^*)=x^*$。
+
+\textbf{唯一性：}若 $x^*\neq y^*$ 均为不动点，则 $d(x^*,y^*)=d(\varphi(x^*),\varphi(y^*))\le\alpha d(x^*,y^*)$。由 $\alpha<1$ 得 $d=0$，矛盾。
+\end{proof}
+
+\section{$\mathbb{R}^m$ 中的收敛与连续性}
+
+\subsection{点列收敛的分量刻画}
+在 $\mathbb{R}^m$ 中，$x_n=(x_n^1,\dots,x_n^m)$。$\lim x_n=a\iff\lim x_n^i=a^i$（$i=1,\dots,m$）。$\mathbb{R}^m$ 完备（Cauchy 列按分量收敛）。由于有限维空间上所有范数等价，可选 Euclid 范数：$\|x-a\|_2=\sqrt{\sum(x^i-a^i)^2}$。
+
+\textbf{"遗传"性质：}一维空间的许多性质通过分量推广到多维——极限存在 $\Rightarrow$ 有界、极限的线性运算、Cauchy 收敛原理等。
+
+\subsection{多元函数的极限}
+设 $D\subset\mathbb{R}^m$，$a$ 为 $D$ 的聚点，$f:D\to\mathbb{R}$。
+
+\begin{definition}[Heine 归结原则]
+$\lim_{x\to a}f(x)=A\iff$ 对任意 $D\setminus\{a\}$ 中点列 $x_n\to a$，都有 $\lim f(x_n)=A$。
+\end{definition}
+
+\begin{definition}[$\varepsilon$-$\delta$ 定义]
+$\forall\varepsilon>0,\exists\delta>0,\forall x\in D:0<\|x-a\|<\delta\Rightarrow|f(x)-A|<\varepsilon$。
+\end{definition}
+
+\subsection{经典反例——路径依赖}
+
+\begin{example}[$f(x,y)=\frac{xy}{x^2+y^2}$]
+沿直线 $y=\alpha x$：$f(x,\alpha x)=\frac{\alpha x^2}{x^2+\alpha^2x^2}=\frac{\alpha}{1+\alpha^2}$。该值与 $\alpha$ 有关，故 $\lim_{(x,y)\to(0,0)}f$ 不存在。
+\end{example}
+
+\begin{example}[$f(x,y)=\frac{x^2y}{x^4+y^2}$]
+沿直线 $y=\alpha x$：$f=\frac{\alpha x}{x^2+\alpha^2}\to0$（$x\to0$）。但沿抛物线 $y=\beta x^2$：$f(x,\beta x^2)=\frac{\beta x^4}{x^4+\beta^2x^4}=\frac{\beta}{1+\beta^2}$，依赖 $\beta$，故极限不存在。此例说明仅沿直线逼近不够！
+\end{example}
+
+\begin{example}[$f(x,y)=\frac{x^2y^2}{x^2+y^2}$]
+$|f|=\frac{x^2y^2}{x^2+y^2}\le x^2$（因 $\frac{y^2}{x^2+y^2}\le1$），$x^2\to0$，夹逼得极限存在为 $0$。
+\end{example}
+
+\subsection{累次极限与重极限}
+$\lim_{(x,y)\to(a,b)}f(x,y)$（重极限）与 $\lim_{x\to a}\lim_{y\to b}f$ 或 $\lim_{y\to b}\lim_{x\to a}f$（累次极限）之间\textbf{无必然蕴含关系}。
+
+\begin{example}[$f=x+y\sin(1/x)$，$x\neq0$；$f(0,y)=0$]
+$|f|\le|x|+|y|\to0$，重极限存在为 $0$。但 $\lim_{x\to0}f$ 因 $\sin(1/x)$ 振荡而不存在，故累次极限 $\lim_{y\to0}\lim_{x\to0}f$ 不存在。
+\end{example}
+
+\begin{example}[$f(x,y)=(x+y)\sin\frac1x\sin\frac1y$]
+累次极限不存在（$\sin\frac1x$ 振荡），但重极限存在为 $0$（被 $|x+y|$ 控制）。
+\end{example}
+
+\subsection{连续性与开映射刻画}
+$f$ 在 $a$ 处连续：(1) Heine：$\forall\{x_n\}\to a$，$f(x_n)\to f(a)$；(2) $\varepsilon$-$\delta$。分量刻画：$f=(f^1,\dots,f^n)$ 连续 $\iff$ 每个 $f^i$ 连续。
+
+\begin{theorem}[开映射原理]
+设 $\Omega\subset\mathbb{R}^m$ 为开集，$f:\Omega\to\mathbb{R}^n$。则 $f\in C(\Omega)\iff$ 任意开集 $H\subset\mathbb{R}^n$ 的原像 $f^{-1}(H)$ 是开集。
+\end{theorem}
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/26_1270_1638_350_228_0.jpg}\end{center}
+
+\begin{proof}($\Rightarrow$) 设 $H$ 开，$a\in f^{-1}(H)$。$f(a)\in H$，$\exists\varepsilon>0$ 使 $U(f(a),\varepsilon)\subset H$。由 $f$ 连续，$\exists\delta>0$ 使 $f(U(a,\delta))\subset U(f(a),\varepsilon)\subset H$，故 $U(a,\delta)\subset f^{-1}(H)$。($\Leftarrow$) $\forall a,\forall\varepsilon$，$U(f(a),\varepsilon)$ 是开集，$f^{-1}(U(f(a),\varepsilon))$ 开，$\exists\delta$ 使 $U(a,\delta)\subset f^{-1}(U(f(a),\varepsilon))$，即得连续性。\end{proof}
+
+\begin{flushright}\small $\square$ 第八章完\end{flushright}
+
+% ============================================================
+% 第九章  Class 9（3.25）  紧致性与多元连续函数性质
+% ============================================================
+\chapter{紧致性与多元连续函数性质}
+\begin{flushright}\small 日期：3月25日\quad 原 Class 9\end{flushright}
+
+\section{$\mathbb{R}^m$ 中有界闭集上连续函数的性质}
+回顾一元：闭区间上连续函数有界、取到最值、一致连续。推广至 $\mathbb{R}^m$。
+
+\subsection{有界集与 Bolzano-Weierstrass 定理}
+$E\subset\mathbb{R}^m$ 有界：$\exists L>0,\forall x\in E,\|x\|<L$（等价于每个分量有界）。
+
+\begin{theorem}[B-W 定理]
+$\mathbb{R}^m$ 中有界序列必有收敛子序列（$m$ 有限）。
+\end{theorem}
+\begin{proof}逐分量选取：对第一分量用一维 B-W 得子列收敛于 $a^1$；在子列上对第二分量用 B-W 得 $a^2$；如此 $m$ 次，最终子列所有分量同时收敛。\end{proof}
+
+\subsection{三大性质}
+\begin{theorem}设 $E\subset\mathbb{R}^m$ 有界闭，$f\in C(E)$。则：(1)$f$ 有界；(2)$f$ 取到最值；(3)$f$ 一致连续。\end{theorem}
+\begin{proof}
+(1)若无界，$\forall n,\exists x_n\in E$ 使 $|f(x_n)|>n$。B-W 给出子列 $x_{n_k}\to x^*\in E$，由连续 $f(x_{n_k})\to f(x^*)<\infty$，与 $|f(x_{n_k})|>n_k\to\infty$ 矛盾。
+
+(2)令 $M=\sup_E f$。$\forall n,\exists x_n\in E$ 使 $M-1/n<f(x_n)\le M$。取子列 $x_{n_k}\to x_0\in E$，$f(x_0)=\lim f(x_{n_k})=M$。最小值同理。
+
+(3)反证。若不，$\exists\varepsilon_0>0,\forall n,\exists x_n,x_n'\in E$ 使 $\|x_n-x_n'\|<1/n$ 但 $|f(x_n)-f(x_n')|\ge\varepsilon_0$。取 $\{x_n\}$ 的收敛子列 $x_{n_k}\to x_0\in E$，则 $\|x_{n_k}'-x_0\|\le\|x_{n_k}'-x_{n_k}\|+\|x_{n_k}-x_0\|\to0$。由连续 $|f(x_{n_k})-f(x_{n_k}')|\to0$，与 $\ge\varepsilon_0$ 矛盾。\end{proof}
+
+\section{紧致性}
+
+\subsection{平庸距离的启示}
+平庸距离 $d(x,y)=\begin{cases}0,&x=y\\1,&x\neq y\end{cases}$ 下所有集合既开又闭，但 $\{\frac1n\}$ 无收敛子列。此空间不完备。需要更强概念。
+
+\subsection{列紧与紧致}
+\begin{definition}[列紧] $E$ 中任意序列有子序列收敛于 $E$ 中点。\end{definition}
+\begin{definition}[紧致] $E$ 的任意开覆盖存在有限子覆盖。\end{definition}
+
+\begin{example}[$(0,1)$ 不紧致] 开覆盖 $\{(\frac1n,1):n\in\mathbb{N}\}$ 覆盖 $(0,1)$ 但无有限子覆盖（接近 $0$ 的点无法被有限覆盖）。\end{example}
+\begin{example}[{$[0,1]$} 紧致] Heine-Borel 定理的一维情形。\end{example}
+
+\subsection{紧致 $\Rightarrow$ 列紧}
+\begin{proof}反证。设 $K$ 紧致但不列紧，$\exists\{x_n\}\subset K$ 无收敛于 $K$ 的子列。则 $\forall x\in K,\exists\delta_x>0$ 使 $U(x,\delta_x)$ 仅含有限项（否则 $x$ 为某子列的极限点）。开覆盖 $\{U(x,\delta_x):x\in K\}$ 有有限子覆盖，但每个只含有限项，矛盾。\end{proof}
+
+在 $\mathbb{R}^m$ 中：\textbf{紧致 $\iff$ 列紧 $\iff$ 有界闭}（Heine-Borel 定理）。
+
+\subsection{Heine-Borel 定理证明}
+有界闭 $\Rightarrow$ 紧致。(Step1) 闭方块 $I$ 紧致：若否，二分法得嵌套方块列 $\{I_n\}$，由闭区间套 $\exists!x^*\in\bigcap I_n$。由开覆盖 $\exists V_i\ni x^*$ 开，当 $n$ 大时 $I_n\subset V_i$，矛盾。(Step2) $E\subset I$ 闭：设 $V$ 为 $E$ 的开覆盖，$\tilde V=V\cup\{I\setminus E\}$ 为 $I$ 的开覆盖，取有限子覆盖，去除 $I\setminus E$ 即得。
+
+\subsection{紧致 $\Rightarrow$ 完备}
+紧致空间中 Cauchy 列 $\{x_n\}$：列紧性给出子列 $x_{n_k}\to x^*$。$d(x_n,x^*)\le d(x_n,x_{n_k})+d(x_{n_k},x^*)<\varepsilon+\varepsilon\to0$。
+
+\subsection{紧致集上连续函数的性质（一般度量空间）}
+紧致集上连续函数有界、取最值、一致连续。一致连续性的证明：$\forall\varepsilon$，$\forall a$ 取 $\delta_a$ 满足 $d(x,a)<\delta_a\Rightarrow|f(x)-f(a)|<\varepsilon$。开覆盖 $\{U(a,\frac12\delta_a)\}$ 有有限子覆盖。取 $\delta=\min\frac12\delta_{a_i}$，则 $d(x,x')<\delta\Rightarrow x,x'\in U(a_j,\delta_{a_j})\Rightarrow|f(x)-f(x')|<2\varepsilon$。
+
+\begin{center}\includegraphics[width=0.7\textwidth]{images/36_292_799_923_238_0.jpg}\end{center}
+
+\section{积分收敛判别技巧总结}
+\begin{itemize}
+\item 周期函数积分：按周期分段放缩。例：$\int_0^{+\infty}\frac1x e^{\cos x}\sin(\sin x)dx$ 条件收敛。
+\item $\int_0^1(\ln x)^n dx=(-1)^n n!$
+\item $\int_1^{+\infty}\frac{(\ln x)^n}{x^p}dx$ 收敛 $\iff p>1,n>-1$
+\item $\int_0^1\frac{(\ln x)^n}{x^p}dx$ 收敛 $\iff p<1,n>-1$
+\item $\int_1^{+\infty}\frac{\sin x}{\sqrt{x}}dx$ 条件收敛（经典）
+\item $\int_1^{+\infty}x^p|\sin x|dx$ 收敛 $\iff p<-1$（$\int_{n\pi}^{(n+1)\pi}|\sin x|dx=2$，放缩为 $\sum n^p$）
+\end{itemize}
+\begin{flushright}\small $\square$ 第九章完\end{flushright}
+
+% ============================================================
+% 第十章  Class 10（3.25习题课）  范数等价与完备性习题
+% ============================================================
+\chapter{范数等价与完备性习题}
+\begin{flushright}\small 原 Class 10（习题课）\end{flushright}
+
+\section{线性空间与赋范空间回顾}
+加法公理、数乘公理。范数 $\to$ 距离 $\to$ 收敛/连续。
+
+\section{$\mathbb{R}^m$ 中范数的等价性}
+等价范数：$\exists a,A>0$，$aM(x)\le N(x)\le AM(x)$。满足自反、对称、传递。
+
+\begin{theorem}[$\mathbb{R}^m$ 上任意范数等价]
+只需证 $N(x)$ 与 $\|x\|_2$ 等价。
+
+(1) $N(x)$ 关于 $\|\cdot\|_2$ 连续。基 $\{e_i\}$，$x=\sum x^i e_i$：
+\[
+|N(x)-N(x_0)|\le N(x-x_0)=N(\sum\Delta x^i e_i)\le\sum|\Delta x^i|N(e_i)\le\sqrt{\sum(\Delta x^i)^2}\cdot\sqrt{\sum N(e_i)^2}.
+\]
+当 $\|x-x_0\|_2\to0$ 时 $\to0$。
+
+(2) $K=\{x:\|x\|_2=1\}$ 有界闭（紧集）。$N$ 在 $K$ 上连续，可取最值 $0<b\le N(x)\le B$（$b>0$ 因 $x\neq0$ 时 $N(x)>0$）。对任意 $x\neq0$，$\frac{x}{\|x\|_2}\in K$，故 $b\le N(\frac{x}{\|x\|_2})\le B\Rightarrow b\|x\|_2\le N(x)\le B\|x\|_2$。
+\end{theorem}
+
+推论：$\mathbb{R}^m$ 上任意范数等价 $\Rightarrow$ 收敛性与范数选取无关。
+
+\section{有限维与无穷维的区别}
+有限维：所有范数等价 $\Rightarrow$ 完备性相同、拓扑相同。无穷维不成立！
+
+\begin{example}[{$C[0,1]$} 上 $\|\cdot\|_2$ 不完备]
+$X=C[0,1]$。$\|f\|_2=\sqrt{\int_0^1 f^2}$，$\|f\|_\infty=\sup|f|$。构造分段线性阶梯函数：
+\[
+f_n(x)=\begin{cases}-1,&0\le x\le\frac12-\frac1{2n},\\2nx-n,&\frac12-\frac1{2n}<x<\frac12+\frac1{2n},\\1,&x\ge\frac12+\frac1{2n}.\end{cases}
+\]
+\begin{center}\includegraphics[width=0.3\textwidth]{images/31_1172_1128_408_377_0.jpg}\end{center}
+$n>m$ 时 $\|f_n-f_m\|_2^2\le\frac2m\to0$，故 $\{f_n\}$ 在 $\|\cdot\|_2$ 下为 Cauchy 列。但逐点极限是符号函数（在 $1/2$ 处间断），不属 $X$。$\therefore(X,\|\cdot\|_2)$ 不完备。
+
+在 $\|\cdot\|_\infty$ 下：$\|f_n-f_m\|_\infty=1-\frac{m}{n}\not\to0$（非 Cauchy 列）。可证 $(C[0,1],\|\cdot\|_\infty)$ 完备。
+\end{example}
+
+\section{$\mathbb{R}^m$ 中的收敛与连续性}
+$\lim x_n=a\iff\lim x_n^i=a^i$（按分量收敛）。遗传定理：极限存在 $\Rightarrow$ 有界；线性与 $\lim$ 可交换；Cauchy 收敛原理。
+
+多元函数极限的两种定义（Heine / $\varepsilon$-$\delta$）等价。经典反例：$\frac{xy}{x^2+y^2}$（路径依赖）、$\frac{x^2y}{x^4+y^2}$（沿直线趋近不够）。
+
+累次极限与重极限无必然关系。例：$(x+y)\sin\frac1x\sin\frac1y$ 累次不存在，重极限存在。
+
+\section{多元函数极限习题}
+\begin{example}[$\frac{x^3+y^3}{x^2+y^2}$，$(x,y)\to(0,0)$]极坐标 $x=r\cos\theta,y=r\sin\theta$，原式 $=r(\cos^3\theta+\sin^3\theta)\le2r\to0$。\end{example}
+\begin{example}[$(x^2+y^2)^{xy}$，$(x,y)\to(0,0)$]取对数 $|xy\ln(x^2+y^2)|\le\frac{x^2+y^2}{2}|\ln(x^2+y^2)|=\frac{r^2}{2}|\ln r^2|\to0$。原极限 $=e^0=1$。\end{example}
+\begin{example}[$f(x,y)=\frac{\ln(1+xy)}{x}$（$x\neq0$），$f(0,y)=y$]定义域 $xy>-1$。在 $(0,0)$：$x\neq0$ 时 $f=y\cdot\frac{\ln(1+xy)}{xy}\to0\cdot1=0=f(0,0)$。在 $(0,y_0)$（$y_0\neq0$）：$|f(x,y)-f(0,y_0)|=|y\ln(1+xy)^{1/xy}-y_0|\le|y||\ln(1+xy)^{1/xy}-1|+|y-y_0|\to0$。$f$ 在全定义域连续。\end{example}
+\begin{center}\includegraphics[width=0.2\textwidth]{images/33_173_156_361_322_0.jpg}\end{center}
+\begin{flushright}\small $\square$ 第十章完\end{flushright}
+
+% ============================================================
+% 第十一章  Class 12（4.1）  连通性与方向导数
+% ============================================================
+\chapter{连通性与方向导数}
+\begin{flushright}\small 日期：4月1日\quad 原 Class 12（Class 11缺失）\end{flushright}
+
+\section{连通性}
+\subsection{路径连通}
+$E\subset\mathbb{R}^m$ 路径连通：$\forall x,y\in E,\exists\gamma\in C[0,1]$ 使 $\gamma(0)=x,\gamma(1)=y$，$\gamma([0,1])\subset E$。
+
+\begin{theorem}[连通集上连续函数的介值性]
+设 $E$ 连通，$f\in C(E)$。$\forall x,y\in E,\forall A$ 介于 $f(x)$ 与 $f(y)$ 之间，$\exists c\in E$ 使 $f(c)=A$。
+\end{theorem}
+\begin{proof}$\exists\gamma\in C[0,1]$ 连接 $x,y$。$f\circ\gamma$ 为一元连续函数，介值定理给出 $\exists t_0$ 使 $f(\gamma(t_0))=A$。\end{proof}
+
+\subsection{开区域与闭区域}
+开区域 = 连通开集。闭区域 = 开区域的闭包。例：$\mathbb{R}^2$ 中 $\{(x,0):x\in(0,1)\}$ 连通非开；$\{(x,y):x\in(0,1),y\in\mathbb{R}\}$ 开区域；$\{(x,0):x\in[0,1]\}$ 连通闭但非闭区域；$[0,1]\subset\mathbb{R}$ 闭区域。
+
+闭区域上的介值性：若 $x,y\in\partial E$，取内部点 $x',y'\in\operatorname{int}E$ 使 $f(x')<C<f(y')$，内部连通 $\Rightarrow\exists z\in\operatorname{int}E$ 使 $f(z)=C$。
+
+\subsection{拓扑应用}球面 $S=\{x:\|x\|=R\}$。若 $\gamma$ 满足 $\|\gamma(0)\|=R_1<R,\|\gamma(1)\|=R_2>R$，则 $\exists t_0,\|\gamma(t_0)\|=R$（$f=\|x\|$ 连续，介值性）。
+
+\section{不动点定理应用：Newton 法}
+求 $f(x)=x^2-c$ 的零点。Newton 迭代：$x_{n+1}=x_n-\frac{x_n^2-c}{2x_n}=\frac12(x_n+\frac{c}{x_n})=:\varphi(x_n)$。当 $x,x'>\sqrt{c}$：$|\varphi(x)-\varphi(x')|=\frac12|1-\frac{c}{xx'}|\cdot|x-x'|<\frac12|x-x'|$。$\varphi$ 在 $[\sqrt{c},+\infty)$ 上压缩，收敛于 $\sqrt{c}$。
+
+\section{方向导数与梯度}
+\subsection{方向导数}
+$\overrightarrow{e}$ 单位向量。$\frac{\partial f}{\partial\overrightarrow{e}}(x_0)=\lim_{t\to0^+}\frac{f(x_0+t\overrightarrow{e})-f(x_0)}{t}=\frac{d}{dt}\big|_{t=0}f(x_0+t\overrightarrow{e})$。$m=1$ 时即普通导数 $\frac{df}{dx}$。
+
+\subsection{偏导数与梯度}
+$\frac{\partial f}{\partial x_i}=\frac{\partial f}{\partial\overrightarrow{e_i}}$（沿标准基）。梯度 $\nabla f=(\frac{\partial f}{\partial x_1},\dots,\frac{\partial f}{\partial x_m})$。可微时 $\frac{\partial f}{\partial\overrightarrow{e}}=\nabla f\cdot\overrightarrow{e}$。
+\begin{flushright}\small $\square$ 第十一章完\end{flushright}
+
+% ============================================================
+% 第十二章  Class 13（4.1习题课）  拓扑习题课
+% ============================================================
+\chapter{拓扑习题课}
+\begin{flushright}\small 原 Class 13（习题课）\end{flushright}
+
+\section{拓扑概念速查}
+邻域 $O_\delta(x)=\{y:\|y-x\|<\delta\}$。内点：$\exists\delta,O_\delta(x)\subset S$。外点：$\exists\delta,O_\delta(x)\cap S=\varnothing$。边界点：$\forall\delta,O_\delta(x)\cap S\neq\varnothing$ 且 $O_\delta(x)\cap S^c\neq\varnothing$。聚点 $S'$：$\forall\delta,\overset{\circ}{O}_\delta(x)\cap S\neq\varnothing$。孤立点：$\exists\delta,O_\delta(x)\cap S=\{x\}$。开集：$\operatorname{int}S=S$。闭集：闭包 $\overline{S}=S\cup S'$。紧集：任意开覆盖有有限子覆盖。$\mathbb{R}^m$ 中紧致 $\iff$ 有界闭。连续函数在紧集上：有界、取最值、一致连续；在连通集上：介值性。
+
+\section{典型例题}
+
+\begin{example}[$\{m+n\sqrt{2}:m,n\in\mathbb{Z}\}=S$ 在 $\mathbb{R}$ 中稠密]
+$\{n\sqrt{2}\bmod1\}_{n\in\mathbb{Z}}\subset[0,1)$。$\sqrt{2}$ 无理 $\Rightarrow n_1\neq n_2$ 时 $n_1\sqrt{2}\not\equiv n_2\sqrt{2}\pmod1$。Dirichlet 逼近：$\forall\varepsilon>0,\exists m$ 使 $m\sqrt{2}\bmod1<\varepsilon$。于是在任意 $(a,b)\subset[0,1]$ 内存在 $\{n\sqrt{2}\}$ 的分数部分。故 $\overline{S}=\mathbb{R}$。对比 $\{m+n\sqrt{3}\}=S'$，$S\neq S'$ 但均稠密（$\operatorname{int}S=\varnothing$，$\overline{S}=\mathbb{R}$）。
+\end{example}
+
+\begin{example}[$\max$ 函数的连续性]
+设 $f\in C([a,b]\times[a,b])$。$\varphi(x)=\max_{a\le\xi\le x}\max_{a\le y\le\xi}f(\xi,y)$。证 $\varphi\in C[a,b]$。
+\begin{center}\includegraphics[width=0.3\textwidth]{images/42_1191_427_460_345_0.jpg}\end{center}
+法一（直接）：对 $\Delta x>0$，若 max 在 $x\le\xi\le x+\Delta x$ 达到，取 $y(\Delta x)$：$\varphi(x+\Delta x)-\varphi(x)\le f(x+\Delta x,y(\Delta x))-f(x,y(\Delta x))\to0$。
+\begin{center}\includegraphics[width=0.2\textwidth]{images/42_1409_777_218_303_0.jpg}\end{center}
+法二（一致连续）：$f$ 在紧集上一致连续，可证 $|\varphi(x+\Delta x)-\varphi(x)|<\varepsilon$（$\Delta x$ 充分小）。
+\end{example}
+
+\begin{example}[Gram 矩阵与线性相关性]
+$f_1,\dots,f_n\in C[0,1]$。Gram 矩阵 $A=(a_{ij})_{n\times n}$，$a_{ij}=\int_0^1 f_i f_j$。$\{f_i\}$ 线性相关 $\iff\det A=0$。
+\begin{proof}($\Rightarrow$)$\exists c\neq0,\sum c_j f_j\equiv0$。$\sum_j a_{ij}c_j=\int f_i\sum c_j f_j=0$，$Ac=0$，$\det A=0$。($\Leftarrow$)$\det A=0\Rightarrow\exists c\neq0,Ac=0$。$S_i=\int f_i\sum c_j f_j=0$。$\sum c_i S_i=\int(\sum c_i f_i)^2=0\Rightarrow\sum c_i f_i\equiv0$。\end{proof}
+\end{example}
+
+\begin{example}[广义 Rayleigh 商]
+$A,B$ 实对称，$B$ 正定。$G(x)=\frac{x^T Ax}{x^T Bx}$ 在 $\mathbb{R}^n\setminus\{0\}$ 上。(1) $G$ 在单位球面上取最值。(2) 最值点为 $B^{-1}A$ 的特征向量。$B=L^T L$，令 $y=Lx$，$G=\frac{y^T(L^{-1})^T AL^{-1}y}{y^T y}$ 化为标准 Rayleigh 商。
+\end{example}
+
+\begin{flushright}\small $\square$ 第十二章完\end{flushright}
+
+% ============================================================
+% 第十三章  Class 14（4.3）  多元函数的可微性
+% ============================================================
+\chapter{多元函数的可微性}
+\begin{flushright}\small 日期：4月3日\quad 原 Class 14\end{flushright}
+
+\section{偏导数与方向导数}
+\begin{example}[$f(x,y)=x^2+y^2\sin x$]
+$\frac{\partial f}{\partial x}=\frac{d}{dt}\big|_{t=0}((x+t)^2+y^2\sin(x+t))=2x+y^2\cos x$（$y$ 视为参数）。$\frac{\partial f}{\partial y}=2y\sin x$。方向导数 $\overrightarrow{e}=(\cos\theta,\sin\theta)$：$\frac{\partial f}{\partial\overrightarrow{e}}=\cos\theta(2x+y^2\cos x)+\sin\theta(2y\sin x)=\nabla f\cdot\overrightarrow{e}$。
+\end{example}
+
+\begin{example}[偏导数存在但不可微]
+$f(x,y)=\begin{cases}0,&y=0\text{ 或 }x=0\\x,&\text{其他}\end{cases}$。在 $(0,0)$ 处 $f_x=f_y=0$。但对 $\overrightarrow{e}=(\cos\theta,\sin\theta)$，$\frac{\partial f}{\partial\overrightarrow{e}}=\cos\theta\neq\nabla f\cdot\overrightarrow{e}=0$。故不可微。
+\end{example}
+
+\section{可微性定义}
+\begin{definition}$f:\mathbb{R}^m\to\mathbb{R}$ 在 $x$ 可微：$\exists$ 线性 $L(x):\mathbb{R}^m\to\mathbb{R}$ 使 $f(x+h)=f(x)+L(x)h+o(\|h\|)$。$L(x)h=\sum A^i(x)h^i$。全微分 $Df(x)$ 或 $df(x)$。\end{definition}
+关于 $o(\|h\|)$：$\varphi=o(\sqrt{x^2+y^2})$ 可表 $\varepsilon\sqrt{x^2+y^2}$（$\varepsilon\to0$），进一步 $\alpha x+\beta y$（$|\alpha|,|\beta|\le|\varepsilon|\to0$）。高阶小量可写成分量的高阶小量。
+
+\section{可微 $\Rightarrow$ 连续，可方向导，可偏导}
+(1) $\lim f(x+h)=f(x)+\lim(Lh+o(\|h\|))=f(x)$。(2) $h=t\overrightarrow{e}$：$\frac{f(x_0+t\overrightarrow{e})-f(x_0)}{t}\to L(x_0)(\overrightarrow{e})$。取 $\overrightarrow{e}=e_i$ 得 $\frac{\partial f}{\partial x_i}=A^i$。(3) 可方向导 $\Rightarrow$ 可偏导。(4) 可偏导 $\nRightarrow$ 连续。
+
+\section{偏导数连续 $\Rightarrow$ 可微}
+\begin{theorem}$f$ 在 $x_0$ 邻域偏导数存在且至少一个在 $x_0$ 连续，则 $f$ 在 $x_0$ 可微。\end{theorem}
+\begin{proof}[$\mathbb{R}^2$ 情形]
+\begin{align*}
+f(x_0+h,y_0+k)-f(x_0,y_0)&=[f(x_0+h,y_0+k)-f(x_0+h,y_0)]+[f(x_0+h,y_0)-f(x_0,y_0)]\\
+&=f_y(x_0+h,y_0)k+o(k)+f_x(x_0,y_0)h+o(h).
+\end{align*}
+$f_y$ 在 $(x_0,y_0)$ 连续：$f_y(x_0+h,y_0)=f_y(x_0,y_0)+g(h),\lim g=0$。代入得 $f_x h+f_y k+g(h)k+o(k)+o(h)$，$g(h)k=o(\|(h,k)\|)$。线性部分 $+o$。\end{proof}
+若所有偏导数存在且连续，称 $f\in C^1(\Omega)$（连续可微）。
+
+\section{微分的几何意义}
+$z=f(x,y)$ 在 $(x_0,y_0,z_0)$ 切平面：$z-z_0=f_x(x_0,y_0)(x-x_0)+f_y(x_0,y_0)(y-y_0)$。法向量 $(f_x,f_y,-1)$。
+\begin{flushright}\small $\square$ 第十三章完\quad（期中：至复合函数偏导数、全微分）\end{flushright}
+
+% ============================================================
+% 第十四章  Class 15  链式法则
+% ============================================================
+\chapter{链式法则与复合函数微分}
+\begin{flushright}\small 原 Class 15\end{flushright}
+
+\section{链式法则}
+\subsection{一元复合多元}$\mathbb{R}\xrightarrow{\varphi}\mathbb{R}^m\xrightarrow{f}\mathbb{R}$：$\frac{d}{dt}(f\circ\varphi)=\sum\frac{\partial f}{\partial x^i}\frac{d\varphi^i}{dt}=\nabla f\cdot\varphi'$。若 $\varphi(t)=x_0+t\overrightarrow{e}$：$\frac{d}{dt}(f\circ\varphi)=\overrightarrow{e}\cdot\nabla f$（方向导数）。
+\begin{proof}$f(\varphi(t+\Delta t))-f(\varphi(t))=\sum\frac{\partial f}{\partial x^i}(\varphi^i(t+\Delta t)-\varphi^i(t))+o(\|\Delta\varphi\|)$。$\varphi^i(t+\Delta t)-\varphi^i(t)=\frac{d\varphi^i}{dt}\Delta t+o(\Delta t)$。代入得 $(\sum\frac{\partial f}{\partial x^i}\frac{d\varphi^i}{dt})\Delta t+o(\Delta t)$。\end{proof}
+
+\subsection{一般情形——Jacobi 矩阵}
+$\mathbb{R}^n\xrightarrow{\varphi}\mathbb{R}^m\xrightarrow{f}\mathbb{R}^p$：$D(f\circ\varphi)=Df\cdot D\varphi$。分量形式 $\frac{\partial y^i}{\partial t^j}=\sum_k\frac{\partial y^i}{\partial x^k}\frac{\partial x^k}{\partial t^j}$。
+
+\section{微分的运算性质}
+$df=\sum\frac{\partial f}{\partial x^i}dx^i$。线性：$d(\lambda f+\mu g)=\lambda df+\mu dg$。Leibniz：$d(fg)=f dg+g df$。\textbf{一阶微分形式不变性：}无论 $x^i$ 是自变量还是中间变量，$df$ 形式不变。复合验证：$dx^i=\sum\frac{\partial\varphi^i}{\partial t^j}dt^j$，$dy^i=\sum\frac{\partial f^i}{\partial x^k}dx^k$，代入得 $dy^i=\sum\frac{\partial y^i}{\partial t^j}dt^j$。
+
+\section{极坐标变换}
+$\begin{cases}x=r\cos\theta\\y=r\sin\theta\end{cases}$。$\frac{\partial f}{\partial r}=\cos\theta f_x+\sin\theta f_y$，$\frac{\partial f}{\partial\theta}=-r\sin\theta f_x+r\cos\theta f_y$。矩阵：$(\frac{\partial f}{\partial r}\,\frac{\partial f}{\partial\theta})=(f_x\,f_y)\begin{pmatrix}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{pmatrix}$。微分形式不变：$df=f_x dx+f_y dy=f_r dr+f_\theta d\theta$。例：$f=x^2+y^2=r^2$，$f_r=2r,f_\theta=0$。
+\begin{example}[仿射变换]$\begin{cases}x=p\\y=p+q\end{cases}$。$\frac{\partial f}{\partial p}=f_x+f_y$，$f_q=f_y$。微分验证：$df=f_x dp+f_y(dp+dq)=(f_x+f_y)dp+f_y dq$。\end{example}
+\begin{flushright}\small $\square$ 第十四章完\end{flushright}
+
+% ============================================================
+% 第十五章  Class 16（4.8习题课）  ODE系统与期中复习
+% ============================================================
+\chapter{期中复习与ODE系统}
+\begin{flushright}\small 原 Class 16（习题课）\end{flushright}
+
+\section{期中要点}
+(1) 开集的连续像未必开（$y=\sin x,(0,4\pi)\to[-1,1]$），原像必开。(2) 偏导存在+至少一个连续 $\Rightarrow$ 可微。(3) 1-范数弧长：$x=a(\cos t+t\sin t),y=a(\sin t-t\cos t)$，$s=\int(|dx|+|dy|)=2\pi|a|$。(4) 热力学：$dU=TdS-PdV$，$A=U-TS\Rightarrow dA=-PdV-SdT$，$S=-\frac{\partial A}{\partial T},P=-\frac{\partial A}{\partial V}$。
+
+\section{线性ODE系统}
+\subsection{矩阵指数法}
+$\overrightarrow{x}'=A\overrightarrow{x}$。解 $\overrightarrow{x}=e^{At}\overrightarrow{c}$。$e^A=I+A+\frac12A^2+\cdots$。若 $A$ 可对角化 $A=PDP^{-1}$：$e^{At}=P\operatorname{diag}(e^{\lambda_i t})P^{-1}$。通解 $\sum c_i e^{\lambda_i t}\overrightarrow{p}_i$。
+
+例：$A=\begin{pmatrix}3&-2\\2&-2\end{pmatrix}$，$\lambda=2,-1$，$\overrightarrow{x}=c_1 e^{2t}\binom21+c_2 e^{-t}\binom12$。$A=\begin{pmatrix}3&1\\1&3\end{pmatrix}$，$\lambda=4,2$，$\overrightarrow{x}=c_1 e^{4t}\binom11+c_2 e^{2t}\binom1{-1}$。
+
+\subsection{重特征值}
+$\lambda$ 重根，几何重数不足：$(A-\lambda I)p_2=p_1$。解 $c_1 e^{\lambda t}p_1+c_2 e^{\lambda t}(tp_1+p_2)$。
+
+验证：$\widetilde{x}=(tp_1+p_2)e^{\lambda t}$，$\widetilde{x}'=p_1 e^{\lambda t}+\lambda(tp_1+p_2)e^{\lambda t}=(A-\lambda I)p_2 e^{\lambda t}+(\lambda tp_1+\lambda p_2)e^{\lambda t}=A\widetilde{x}$。
+
+例：$A=\begin{pmatrix}6&4\\-1&2\end{pmatrix}$，$\lambda=4$（重根），$p_1=(2,-1)^T$。
+
+\subsection{非齐次系统}
+$\overrightarrow{x}'=A\overrightarrow{x}+\overrightarrow{b}$。通解 $=e^{At}\overrightarrow{x}_0+e^{At}\int_0^t e^{-A\tau}\overrightarrow{b}d\tau$。注：$e^A e^B\neq e^{A+B}$（$AB\neq BA$ 时）。
+\begin{flushright}\small $\square$ 第十五章完\end{flushright}
+
+% ============================================================
+% 第十六章  Class 17（4.10）  高阶偏导数与Clairaut定理
+% ============================================================
+\chapter{高阶偏导数与Clairaut定理}
+\begin{flushright}\small 日期：4月10日\quad 原 Class 17\end{flushright}
+
+\section{高阶偏导数}
+$f_{xx}=\partial_x(f_x),f_{xy}=\partial_y(f_x),f_{yx}=\partial_x(f_y),f_{yy}=\partial_y(f_y)$。
+
+例：$f=e^{x\sin y}$，$f_y=x\cos y\cdot e^{x\sin y}$，$f_{xy}=\cos y\cdot e^{x\sin y}+x\cos y\sin y\cdot e^{x\sin y}=f_{yx}$。$f=xy$：$f_x=y,f_{xy}=1;f_y=x,f_{yx}=1$。
+
+\subsection{混合偏导数不相等的反例}
+$f(x,y)=\begin{cases}xy\frac{x^2-y^2}{x^2+y^2},&(x,y)\neq(0,0)\\0,&(x,y)=(0,0)\end{cases}$。$f_x(0,y)=-y\,(y\neq0),f_x(0,0)=0$。$f_{xy}(0,0)=-1$。$f_{yx}(0,0)=1$。$f_{xy}\neq f_{yx}$！
+\begin{center}\includegraphics[width=0.2\textwidth]{images/54_1256_1589_389_371_0.jpg}\includegraphics[width=0.2\textwidth]{images/55_1307_1072_324_250_0.jpg}\end{center}
+
+\subsection{Clairaut / Schwarz 定理}
+\begin{theorem}若 $f_{xy},f_{yx}$ 在 $(x_0,y_0)$ 邻域存在且在 $(x_0,y_0)$ 连续，则 $f_{xy}(x_0,y_0)=f_{yx}(x_0,y_0)$。\end{theorem}
+\begin{proof}$F(h,k)=f(x_0+h,y_0+k)-f(x_0+h,y_0)-f(x_0,y_0+k)+f(x_0,y_0)$。$\varphi(x)=f(x,y_0+k)-f(x,y_0)$，$F=\varphi(x_0+h)-\varphi(x_0)=\varphi'(x_0+\theta_1 h)h=f_{xy}(\cdots)hk$。对称地 $F=f_{yx}(\cdots)hk$。令 $(h,k)\to(0,0)$ 得 $f_{xy}=f_{yx}$。\end{proof}
+推广：$f\in C^{(k)}(\Omega)$ 则任意 $k$ 阶混合偏导与求导顺序无关（归纳法）。
+
+\subsection{复合函数的高阶导数}
+$\frac{\partial^2 y}{\partial t^i\partial t^k}=\sum_{j,l}\frac{\partial^2 y}{\partial x^j\partial x^l}\frac{\partial x^j}{\partial t^i}\frac{\partial x^l}{\partial t^k}+\sum_j\frac{\partial y}{\partial x^j}\frac{\partial^2 x^j}{\partial t^i\partial t^k}$。
+
+二阶微分：$d^2 f=\sum_{i,j}f_{x^i x^j}dx^i dx^j$（当 $x^i$ 为自变量时）。一阶微分形式不变但二阶不保持！
+\begin{flushright}\small $\square$ 第十六章完\end{flushright}
+
+% ============================================================
+% 第十七章  Class 19（4.17）  Taylor展开与隐函数定理
+% ============================================================
+\chapter{Taylor展开与隐函数定理}
+\begin{flushright}\small 日期：4月17日\quad 原 Class 19（Class 18缺失）\end{flushright}
+
+\section{Laplace 算子与调和函数}
+$\nabla=(\partial_{x^1},\dots,\partial_{x^m})$。散度 $\nabla\cdot g=\sum\partial_{x^i}g^i$。Laplace：$\Delta=\nabla^2=\sum\partial_{x^ix^i}$。$\mathbb{R}^3$：$f=1/r$（$r=\sqrt{x^2+y^2+z^2}$），$\Delta f=0$。$\mathbb{R}^2$：$f=\ln r$，$\Delta f=0$。$\mathbb{R}^m(m>2)$：$f=1/r^{m-2}$，$\Delta f=0$（$\partial_x f=(2-m)x/r^m$，$\partial_{xx}f=(2-m)/r^m-(2-m)mx^2/r^{m+2}$，求和得0）。
+
+\section{方向导数的高阶推广}
+$(h\cdot\nabla)=\sum h^i\partial_{x^i}$。$\varphi(t)=f(x_0+th)$，$\frac{d^k\varphi}{dt^k}=(h\cdot\nabla)^k f(x_0+th)$。
+
+\section{多元 Taylor 展开}
+$f\in C^{(n+1)}(\Omega)$。$\varphi(\tau)=f(x+\tau\Delta x)$。一元 Taylor：
+\[
+\varphi(1)=\sum_{k=0}^n\frac1{k!}\varphi^{(k)}(0)+\frac1{n!}\int_0^1(1-s)^n\varphi^{(n+1)}(s)ds.
+\]
+代入 $\varphi^{(k)}(0)=(\Delta x\cdot\nabla)^k f(x)$：
+\[
+f(x+\Delta x)=\sum_{k=0}^n\frac1{k!}(\Delta x\cdot\nabla)^k f(x)+\frac1{n!}\int_0^1(1-s)^n(\Delta x\cdot\nabla)^{n+1}f(x+s\Delta x)ds.
+\]
+
+$n=1$ 有限增量公式：$f(x+\Delta x)=f(x)+\int_0^1\Delta x\cdot\nabla f(x+s\Delta x)ds$。Lagrange 余项：$f(x+\Delta x)=f(x)+\Delta x\cdot\nabla f(x+\theta\Delta x),\theta\in(0,1)$。
+
+推论：$D$ 开区域，$\nabla f\equiv0\Rightarrow f\equiv\text{const}$（路径连通 + 有限增量）。
+
+\section{隐函数定理}
+
+\subsection{一维隐函数定理}
+\begin{theorem}设 $F:\Omega\subset\mathbb{R}^2\to\mathbb{R},F\in C^{(1)}$，$F(x_0,y_0)=0$，$F_y(x_0,y_0)\neq0$。则 $\exists\alpha,\beta>0$ 及唯一 $f:(x_0-\alpha,x_0+\alpha)\to(y_0-\beta,y_0+\beta)$ 使 $F(x,f(x))\equiv0$，$f\in C^{(1)}$，$f'(x)=-\frac{F_x}{F_y}$。\end{theorem}
+\begin{proof}不妨 $F_y(x_0,y_0)>0$。由连续，邻域内 $F_y>0$，$F(x_0,\cdot)$ 严格增。$\exists y_0-\beta<y_0<y_0+\beta$ 使 $F(x_0,y_0-\beta)<0<F(x_0,y_0+\beta)$。$F$ 连续 $\Rightarrow\forall x$ 靠近 $x_0$ 同样成立，介值定理 $\exists!y=f(x)$。导数：$F(x,f(x))\equiv0$ 求微分：$F_x dx+F_y dy=0$。\end{proof}
+
+\subsection{一般隐函数定理}
+$F:\Omega\subset\mathbb{R}^{m+n}\to\mathbb{R}^n,F\in C^{(1)},F(x_0,y_0)=0$。若 $\det(\frac{\partial F}{\partial y})\neq0$，则 $\exists y=f(x)$ 且 $\frac{\partial y^i}{\partial x^j}=-\sum_p(\frac{\partial F}{\partial y})_{ip}^{-1}\frac{\partial F^p}{\partial x^j}$。全微分形式：$F_x dx+F_y dy=0\Rightarrow dy=-F_y^{-1}F_x dx$。
+
+例：$\begin{cases}x+y+u+v=0\\x^2+y^2+u^2+v^2-1=0\end{cases}$。全微分：$\begin{cases}dx+dy+du+dv=0\\2xdx+2ydy+2udu+2vdv=0\end{cases}$。$v-u\neq0$ 时矩阵可逆：
+\[
+\begin{pmatrix}du\\dv\end{pmatrix}=-\frac1{v-u}\begin{pmatrix}v&-1\\-u&1\end{pmatrix}\begin{pmatrix}1&1\\x&y\end{pmatrix}\begin{pmatrix}dx\\dy\end{pmatrix}.
+\]
+二阶微分：$\begin{cases}d^2u+d^2v=0\\dx^2+dy^2+du^2+u d^2u+dv^2+v d^2v=0\end{cases}$。$d^2u=\frac1{u-v}(-dx^2-dy^2-du^2-dv^2)$。
+
+\begin{flushright}\small $\square$ 第十七章完\end{flushright}
+
+% ============================================================
+% 第十八章  Class 20（4.22习题课）  有限增量与ODE续
+% ============================================================
+\chapter{有限增量估计与ODE续}
+\begin{flushright}\small 原 Class 20（OCRed as Class 2，4.22习题课）\end{flushright}
+
+\section{期中考试讲解}
+(1) 开集在连续函数下的像未必开（反例 $y=\sin x,(0,4\pi)\to[-1,1]$），原像必开。偏导连续 $\Rightarrow$ 可微。(2) 1-范数弧长计算。(3) 热力学 $dU=TdS-PdV,dA=-PdV-SdT$。
+
+\section{有限增量估计}
+$f:G\subset\mathbb{R}^m\to\mathbb{R}^n,f\in C^{(1)}(G)$。$\forall a,b\in G,\exists c\in[a,b]$ 使 $\|f(b)-f(a)\|\le\|Df(c)\|\cdot\|b-a\|$，其中 $\|A\|=\max_{\|x\|=1}\|Ax\|$（算子范数，$=\sqrt{\lambda_{\max}(A^T A)}$）。
+
+证明：$\|f(b)-f(a)\|^2=\sum_i(f^i(b)-f^i(a))^2=\varphi(b)-\varphi(a)$，$\varphi(x)=\sum(f^i(b)-f^i(a))f^i(x)$。中值定理 $\varphi(b)-\varphi(a)=(b-a)\cdot\nabla\varphi(c)$。Schwartz 不等式得 $\|f(b)-f(a)\|^2\le\|b-a\|\cdot\|Df(c)^T(f(b)-f(a))\|\le\|b-a\|\cdot\|Df(c)\|\cdot\|f(b)-f(a)\|$。$\|Df\|$ 有界 $\Rightarrow f$ Lipschitz。
+
+\section{ODE 系统续}
+\subsection{可对角化情形}
+$A_{n\times n}=PDP^{-1}$。$y=P^{-1}x$，$y'=Dy$（解耦）。$y_i=c_i e^{\lambda_i t}$，$x=Py=\sum c_i e^{\lambda_i t}p_i$。
+
+\subsection{矩阵指数}
+$e^{At}=P\operatorname{diag}(e^{\lambda_i t})P^{-1}$。非齐次：$x'=Ax+b$。$e^{-At}(x'-Ax)=e^{-At}b$。$(e^{-At}x)'=e^{-At}b$。$x=e^{At}x_0+e^{At}\int_0^t e^{-A\tau}b d\tau$。注：$e^A e^B\neq e^{A+B}$。
+
+$e^A e^B=(I+A+\frac12 A^2+\cdots)(I+B+\frac12 B^2+\cdots)=I+A+B+AB+\frac12 A^2+\frac12 B^2+\cdots$。$e^{A+B}=I+A+B+\frac12(A^2+AB+BA+B^2)+\cdots$。$AB\neq BA$ 时不等。
+
+\subsection{重特征值（续）}
+$(A-\lambda I)p_2=p_1$。通解 $x=c_1 e^{\lambda t}p_1+c_2 e^{\lambda t}(tp_1+p_2)$。验证 $\widetilde{x}'=p_1 e^{\lambda t}+\lambda(tp_1+p_2)e^{\lambda t}=(A-\lambda I)p_2 e^{\lambda t}+(\lambda tp_1+\lambda p_2)e^{\lambda t}=A\widetilde{x}$。
+
+例：$A=\begin{pmatrix}6&4\\-1&2\end{pmatrix}$，$\lambda=4$（重根）。$p_1=(2,-1)^T$。求 $p_2$：$\begin{pmatrix}2&4\\-1&-2\end{pmatrix}p_2=\binom{2}{-1}$。通解 $x=c_1 e^{4t}\binom{2}{-1}+c_2 e^{4t}(t\binom{2}{-1}+p_2)$。
+\begin{flushright}\small $\square$ 第十八章完\end{flushright}
+
+% ============================================================
+% 第十九章  Class 22（4.24）  高阶微分与极值
+% ============================================================
+\chapter{高阶微分与多元函数极值}
+\begin{flushright}\small 日期：4月24日\quad 原 Class 22（Class 21缺失）\end{flushright}
+
+\section{二阶微分}
+$du=u_x dx+u_y dy$。$d^2u=d(u_x dx+u_y dy)=du_x dx+u_x d^2x+du_y dy+u_y d^2y$。当 $x,y$ 为自变量时 $d^2x=d^2y=0$，$d^2u=u_{xx}dx^2+2u_{xy}dxdy+u_{yy}dy^2$。
+
+\section{一元函数极值回顾}
+$f'(x)=0$，$f''(x)>0$ 极小，$f''(x)<0$ 极大。
+
+\section{多元函数极值}
+$f:\mathbb{R}^m\to\mathbb{R}$。Taylor：$f(x_0+\Delta x)=f(x_0)+(\Delta x\cdot\nabla)f(x_0)+\frac12(\Delta x\cdot\nabla)^2 f(x_0)+\cdots$。临界点 $\nabla f=0$。二阶项 $\frac12\sum\Delta x^i\Delta x^j f_{x^i x^j}(x_0)$。Hessian $H_f=(\frac{\partial^2 f}{\partial x^i\partial x^j})$。$H_f$ 正定 $\Rightarrow$ 极小；负定 $\Rightarrow$ 极大；不定 $\Rightarrow$ 鞍点；半定 $\Rightarrow$ 需进一步判断。
+
+\section{最小二乘法}
+数据 $(x_i,y_i)$，拟合 $f(x)=a_1 f_1(x)+a_2 f_2(x)$。误差 $E(a_1,a_2)=\sum(a_1 f_1(x_i)+a_2 f_2(x_i)-y_i)^2$。$\nabla E=0$ 得正规方程：
+\[
+\begin{pmatrix}\sum f_1^2&\sum f_1 f_2\\\sum f_1 f_2&\sum f_2^2\end{pmatrix}\begin{pmatrix}a_1\\a_2\end{pmatrix}=\begin{pmatrix}\sum f_1 y_i\\\sum f_2 y_i\end{pmatrix}.
+\]
+系数矩阵为正定（或半正定），解即为最小二乘估计。
+
+\section{Lagrange 乘子法}
+约束 $F(x)=0$（$F:\mathbb{R}^m\to\mathbb{R}^n$）下求 $f$ 极值。$L(x,\lambda)=f(x)+\sum\lambda_i F^i(x)$。必要条件 $\nabla_x L=0$（$\nabla f$ 是 $\nabla F^i$ 的线性组合）。
+
+二阶条件：在约束切空间上 $\sum\frac{\partial^2 L}{\partial x^i\partial x^j}\Delta x^i\Delta x^j$ 正定 $\Rightarrow$ 极小；负定 $\Rightarrow$ 极大。
+
+\begin{example}[$f=x^2-y^2$，$2x-y-3=0$]
+$L=x^2-y^2-\lambda(2x-y-3)$。$\begin{cases}L_x=2x-2\lambda=0\\L_y=-2y+\lambda=0\\2x-y-3=0\end{cases}\Rightarrow x_0=2,y_0=1,\lambda=2$。$H_L=\begin{pmatrix}2&0\\0&-2\end{pmatrix}$ 不定。在约束 $2\Delta x-\Delta y=0$ 上：$2\Delta x^2-2\Delta y^2=2\Delta x^2-8\Delta x^2=-6\Delta x^2<0$。极大值 $f(2,1)=3$。
+\end{example}
+
+\begin{example}[二次型在单位球面上的极值]
+$f(x)=\sum a_{ij}x^i x^j$（$A$ 对称），$\|x\|^2=1$。Lagrange：$Ax=\lambda x$。极值点为 $A$ 的特征向量，极值为特征值：$\max=\lambda_{\max},\min=\lambda_{\min}$。
+\end{example}
+
+\begin{flushright}\small $\square$ 第十九章完\end{flushright}
+
+% ============================================================
+% 第二十章  Class 23（4.29）  Lagrange乘子与曲线曲面
+% ============================================================
+\chapter{Lagrange乘子与曲线曲面}
+\begin{flushright}\small 日期：4月29日\quad 原 Class 23\end{flushright}
+
+\section{Lagrange 乘子法（续）}
+\begin{example}[$f=ax^2+by^2+cz^2$（$a>b>c>0$），$\|x\|^2=1$]
+$L=ax^2+by^2+cz^2-\lambda(x^2+y^2+z^2-1)$。$\partial_x L=2(a-\lambda)x=0$ 等。解得 $(\pm1,0,0)$ 对应 $\lambda=a$（极大 $a$），$(0,\pm1,0)$ 对应 $\lambda=b$（鞍点），$(0,0,\pm1)$ 对应 $\lambda=c$（极小 $c$）。约束 $x_0\Delta x+y_0\Delta y+z_0\Delta z=0$。$\lambda=a$ 时二阶项 $2(b-a)\Delta y^2+2(c-a)\Delta z^2<0$（极大）。
+\end{example}
+
+\section{$\mathbb{R}^3$ 中的曲线}
+
+\subsection{弧长}
+$\overrightarrow{r}(t)=(x(t),y(t),z(t))$。$s=\int_{t_0}^t\|\overrightarrow{r}'(\tau)\|d\tau$，$\frac{ds}{dt}=\|\overrightarrow{r}'\|$。单位切向量 $\overrightarrow{T}=d\overrightarrow{r}/ds=\overrightarrow{r}'/\|\overrightarrow{r}'\|$。加速度 $\overrightarrow{a}=v'\overrightarrow{T}+\kappa v^2\overrightarrow{N}=a_t\overrightarrow{T}+\frac{v^2}{\rho}\overrightarrow{N}$。
+
+\subsection{Frenet 标架}
+主法向量 $\overrightarrow{N}=\overrightarrow{T}'/\|\overrightarrow{T}'\|$，曲率 $\kappa=\|\overrightarrow{T}'\|=\frac{\|\overrightarrow{r}'\times\overrightarrow{r}''\|}{\|\overrightarrow{r}'\|^3}$。副法向量 $\overrightarrow{B}=\overrightarrow{T}\times\overrightarrow{N}$，挠率 $\tau=\frac{(\overrightarrow{r}',\overrightarrow{r}'',\overrightarrow{r}''')}{\|\overrightarrow{r}'\times\overrightarrow{r}''\|^2}$。Frenet 公式：$\overrightarrow{T}'=\kappa\overrightarrow{N},\overrightarrow{N}'=-\kappa\overrightarrow{T}+\tau\overrightarrow{B},\overrightarrow{B}'=-\tau\overrightarrow{N}$。
+
+例：圆周 $\overrightarrow{r}=(a\cos t,a\sin t,0)$：$\kappa=1/a,\tau=0$。圆柱螺线 $\overrightarrow{r}=(a\cos t,a\sin t,t)$：$\kappa=\frac{a}{a^2+1},\tau=\frac1{a^2+1}$。
+
+\section{曲面}
+参数化 $\overrightarrow{r}(u,v)$。法向量 $\overrightarrow{n}=\frac{\overrightarrow{r}_u\times\overrightarrow{r}_v}{\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|}$。切平面 $(\overrightarrow{r}-\overrightarrow{r}_0)\cdot\overrightarrow{n}=0$。
+
+隐式 $F(x,y,z)=0$：$\nabla F$ 为法向量，切平面 $(\overrightarrow{r}-\overrightarrow{r}_0)\cdot\nabla F=0$。两曲面交线的切向量 $\nabla F_1\times\nabla F_2$。
+
+\subsection{第一基本形式}
+$I(du,dv)=\|\overrightarrow{r}_u du+\overrightarrow{r}_v dv\|^2=E du^2+2F du dv+G dv^2$。面积元 $\sqrt{EG-F^2}du dv$。
+\begin{flushright}\small $\square$ 第二十章完\end{flushright}
+
+% ============================================================
+% 第二十一章  Class 24（4.29习题课）  隐函数与极值习题
+% ============================================================
+\chapter{隐函数与极值习题}
+\begin{flushright}\small 原 Class 24（OCRed as Class 2，4.29习题课）\end{flushright}
+
+\section{隐函数方程组}
+
+\subsection{二元二方程情形}
+$\begin{cases}F(x,y,u,v)=0\\G(x,y,u,v)=0\end{cases}$，确定 $u=u(x,y),v=v(x,y)$。对 $x$ 求偏导：
+\[
+\begin{cases}
+F_1+F_3 u_x+F_4 v_x=0,\\
+G_1+G_3 u_x+G_4 v_x=0.
+\end{cases}
+\]
+（其中 $F_1=F_x,F_2=F_y,F_3=F_u,F_4=F_v$，$G$ 同。）解出 $u_x,v_x$ 的条件是 $\bigl|\begin{smallmatrix}F_3&F_4\\G_3&G_4\end{smallmatrix}\bigr|=\frac{\partial(F,G)}{\partial(u,v)}\neq0$。对 $y$ 求偏导对称地处理。
+
+\begin{example}[嵌套隐函数]
+$u=f(x,y,z,t)$，$g(y,z,t)=0$，$h(z,t)=0$。问 $u$ 何时能表为 $x,y$ 的函数？
+
+先解后两个方程：$h(z,t)=0\Rightarrow t=t(z)$，代入 $g(y,z,t(z))=0\Rightarrow z=z(y)$，进而 $t=t(z(y))$。最终 $u=f(x,y,z(y),t(z(y)))$ 为 $x,y$ 的函数。条件是每次求解的 Jacobi 行列式非零：
+\[
+\bigl|\begin{smallmatrix}g_z&g_t\\h_z&h_t\end{smallmatrix}\bigr|\neq0,\quad
+\bigl|\begin{smallmatrix}g_z&g_t&g_u\\h_z&h_t&h_u\end{smallmatrix}\bigr|\neq0.
+\]
+\end{example}
+
+\section{向量值函数的中值定理}
+
+一元：$f(x_2)-f(x_1)=f'(x_1+\theta(x_2-x_1))(x_2-x_1)$。多元标量：$f(\vec{x}_2)-f(\vec{x}_1)=\nabla f(\vec{x}_1+\theta\vec{h})\cdot\vec{h}$。多元向量值：没有等式形式的 Lagrange 中值定理，只有不等式估计：
+\[
+\|f(\vec{x}_2)-f(\vec{x}_1)\|\le\|Df(\vec{x}_1+\theta\vec{h})\|\cdot\|\vec{h}\|,
+\]
+其中 $\vec{h}=\vec{x}_2-\vec{x}_1$，$\theta\in(0,1)$。这已在第十八章作为有限增量估计证明。
+
+\section{单调算子与单射性}
+
+\begin{problem}
+设 $\Omega\subset\mathbb{R}^n$ 为凸域，$f\in C^1(\Omega,\mathbb{R}^n)$。若 $Df(x)$ 在 $\Omega$ 上处处正定，求证 $f$ 是单射（一一映射）。
+\end{problem}
+
+\begin{proof}
+对任意 $\vec{x}_1,\vec{x}_2\in\Omega$，令 $\vec{h}=\vec{x}_2-\vec{x}_1$。构造 $F(t)=(\vec{x}_2-\vec{x}_1)^\top\bigl[f(\vec{x}_1+t\vec{h})-f(\vec{x}_1)\bigr]$，$t\in[0,1]$。则 $F(0)=0$，$F(1)=\vec{h}^\top[f(\vec{x}_2)-f(\vec{x}_1)]$。
+
+求导：$F'(t)=\vec{h}^\top Df(\vec{x}_1+t\vec{h})\vec{h}$。由 $Df$ 正定，当 $\vec{h}\neq0$ 时 $F'(t)>0$（$\forall t$）。故 $F$ 严格递增，$F(1)>F(0)=0$。因此 $\vec{h}\neq0\Rightarrow f(\vec{x}_2)\neq f(\vec{x}_1)$，即 $f$ 为单射。
+\end{proof}
+
+\section{满射性——从 $\det(Df)\neq0$ 和强制性出发}
+
+\begin{problem}
+设 $f\in C^1(\mathbb{R}^n,\mathbb{R}^n)$，$\forall x,\det Df(x)\neq0$，且 $\|x\|\to\infty$ 时 $\|f(x)\|\to\infty$（强制性）。求证 $f(\mathbb{R}^n)=\mathbb{R}^n$（$f$ 为满射）。
+\end{problem}
+
+\begin{proof}
+任取 $\vec{y}\in\mathbb{R}^n$，需证 $\exists\vec{x}^*$ 使 $f(\vec{x}^*)=\vec{y}$。考虑 $g(\vec{x})=\|f(\vec{x})-\vec{y}\|^2$。由强制性，当 $\|\vec{x}\|\to\infty$ 时 $g(\vec{x})\to\infty$，故 $g$ 在某点 $\vec{x}_0$ 取全局最小值。在极小点处 $\nabla g(\vec{x}_0)=0$，即
+\[
+2Df(\vec{x}_0)^\top(f(\vec{x}_0)-\vec{y})=0.
+\]
+由 $\det Df(\vec{x}_0)\neq0$，$Df(\vec{x}_0)$ 可逆，故 $f(\vec{x}_0)-\vec{y}=0$，即 $f(\vec{x}_0)=\vec{y}$。$\therefore f$ 为满射。
+\end{proof}
+
+\section{椭圆型方程极值原理}
+
+\begin{problem}
+$u(x,y)$ 在闭圆盘 $x^2+y^2\le1$ 上连续，在开圆盘内满足 $u_{xx}+u_{yy}=u$，且在边界 $x^2+y^2=1$ 上 $u(x,y)>0$。证明在内部恒有 $u(x,y)\ge0$（进而 $>0$）。
+\end{problem}
+
+\begin{proof}
+\textbf{先证 $u\ge0$。}假设 $\exists(x_0,y_0)$ 使 $u(x_0,y_0)<0$（内部点）。由连续性，$u$ 在闭圆盘上取最小值，设为 $(x^*,y^*)$ 处。由 $u(x_0,y_0)<0$ 且边界上 $u>0$，最小值必在内部达到。故 $(x^*,y^*)$ 为内点，有 $u_x=u_y=0$。
+
+在极小值点处，由二阶 Taylor 展开：
+\[
+u(x^*+\Delta x,y^*)-u(x^*,y^*)=\frac12 u_{xx}(x^*,y^*)\Delta x^2+O(\Delta x^2).
+\]
+若 $u_{xx}(x^*,y^*)<0$，则沿 $x$ 方向移动会使 $u$ 更小，与极小性矛盾！故 $u_{xx}\ge0$。同理 $u_{yy}\ge0$。于是 $u_{xx}+u_{yy}\ge0$，但由方程 $u_{xx}+u_{yy}=u(x^*,y^*)<0$，矛盾。因此不存在 $u<0$ 的点，即 $u\ge0$。
+
+\textbf{再证 $u>0$。}取 $c<\min_{\partial\Omega}u/\max e^x$，令 $v=u-ce^x$。则 $v_{xx}+v_{yy}=u-ce^x=v$，且边界上 $v>0$。由前证 $v\ge0$，故 $u\ge ce^x>0$。此即椭圆型方程的\textbf{比较原理}：$L(u)=L(v)=0$（$L=\Delta-I$），边界 $u>v\Rightarrow$ 内部 $u>v$。
+\end{proof}
+
+\section{条件极值——椭球截面椭圆面积}
+
+\begin{problem}
+求椭球面 $\frac{x^2}{3}+y^2+\frac{z^2}{2}=1$ 被平面 $2x+y+z=0$ 截出的椭圆面积。
+\end{problem}
+
+\begin{proof}
+截线椭圆上的点到原点距离的平方 $r^2=x^2+y^2+z^2$ 取极值即得椭圆半轴长。用 Lagrange 乘子法：
+\[
+L=x^2+y^2+z^2+\lambda\Bigl(\frac{x^2}{3}+y^2+\frac{z^2}{2}-1\Bigr)+\mu(2x+y+z).
+\]
+求偏导：
+\[
+\begin{cases}
+2x+\frac{2}{3}\lambda x+2\mu=0,\quad
+2y+2\lambda y+\mu=0,\quad
+2z+\lambda z+\mu=0,\\
+\frac{x^2}{3}+y^2+\frac{z^2}{2}=1,\quad 2x+y+z=0.
+\end{cases}
+\]
+将前三式分别乘 $x,y,z$ 并相加，利用约束得 $2r^2+\lambda\bigl(\frac{2}{3}x^2+2y^2+z^2\bigr)=0$。由前两约束可推 $2r^2+\lambda\bigl(2-\frac{4}{3}x^2-y^2-\frac12 z^2\bigr)=0$，最终得 $\lambda=-r^2$。回代求解，得到特征方程 $15r^4-49r^2+36=0$，解得 $r_1^2=\frac{36}{15}=\frac{12}{5}$，$r_2^2=1$。半轴分别为 $a=\sqrt{\frac{12}{5}}$，$b=1$。椭圆面积 $S=\pi ab=\pi\sqrt{\frac{12}{5}}=\frac{2\sqrt{15}}{5}\pi$。
+
+注：此法仅当椭圆中心在原点时有效（由约束 $2x+y+z=0$ 知截面过原点，成立）。
+\end{proof}
+
+\begin{flushright}\small $\square$ 第二十一章完\end{flushright}
+
+% ============================================================
+% 第二十二章  Class 25（5.6）  Lagrange乘子续与Frenet标架
+% ============================================================
+\chapter{Lagrange乘子续与Frenet标架}
+\begin{flushright}\small 日期：5月6日\quad 原 Class 25\end{flushright}
+
+\section{Lagrange 乘子法续}
+
+\begin{example}[$f=x^2-y^2$，约束 $2x-y-3=0$（重温）]
+$L=x^2-y^2-\lambda(2x-y-3)$。临界点 $x_0=2,y_0=1,\lambda=2$。$H_L=\bigl(\begin{smallmatrix}2&0\\0&-2\end{smallmatrix}\bigr)$ 不定。在约束切空间 $2\Delta x-\Delta y=0$ 上：$2\Delta x^2-2\Delta y^2=2\Delta x^2-8\Delta x^2=-6\Delta x^2<0$。$\therefore$ 极大值 $f(2,1)=3$。
+\end{example}
+
+\begin{example}[二次型在单位球面上的极值]
+$f(x)=\sum a_{ij}x^i x^j$（$A$ 对称），约束 $\|x\|^2=1$。$L=\sum a_{ij}x^i x^j-\lambda(\frac12\|x\|^2-1)$。$\frac{\partial L}{\partial x_i}=2\sum a_{ij}x^j-2\lambda x^i=0\Rightarrow Ax=\lambda x$。极值点恰为 $A$ 的特征向量，极值为相应特征值。$\max=\lambda_{\max},\min=\lambda_{\min}$。
+\end{example}
+
+\begin{example}[$f=ax^2+by^2+cz^2$（$a>b>c>0$），$\|x\|^2=1$]
+$L=ax^2+by^2+cz^2-\lambda(x^2+y^2+z^2-1)$。解：$(\pm1,0,0)$（$\lambda=a$，极大值 $a$），$(0,\pm1,0)$（$\lambda=b$，鞍点），$(0,0,\pm1)$（$\lambda=c$，极小值 $c$）。
+
+二阶判断：$\lambda=a$ 时，约束 $2x_0\Delta x=0$ 给出 $\Delta x=0$（在 $(\pm1,0,0)$ 处）。二阶项 $2(b-a)\Delta y^2+2(c-a)\Delta z^2<0$（因 $b-a<0,c-a<0$），$\therefore$ 极大。$\lambda=c$ 时 $\Delta z=0$，二阶项 $2(a-c)\Delta x^2+2(b-c)\Delta y^2>0$，极小。
+\end{example}
+
+\section{$\mathbb{R}^3$ 中曲线的 Frenet 标架}
+
+\subsection{弧长参数化}
+曲线 $\overrightarrow{r}(t)=(x(t),y(t),z(t))$。弧长 $s(t)=\int_{t_0}^t\|\overrightarrow{r}'(\tau)\|d\tau$，$\frac{ds}{dt}=\|\overrightarrow{r}'\|$。弧长参数化：$\overrightarrow{r}(s)$ 满足 $\|\dot{\overrightarrow{r}}\|=1$（$\dot{}=d/ds$）。
+
+单位切向量 $\overrightarrow{T}=\dot{\overrightarrow{r}}=\frac{\overrightarrow{r}'}{\|\overrightarrow{r}'\|}$。曲率 $\kappa=\|\dot{\overrightarrow{T}}\|=\frac{\|\overrightarrow{r}'\times\overrightarrow{r}''\|}{\|\overrightarrow{r}'\|^3}$。
+
+\begin{example}[圆 $\overrightarrow{r}=(a\cos t,a\sin t,0)$]
+$s=at$，$\overrightarrow{T}=(-\sin(s/a),\cos(s/a))$，$\dot{\overrightarrow{T}}=(-\frac1a\cos(s/a),-\frac1a\sin(s/a))$，$\kappa=1/a$。直线 $\iff\kappa=0$（$\dot{\overrightarrow{T}}=0\Rightarrow\overrightarrow{T}=\vec{e}$ 常向量 $\Rightarrow\overrightarrow{r}=\overrightarrow{r}_0+s\vec{e}$）。
+\end{example}
+
+\subsection{主法向量与副法向量}
+单位主法向量 $\overrightarrow{N}=\frac{\dot{\overrightarrow{T}}}{\|\dot{\overrightarrow{T}}\|}=\frac{\dot{\overrightarrow{T}}}{\kappa}$。副法向量 $\overrightarrow{B}=\overrightarrow{T}\times\overrightarrow{N}$。$\{\overrightarrow{T},\overrightarrow{N},\overrightarrow{B}\}$ 构成右手单位正交标架（Frenet 标架）。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/80_1201_894_394_362_0.jpg}\end{center}
+
+Taylor 展开（弧长参数）：
+\[
+\overrightarrow{r}(s_0+\Delta s)=\overrightarrow{r}(s_0)+\Delta s\overrightarrow{T}+\frac12\kappa\Delta s^2\overrightarrow{N}+O(\Delta s^2).
+\]
+此式表明曲线在密切平面（由 $\overrightarrow{T},\overrightarrow{N}$ 张成）内以曲率 $\kappa$ 弯曲。
+
+\subsection{Frenet 公式}
+$\{\overrightarrow{T},\overrightarrow{N},\overrightarrow{B}\}$ 为单位正交标架，导数满足反对称关系。设
+\[
+\begin{pmatrix}\dot{\overrightarrow{T}}\\\dot{\overrightarrow{N}}\\\dot{\overrightarrow{B}}\end{pmatrix}
+=\begin{pmatrix}0&\kappa&0\\-\kappa&0&\tau\\0&-\tau&0\end{pmatrix}
+\begin{pmatrix}\overrightarrow{T}\\\overrightarrow{N}\\\overrightarrow{B}\end{pmatrix}.
+\]
+即 $\dot{\overrightarrow{T}}=\kappa\overrightarrow{N}$，$\dot{\overrightarrow{N}}=-\kappa\overrightarrow{T}+\tau\overrightarrow{B}$，$\dot{\overrightarrow{B}}=-\tau\overrightarrow{N}$。$\tau$ 称为\textbf{挠率}。
+
+\textbf{挠率公式（一般参数）：}
+\[
+\tau=\frac{(\overrightarrow{r}',\overrightarrow{r}'',\overrightarrow{r}''')}{\|\overrightarrow{r}'\times\overrightarrow{r}''\|^2}
+=\frac{\overrightarrow{r}'''\cdot(\overrightarrow{r}'\times\overrightarrow{r}'')}{\|\overrightarrow{r}'\times\overrightarrow{r}''\|^2}.
+\]
+分子为三阶混合积，$\overrightarrow{r}'\times\overrightarrow{r}''=\kappa s'^{\,3}\overrightarrow{B}$。
+
+\textbf{曲率和挠率确定曲线：}给定 $\kappa(s)>0,\tau(s)$，存在唯一空间曲线（不计刚体运动）以它们为曲率和挠率。$\kappa,\tau$ 均为常数 $\iff$ 曲线为圆柱螺线。
+
+\subsection{一般参数下的加速度}
+$\overrightarrow{a}=\overrightarrow{r}''(t)=v'\overrightarrow{T}+\kappa v^2\overrightarrow{N}$，其中 $v=\frac{ds}{dt}$。切向加速度 $a_t=v'$，法向加速度 $a_n=\kappa v^2=v^2/\rho$（$\rho=1/\kappa$ 曲率半径）。
+
+\section{二阶 PDE 的分类}
+
+对于 $u_{xx}+a u_{xy}+b u_{yy}=0$，作变换 $\xi=x+\lambda y,\eta=x+\mu y$。代入得
+\[
+(1+a\lambda+b\lambda^2)u_{\xi\xi}+[2+a(\lambda+\mu)+2b\lambda\mu]u_{\xi\eta}+(1+a\mu+b\mu^2)u_{\eta\eta}=0.
+\]
+特征方程 $1+ar+br^2=0$ 的判别式 $\Delta=a^2-4b$：
+\begin{itemize}
+\item $\Delta>0$（双曲型）：$\lambda=r_1,\mu=r_2$，得 $u_{\xi\eta}=0$；
+\item $\Delta=0$（抛物型）：$\lambda=r_1,\mu=0$，得 $u_{\eta\eta}=0$；
+\item $\Delta<0$（椭圆型）：取 $\lambda+\mu=-a/b$（$A=C$）且 $\lambda\mu=\frac{a^2}{2b^2}-\frac1b$（$B=0$），得 $u_{\xi\xi}+u_{\eta\eta}=0$（Laplace 方程）。
+\end{itemize}
+
+\begin{flushright}\small $\square$ 第二十二章完\end{flushright}
+
+% ============================================================
+% 第二十三章  Class 26（5.6习题课）  极值与PDE习题
+% ============================================================
+\chapter{极值与PDE习题}
+\begin{flushright}\small 原 Class 26（5.6习题课）\end{flushright}
+
+\section{条件极值续}
+
+\begin{example}[椭球面到原点的最大距离]
+$a x^2+b y^2+c z^2+2d xy+2e xz+2f yz=1$。求 $x^2+y^2+z^2$ 的最值。$L=x^2+y^2+z^2-\lambda(\cdots-1)$。由 $\nabla L=0$ 得 $\frac{x}{\lambda}=ax+dy+ez$，$\frac{y}{\lambda}=dx+by+fz$，$\frac{z}{\lambda}=ex+fy+cz$。三式分别乘 $x,y,z$ 相加：$\frac{x^2+y^2+z^2}{\lambda}=1$，故 $l=\sqrt{\lambda}$。消去 $x,y,z$ 得特征方程 $|A-t I|=0$（其中 $t=1/\lambda$，$A$ 为二次型矩阵），最大距离为 $\sqrt{\lambda_{\max}}$。
+\end{example}
+
+\begin{example}[行列式的极值不等式]
+$A=\bigl|\begin{smallmatrix}x_1&x_2&x_3\\y_1&y_2&y_3\\z_1&z_2&z_3\end{smallmatrix}\bigr|$。证 $|A|\le\frac{|x||y||z|}{\sqrt{(\sum x_i^2)(\sum y_i^2)(\sum z_i^2)}}$。用 Lagrange 乘子法，固定 $\|x\|,\|y\|,\|z\|$ 求 $|A|$ 的最大值。$\partial f/\partial x_1=\bigl|\begin{smallmatrix}y_2&y_3\\z_2&z_3\end{smallmatrix}\bigr|+2\lambda_1 x_1=0$，即 $\overrightarrow{x}\parallel(\overrightarrow{y}\times\overrightarrow{z})$。同理 $\overrightarrow{y}\parallel(\overrightarrow{z}\times\overrightarrow{x})$，$\overrightarrow{z}\parallel(\overrightarrow{x}\times\overrightarrow{y})$。故 $\overrightarrow{x},\overrightarrow{y},\overrightarrow{z}$ 两两正交，此时 $|A|=\|x\|\|y\|\|z\|$ 达最大。
+\end{example}
+
+\begin{example}[正定阵与极值点的二阶条件]
+$A=(a_{ij})$ 正定，$u\in C^{1,2}(\Omega)$，$u$ 在 $\Omega$ 的极小值在 $\vec{x}_0\in\Omega$ 取到。求证 $\sum a_{ij}\frac{\partial^2 u}{\partial x_i\partial x_j}(\vec{x}_0)\ge0$。
+
+在极小点 $\nabla u=0$，Hessian $B=(\partial_{ij}u)$ 半正定。$\sum a_{ij}b_{ji}=\operatorname{tr}(AB)$。$A=PP^\top$，$\operatorname{tr}(AB)=\operatorname{tr}(P^\top BP)$。$P^\top BP$ 半正定（半正定性的合同不变），故其迹 $\ge0$。
+\end{example}
+
+\begin{example}[广义 AM-GM 不等式]
+$a,b,c,u,v,w>0$。证 $(\frac{u}{a})^a(\frac{v}{b})^b(\frac{w}{c})^c\le(\frac{u+v+w}{a+b+c})^{a+b+c}$。令 $x=\frac{u}{u+v+w}$，$y=\frac{v}{u+v+w}$，$z=\frac{w}{u+v+w}$（$x+y+z=1$）。Lagrange 乘子法求 $x^a y^b z^c$ 在单纯形上的最大值得 $(\frac{a}{a+b+c})^a(\frac{b}{a+b+c})^b(\frac{c}{a+b+c})^c$，乘回即得。
+\end{example}
+
+\begin{example}[PDE 化简]
+$\frac{1}{(x+y)^2}(z_{xx}+2z_{xy}+z_{yy})-\frac{1}{(x+y)^3}(z_x+z_y)=0$。代换 $u=xy,v=x-y$。注意到 $(x+y)^2=v^2+4u$。计算 $z_x=y f_u+f_v$，$z_y=x f_u-f_v$。$z_x+z_y=(x+y)f_u$。$(\partial_x+\partial_y)^2 z = 2 f_u + (x+y)^2 f_{uu}$。代入原方程化简得 $f_{uu}+\frac{1}{v^2+4u}f_u=0$。
+\end{example}
+
+\begin{flushright}\small $\square$ 第二十三章完\end{flushright}
+
+% ============================================================
+% 第二十四章  Class 27（5.5）  Frenet标架续与曲面论
+% ============================================================
+\chapter{Frenet标架续与曲面论}
+\begin{flushright}\small 原 Class 27（5.5，OCRed as S.S）\end{flushright}
+
+\section{Frenet 标架续}
+
+\subsection{一般参数下的曲率和挠率}
+$\kappa=\frac{\|\overrightarrow{r}'\times\overrightarrow{r}''\|}{\|\overrightarrow{r}'\|^3}$。$\tau=\frac{(\overrightarrow{r}',\overrightarrow{r}'',\overrightarrow{r}''')}{\|\overrightarrow{r}'\times\overrightarrow{r}''\|^2}$。$\overrightarrow{r}'\times\overrightarrow{r}''=\kappa s'^{\,3}\overrightarrow{B}$。
+
+例：圆周 $\overrightarrow{r}=(a\cos t,a\sin t,0)$：$\overrightarrow{r}'\times\overrightarrow{r}''=(0,0,a^2)$，$\kappa=1/a,\tau=0$。
+
+圆柱螺线 $\overrightarrow{r}=(a\cos t,a\sin t,t)$：$\overrightarrow{r}'=(-a\sin t,a\cos t,1)$，$\overrightarrow{r}''=(-a\cos t,-a\sin t,0)$。$\overrightarrow{r}'\times\overrightarrow{r}''=(a\sin t,-a\cos t,a^2)$。$\kappa=\frac{\sqrt{a^2+a^4}}{(a^2+1)^{3/2}}$，$\tau=\frac{a^2}{a^4+a^2}$。
+
+\section{$\mathbb{R}^3$ 中曲面的基本形式}
+
+\subsection{曲面参数化}
+$\overrightarrow{r}(u,v):\mathbb{R}^2\to\mathbb{R}^3$。曲面上曲线 $\overrightarrow{r}(u(t),v(t))$ 的切向量 $\overrightarrow{r}'=\overrightarrow{r}_u u'+\overrightarrow{r}_v v'$。
+
+\subsection{第一基本形式（度量）}
+$I(du,dv)=\|\overrightarrow{r}_u du+\overrightarrow{r}_v dv\|^2=E du^2+2F du dv+G dv^2$，其中 $E=\|\overrightarrow{r}_u\|^2$，$F=\overrightarrow{r}_u\cdot\overrightarrow{r}_v$，$G=\|\overrightarrow{r}_v\|^2$。
+
+弧长 $L=\int\sqrt{I(u',v')}dt$。面积微元 $dA=\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|du dv=\sqrt{EG-F^2}du dv$。
+
+\subsection{第二基本形式与法曲率}
+单位法向量 $\overrightarrow{n}=\frac{\overrightarrow{r}_u\times\overrightarrow{r}_v}{\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|}$。
+
+曲面曲线 $\overrightarrow{r}(s)$（弧长参数化）的曲率向量 $\ddot{\overrightarrow{r}}=K\overrightarrow{N}$。$\overrightarrow{n}\cdot\ddot{\overrightarrow{r}}=K\cos\theta=K_n$（法曲率）。$\overrightarrow{n}\cdot\overrightarrow{r}=0$ 求导：$\dot{\overrightarrow{n}}\cdot\dot{\overrightarrow{r}}+\overrightarrow{n}\cdot\ddot{\overrightarrow{r}}=0\Rightarrow\overrightarrow{n}\cdot\ddot{\overrightarrow{r}}=-\dot{\overrightarrow{n}}\cdot\dot{\overrightarrow{r}}$。
+
+第二基本形式 $II(du,dv)=-\overrightarrow{n}\cdot d^2\overrightarrow{r}=L du^2+2M du dv+N dv^2$。法曲率 $K_n=\frac{II}{I}$。
+
+\begin{center}\includegraphics[width=0.3\textwidth]{images/87_1160_185_487_319_0.jpg}\end{center}
+
+\textbf{法截面与法截线：}由 $\overrightarrow{n}$ 和切方向张成的平面截曲面得法截线，其曲率即法曲率 $K_n$。所有方向的法曲率中最大和最小者称为主曲率 $K_1,K_2$。
+
+\begin{flushright}\small $\square$ 第二十四章完\end{flushright}
+
+% ============================================================
+% 第二十五章  Class 29（5.13习题课）  曲线曲面习题
+% ============================================================
+\chapter{曲线曲面习题}
+\begin{flushright}\small 原 Class 29（5.13习题课，Class 28缺失）\end{flushright}
+
+\section{习题选讲}
+
+\begin{problem}[切线与坐标平面的夹角]
+$z=f(x,y)$ 上过 $M_0(x_0,y_0,z_0)$ 的曲线 $\frac{x-x_0}{\cos\alpha}=\frac{y-y_0}{\sin\alpha}$ 在 $M_0$ 的切线与 $xOy$ 平面所成角 $\theta$ 的正切。
+\end{problem}
+\begin{proof}曲线参数 $t$：$dx=\cos\alpha\,dt,dy=\sin\alpha\,dt$。$dz=f_x dx+f_y dy=(f_x\cos\alpha+f_y\sin\alpha)dt$。切线方向 $(\cos\alpha,\sin\alpha,f_x\cos\alpha+f_y\sin\alpha)$。$\tan\theta=\frac{|dz|}{\sqrt{dx^2+dy^2}}=|f_x\cos\alpha+f_y\sin\alpha|$。\end{proof}
+
+\begin{problem}[球面斜驶线]
+球面参数化：$x=r\cos\psi\cos\varphi,y=r\cos\psi\sin\varphi,z=r\sin\psi$（$\varphi$ 经度，$\psi$ 纬度）。斜驶线 $\tan(\frac\pi4+\frac\psi2)=e^{k\varphi}$。证它与每条子午线（经线）交成定角。
+
+$\overrightarrow{r}_\varphi=(-r\cos\psi\sin\varphi,r\cos\psi\cos\varphi,0)$，$\overrightarrow{r}_\psi=(-r\sin\psi\cos\varphi,-r\sin\psi\sin\varphi,r\cos\psi)$。$\overrightarrow{r}_\varphi\cdot\overrightarrow{r}_\psi=0$，$\|\overrightarrow{r}_\varphi\|=r\cos\psi$，$\|\overrightarrow{r}_\psi\|=r$。
+
+斜驶线微分：$d\psi=\frac{2k e^{k\varphi}}{1+e^{2k\varphi}}d\varphi$。$d\overrightarrow{r}=\overrightarrow{r}_\varphi d\varphi+\overrightarrow{r}_\psi d\psi$。子午线 $d\varphi=0$，切向量 $\overrightarrow{r}_\psi$。计算 $\cos\theta=\frac{d\overrightarrow{r}\cdot\overrightarrow{r}_\psi}{\|d\overrightarrow{r}\|\|\overrightarrow{r}_\psi\|}$，利用恒等式 $\frac{2e^{k\varphi}}{1+e^{2k\varphi}}=\cos\psi$ 可证 $\cos\theta$ 为常数。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/91_1197_1631_390_387_0.jpg}\includegraphics[width=0.3\textwidth]{images/92_206_1620_396_387_0.jpg}\includegraphics[width=0.4\textwidth]{images/92_996_1622_641_378_0.jpg}\end{center}
+\end{problem}
+
+\begin{problem}[Euler 齐次函数定理]
+$f$ 可微且 $x f_x+y f_y=0$。求证 $f$ 恒为常数。
+
+法一：令 $F(t)=f(tx,ty)$。$F'(t)=x f_x(tx,ty)+y f_y(tx,ty)=\frac1t(tx f_x+ty f_y)=0$。$\therefore F(t)\equiv F(0)=f(0,0)$。取 $t=1$ 得 $f(x,y)=f(0,0)$，常数。
+
+法二：$\frac{\partial f}{\partial l_\theta}=f_x\cos\theta+f_y\sin\theta$。条件意味着所有方向导数为零，故 $f$ 为常数。\end{problem}
+
+\begin{problem}[均匀分布方向导数之和为零]
+$f$ 在 $P_0$ 可微，$\overrightarrow{l_1},\dots,\overrightarrow{l_n}$（$n\ge2$）为 $n$ 个单位向量，相邻夹角 $2\pi/n$。证 $\sum_{i=1}^n\frac{\partial f}{\partial l_i}(x_0,y_0)=0$。
+
+设 $\theta_i=\frac{2\pi}{n}(i-1)$，$\overrightarrow{l_i}=(\cos\theta_i,\sin\theta_i)$。$\frac{\partial f}{\partial l_i}=f_x\cos\theta_i+f_y\sin\theta_i$。求和 $\sum\cos\theta_i=0$，$\sum\sin\theta_i=0$（单位根之和为零）。故总和为零。
+
+具体：$\sum\cos\theta_i\sin\theta_i=\frac12\sum[\sin(2\theta_i)]=0$（同样利用三角恒等式）。
+\end{problem}
+
+\begin{problem}[曲率挠率确定曲线]
+$\mathbb{R}^3$ 中两曲线 $\overrightarrow{r}(s)$ 和 $\widetilde{r}(s)$（$s$ 弧长），Frenet 标架分别为 $\{\overrightarrow{T},\overrightarrow{N},\overrightarrow{B}\}$ 和 $\{\widetilde{T},\widetilde{N},\widetilde{B}\}$。若 $\kappa(s)=\widetilde{\kappa}(s)$，$\tau(s)=\widetilde{\tau}(s)$，且在 $s=s_0$ 处标架重合，则两曲线全同（不计位置）。
+
+考虑 $D(s)=\|\overrightarrow{T}-\widetilde{T}\|^2+\|\overrightarrow{N}-\widetilde{N}\|^2+\|\overrightarrow{B}-\widetilde{B}\|^2$。由 Frenet 公式可证 $D'(s)\equiv0$，故 $D(s)\equiv D(s_0)=0$，标架恒等，积分得 $\overrightarrow{r}=\widetilde{r}+\text{const}$。
+
+$\kappa,\tau$ 为常数 $\iff$ 曲线为圆柱螺线（包括圆周 $\tau=0$ 和直线 $\kappa=0$ 为特例）。
+\end{problem}
+
+\begin{flushright}\small $\square$ 第二十五章完\end{flushright}
+
+% ============================================================
+% 第二十六章  Class 30（5.15）  重积分定义与Fubini定理
+% ============================================================
+\chapter{重积分定义与Fubini定理}
+\begin{flushright}\small 日期：5月15日\quad 原 Class 30\end{flushright}
+
+\section{闭方块上的重积分}
+
+\subsection{定义与分割}
+$Q=[a^1,b^1]\times\cdots\times[a^m,b^m]\subset\mathbb{R}^m$。分割 $P^i=\{x_0^i=a^i,\dots,x_{n_i}^i=b^i\}$，$P=(P^1,\dots,P^m)$。小方块 $Q_I=\prod_{k=1}^m[x_{i_k-1}^k,x_{i_k}^k]$。体积 $\operatorname{Vol}(Q_I)=\prod_k(x_{i_k}^k-x_{i_k-1}^k)$。$\|P\|=\max_I\operatorname{diam}(Q_I)$。
+
+Riemann和 $\sigma(f,P,\xi)=\sum_I f(\xi_I)\operatorname{Vol}(Q_I)$，$\xi_I\in Q_I$。若 $\lim_{\|P\|\to0}\sigma(f,P,\xi)$ 存在，称 $f$ 在 $Q$ 上 Riemann 可积，记 $f\in R(Q)$，$\int_Q f\,dx=\lim\sigma$。等价写法：$\int_Q f(x^1,\dots,x^m)dx^1\cdots dx^m$。
+
+\subsection{连续函数必可积}
+$f\in C(Q)\Rightarrow f$ 在紧集 $Q$ 上一致连续。$\forall\varepsilon>0,\exists\delta>0,\|x_1-x_2\|<\delta\Rightarrow|f(x_1)-f(x_2)|<\varepsilon$。取 $\|P\|<\delta/\sqrt{m}$，每个 $Q_I$ 直径 $<\delta$，振幅 $\omega_I<\varepsilon$。$\Omega=\sum\omega_I\operatorname{Vol}(Q_I)<\varepsilon\operatorname{Vol}(Q)\to0$。$\therefore f\in R(Q)$。
+
+\subsection{零延拓}
+$f:Q\to\mathbb{R}$。$\widetilde{f}(x)=\begin{cases}f(x),&x\in Q\\0,&x\in\widetilde{Q}\setminus Q\end{cases}$（$\widetilde{Q}$ 为包含 $Q$ 的方块）。$f\in R(Q)\iff\widetilde{f}\in R(\widetilde{Q})$。
+
+证明思路：$(\Rightarrow)$ $f\in R(Q)\Rightarrow\forall\varepsilon,\exists P$ 使 $\Omega(f,P)<\varepsilon$。将 $P$ 扩充为 $\widetilde{P}$，新增方块上 $\widetilde{f}=0$，$\Omega=0$。总 $\Omega=\Omega(f,P)<\varepsilon$。$(\Leftarrow)$ 类似限制。
+
+\subsection{基本性质}
+若 $f\in R(Q)$：(1) $f$ 有界；(2) 线性 $\int_Q(\lambda f+\mu g)=\lambda\int_Q f+\mu\int_Q g$；(3) $f\le g\Rightarrow\int f\le\int g$；(4) 中值：$m\le f\le M\Rightarrow m\operatorname{Vol}(Q)\le\int_Q f\le M\operatorname{Vol}(Q)$。
+
+若 $f\in C(Q)$ 且 $Q$ 连通，由连续性可取到 $m,M$ 且路径连通 $\Rightarrow\exists\xi\in Q,\int_Q f=f(\xi)\operatorname{Vol}(Q)$。
+
+\section{Fubini 定理（化重积分为累次积分）}
+
+\subsection{二维情形}
+\begin{theorem}[Fubini]
+$f(x,y)\in R([a,b]\times[c,d])$。若 $\forall x\in[a,b]$，$f(x,\cdot)\in R[c,d]$，则
+\[
+\iint_{[a,b]\times[c,d]}f(x,y)dxdy=\int_a^b dx\int_c^d f(x,y)dy.
+\]
+\end{theorem}
+
+\begin{proof}对分割 $P_x=\{x_i\},P_y=\{y_j\}$，取介点 $z_i\in[x_{i-1},x_i]$。
+\begin{align*}
+\sum_i\Bigl(\int_c^d f(z_i,y)dy\Bigr)\Delta x_i
+&=\sum_{i,j}\int_{y_{j-1}}^{y_j}f(z_i,y)dy\,\Delta x_i\\
+&\stackrel{\text{中值}}{=}\sum_{i,j}\mu_{ij}\Delta y_j\Delta x_i,
+\end{align*}
+其中 $m_{ij}\le\mu_{ij}\le M_{ij}$。因此和式介于 $L(f,P),U(f,P)$ 之间。由 $f\in R(Q)$，$\lim(U-L)=0$。取 $\|P\|\to0$ 得左端 $\to\int_Q f$，右端（作为 $\|P_x\|\to0$ 的极限）$\to\int_a^b dx\int_c^d f dy$。\end{proof}
+
+\textbf{高维推广：}$Q=V\times W$（$V\subset\mathbb{R}^m,W\subset\mathbb{R}^n$）。若 $\forall x\in V,\exists\int_W f(x,y)dy$，则 $\int_Q f=\int_V dx\int_W f\,dy$。
+
+\subsection{重积分与累次积分未必等价}
+
+\begin{example}[重积分不存在但累次积分存在]
+$f(x,y)=\begin{cases}1,&x\in\mathbb{Q}\\2y,&x\notin\mathbb{Q}\end{cases}$ 在 $[0,1]^2$ 上。重积分：$\forall$ 划分 $\Omega\ge\frac12\cdot\frac14=\frac18>0$，$\therefore f\notin R(Q)$。但 $\int_0^1 f(x,y)dy=1$（$\forall x$），$\int_0^1 dx\int_0^1 f dy=1$。另一顺序 $\int_0^1 f(x,y)dx$ 不存在（Dirichlet 函数）。
+\end{example}
+
+\begin{example}[两个累次存在且相等，重积分仍不存在]
+构造 $f(x,y)=\begin{cases}0,&x,y\in\mathbb{Q}\text{ 或 }x,y\notin\mathbb{Q}\\1,&x\in\mathbb{Q},y\notin\mathbb{Q}\\1,&y\in\mathbb{Q},x\notin\mathbb{Q}\end{cases}$。两个累次积分均存在但不相等（且实际计算 $\int dy\int dx\neq\int dx\int dy$）。重积分不存在。
+\end{example}
+
+\begin{flushright}\small $\square$ 第二十六章完\end{flushright}
+
+% ============================================================
+% 第二十七章  Class 31（5.20）  带状区域与零测度
+% ============================================================
+\chapter{带状区域与零测度}
+\begin{flushright}\small 日期：5月20日\quad 原 Class 31\end{flushright}
+
+\section{一般区域上的重积分}
+
+\subsection{带状区域}
+设 $D=\{(x,y):x\in[a,b],\varphi(x)\le y\le\psi(x)\}$，$\varphi,\psi\in C[a,b]$，$\varphi\le\psi$。$Q=[a,b]\times[c,d]$ 为包含 $D$ 的方块。
+
+对 $Q$ 作分割 $P$，小方块 $Q_J$ 分三类：
+\begin{itemize}
+\item $J_1$：$Q_J\subset D$（全部在内部）；
+\item $J_2$：$Q_J\cap D\neq\varnothing$ 且 $Q_J\cap(Q\setminus D)\neq\varnothing$（跨边界）；
+\item $J_3$：$Q_J\cap D=\varnothing$（全部在外部）。
+\end{itemize}
+
+Riemann 和 $\sigma(f,P,\xi)=\sum_J f(\xi_J)\operatorname{Vol}(Q_J)$（$\xi_J\in Q_J\cap D$，若 $J_3$ 项取 0）。
+
+\subsection{连续曲线为零面积}
+\begin{lemma}[曲线是零测集]
+$\varphi\in C[a,b]$ 的图像 $\{(x,\varphi(x)):x\in[a,b]\}$ 在 $\mathbb{R}^2$ 中是零面积集（零测集）。
+\end{lemma}
+
+\begin{proof}
+$\varphi$ 在 $[a,b]$ 上一致连续：$\forall\eta>0,\exists\delta>0,|x_1-x_2|<\delta\Rightarrow|\varphi(x_1)-\varphi(x_2)|<\eta$。取 $P_x$ 满足 $\|P_x\|<\delta$。对每个 $[x_{i-1},x_i]$，最多有两个 $Q_J$ 与 $\varphi$ 图像相交（$\varphi$ 在该区间上振幅 $<\eta$，用高为 $\eta$ 的矩形即可覆盖）。总体积 $\sum_{Q_J\cap\varphi\neq\varnothing}\operatorname{Vol}(Q_J)<\sum_i 2\eta\Delta x_i=2(b-a)\eta$。取 $\eta\to0$ 即得。
+\end{proof}
+
+\begin{center}\includegraphics[width=0.3\textwidth]{images/99_1132_291_481_239_0.jpg}\end{center}
+
+\begin{theorem}[带状区域上的积分]
+若 $f\in C(D)$，则
+\[
+\iint_D f(x,y)dxdy = \int_a^b\left(\int_{\varphi(x)}^{\psi(x)}f(x,y)dy\right)dx.
+\]
+\end{theorem}
+
+\begin{proof}
+(1) 重积分存在：将 $f$ 零延拓到 $Q$ 上。$\Omega(f,P)=\Omega_1+\Omega_2+\Omega_3$。$f\in C(D)$ 在紧集 $Q$ 上一致连续（延拓后可能有间断，但仅在 $\partial D$ 上）。$\Omega_1$ 由内部方块贡献 $<\varepsilon\operatorname{Vol}(Q)$。$\Omega_2$ 涉边界，因 $\partial D$ 为零面积，可使其总体积 $<\varepsilon$，且 $f$ 有界（$|f|<L$），贡献 $<L\varepsilon$。$\Omega_3=0$。故 $f\in R(Q)$，进而在 $D$ 上可积。
+
+(2) $\forall x\in[a,b]$，$f(x,\cdot)$ 在 $[\varphi(x),\psi(x)]$ 上至多有两个间断点（边界处延拓造成），故内层积分存在。用 Fubini 定理即得累次积分公式。
+\end{proof}
+
+\subsection{单形体 $V_m(x)$}
+$V_m(x)=\{(t_0,\dots,t_{m-1}):0\le t_0\le\cdots\le t_{m-1}\le x\}$。
+
+$V_2(x)$（三角形）：$\operatorname{Vol}(V_2)=\int_0^x dt_1\int_0^{t_1}dt_0=\frac{x^2}{2}$。另一种顺序 $\int_0^x dt_0\int_{t_0}^x dt_1=\frac{x^2}{2}$（一致）。
+
+一般 $V_m$：
+\begin{align*}
+\int_{V_m}f(t_0)d\overrightarrow{t}
+&=\int_0^x f(t_0)dt_0\int_{t_0}^x dt_1\int_{t_1}^x dt_2\cdots\int_{t_{m-2}}^x dt_{m-1}\\
+&=\int_0^x\frac{f(t_0)}{(m-1)!}(x-t_0)^{m-1}dt_0.
+\end{align*}
+当 $f\equiv1$ 时 $\operatorname{Vol}(V_m(x))=x^m/m!$。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/100_171_452_368_286_0.jpg}\end{center}
+
+\section{零测度集与 Lebesgue 可积准则}
+
+\begin{definition}[零测度集]
+$A\subset\mathbb{R}^m$ 为零测度集，若 $\forall\varepsilon>0$，存在方块列 $\{Q_k\}$ 覆盖 $A$ 且 $\sum\operatorname{Vol}(Q_k)<\varepsilon$。
+\end{definition}
+
+例：$\Lambda=\{x\in[0,1]\}$ 在 $\mathbb{R}$ 中不是零测集（$\operatorname{Vol}(\Lambda)=1$）。$\Lambda=\{(x,0):x\in[0,1]\}$ 在 $\mathbb{R}^2$ 中是零测集（可用 $n$ 个 $1/n\times\varepsilon$ 矩形覆盖，总面积 $\varepsilon$）。
+
+\begin{theorem}[Lebesgue 可积准则]
+有界函数 $f:Q\to\mathbb{R}$ 在 $Q$ 上 Riemann 可积 $\iff$ $f$ 的不连续点集为零测度集。
+\end{theorem}
+
+\textbf{推论1：}若 $f$ 仅在零测集上非零，则 $\int f=0$。\\
+\textbf{推论2：}$f,g\in R(Q)$，若 $f=g$ 几乎处处（相差零测集），则 $\int f=\int g$。
+
+\subsection{Jordan 可测集}
+$E\subset\mathbb{R}^m$ 有界。若 $\partial E$ 为零测度集，则称 $E$ 为 \textbf{Jordan 可测集}。此时可定义 $f$ 在 $E$ 上的积分：$\int_E f=\int_Q f\cdot\chi_E$（$\chi_E$ 为 $E$ 的示性函数）。
+
+\subsection{Hilbert 空间填充曲线}
+存在连续满射 $[0,1]\to[0,1]^2$（Peano 曲线），说明"一维"的连续像可填满"二维"区域。这揭示了维数在连续映射下不保持——Jordan 曲线定理的复杂性即源于此。
+
+\begin{center}\includegraphics[width=1.0\textwidth]{images/101_176_494_1503_420_0.jpg}\end{center}
+
+\begin{flushright}\small $\square$ 第二十七章完\end{flushright}
+
+% ============================================================
+% 第二十八章  Class 32（5.20习题课）  曲线与区域习题
+% ============================================================
+\chapter{曲线与区域习题}
+\begin{flushright}\small 原 Class 32（5.20习题课）\end{flushright}
+
+\section{曲率挠率习题}
+
+\begin{problem}[曲率挠率成比例 $\iff$ 切向量与某常向量成定角]
+证 $\kappa/\tau=\text{const}\iff\exists$ 常向量 $\vec{a}$ 使 $\vec{a}\cdot\overrightarrow{T}=\text{const}$。
+\end{problem}
+
+\begin{proof}
+($\Leftarrow$) $\vec{a}\cdot\overrightarrow{r}'=c$。求导：$\vec{a}\cdot\overrightarrow{r}''=0\Rightarrow\vec{a}\cdot\kappa\overrightarrow{N}=0\Rightarrow\vec{a}\perp\overrightarrow{N}$。故 $\vec{a}=\alpha_1\overrightarrow{T}+\alpha_3\overrightarrow{B}$。再求导：$\frac{d\vec{a}}{ds}=(\alpha_1'\overrightarrow{T}+\alpha_1\kappa\overrightarrow{N})+(\alpha_3'\overrightarrow{B}-\alpha_3\tau\overrightarrow{N})=0$。$\overrightarrow{N}$ 分量：$\alpha_1\kappa-\alpha_3\tau=0\Rightarrow\frac{\kappa}{\tau}=\frac{\alpha_3}{\alpha_1}$（常数）。同时 $\alpha_1'=\alpha_3'=0\Rightarrow\alpha_1,\alpha_3$ 常数。
+
+($\Rightarrow$) 若 $\kappa/\tau=a$，取 $\vec{a}=\overrightarrow{T}+a\overrightarrow{B}$。$\frac{d\vec{a}}{ds}=(\kappa\overrightarrow{N})+a(-\tau\overrightarrow{N})=(\kappa-a\tau)\overrightarrow{N}=0$。$\therefore\vec{a}=\text{const}$，且 $\vec{a}\cdot\overrightarrow{T}=1$（定角）。
+\end{proof}
+
+\section{区域描述与重积分习题}
+
+\begin{example}[区域的多种描述]
+$D=\{(x,y):2y\le x^2+y^2\le4y,x\ge0\}$（两圆之间的月牙形区域）。
+
+$y$ 型：分两段。$D_1=\{0\le y\le2,\sqrt{2y-y^2}\le x\le\sqrt{4y-y^2}\}$，$D_2=\{2\le y\le4,0\le x\le\sqrt{4y-y^2}\}$。
+
+$x$ 型：$0\le x\le1$ 时 $2-\sqrt{4-x^2}\le y\le2+\sqrt{4-x^2}$；$1\le x\le2$ 时 $1+\sqrt{1-x^2}\le y\le2+\sqrt{4-x^2}$。
+
+$\theta$ 型（极坐标）：$x=r\cos\theta,y=r\sin\theta$。$2r\sin\theta\le r^2\le4r\sin\theta\Rightarrow2\sin\theta\le r\le4\sin\theta$，$r\cos\theta\ge0\Rightarrow0\le\theta\le\frac\pi2$。
+\end{example}
+
+\begin{center}\includegraphics[width=0.5\textwidth]{images/103_964_721_704_411_0.jpg}\end{center}
+
+\begin{example}[仅在有限个点间断的函数可积]
+$f(x,y)=\sin\frac1{(x^2-1)^2+(y^2-1)^2}$ 在 $[-1,1]^2$ 上。仅在 $(\pm1,\pm1)$ 四点处未定义（间断）。定义 $f$ 在那些点任意取值，间断点集为零测集，故 $f\in R(Q)$。
+
+$f(x,y)=\arctan\frac1{y-x^2}$ 在 $[0,1]^2$ 上。仅在抛物线 $y=x^2$ 上无定义。该曲线为零测集（连续函数图像），故 $f\in R(Q)$。重积分 $I_1$ 存在，但累次积分 $I_2$ 不一定存在（沿 $x$ 方向每个 $x$ 处内层积分在 $y=x^2$ 发散）。$f$ 连续时 $I_1=I_2$。
+\end{example}
+
+\begin{example}[$\iint_{[0,1]^2}\frac{y\,dxdy}{(1+x^2+y^2)^{3/2}}$]
+\begin{align*}
+I&=\frac12\int_0^1 dx\int_0^1\frac{d(y^2)}{(1+x^2+y^2)^{3/2}}
+=\frac12\int_0^1 dx\Bigl[-2(1+x^2+y^2)^{-1/2}\Bigr]_{y=0}^{y=1}\\
+&=-\int_0^1\Bigl(\frac1{\sqrt{2+x^2}}-\frac1{\sqrt{1+x^2}}\Bigr)dx
+=\ln\frac{1+\sqrt2}{1}-\ln\frac{1+\sqrt3}{\sqrt2}.
+\end{align*}
+\end{example}
+
+\section{常用积分公式}
+$\int\csc x\,dx=\ln|\csc x-\cot x|+C$。$\int\frac{dx}{a^2+x^2}=\frac1a\arctan\frac{x}{a}+C$。$\int\frac{dx}{\sqrt{a^2-x^2}}=\arcsin\frac{x}{a}+C$。$\int\frac{dx}{x^2-a^2}=\frac1{2a}\ln|\frac{x-a}{x+a}|+C$。$\int\frac{dx}{\sqrt{x^2\pm a^2}}=\ln|x+\sqrt{x^2\pm a^2}|+C$。$\int\sqrt{a^2-x^2}dx=\frac{x}2\sqrt{a^2-x^2}+\frac{a^2}2\arcsin\frac{x}{a}+C$。
+
+\begin{flushright}\small $\square$ 第二十八章完\end{flushright}
+
+% ============================================================
+% 第二十九章  Class 33（5.22）  重积分变量替换
+% ============================================================
+\chapter{重积分变量替换}
+\begin{flushright}\small 日期：5月22日\quad 原 Class 33\end{flushright}
+
+\section{变量替换公式}
+一维回顾：$\int_{\varphi(s_1)}^{\varphi(s_2)}f(x)dx=\int_{s_1}^{s_2}f(\varphi(s))\varphi'(s)ds$（$\varphi'$ 为放大率）。
+
+二维推广：$(x,y)=\overrightarrow{\varphi}(u,v)=(\varphi_1(u,v),\varphi_2(u,v))$。小矩形 $[u_0,u_0+\Delta u]\times[v_0,v_0+\Delta v]$ 映为曲边平行四边形，面积近似为
+\[
+\Delta S\approx\bigl\|\frac{\partial\overrightarrow{\varphi}}{\partial u}\times\frac{\partial\overrightarrow{\varphi}}{\partial v}\bigr\|\Delta u\Delta v
+=\bigl|\frac{\partial(\varphi_1,\varphi_2)}{\partial(u,v)}\bigr|\Delta u\Delta v = |\det D\overrightarrow{\varphi}|\Delta u\Delta v.
+\]
+（因为 $\frac{\partial\overrightarrow{\varphi}}{\partial u}\approx(\varphi_{1u}\Delta u,\varphi_{2u}\Delta u)$，$\frac{\partial\overrightarrow{\varphi}}{\partial v}\approx(\varphi_{1v}\Delta v,\varphi_{2v}\Delta v)$，叉积模长 $=|(\varphi_{1u}\Delta u)(\varphi_{2v}\Delta v)-(\varphi_{1v}\Delta v)(\varphi_{2u}\Delta u)|=|\det D\varphi|\Delta u\Delta v$。）
+
+\begin{center}\includegraphics[width=0.5\textwidth]{images/105_175_653_698_343_0.jpg}\includegraphics[width=0.4\textwidth]{images/105_890_644_570_345_0.jpg}\end{center}
+
+\section{一般变量替换定理}
+
+\begin{theorem}[重积分变量替换]
+设 $\overrightarrow{\varphi}\in C^1(\Omega,\mathbb{R}^m)$，$\Omega$ 为开区域。$E$ 为 Jordan 可测集且 $\overline{E}\subset\Omega$。若
+\begin{enumerate}
+\item[(1)] $\det D\overrightarrow{\varphi}(\vec{u})\neq0$ 在 $\operatorname{int}(E)$ 上；
+\item[(2)] $\overrightarrow{\varphi}$ 在 $\operatorname{int}(E)$ 上是单射。
+\end{enumerate}
+则 $\overrightarrow{\varphi}(E)$ 是 Jordan 可测集，且 $\forall f\in C(\overrightarrow{\varphi}(E))$：
+\[
+\int_{\overrightarrow{\varphi}(E)}f(\vec{x})d\vec{x}
+=\int_E f(\overrightarrow{\varphi}(\vec{u}))\bigl|\det D\overrightarrow{\varphi}(\vec{u})\bigr|d\vec{u}.
+\]
+其中 $\det D\overrightarrow{\varphi}=\frac{\partial(x^1,\dots,x^m)}{\partial(u^1,\dots,u^m)}$ 称为 \textbf{Jacobi 行列式}。
+\end{theorem}
+
+注：$\overrightarrow{\varphi}(\partial E)\neq\partial(\overrightarrow{\varphi}(E))$ 一般成立。
+
+\section{常见坐标变换的 Jacobi 行列式}
+
+\begin{itemize}
+\item 极坐标 $(r,\theta)$：$\frac{\partial(x,y)}{\partial(r,\theta)}=\bigl|\begin{smallmatrix}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{smallmatrix}\bigr|=r$。
+\item 柱坐标 $(r,\theta,z)$：Jacobi $=r$。
+\item 球坐标 $(r,\theta,\phi)$：$x=r\sin\phi\cos\theta,y=r\sin\phi\sin\theta,z=r\cos\phi$。Jacobi $=r^2\sin\phi$。
+\end{itemize}
+
+\begin{flushright}\small $\square$ 第二十九章完\end{flushright}
+
+% ============================================================
+% 第三十章  Class 34（5.27）  变量替换应用与第一型曲线积分
+% ============================================================
+\chapter{变量替换应用与第一型曲线积分}
+\begin{flushright}\small 日期：5月27日\quad 原 Class 34\end{flushright}
+
+\section{变量替换典型例题}
+
+\begin{example}[菱形区域上的积分]
+$E=\{(x,y):|x|+|y|\le1\}$。令 $u=x+y,v=x-y$，$x=\frac{u+v}{2},y=\frac{u-v}{2}$。$|\frac{\partial(x,y)}{\partial(u,v)}|=\frac12$。$E$ 变为 $[-1,1]\times[-1,1]$。$\iint_E f(x+y)dxdy=\int_{-1}^1 f(u)du\int_{-1}^1\frac12 dv=\int_{-1}^1 f(u)du$。
+\end{example}
+
+\begin{example}[双曲线围成的区域面积]
+$E$ 由 $xy=a,xy=b$（$0<a<b$）和 $y=px,y=qx$（$0<p<q$）围成。令 $u=xy,v=y/x$。$|\frac{\partial(u,v)}{\partial(x,y)}|=\bigl|\begin{smallmatrix}y&x\\-y/x^2&1/x\end{smallmatrix}\bigr|=2y/x=2v$。$\operatorname{Vol}(E)=\int_a^b du\int_p^q\frac{dv}{2v}=\frac{b-a}{2}\ln\frac{q}{p}$。
+\end{example}
+
+\section{Gauss 积分与极坐标}
+$I=\int_{-\infty}^{+\infty}e^{-x^2}dx=\sqrt{\pi}$。计算：$I^2=\int_{-\infty}^{+\infty}e^{-x^2}dx\int_{-\infty}^{+\infty}e^{-y^2}dy=\iint_{\mathbb{R}^2}e^{-(x^2+y^2)}dxdy$。极坐标：$=\lim_{a\to\infty}\int_0^a\int_0^{2\pi}e^{-r^2}r\,dr d\theta=2\pi\cdot\frac12=\pi$。$\therefore I=\sqrt{\pi}$。
+
+夹逼：$\iint_{x^2+y^2\le a^2}e^{-r^2}rdrd\theta=\pi(1-e^{-a^2})\le I(a)\le\iint_{x^2+y^2\le2a^2}=\pi(1-e^{-2a^2})\to\pi$。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/107_1188_937_379_285_0.jpg}\end{center}
+
+\section{球坐标与 $n$ 维球体积}
+球坐标（$\mathbb{R}^3$）：$x=r\cos\theta\cos\varphi,y=r\cos\theta\sin\varphi,z=r\sin\theta$。Jacobi $=r^2\cos\theta$。
+
+\begin{center}\includegraphics[width=0.3\textwidth]{images/107_170_1724_486_331_0.jpg}\end{center}
+
+$n$ 维球 $E_n(a):x_1^2+\cdots+x_n^2\le a^2$。体积 $V_n(a)=C_n a^n$。递推：
+\begin{align*}
+V_n(a)&=\iint_{x_1^2+x_2^2\le a^2}dx_1dx_2\int_{x_3^2+\cdots+x_n^2\le a^2-x_1^2-x_2^2}dx_3\cdots dx_n\\
+&=\iint_{x_1^2+x_2^2\le a^2}C_{n-2}(a^2-x_1^2-x_2^2)^{\frac{n-2}{2}}dx_1dx_2\\
+&\stackrel{\text{极坐标}}{=}\int_0^a\int_0^{2\pi}C_{n-2}(a^2-r^2)^{\frac{n-2}{2}}r\,dr d\theta
+=\pi C_{n-2}\cdot\frac{2}{n}a^n.
+\end{align*}
+故 $C_n=\frac{2\pi}{n}C_{n-2}$。$C_1=2,C_2=\pi$。递推：$C_3=\frac{4}{3}\pi,C_4=\frac{\pi^2}{2}$。
+
+\section{第一型曲线积分（对弧长的积分）}
+
+\subsection{可求长曲线}
+$\overrightarrow{r}(t),t\in[\alpha,\beta]$。分割 $\pi=\{t_0=\alpha,\dots,t_N=\beta\}$。折线长 $\lambda(r,\pi)=\sum\|\overrightarrow{r}(t_i)-\overrightarrow{r}(t_{i-1})\|$。弧长 $L=\sup_\pi\lambda(r,\pi)$。若 $L<\infty$ 称曲线可求长。
+
+若 $r\in C^1$：$L=\int_\alpha^\beta\|\overrightarrow{r}'(t)\|dt$（$\|\overrightarrow{r}'(t)\|=\frac{ds}{dt}$）。
+
+\subsection{第一型曲线积分}
+$f$ 定义在曲线 $\Gamma$ 上。分割 $\pi$，介点 $\xi_i\in[t_{i-1},t_i]$。$\Delta s_i\approx\|\overrightarrow{r}'(t_i)\|\Delta t_i$。
+\[
+\int_\Gamma f\,ds=\lim_{\|\pi\|\to0}\sum f(\overrightarrow{r}(\xi_i))\|\overrightarrow{r}(t_i)-\overrightarrow{r}(t_{i-1})\|
+=\int_\alpha^\beta f(\overrightarrow{r}(t))\|\overrightarrow{r}'(t)\|dt.
+\]
+
+\begin{example}[圆柱螺线质量]
+$x=a\cos t,y=a\sin t,z=bt$。$\|\overrightarrow{r}'\|=\sqrt{a^2+b^2}$。线密度 $\rho(t)$，总质量 $m=\int_0^T\rho(t)\sqrt{a^2+b^2}dt$。
+\end{example}
+
+\section{曲面积分预备：面积元}
+曲面 $\overrightarrow{r}(u,v)$。面积微元 $d\sigma=\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|du dv$。$\overrightarrow{r}_u\times\overrightarrow{r}_v=(\frac{\partial(y,z)}{\partial(u,v)},\frac{\partial(z,x)}{\partial(u,v)},\frac{\partial(x,y)}{\partial(u,v)})$。$d\sigma=\sqrt{(\frac{\partial(y,z)}{\partial(u,v)})^2+(\frac{\partial(z,x)}{\partial(u,v)})^2+(\frac{\partial(x,y)}{\partial(u,v)})^2}du dv$。
+
+第一型曲面积分：$\iint_S f\,d\sigma=\iint_D f(\overrightarrow{r}(u,v))\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|du dv$。
+
+\begin{flushright}\small $\square$ 第三十章完\end{flushright}
+
+% ============================================================
+% 第三十一章  Class 35（5.27习题课）  重积分习题
+% ============================================================
+\chapter{重积分习题}
+\begin{flushright}\small 原 Class 35（5.27习题课）\end{flushright}
+
+\begin{example}[双纽线面积]
+曲线 $(\frac{x^2}{a^2}+\frac{y^2}{b^2})^2=\frac{x^2}{a^2}-\frac{y^2}{b^2}$。令 $x=a\rho\cos\theta,y=b\rho\sin\theta$。代入得 $\rho^4=\rho^2(\cos^2\theta-\sin^2\theta)\Rightarrow\rho^2=\cos2\theta$。$\cos2\theta\ge0\Rightarrow\theta\in[-\frac\pi4,\frac\pi4]\cup[\frac{3\pi}{4},\frac{5\pi}{4}]$。Jacobi $=ab\rho$。面积 $S=ab\int_{-\pi/4}^{\pi/4}d\theta\int_0^{\sqrt{\cos2\theta}}\rho d\rho=ab\int_{-\pi/4}^{\pi/4}\frac{\cos2\theta}{2}d\theta=ab$。
+\end{example}
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/110_1183_1920_367_253_0.jpg}\end{center}
+
+\begin{example}[广义极坐标]
+$\iint_D(\frac{x-c}{a}+\sqrt{\frac{y-c}{b}})dxdy$，$D$ 由 $\frac{x-c}{a}+\sqrt{\frac{y-c}{b}}=1$ 和坐标轴围成。
+
+令 $x=c+a\rho\cos^4\theta,y=c+b\rho\sin^4\theta$。$\sqrt{\rho}=1\Rightarrow\rho=1$。Jacobi $=4ab\rho\sin^3\theta\cos^3\theta$。积分 $=4ab\int_0^{\pi/2}\sin^3\theta\cos^3\theta d\theta\int_0^1\rho\sqrt{\rho}d\rho=\frac{2}{5}ab$。
+
+法二：$u=\sqrt{\frac{x-c}{a}},v=\sqrt{\frac{y-c}{b}}$。$D\to\{u+v\le1,u,v\ge0\}$。
+\end{example}
+
+\begin{example}[$y^2=2x,x+y=12$ 围成区域]
+交点 $(2,2),(8,4)$。$D=\{(x,y):y^2/2\le x\le12-y,2\le y\le4\}$。$\iint_D(x+y)dxdy=\int_2^4 dy\int_{y^2/2}^{12-y}(x+y)dx=\cdots$。或换元 $u=x+y,v=y$，$|\frac{\partial(x,y)}{\partial(u,v)}|=1$。$y=-\sqrt{1+2u}\le v\le-1+\sqrt{1+2u}$。$I=\int_4^{12}u du\int_{y_1}^{y_2}dv$。
+\end{example}
+
+\begin{flushright}\small $\square$ 第三十一章完\end{flushright}
+
+% ============================================================
+% 第三十二章  Class 36（5.29）  第一型曲面积分
+% ============================================================
+\chapter{第一型曲面积分}
+\begin{flushright}\small 日期：5月29日\quad 原 Class 36\end{flushright}
+
+\section{第一型曲面积分（对面积的积分）}
+曲面参数化 $\overrightarrow{r}(u,v)$。面积微元 $d\sigma=\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|du dv$。$\iint_S f\,d\sigma=\iint_D f(\overrightarrow{r}(u,v))\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|du dv$。
+
+显式 $z=f(x,y)$：$S$ 参数化为 $(x,y,f(x,y))$。$\overrightarrow{r}_x=(1,0,f_x)$，$\overrightarrow{r}_y=(0,1,f_y)$。$\|\overrightarrow{r}_x\times\overrightarrow{r}_y\|=\sqrt{1+f_x^2+f_y^2}$。$\iint_S g\,d\sigma=\iint_D g(x,y,f(x,y))\sqrt{1+f_x^2+f_y^2}dxdy$。
+
+\begin{example}[球面面积]
+$x=a\cos\theta\cos\varphi,y=a\cos\theta\sin\varphi,z=a\sin\theta$。$\overrightarrow{r}_\theta=(-a\sin\theta\cos\varphi,-a\sin\theta\sin\varphi,a\cos\theta)$，$\overrightarrow{r}_\varphi=(-a\cos\theta\sin\varphi,a\cos\theta\cos\varphi,0)$。$\|\overrightarrow{r}_\theta\times\overrightarrow{r}_\varphi\|=a^2\cos\theta$。面积 $=\int_{-\pi/2}^{\pi/2}\int_0^{2\pi}a^2\cos\theta d\varphi d\theta=4\pi a^2$。
+\end{example}
+
+\begin{example}[锥面 $z=\sqrt{x^2+y^2}$ 被柱面 $x^2+y^2=2ax$ 割下部分的面积]
+$z_x=x/\sqrt{x^2+y^2},z_y=y/\sqrt{x^2+y^2}$。$\sqrt{1+z_x^2+z_y^2}=\sqrt{2}$。$D:$ $(x-a)^2+y^2\le a^2$。面积 $=\iint_D\sqrt{2}dxdy=\sqrt{2}\pi a^2$。
+\end{example}
+
+\section{第二型曲线积分（对坐标的积分）}
+$\int_\Gamma\overrightarrow{F}\cdot d\overrightarrow{r}=\int_\Gamma F^{(x)}dx+F^{(y)}dy+F^{(z)}dz$。$d\overrightarrow{r}=(dx,dy,dz)=\overrightarrow{r}'(t)dt$。计算 $\int_\alpha^\beta(F^{(x)}x'+F^{(y)}y'+F^{(z)}z')dt$。
+
+与第一型关系：$\int_\Gamma\overrightarrow{F}\cdot d\overrightarrow{r}=\int_\Gamma(\overrightarrow{F}\cdot\overrightarrow{T})ds$（$\overrightarrow{T}=d\overrightarrow{r}/ds$ 为单位切向量）。反向路径：$\int_{-\Gamma}=-\int_\Gamma$。
+
+\begin{example}[椭圆面积]
+$A=\frac12\oint_{\partial D}(xdy-ydx)$。对 $\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$：$x=a\cos t,y=b\sin t$。$A=\frac12\int_0^{2\pi}(ab\cos^2 t+ab\sin^2 t)dt=\pi ab$。
+\end{example}
+
+\begin{example}[圆柱螺线]
+$\overrightarrow{r}=(a\cos t,a\sin t,bt),t\in[0,2\pi]$。$\overrightarrow{F}=(x,y,z)$。$\int\overrightarrow{F}\cdot d\overrightarrow{r}=\int_0^{2\pi}(-a^2\cos t\sin t+a^2\sin t\cos t+b^2 t)dt=2\pi^2 b^2$。
+
+法二：$d\overrightarrow{r}=(dx,dy,dz)$，被积 $xdx+ydy+zdz=\frac12 d(x^2+y^2+z^2)$，积分 $=\frac12[(a^2+4\pi^2 b^2)-(a^2)]=2\pi^2 b^2$。
+\end{example}
+
+\begin{flushright}\small $\square$ 第三十二章完\end{flushright}
+
+% ============================================================
+% 第三十三章  Class 37（6.3）  第二型曲面积分与定向
+% ============================================================
+\chapter{第二型曲面积分与定向}
+\begin{flushright}\small 日期：6月3日\quad 原 Class 37\end{flushright}
+
+\section{第二型曲面积分（对坐标的积分）}
+有向面元 $d\overrightarrow{S}=\overrightarrow{n}d\sigma$（$\overrightarrow{n}$ 为单位法向量）。$\overrightarrow{n}=\frac{\overrightarrow{r}_u\times\overrightarrow{r}_v}{\|\overrightarrow{r}_u\times\overrightarrow{r}_v\|}$，$d\overrightarrow{S}=(\overrightarrow{r}_u\times\overrightarrow{r}_v)du dv$。
+
+$\iint_S\overrightarrow{v}\cdot d\overrightarrow{S}=\iint_D\overrightarrow{v}\cdot(\overrightarrow{r}_u\times\overrightarrow{r}_v)du dv$。分量形式：
+\[
+\iint_S v^{(x)}dS^{(x)}+v^{(y)}dS^{(y)}+v^{(z)}dS^{(z)}
+=\iint_D\Bigl(v^{(x)}\frac{\partial(y,z)}{\partial(u,v)}+v^{(y)}\frac{\partial(z,x)}{\partial(u,v)}+v^{(z)}\frac{\partial(x,y)}{\partial(u,v)}\Bigr)du dv.
+\]
+楔积记号：$dy\wedge dz,dz\wedge dx,dx\wedge dy$。
+
+\section{曲面定向}
+简单正则曲面：$\overrightarrow{r}\in C^1$，$\overrightarrow{r}_u\times\overrightarrow{r}_v\neq\overrightarrow{0}$，单射。法向量连续选取确定定向。
+
+\textbf{不可定向曲面——M\"obius 带：}
+$x=(a+v\sin\frac{u}{2})\cos u,y=(a+v\sin\frac{u}{2})\sin u,z=v\cos\frac{u}{2}$。$u\in[0,2\pi],v\in[-\varepsilon,\varepsilon]$。在 $u=0,v=0$：$\overrightarrow{r}_u\times\overrightarrow{r}_v=(a,0,0)$。在 $u=2\pi,v=0$：$\overrightarrow{r}_u\times\overrightarrow{r}_v=(-a,0,0)$（法向量反向！）。M\"obius 带不可定向。
+
+\section{初等区域与定向协调}
+初等区域：边界分段连续。初等曲面：定义在初等区域上的正则曲面。拼接条件：(i) 至多两个曲面共边；(ii) $n\ge3$ 个曲面最多交于一点。定向协调：相邻曲面在共同边界处诱导相反定向。
+
+\begin{center}\includegraphics[width=0.9\textwidth]{images/117_195_1878_1197_289_0.jpg}\end{center}
+
+\section{第二型曲面积分计算}
+显式 $z=f(x,y)$：以 $x,y$ 为参数，$d\overrightarrow{S}=(-f_x,-f_y,1)dxdy$。$\iint_S\overrightarrow{v}\cdot d\overrightarrow{S}=\iint_D(v^{(z)}-v^{(x)}f_x-v^{(y)}f_y)dxdy$。
+
+\begin{example}[单位立方体表面]
+$\iint_{\partial[0,1]^3}\overrightarrow{x}\cdot d\overrightarrow{S}$。以 $x=1$ 面为例：$\overrightarrow{n}=(1,0,0)$，$d\overrightarrow{S}=(1,0,0)dydz$，$\overrightarrow{x}\cdot d\overrightarrow{S}=1\cdot1\cdot dydz$。六面之和 $=8$。或整体用散度定理：$\frac13\iint\overrightarrow{x}\cdot d\overrightarrow{S}=\frac13\iiint\nabla\cdot\overrightarrow{x}=\frac13\cdot3=1$（每面贡献不均匀，但答为 $8$，需注意 $\overrightarrow{x}=(x,y,z)$ 在各面取值不同）。
+\end{example}
+
+\begin{example}[椭球面]
+$\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$。$\iint\overrightarrow{x}\cdot d\overrightarrow{S}$。参数化 $x=a\cos\theta\cos\varphi,y=b\cos\theta\sin\varphi,z=c\sin\theta$。计算各 Jacobi 得 $I=-\frac{4\pi}{3}abc$（负号因参数化法向量指向内部）。
+\end{example}
+
+\begin{flushright}\small $\square$ 第三十三章完\end{flushright}
+
+% ============================================================
+% 第三十四章  Class 38（6.3习题课）  曲线曲面积分习题
+% ============================================================
+\chapter{曲线曲面积分习题}
+\begin{flushright}\small 原 Class 38（6.3习题课）\end{flushright}
+
+\begin{example}[球上 $\iiint_{x^2+y^2+z^2\le1}f(ax+by+cz)dxdydz=\pi\int_{-1}^1(1-u^2)f(ku)du$]
+$k=\sqrt{a^2+b^2+c^2}$。设 $z'$ 轴沿 $(a,b,c)$ 方向。$ax+by+cz=kz'$。新坐标系下积分 $=\iiint_{x'^2+y'^2+z'^2\le1}f(kz')dx'dy'dz'=\int_{-1}^1\pi(1-z'^2)f(kz')dz'$。
+\end{example}
+
+\begin{example}[$\oint_C x^2 ds$，$C$ 为 $x^2+y^2+z^2=R^2,x+y+z=0$]
+由对称性 $x,y,z$ 地位等同：$\oint x^2 ds=\oint y^2 ds=\oint z^2 ds$。$\oint(x^2+y^2+z^2)ds=R^2\oint ds=R^2\cdot2\pi R=2\pi R^3$。$\therefore\oint x^2 ds=\frac{2\pi R^3}{3}$。
+\end{example}
+
+\begin{example}[$\int_\Gamma y^2dx+z^2dy+x^2dz$，$\Gamma$ 为 $x^2+y^2+z^2=a^2,x^2+y^2=ax(z>0)$]
+$r^2=ar\cos\theta$。$z^2=a^2-r^2=a^2\sin^2\theta$。参数化：$x=a\cos^2\theta,y=a\sin\theta\cos\theta,z=a\sin\theta$（$z>0$）。代入计算。
+\end{example}
+
+\begin{example}[锥面 $z=\sqrt{x^2+y^2}$ 被柱面 $x^2+y^2=2ax$ 割下部分的曲面积分]
+$\iint(x^2y^2+y^2z^2+z^2x^2)dS$。$z_x=x/\sqrt{x^2+y^2},z_y=y/\sqrt{x^2+y^2}$。$\sqrt{1+z_x^2+z_y^2}=\sqrt{2}$。$D:(x-a)^2+y^2\le a^2$。$x^2y^2+(x^2+y^2)^2=x^4+3x^2y^2+y^4$。积分 $=\sqrt{2}\iint_D(x^4+3x^2y^2+y^4)dxdy=\frac{9}{8}\sqrt{2}\pi a^6$。
+\end{example}
+
+\begin{flushright}\small $\square$ 第三十四章完\end{flushright}
+
+% ============================================================
+% 第三十五章  Class 39（6.5）  Green公式
+% ============================================================
+\chapter{Green公式}
+\begin{flushright}\small 日期：6月5日\quad 原 Class 39\end{flushright}
+
+\section{Green 公式}
+\begin{theorem}[Green]
+设 $D\subset\mathbb{R}^2$ 为初等区域（$x$ 型和 $y$ 型），$\partial D$ 为分段光滑正向闭曲线。$P,Q\in C^1(\overline{D})$。则
+\[
+\oint_{\partial D}Pdx+Qdy=\iint_D\Bigl(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\Bigr)dxdy.
+\]
+\end{theorem}
+
+\begin{proof}[$y$ 型区域的证明]
+$D=\{(x,y):a\le x\le b,y_1(x)\le y\le y_2(x)\}$。对 $\iint_D\frac{\partial P}{\partial y}dxdy=\int_a^b\int_{y_1(x)}^{y_2(x)}\frac{\partial P}{\partial y}dy dx=\int_a^b[P(x,y_2(x))-P(x,y_1(x))]dx$。右边恰为 $-\oint_{\partial D}Pdx$（上边界正向为右到左，故 $-\int_a^b P(x,y_2)dx$，下边界为 $\int_a^b P(x,y_1)dx$）。对称处理 $x$ 型得 $Q$ 项。
+\end{proof}
+
+\section{应用}
+\begin{itemize}
+\item 面积：$A=\frac12\oint_{\partial D}(xdy-ydx)=\iint_D dxdy$。
+\item 体积（三维）：$V=\frac13\iint_{\partial E}\overrightarrow{x}\cdot d\overrightarrow{S}$（散度定理特例）。
+\end{itemize}
+
+\begin{example}[单位圆盘面积验证]
+$\partial D:x=\cos t,y=\sin t$。$A=\frac12\int_0^{2\pi}(\cos^2 t+\sin^2 t)dt=\pi$。
+\end{example}
+
+\begin{flushright}\small $\square$ 第三十五章完\end{flushright}
+
+% ============================================================
+% 第三十六章  Class 41（6.12）  Green公式应用与Stokes公式
+% ============================================================
+\chapter{Green公式应用与曲面积分}
+\begin{flushright}\small 原 Class 41（6.12，Class 40缺失）\end{flushright}
+
+\section{Green 公式典型例题}
+
+\begin{example}[补路径法求曲线积分]
+$C$ 为抛物线 $2x=\pi y^2$ 自 $(0,0)$ 到 $(\frac\pi2,1)$ 的弧段。求
+\[
+I=\int_C(2xy^3-y^2\cos x)dx+(1-2y\sin x+3x^2y^2)dy.
+\]
+
+$\frac{\partial Q}{\partial x}=-2y\cos x+6xy^2$，$\frac{\partial P}{\partial y}=6xy^2-2y\cos x$。$\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0$，积分与路径无关！补上从 $(\frac\pi2,1)$ 沿 $x=\frac\pi2$ 到 $(\frac\pi2,0)$ 再沿 $y=0$ 回到 $(0,0)$ 的直线段形成闭路。闭路积分为 $0$。$I=$ 沿 $x=\frac\pi2$ 从 $y=1$ 到 $0$：$\int_0^1(1-2y+\frac{3\pi^2}{4}y^2)dy=[y-y^2+\frac{\pi^2}{4}y^3]_0^1=\frac{\pi^2}{4}$。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/130_173_1699_353_218_0.jpg}\end{center}
+\end{example}
+
+\begin{example}[原点是奇点的闭路积分]
+\[
+I=\oint_C\frac{e^y}{x^2+y^2}\bigl[(x\sin x+y\cos x)dx+(y\sin x-x\cos x)dy\bigr],
+\]
+$C:x^2+y^2=1$ 逆时针，$(0,0)$ 无定义。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/131_189_372_320_248_0.jpg}\end{center}
+
+在环形区域 $D_\varepsilon=\{x^2+y^2\ge\varepsilon^2\}\cap\{x^2+y^2\le1\}$ 上 Green 公式适用，且 $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0$。$\oint_C=\oint_{C_\varepsilon}$（$C_\varepsilon:x^2+y^2=\varepsilon^2$）。在 $C_\varepsilon$ 上 $x^2+y^2=\varepsilon^2$，提出 $1/\varepsilon^2$：
+\[
+I=\frac1{\varepsilon^2}\oint_{C_\varepsilon}e^y[(x\sin x+y\cos x)dx+(y\sin x-x\cos x)dy].
+\]
+在 $C_\varepsilon$ 内用 Green：被积函数记 $P_1,Q_1$。$\frac{\partial Q_1}{\partial x}-\frac{\partial P_1}{\partial y}=-2e^y\cos x$。由二重积分中值定理：
+\[
+I=\frac1{\varepsilon^2}\iint_{x^2+y^2\le\varepsilon^2}(-2e^y\cos x)dxdy
+\approx\frac1{\varepsilon^2}(-2e^0\cos0)\cdot\pi\varepsilon^2=-2\pi\quad(\varepsilon\to0).
+\]
+\end{example}
+
+\begin{example}[外法向导数的闭路积分]
+$u=x^2+y^2$，$C$ 为 $(x-3)^2+y^2=3^2$，$\overrightarrow{n}$ 为外法向。求 $\oint_C\frac{\partial u}{\partial n}ds$。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/131_178_1781_377_244_0.jpg}\end{center}
+
+法一：$\nabla u=(2x,2y)$。$C$ 的参数 $x=3+3\cos\theta,y=3\sin\theta$，外法向 $\overrightarrow{n}=(\cos\theta,\sin\theta)$。$ds=3d\theta$。$\frac{\partial u}{\partial n}=\nabla u\cdot\overrightarrow{n}=2x\cos\theta+2y\sin\theta$。代入积分得 $36\pi$。
+
+法二（Green）：$\overrightarrow{n}ds=(dy,-dx)$（外法向 $=$ 切向量右转 $90^\circ$）。$\oint_C\frac{\partial u}{\partial n}ds=\oint_C\frac{\partial u}{\partial x}dy-\frac{\partial u}{\partial y}dx=\oint_C 2xdy-2ydx$。由 Green $=\iint_D(2+2)dxdy=4\cdot\pi\cdot3^2=36\pi$。
+
+\begin{center}\includegraphics[width=0.3\textwidth]{images/132_1008_918_420_384_0.jpg}\includegraphics[width=0.2\textwidth]{images/132_205_928_358_300_0.jpg}\end{center}
+
+\textbf{记忆：}右手边外侧，左手边内侧。$ds\,\overrightarrow{t}=(dx,dy)$；外侧 $ds\,\overrightarrow{n}=(dy,-dx)$；内侧 $ds\,\overrightarrow{n}=(-dy,dx)$。
+\end{example}
+
+\begin{example}[椭圆区域奇点的曲线积分]
+$L:x^2+4y^2=1$ 逆时针。求 $\oint_L\frac{(x-y)dx+(x+4y)dy}{x^2+4y^2}$。
+
+$(0,0)$ 无定义。$C_\varepsilon:x^2+4y^2=\varepsilon^2$。在环形区域 $\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=0$。$\oint_L=\oint_{C_\varepsilon}$。在 $C_\varepsilon$ 上提出 $1/\varepsilon^2$：
+\[
+I=\frac1{\varepsilon^2}\oint_{C_\varepsilon}(x-y)dx+(x+4y)dy
+=\frac1{\varepsilon^2}\iint_{x^2+4y^2\le\varepsilon^2}(1-(-1))dxdy
+=\frac1{\varepsilon^2}\cdot2\cdot\pi\cdot\frac{\varepsilon^2}{2}=\pi.
+\]
+\end{example}
+
+\section{散度定理（Gauss 公式）应用}
+
+\begin{example}[球面积分——原点为奇点]
+\[
+I=\iint_S\frac{xdydz+ydzdx+zdxdy}{(ax^2+by^2+cz^2)^{3/2}},
+\]
+$S:x^2+y^2+z^2=1$ 取外侧，$a,b,c>0$。$(0,0,0)$ 无定义。
+
+$P=\frac{x}{(ax^2+by^2+cz^2)^{3/2}}$ 等。计算 $\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}=0$（在非原点处）。作小球面 $S_\varepsilon:ax^2+by^2+cz^2=\varepsilon$。$I=\iint_{S_\varepsilon}$。在 $S_\varepsilon$ 上 $ax^2+by^2+cz^2=\varepsilon$，提出 $1/\varepsilon^{3/2}$：
+\[
+I=\frac1{\varepsilon^{3/2}}\iint_{S_\varepsilon}xdydz+ydzdx+zdxdy
+=\frac1{\varepsilon^{3/2}}\iiint_{ax^2+by^2+cz^2\le\varepsilon}3\,dxdydz.
+\]
+椭球体积 $=\frac{4\pi}{3}\frac{\varepsilon^{3/2}}{\sqrt{abc}}$。故 $I=\frac{4\pi}{\sqrt{abc}}$。
+\end{example}
+
+\begin{example}[锥体体积公式 $V=\frac13SH$]
+锥面 $\Sigma$ 以原点为顶点，与平面 $\Pi:Ax+By+Cz=D$ 围成锥体。证 $V=\frac13SH$（$S$ 为底面积，$H$ 为原点到 $\Pi$ 的距离）。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/134_195_155_356_192_0.jpg}\end{center}
+
+法一（坐标变换）：$z'=\overrightarrow{n}\cdot\overrightarrow{r}$，$\overrightarrow{n}$ 为 $\Pi$ 的单位法向量。Jacobi $=1$。$V=\int_0^H dz'\iint_{截面}dx'dy'$。
+
+法二（散度定理）：$V=\iiint_\Omega dxdydz=\frac13\iint_{\partial\Omega}(xdydz+ydzdx+zdxdy)=\frac13\iint_{\partial\Omega}\overrightarrow{r}\cdot\overrightarrow{n}dS$。锥面上 $\overrightarrow{n}\perp\overrightarrow{r}$，贡献为 $0$。底面上 $\overrightarrow{r}\cdot\overrightarrow{n}=\frac{Ax+By+Cz}{\sqrt{A^2+B^2+C^2}}=\frac{D}{\sqrt{A^2+B^2+C^2}}=H$。故 $V=\frac13 H\iint_{\Pi}dS=\frac13 SH$。
+\end{example}
+
+\section{Stokes 公式}
+
+\begin{example}[球面与柱面交线上的曲线积分]
+$C$ 为 $x^2+y^2+z^2=2Rx$ 与 $x^2+y^2=2rx$ 的交线（$0<r<R,z>0$）。求
+\[
+I=\oint_C(y^2+z^2)dx+(z^2+x^2)dy+(x^2+y^2)dz.
+\]
+
+$(x-R)^2+y^2+z^2=R^2$。由 Stokes，$I=\iint_S\operatorname{rot}\overrightarrow{F}\cdot d\overrightarrow{S}$。$\operatorname{rot}\overrightarrow{F}=(2y-2z,2z-2x,2x-2y)$。选球冠面 $S$ 为积分曲面，法向量 $\overrightarrow{n}=\frac1R(x-R,y,z)$。化简得 $I=\iint_S 2(z-y)dS$。由对称性 $\iint y dS=0$，只需 $\iint 2z dS$。$z/R$ 为 $\cos(\overrightarrow{n},\overrightarrow{k})$。$I=\iint 2R\cdot\frac{z}{R}dS=2R\iint_{D_{xy}}dxdy=2R\pi r^2$（$D_{xy}$ 为 $x^2+y^2\le2rx$ 的投影）。
+\end{example}
+
+\begin{example}[立体角 / Gauss 积分]
+$\Sigma$ 光滑闭曲面，$\Omega$ 为其内部，$\overrightarrow{n}$ 为单位外法向。$(x_0,y_0,z_0)$ 为定点，$\overrightarrow{r}=(x-x_0,y-y_0,z-z_0)$。证
+\[
+\oiint_\Sigma\frac{\cos(\overrightarrow{n},\overrightarrow{r})}{|\overrightarrow{r}|^2}dS
+=\iiint_\Omega\frac{2}{|\overrightarrow{r}|}dxdydz.
+\]
+
+$\cos(\overrightarrow{n},\overrightarrow{r})=\frac{\overrightarrow{n}\cdot\overrightarrow{r}}{|\overrightarrow{r}|}$。化为一型 $=$ 二型：
+\[
+\oiint_\Sigma\frac{(x-x_0)dydz+(y-y_0)dzdx+(z-z_0)dxdy}{|\overrightarrow{r}|^3}.
+\]
+由散度定理（注意 $|\overrightarrow{r}|^{-3}$ 的散度 $=\frac{2}{|\overrightarrow{r}|}$）即得。
+\end{example}
+
+\section{正交曲线坐标系}
+$\frac{\partial\overrightarrow{r}}{\partial q_i}=h_i\widehat{e_i}$（$h_i=|\frac{\partial\overrightarrow{r}}{\partial q_i}|$，$\widehat{e_i}$ 为单位向量）。正交条件：$\widehat{e_i}\cdot\widehat{e_j}=\delta_{ij}$。
+
+\begin{center}\includegraphics[width=0.2\textwidth]{images/135_175_882_340_271_0.jpg}\includegraphics[width=0.2\textwidth]{images/135_562_888_367_274_0.jpg}\includegraphics[width=0.3\textwidth]{images/135_978_835_424_309_0.jpg}\end{center}
+
+弧长微元 $ds^2=h_1^2 dq_1^2+h_2^2 dq_2^2+h_3^2 dq_3^2$。体积微元 $dV=h_1h_2h_3 dq_1dq_2dq_3$。梯度 $(\nabla f)_i=\frac1{h_i}\frac{\partial f}{\partial q_i}$。散度 $\nabla\cdot\overrightarrow{F}=\frac1{h_1h_2h_3}\bigl[\frac{\partial}{\partial q_1}(h_2h_3F_1)+\frac{\partial}{\partial q_2}(h_3h_1F_2)+\frac{\partial}{\partial q_3}(h_1h_2F_3)\bigr]$。
+
+常见正交系：直角 $(1,1,1)$、柱 $(1,r,1)$、球 $(1,r,r\sin\theta)$。
+
+\begin{flushright}\small $\square$ 第三十六章（全书完）\end{flushright}
+
+\end{document}
