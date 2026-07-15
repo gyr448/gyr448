@@ -64,6 +64,7 @@
 ##  学习笔记 & 资料整理
 
 > 好记性不如烂笔头，把学过的东西整理出来，方便复习也方便分享。
+
 > 根据手写笔记，使用AI整理。这些笔记适合预习和考前复习，不适合用于深度学习。
 
 ###  课程笔记
@@ -71,6 +72,7 @@
 | 课程 | 内容 | 链接 |
 |------|------|------| 
 | **数学分析一** | 授课教师：王圣凯 &nbsp;&nbsp; 时间：2025年秋季学期（不包含实数系连续性的基本定理） | [![笔记](https://img.shields.io/badge/笔记-4CAF50)](./notes/Mathematical%20Analysis%20I/) |
+| **数学分析二** | 授课教师：谢金瀚 &nbsp;&nbsp; 时间：2026年春季学期 | [![笔记](https://img.shields.io/badge/笔记-4CAF50)](./notes/Mathematical%20Analysis%20II/) |
 | **线性代数** | 授课教师：孙志勇 &nbsp;&nbsp; 时间：2025年秋季学期| [![笔记](https://img.shields.io/badge/笔记-4CAF50)](./notes/Linear%20Algebra/) |
 | **高等代数** | 授课教师：陈璞 &nbsp;&nbsp; 时间：2026年春季学期| [![笔记](https://img.shields.io/badge/笔记-4CAF50)](./notes/Advanced%20Algebra/) |
 | **普通物理一** | 授课教师：彭士香 &nbsp;&nbsp; 时间：2026年春季学期 | [![笔记](https://img.shields.io/badge/笔记-4CAF50)](./notes/University%20Physics%20I/) |
