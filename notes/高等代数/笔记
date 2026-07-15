@@ -1,0 +1,2009 @@
+% !TeX program = xelatex
+\documentclass[lang=cn,        % 中文
+                newtx,         % 专业数学字体
+                11pt,          % 字号
+                color=blue,    % 主题色：blue/green/cyan/gray/black
+                scheme=chinese % 中文编号（第一章）
+               ]{elegantbook}
+
+% ========== 封面信息 ==========
+\title{高等代数学习笔记}
+\author{郭玉润}
+\institute{北京大学工学院}
+\date{\today}
+\cover{logo.jpg}   
+
+% ========== 导言区设置 ==========
+% 图片文件夹路径（如有）
+\graphicspath{{images/}}
+
+% ========== 补充宏包 ==========
+\usepackage[export]{adjustbox}  % 支持 max width 等图片选项
+\usepackage{wasysym}            % 提供 \XBox 等符号
+
+% ========== 自定义命令 ==========
+\newcommand{\HRule}{\begin{center}\rule{0.9\linewidth}{0.2mm}\end{center}}
+\newcommand{\lt}{\mathrel{<}}
+\newcommand{\gt}{\mathrel{>}}
+
+% ========== 修复章节页无页码 ==========
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[L]{\small 高等代数学习笔记}
+  \fancyhead[R]{\small\leftmark}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+}
+
+% ========== 正文开始 ==========
+\begin{document}
+
+% --- 生成封面 ---
+\maketitle
+
+% --- 前言与目录 ---
+\tableofcontents
+
+% --- 正文（各章） ---
+\mainmatter
+
+% ============================================================
+% Class 1 (3.3) — 可逆矩阵定理
+% ============================================================
+\chapter{可逆矩阵定理与行列式复习}
+
+\section{成绩评定与课程内容}
+
+成绩评定：平时30\%（含课堂5\%），期中考试20\%，期终考试50\%。
+
+内容：一元多项式/多元多项式；行列式的另一个定义；可逆矩阵定理复习。
+
+\section{可逆矩阵定理 (Invertible Matrix Theorem)}
+
+设 $A$ 为 $n \times n$ 矩阵，以下各条等价：
+
+\begin{enumerate}
+  \item[(1)] $\begin{cases}
+    \operatorname{Col}A = \mathbb{R}^{n}, \; A \text{ 作为一个映射的标准矩阵，它是满的}
+  \end{cases}$
+
+  \item[(2)] $A$ 的列线性无关。即：
+  \[
+  \begin{cases}
+    A\vec{x} = \vec{0} \Rightarrow \vec{x} = \vec{0} \\
+    \operatorname{Nul}A = \{0\} \\
+    A: x \rightarrow Ax \text{ 是单射}
+  \end{cases}
+  \]
+
+  \item[(3)] $\det A \neq 0$
+
+  \item[(4)] $\begin{cases}
+    A \text{ 的特征值全非零} \\
+    A \text{ 的奇异值全非零}
+  \end{cases}$
+
+  \item[(5)] $A$ 行等价于单位矩阵
+
+  \item[(6)] $\because CA = E,\; AD = E \; (C = D)$
+
+  \item[(7)] $\operatorname{rank}A = n$
+\end{enumerate}
+
+\medskip
+\textbf{注：}齐次线性方程组，如果变量的个数多于方程的个数，一定有非平凡解。
+
+\subsection{行满秩矩阵（矮矩阵）与列满秩矩阵（高矩阵）}
+
+设 $G$ 为 $m \times n$ 矩阵，行满秩（矮矩阵）时 $m < n$：
+
+\begin{enumerate}
+  \item[(1)] $\operatorname{rank}G = m$（行数）
+  \item[(2)] 不适用（列数讨论）
+  \item[(3)] 不适用（秩讨论）
+  \item[(4)] 可找到右逆 $D$：$GD = [\vec{G}_1 \cdots \vec{G}_n]D = E_m$，但 $D$ 不唯一
+\end{enumerate}
+
+设 $H$ 为高矩阵，列满秩时 $m > n$：
+
+\begin{enumerate}
+  \item[(1)] $\operatorname{rank}H = n$（列数）
+  \item[(2)] 不适用
+  \item[(3)] 不适用
+  \item[(4)] $CH = E_n$，$H^{\top}C^{\top} = E$（用转置思考）
+\end{enumerate}
+
+\subsection{可逆矩阵定理完整对比表}
+
+\textbf{(Invertible Matrix Theorem，源自 David Lay Sec2.3, Sec2.9, Sec4.6, Sec5.2, Sec7.4)}
+
+\bgroup
+\small
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+No & $A$ 为 $n \times n$ 矩阵 & $\mathbf{B}$ 为 $m \times n$ 矩阵 $(m < n)$ & $\mathbf{G}$ 为 $m \times n$ 矩阵 $(m > n)$ & 分类 \\
+\hline
+a & $A$ 是可逆矩阵 & $\mathbf{B}$ 是满行秩矩阵（矮） & $\mathbf{G}$ 是满列秩矩阵（高） & $\operatorname{rank} = \min(m,n)$ \\
+\hline
+b & $A$ 行等价于单位矩阵 & $\mathbf{B}$ 列等价于 $(\mathbf{E}_m,\mathbf{O})$ & $\mathbf{G}$ 行等价于 $(\mathbf{E}_n,\mathbf{O})^{T}$ & 行列等价讨论 \\
+\hline
+c & $A$ 有 $n$ 个主元位置 & $\mathbf{B}$ 有 $m$ 个主元位置 & $\mathbf{G}$ 有 $n$ 个主元位置 & 秩 \\
+\hline
+d & $Ax = 0$ 仅有平凡解 & No & Yes & \multirow{3}{*}{列线性无关性} \\
+\cline{1-4}
+e & $A$ 的列线性无关 & No & Yes & \\
+\cline{1-4}
+f & $\mathbf{x} \rightarrow A\mathbf{x}$ 是单射的 & No & Yes & \\
+\hline
+g & $\forall \mathbf{b} \in \mathbb{R}^{n}, A\mathbf{x} = \mathbf{b}$ 相容 & Yes & No & \multirow{3}{*}{列的完整性} \\
+\cline{1-4}
+h & $\mathbf{A}$ 的列线性张成 $\mathbb{R}^{n}$ & $\mathbf{B}$ 的列线性张成 $\mathbb{R}^{m}$ & $\mathbf{G}$ 的列不张成 $\mathbb{R}^{m}$ & \\
+\cline{1-4}
+i & $x \rightarrow Ax$ 是满射的 & Yes & No & \\
+\hline
+j & $\exists \mathbf{C} \in \mathbb{R}^{n \times n}, \mathbf{CA} = \mathbf{E}$ & No & $\exists \mathbf{C} \in \mathbb{R}^{n \times m}, \mathbf{CG} = \mathbf{E}_n$ & 列线性无关性 \\
+\hline
+k & $\exists \mathbf{D} \in \mathbb{R}^{n \times n}, \mathbf{AD} = \mathbf{E}$ & $\exists \mathbf{D} \in \mathbb{R}^{n \times m}, \mathbf{BD} = \mathbf{E}_m$ & No & 行线性无关性 \\
+\hline
+l & $\mathbf{A}^{T}$ 是可逆矩阵 & $\mathbf{B}^{T}$ 是满列秩矩阵 & $\mathbf{G}^{T}$ 是满行秩矩阵 & 行列互换 \\
+\hline
+m & $\mathbf{A}$ 的列形成 $\mathbb{R}^{n}$ 的基 & $\mathbf{B}$ 的列含 $\mathbb{R}^{m}$ 的基 & $\mathbf{G}$ 的行含 $\mathbb{R}^{1 \times n}$ 的基 & \multirow{3}{*}{列的完整性} \\
+\cline{1-4}
+n & $\operatorname{Col}\mathbf{A} = \mathbb{R}^{n}$ & $\operatorname{Col}\mathbf{B} = \mathbb{R}^{m}$ & $\operatorname{Col}\mathbf{G} \subset \mathbb{R}^{m}$ & \\
+\cline{1-4}
+o & $\dim\operatorname{Col}\mathbf{A} = n$ & $\dim\operatorname{Col}\mathbf{B} = m$ & $\dim\operatorname{Col}\mathbf{G} = n < m$ & \\
+\hline
+p & $\operatorname{rank}\mathbf{A} = n$ & $\operatorname{rank}\mathbf{B} = m$ & $\operatorname{rank}\mathbf{G} = n$ & \\
+\hline
+q & $\operatorname{Nul}\mathbf{A} = \{\mathbf{0}\}$ & No & Yes & \multirow{2}{*}{列线性无关性} \\
+\cline{1-4}
+r & $\dim\operatorname{Nul}\mathbf{A} = 0$ & $\dim\operatorname{Nul}\mathbf{B} = n - m$ & $\dim\operatorname{Nul}\mathbf{G} = 0$ & \\
+\hline
+s & $0$ 不是 $\mathbf{A}$ 的特征值 & 不适用 & 不适用 & 不讨论特征值 \\
+\hline
+t & $\mathbf{A}$ 的行列式不为零 & 某个 $m$ 阶子式不为零 & 某个 $n$ 阶子式不为零 & 秩的另一面 \\
+\hline
+u & $(\operatorname{Col}\mathbf{A})^{\bot} = \{\mathbf{0}\}$ & Yes & $(\operatorname{Col}\mathbf{G})^{\bot} \neq \{\mathbf{0}\}$ & \multirow{3}{*}{行列空间的长度不一样} \\
+\cline{1-4}
+v & $(\operatorname{Nul}\mathbf{A})^{\bot} = \mathbb{R}^{n}$ & $\operatorname{Nul}\mathbf{B} \neq \{\mathbf{0}\} \subset \mathbb{R}^{n}$ & Yes & \\
+\cline{1-4}
+w & $\operatorname{Col}\mathbf{A}^{T} = \mathbb{R}^{n}$ & $\operatorname{Col}\mathbf{B}^{T} \subset \mathbb{R}^{n}$ & Yes & \\
+\hline
+x & $\mathbf{A}$ 有 $n$ 个非零奇异值 & $\mathbf{B}$ 有 $m$ 个非零奇异值 & $\mathbf{G}$ 有 $n$ 个非零奇异值 & 秩 \\
+\hline
+\end{tabular}
+\end{center}
+\egroup
+
+% ============================================================
+% 第一章 一元多项式
+% ============================================================
+\chapter{一元多项式}
+
+\section{主要结论与算法}
+
+\textbf{主要结论：}
+\begin{enumerate}
+  \item B\'{e}zout 公式（最大公因式的表示）
+  \item 重因式定理（形式微商）
+  \item Sturm 定理（区间内实根的个数）
+\end{enumerate}
+
+\textbf{主要算法：}
+\begin{enumerate}
+  \item 辗转相除法求公因式（域无关性）
+  \item 同余方程的解法
+  \item 区间内实根的算法
+\end{enumerate}
+
+\textbf{主要工具：}带余除法。
+
+\section{一元多项式的定义与基本运算}
+
+\begin{definition}
+设 $P$ 是一个数域，$n$ 是非负整数，$X$ 是一个符号。下面的形式表达式
+\[
+f(x) = a_n x^n + \cdots + a_1 x + a_0 = \sum_{k=0}^{n} a_k x^k
+\]
+称为 $P$ 上关于符号 $X$ 的一元 $n$ 次多项式，如果 $a_n \neq 0$，次数为 $n$，记为 $\partial(f(x))$ 或 $\partial f$。零多项式次数无定义或为 $-\infty$。
+\end{definition}
+
+首一多项式：$a_n = 1$；零次多项式：$a_0 \neq 0$；零多项式：$a_0 = a_1 = \cdots = a_n = 0$。
+
+多项式相等：次数相等 $+$ 对应系数相等。
+
+\textbf{加法：}相同幂次的系数相加。
+\[
+\partial(f + g) \leq \max(\partial f, \partial g)
+\]
+
+\textbf{乘法：}合并相同幂次的系数乘积。
+\[
+\partial(fg) = \partial f + \partial g
+\]
+非零多项式的积是非零多项式。运算律略。
+
+\textbf{乘法系数计算：}
+$(b_1 x + b_0)(q_{n+1} x^{n+1} + q_{n-2} x^{n-2} + \cdots + q_1 x + q_0) + r_0 = f(x)$，计算除式为 $(x - b)$ 的商。
+
+计算乘积示例：
+\[
+f(x) = 6x^5 - 3x^4 + 3x^3 - 11x^2 + 4x + 7, \quad
+q(x) = 2x^4 + 5x^3 - 2x^2 + 4x + 3
+\]
+
+\[
+\begin{bmatrix} 6 \\ -3 \\ 3 \\ 2 \\ 1 \\ -1 \\ 4 \\ 7 \end{bmatrix}
+\begin{bmatrix} \frac{3}{2} \\ 5 \\ 2 \\ -2 \\ 1 \\ 4 \\ 7 \end{bmatrix}
+\quad
+\begin{bmatrix} 6 \\ -3 \\ 3 \\ 3 \\ -1 \\ 4 \\ 7 \end{bmatrix}
+\begin{bmatrix} 3 \\ -2 \\ 5 \\ 2 \end{bmatrix} = -21
+\]
+
+\begin{center}
+\includegraphics[max width=0.4\textwidth]{images/3_50_1575_504_661_0.jpg}
+\end{center}
+
+\section{带余除法}
+
+\[
+f(x) = g(x) q(x) + r(x), \quad \partial r(x) < \partial g(x)
+\]
+
+\subsection*{唯一性证明}
+
+假设有另一表达式 $f = p g + s$，那么 $0 = (q - p)g + (r - s)$，即 $(q - p)g = s - r$。若两个表达式不一样，则 $\partial((q-p)g) = \partial(r-s)$，但 $\partial(r-s) < \partial g$，矛盾。
+
+\subsection*{存在性证明（次数不低于除式就减一个）}
+
+设
+\[
+f(x) = a_m x^m + \cdots, \qquad g(x) = b_n x^n + \cdots
+\]
+令
+\[
+f_1(x) = f(x) - \frac{a_m}{b_n} x^{m-n} g(x), \quad \partial f_1 = m - 1
+\]
+\[
+f_2(x) = f_1(x) - \frac{a_{m-1}^{(1)}}{b_n} x^{m-1-n} g(x)
+\]
+\[
+q(x) = \frac{a_m}{b_n} x^{m-n} + \frac{a_{m-1}^{(1)}}{b_n} x^{m-1-n} + \cdots + \frac{a_{n}^{(m-n)}}{b_n}
+\]
+
+\HRule
+
+\textbf{注：}
+第一归纳法：从 $1$ 到 $2$，从 $n$ 到 $n+1$；
+第二归纳法：从 $1$ 到 $2$，从 $1 \cdots n$ 到 $n+1$。
+
+辗转相除法示例：
+\[
+(6537, 15048) = (6537, 1974) = (1974, 615) = (615, 129) = (129, 99) = (99, 30) = (30, 9) = (9, 3) = 3
+\]
+
+公因子的传递：
+\[
+(a, b) \Leftrightarrow (b, r) \Leftrightarrow (r, s), \qquad
+a = q_2 b + r, \; r = a - q_2 b, \; d \mid a, d \mid b \Rightarrow d \mid r
+\]
+
+\section{整除与最大公因式}
+
+\subsection{整除的性质}
+
+设 $a, b, d \in \mathbb{Z}$:
+\begin{itemize}
+  \item $a \mid b, \; b \mid a \rightarrow a = \pm b$
+  \item $d \mid a, \; d \mid b \rightarrow d \mid k(a + db)$
+\end{itemize}
+
+\textbf{互素：}整数没有大于 $1$ 的公因数；多项式没有次数大于 $1$ 的公因式。
+
+\textbf{gcd（最大公因数/式）：}greatest common divisor。
+
+\subsection{多项式余式定理}
+
+设 $f(x), g(x) \in P[x], \; g(x) \neq 0$，则存在 $q(x), r(x)$ 使得
+\[
+f(x) = g(x) q(x) + r(x), \quad \partial r(x) < \partial g(x) \; \text{或} \; r(x) = 0
+\]
+$q(x)$ 称为 $f(x)$ 除以 $g(x)$ 的商式，$r(x)$ 称为余式。
+
+\subsection{最大公因式与最小组合式}
+
+给定 $f(x), g(x) \neq 0$，定义如下集合：
+
+最大公因式（次数最高）：
+\[
+\mathcal{D}_H(f,g) = \{ S(x) \mid S(x) \in \mathcal{D}(f,g), \; \partial S = p \}
+\]
+
+最小组合式（次数最低）：
+\[
+\mathcal{T}_L(f,g) = \{ s(x) \mid s(x) \in \mathcal{T}(f,g), \; \partial s = q \}
+\]
+
+\textbf{性质：}
+\begin{enumerate}
+  \item $p \in \mathcal{D}_H, \; q \in \mathcal{T}_L \Rightarrow p \parallel q$
+  \item 若 $q \neq p$，则 $q = p \cdot s(x)$；否则 $q$ 不是公因式，$q \nmid f$ 或 $q \nmid g$
+\end{enumerate}
+
+不妨设 $q \nmid f$，做带余除法 $f = q g_1 + r_1, \; r_1 \neq 0$。$r_1 = f - q g_1 = f u + g v$，且 $\partial r_1 < \partial g$，矛盾。故 $q \mid f$，从而 $q = c \cdot p$。
+
+因此最大公因式集 $\mathcal{D}_H(f,g)$ 与最小组合式集 $\mathcal{T}_L(f,g)$ 相等。
+
+\textbf{首一最大公因式 (monic greatest common divisor)：}
+记为 $(f(x), g(x))$ 或 $\gcd(f(x), g(x))$。
+
+\subsection{B\'{e}zout 公式}
+
+设 $f, g \in P[x]$ 不全为零，则存在 $u, v \in P[x]$，使
+\[
+(f, g) = u f + v g
+\]
+（没有唯一性；整数形式前面已学过）
+
+\subsection{互素的等价定义}
+
+两个整数互素如果 $(a, b) = 1$。
+
+两个域 $P$ 上的一元多项式互素如果 $(f, g) = 1$。
+
+$a, b$ 互素 $\Leftrightarrow$ 存在 $u, v$ 使得 $ua + vb = 1$ $\Leftrightarrow$ 如果 $a \mid bc$ 则 $a \mid c$。
+
+\textbf{证明 $\Rightarrow$：} $a \mid ac, \; a \mid bc \;\therefore\; a \mid uac + vbc = (ua + vb)c = c$。
+
+\textbf{证明 $\Leftarrow$：} 假设 $(a,b) = d > 1$，则存在 $u, v$ 使得 $ua + vb = d > 1$。令 $c = a/d$，则 $a \mid b \cdot \frac{a}{d}$ 但 $c = a/d < a$，矛盾。
+
+类似地，$f, g$ 互素 $\Leftrightarrow$ $(f, g) = 1$ $\Leftrightarrow$ $\exists u, v$ 使得 $uf + vg = 1$。
+
+\begin{enumerate}
+  \item $f, g$ 互素 $\rightarrow$ 公因式为 $1$ $\rightarrow$ $1$ 是组合式
+  \item $1$ 是组合式，$d$ 是公因式 $\rightarrow$ $d \mid uf + vg \rightarrow d \mid 1$
+\end{enumerate}
+
+$(f, g) = 1, \; (f, h) = 1 \Leftrightarrow (f, gh) = 1$
+
+\textbf{证明：}
+$\exists u_1, v_1$ s.t. $u_1 f + v_1 g = 1$，$\exists u_2, v_2$ s.t. $u_2 f + v_2 h = 1$。
+相乘：
+\[
+(u_1 f + v_1 g)(u_2 f + v_2 h) = (u_1 u_2 f + u_1 v_2 h + v_1 u_2 g) f + v_1 v_2 gh = 1
+\]
+$\therefore (f, gh) = 1$。
+
+\textbf{推论：} $(f, p_i) = 1 \; (i = 1, 2, \ldots, s) \rightarrow (f, \prod p_i) = 1$。
+
+$f(x), g(x)$ 互素 $\Leftrightarrow$ $f(x) \mid h(x), \; g(x) \mid h(x)$ 则 $f(x) g(x) \mid h(x)$。
+
+\textbf{互素的表示/不互素的表示（证明的起点）：}
+$\exists u, v$ s.t. $uf + vg = 1$ 或 $\alpha(x)$（$\partial \alpha(x) > 0$）。
+
+\section{因式分解定理}
+
+因式分解与数域有关。例如：
+\[
+x^4 - 4 = (x^2 + 2)(x^2 - 2) = (x^2 + 2)(x + \sqrt{2})(x - \sqrt{2}) = (x + \sqrt{2}i)(x - \sqrt{2}i)(x + \sqrt{2})(x - \sqrt{2})
+\]
+分别在有理数域、实数域、复数域中的分解。
+
+最小的无限数域是有理数域，它的闭包是实数域。在有理数域与实数域之间有无限个无限数域，如 $\{a + \sqrt{2}b \mid a, b \in \mathbb{Q}\}$。
+
+\begin{definition}
+设 $p(x) \in P[x], \; \partial p(x) \geq 1$，若 $p(x)$ 在 $P[x]$ 内不能表示成两个更低次数多项式的乘积，且 $p(x)$ 在 $P[x]$ 内的因式仅有零次多项式及 $a \cdot p(x) \; (0 \neq a \in P)$，则称 $p(x)$ 是 $P[x]$ 内的一个不可约多项式。
+\end{definition}
+
+素数有序，不可约多项式无序。$x^2 + 1$ 不一定可约，$x + 1$ 一定不可约。
+
+\subsection{不可约的充要条件}
+
+\begin{enumerate}
+  \item 对任意非零多项式 $f(x)$，$p(x) \mid f(x)$ 或 $(p(x), f(x)) = 1$
+  \item 对任意非零多项式 $f(x), g(x)$，$p(x) \mid f(x)g(x)$ 可推出 $p(x) \mid f(x)$ 或 $p(x) \mid g(x)$
+\end{enumerate}
+
+\textbf{证明 1：}若 $(p(x), f(x)) = 1$，命题成立。否则 $(p(x), f(x)) = d(x)$，则 $p(x) = d(x) g(x)$。因 $p(x)$ 是不可约多项式，故 $d(x) = a \cdot p(x)$ 或 $d(x) = b \in P$。$\because d(x)$ 是非零多项式，$\therefore d(x) = a p(x)$，从而 $(p(x), f(x)) = a p(x)$，故 $p(x) \mid f(x)$。
+
+\textbf{反证：}若 $p \nmid f$，$(p, f) = d \neq p$（且 $d \neq 1$），则 $d \mid p$，$p = dq$，$p$ 可约。或：若 $p$ 可约，$p = p_1 p_2$，取 $f = p_1$ 则 $p \nmid f$，$(p, f) = p_1 \neq 1$ 且 $\neq p$。
+
+两个不同的不可约多项式不一定互素（例如 $x+1$ 与 $2(x+1)$）；两个不同的首一不可约多项式互素。
+
+设 $f_1(x), \ldots, f_m(x) \in P[x]$，$p(x)$ 是 $P[x]$ 中的不可约多项式，如果 $p(x) \mid f_1(x) f_2(x) \cdots f_m(x)$，则存在 $i, 1 \leq i \leq m$，使得 $p(x) \mid f_i(x)$。
+
+\subsection{因式分解唯一性定理}
+
+设 $f(x) \in P[x]$，$\partial f(x) = n$，则
+\[
+f(x) = a \, p_1(x)^{k_1} p_2(x)^{k_2} \cdots p_r(x)^{k_r} \quad (k_i > 0, \; i = 1, 2, \ldots, r)
+\]
+其中 $p_1(x), \ldots, p_r(x)$ 是 $P[x]$ 上两两不同的不可约多项式，$a$ 是 $P$ 上的非零常数。上面的分解式唯一。
+
+\textbf{存在性：}只要可约就可拆分，但次数有限，所以拆分次数也有限，最后的不可约多项式只有有限个（归纳法）。
+
+命题：$\mathbb{C}[x]$ 内一个次数不为零的多项式 $f(x)$ 不可约的充要条件是 $f(x)$ 是一次多项式。
+
+命题：$\mathbb{R}[x]$ 内的首一不可约多项式仅有两类：
+\begin{enumerate}
+  \item $x - a \; (a \in \mathbb{R})$
+  \item $x^2 + px + q \; (p^2 - 4q < 0)$
+\end{enumerate}
+
+\section{重因式}
+
+\begin{definition}
+不可约多项式 $p(x)$ 称为 $f(x)$ 的 $k$ 重因式 $(k > 1)$，如果 $p^k(x) \mid f(x)$，并且 $p^{k+1}(x) \nmid f(x)$。
+\[
+f(x) = p^k(x) h(x), \quad (p(x), h(x)) = 1
+\]
+\end{definition}
+
+\subsection{多项式的形式导数}
+
+设 $f(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$，则
+\[
+f'(x) = n a_n x^{n-1} + (n-1) a_{n-1} x^{n-2} + \cdots + a_1
+\]
+$f^{(k)}(x) = (f^{(k-1)}(x))'$，$f^{(0)}(x) = f(x)$。
+
+\begin{theorem}
+若不可约多项式 $p(x)$ 是 $f(x)$ 的 $k$ 重 $(k > 1)$ 因式，则 $p(x)$ 是 $f'(x)$ 的 $k-1$ 重因式。
+\end{theorem}
+
+\textbf{证明：}设 $f(x) = p^k(x) h(x)$，$(p, h) = 1$。则
+\[
+f'(x) = k p^{k-1}(x) p'(x) h(x) + p^k(x) h'(x) = p^{k-1}(x) \bigl(k p'(x) h(x) + p(x) h'(x)\bigr)
+\]
+故 $p^{k-1}(x) \mid f'(x)$。设 $p^k(x) \mid f'(x)$，则 $p(x) \mid p'(x) h(x)$，从而 $p(x) \mid p'(x)$ 或 $p(x) \mid h(x)$。但 $\partial p'(x) < \partial p(x)$ 且 $(p, h) = 1$，矛盾。故 $p^k(x) \nmid f'(x)$，$p(x)$ 是 $f'(x)$ 的 $k-1$ 重因式。
+
+若 $p(x)$ 可约，定理不成立。反过来不对：$x$ 是 $(x^4 + 1)'$ 的 $3$ 重因式，但不是 $x^4 + 1$ 的 $4$ 重因式。
+
+若 $p(x)$ 是 $f'(x)$ 的 $k-1$ 重因式，且 $p(x) \mid f(x)$，则不可约多项式 $p(x)$ 是 $f(x)$ 的 $k$ 重 $(k > 1)$ 因式。
+
+% ============================================================
+% Class 3 — 同余与中国剩余定理
+% ============================================================
+\chapter{同余与中国剩余定理}
+
+\section{同余的基本概念}
+
+同余在"加、减、乘"运算下保持。同余类可做"加、减、乘"运算。
+
+\begin{example}
+$88 \times 1367 \equiv 7 \pmod{3}$，$88 + 1367 \equiv ? \pmod{3}$：
+\[
+\equiv 1 \times 2 \pmod{3} \equiv 2, \quad 2 + 2 \equiv 0 \pmod{3}
+\]
+\end{example}
+
+\begin{example}[中国剩余定理——整数]
+设 $n \bmod (3,5,7) \equiv (2,3,2)$，求 $n$。
+\[
+n = 70\alpha + 21\beta + 15\gamma - 105k = 70 \times 2 + 21 \times 3 + 15 \times 2 - 105k = 233 - 105k
+\]
+因为：
+\begin{align*}
+70 &\equiv (1,0,0) \pmod{(3,5,7)} \\
+21 &\equiv (0,1,0) \pmod{(3,5,7)} \\
+15 &\equiv (0,0,1) \pmod{(3,5,7)}
+\end{align*}
+一般地：$n \equiv (a, b, c) \pmod{(3,5,7)}$。
+\end{example}
+
+\begin{proposition}
+设 $p_1, \ldots, p_s$ 两两互素，则 $p_k$ 与 $\prod_{i \neq k} p_i$ 互素。
+\[
+(p_k, \prod_{i \neq k} p_i) = 1, \quad \exists u_k, v_k \text{ s.t. } u_k p_k + v_k \prod_{i \neq k} p_i = 1
+\]
+令 $h_k = v_k \prod_{i \neq k} p_i$，则
+\[
+h_k \equiv 1 \pmod{p_k}, \quad h_k \equiv 0 \pmod{p_i} \; (i \neq k)
+\]
+\end{proposition}
+
+\textbf{整除的同余阶——两种解法：}筛法与同余基础解系法。筛法不能用在多项式上，因为多项式无序。
+
+\section{多项式同余}
+
+\begin{definition}
+$m(x) \mid f(x) - g(x)$ 则 $f(x) \equiv g(x) \pmod{m(x)}$。
+\end{definition}
+
+\begin{theorem}[多项式中国剩余定理]
+设 $p_1(x), \ldots, p_s(x)$ 是 $P[x]$ 中一组两两互素的非零次多项式，任给多项式 $f_1(x), f_2(x), \ldots, f_s(x) \in P[x]$，存在 $F(x) \in P[x]$，使
+\[
+F(x) \equiv f_j(x) \pmod{p_j(x)} \quad (j = 1, 2, \ldots, s)
+\]
+若 $\partial F(x) < \sum \partial p_j(x)$，则 $F(x)$ 还是唯一的。
+\end{theorem}
+
+\begin{remark}
+思考：模的两个数不互素时，什么时候有解？如 $n \equiv ? \pmod{9}$，$n \equiv ? \pmod{27}$。
+\end{remark}
+
+\section{中国剩余定理求解多项式同余方程组——通用解题模板}
+
+\subsection{一、问题描述}
+
+已知多项式 $f(x)$ 分别除以两两互素的多项式 $m_1(x), m_2(x), \ldots, m_k(x)$ 的余数为 $r_1, r_2, \ldots, r_k$，即：
+\[
+f(x) \equiv r_i \pmod{m_i(x)}, \quad i = 1, \ldots, k.
+\]
+设总模 $M(x) = m_1(x) m_2(x) \cdots m_k(x)$，求 $f(x)$ 除以 $M(x)$ 的余式 $R(x)$，且 $\deg R(x) < \deg M(x)$。
+
+\subsection{二、解题步骤}
+
+\subsubsection{1. 建立同余方程组}
+
+由于余式 $R(x)$ 与 $f(x)$ 模 $M(x)$ 同余，且 $R(x)$ 次数小于 $\deg M$，因此 $R(x)$ 满足：
+\[
+\begin{cases}
+R(x) \equiv r_1 & \pmod{m_1(x)} \\
+R(x) \equiv r_2 & \pmod{m_2(x)} \\
+\vdots & \\
+R(x) \equiv r_k & \pmod{m_k(x)}
+\end{cases}
+\]
+
+\subsubsection{2. 计算总模与乘子}
+
+\[
+M(x) = \prod_{i=1}^{k} m_i(x), \qquad
+M_i(x) = \frac{M(x)}{m_i(x)} \quad (i = 1, \ldots, k)
+\]
+
+\subsubsection{3. 求乘法逆元 $N_i(x)$}
+
+对每个 $i$，求解多项式 $N_i(x)$，使得：
+\[
+M_i(x) \cdot N_i(x) \equiv 1 \pmod{m_i(x)}
+\]
+且 $\deg N_i(x) < \deg m_i(x)$。
+
+\textbf{常用方法：}
+\begin{itemize}
+  \item 若 $m_i(x)$ 为一次幂 $(x-a)^n$，则作变量代换 $t = x-a$，将 $M_i(x)$ 表示为 $t$ 的多项式，并只保留次数低于 $n$ 的项（即模 $t^n$ 下）。
+  \item 设 $N_i(t) = c_{n-1} t^{n-1} + \cdots + c_1 t + c_0$，代入 $M_i(t) N_i(t) \equiv 1 \pmod{t^n}$，比较系数得到线性方程组，解出系数。
+  \item 若 $m_i(x)$ 为一般多项式，则使用多项式扩展欧几里得算法求逆。
+\end{itemize}
+
+\subsubsection{4. 组合构造余式}
+
+\[
+R(x) \equiv \sum_{i=1}^{k} r_i \cdot M_i(x) \cdot N_i(x) \pmod{M(x)}
+\]
+计算右侧多项式，并化简为次数低于 $\deg M$ 的多项式（直接展开合并同类项）。
+
+\subsubsection{5. 最终结果}
+
+化简后的多项式即为所求的余式 $R(x)$。
+
+% ============================================================
+% Class 5 — Sturm 定理
+% ============================================================
+\chapter{Sturm 定理与实根判定}
+
+\section{Sturm 序列的定义}
+
+\begin{definition}
+三项式序列 $f_0(x), f_1(x), \ldots, f_m(x) \in \mathbb{R}[x]$ 称为 Sturm 序列，若它们满足以下 4 条性质：
+\begin{enumerate}
+  \item[(1)] $f_k(x) \; (0 \leq k \leq m)$ 都是非零多项式，且均无重根
+  \item[(2)] $f_m(x)$ 是零次多项式，$f_m(x) = p \neq 0$
+  \item[(3)] 在 $f_0$ 的实根 $c$ 处，$f_1(c) \neq 0$
+  \item[(4)] 在 $f_k(x) \; (0 < k < m)$ 的实根 $c$ 处，$f_{k-1}(c) f_{k+1}(c) < 0$
+\end{enumerate}
+\end{definition}
+
+\textbf{性质：}实数序列 $f_0(c), \ldots, f_m(c)$ 中没有两个连续的零。
+
+\begin{definition}
+设 $f_0(x), \ldots, f_m(x) \in \mathbb{R}[x]$ 为 Sturm 序列，
+\begin{enumerate}
+  \item[(1)] 若 $f_k(x) f_{k+1}(x) < 0 \; (0 \leq k < m)$，称序列有一个变号
+  \item[(2)] 若 $a < b$，且 $f_0(x)$ 在 $[a, b]$ 的两端均不为零，则 $f_0(x)$ 在 $[a, b]$ 内根的个数由变号数之差确定
+\end{enumerate}
+\end{definition}
+
+\subsection{由无重根的 $f(x)$ 生成 Sturm 序列}
+
+\[
+f_0(x) = f(x), \quad f_1(x) = f'(x), \quad f_{k-1}(x) = q_k(x) f_k(x) - f_{k+1}(x)
+\]
+即做带余除法 $f_{k-1} = q_k f_k + (-f_{k+1})$，将余式取负号作为下一项。
+
+\subsection{次对角线全负的三对角矩阵生成的 Sturm 序列}
+
+\[
+\begin{bmatrix}
+x - c_1 & b_1 & & \\
+a_1 & x - c_2 & \ddots & \\
+& \ddots & \ddots & 
+\end{bmatrix}
+\]
+
+\begin{center}
+\includegraphics[max width=0.5\textwidth]{images/14_14_0_746_235_0.jpg}
+\end{center}
+
+\begin{center}
+\includegraphics[max width=0.3\textwidth]{images/12_22_1664_466_393_0.jpg}
+\end{center}
+
+\section{Sturm 定理应用示例}
+
+\begin{example}
+确定 $f(x) = x^4 - 24x^2 + 16x + 12$ 的实根个数。
+
+构造规则：$f_0$ 为原多项式，$f_1$ 为其一阶导数，后续项是前两项带余除法所得余式的相反数。
+\end{example}
+
+% ============================================================
+% Class 6 — 习题课与多元多项式
+% ============================================================
+\chapter{习题课与多元多项式}
+
+\section{复习：多项式与数域的关系}
+
+已知数域 $P$ 是数域 $F$ 的子域，多项式 $f(x)$ 与 $g(x)$ 属于 $P[x]$。当我们的讨论范围从子域 $P$ 扩大到扩域 $F$ 时，请判断下列代数性质或运算结果，哪些保持不变，哪些会发生改变：
+
+\begin{center}
+\begin{tabular}{c|c|c}
+& 保持不变 & 发生改变 \\
+\hline
+A. 带余除法 & $\checkmark$ & \\
+B. 多项式的根 & & $\checkmark$ \\
+C. 最大公因式 $(f(x), g(x))$ & $\checkmark$ & \\
+D. 多项式是否可约 & & $\checkmark$ \\
+E. 多项式是否互素 & $\checkmark$ & \\
+F. 多项式的标准分解式 & & $\checkmark$ \\
+G. 多项式的整除 & $\checkmark$ & \\
+\end{tabular}
+\end{center}
+
+\section{典型例题}
+
+\subsection{例1：带余除法}
+$g(x) = x - 1 + 2i$，$f(x) = x^3 - x^2 - x$。$g(x) = x - (1 - 2i)$，商式 $= x^2 - 2ix - 2i - 5$，余式 $= 8i - 9$。
+
+\subsection{例2：最大公因式}
+$f(x) = x^3 + (1+t)x^2 + 2x + 2u$，$g(x) = x^3 + tx + u$ 的最大公因式是一个二次多项式，求 $t, u$ 的值。
+
+解：$h(x) = f(x) - g(x) = (1+t)x^2 + (2-t)x + u$，$\therefore h(x) = d(x)$。
+\[
+h(x) \mid g(x), \quad h(x) = (1+t)\left(x^2 + \frac{2-t}{1+t}x + \frac{u}{1+t}\right)
+\]
+\[
+\begin{cases}
+t(1+t)^2 - u(1+t) + (t-3)^2 = 0 \\
+u(t^2 + t + 3) = 0
+\end{cases}
+\]
+\begin{enumerate}
+  \item[(1)] $u = 0$，$t = -4$ 或 $t = \frac{1 \pm \sqrt{3}i}{2}$
+  \item[(2)] $u \neq 0$，$t = \frac{-1 \pm \sqrt{11}i}{2}$，$u = -7 \mp \sqrt{11}i$
+\end{enumerate}
+
+\subsection{例3：Bezout公式}
+$f(x) = x^4 + 2x^3 - x^2 - 4x - 2$，$g(x) = x^4 + x^3 - x^2 - 2x - 2$，求 $u(x), v(x)$ 使 $u(x)f(x) + v(x)g(x) = (f(x), g(x))$。
+
+解：$h(x) = f(x) - g(x) = x^3 - 2x$，
+$g(x) = (x+1)(x^3 - 2x) + x^2 - 2$。
+\[
+(f(x), g(x)) = r_1(x) = g(x) - q_1(x)h(x) = (x+2)g(x) - (x+1)f(x)
+\]
+检验：代入特殊值验证。
+
+\subsection{例4：单位根技巧}
+证明：若 $x^2 + x + 1 \mid f_1(x^3) + x f_2(x^3)$，那么 $(x-1) \mid f_1(x)$，$(x-1) \mid f_2(x)$。
+
+解：$x^2 + x + 1 = (x - \omega_1)(x - \omega_2)$，$\omega_1, \omega_2$ 是不为 $1$ 的两个三次单位根。代入得：
+\[
+\begin{cases}
+f_1(1) + \omega_1 f_2(1) = 0 \\
+f_1(1) + \omega_2 f_2(1) = 0
+\end{cases}
+\Rightarrow
+\begin{cases}
+f_1(1) = 0 \\
+f_2(1) = 0
+\end{cases}
+\]
+$\therefore (x-1) \mid f_1(x), \; (x-1) \mid f_2(x)$。
+
+\subsection{例5：重根条件}
+求 $t$ 的值，使 $f(x) = x^3 - 3x^2 + tx - 1$ 有重根。
+
+充要条件：$f(x)$ 与 $f'(x)$ 有公共根。$f'(x) = 3x^2 - 6x + t$，$x_0^2 = 2x_0 - \frac{t}{3}$。
+\[
+f(x_0) = \left(\frac{2}{3}t - 2\right) x_0 + \frac{t}{3} - 1 = 0
+\]
+$(t-3)(2x_0 + 1) = 0$，$t = 3$ 或 $x_0 = -\frac{1}{2}$。当 $x_0 = -\frac{1}{2}$ 时，$t = -\frac{15}{4}$。
+$\therefore t = 3$ 或 $t = -\frac{15}{4}$。
+
+\subsection{例6：结式}
+(习题1.7.3) $m, p, q$ 满足什么条件时，$x^2 + mx + 1 \mid x^4 + px^2 + q$？
+
+\textbf{法1（秩定理）：}结式矩阵
+\[
+R(f,g) = \begin{pmatrix}
+1 & 0 & 0 & 0 & q & 0 \\
+m & 1 & 0 & 0 & 0 & q \\
+1 & m & 1 & 0 & p & 0 \\
+0 & 1 & m & 1 & 0 & p \\
+0 & 0 & 1 & m & 1 & 0 \\
+0 & 0 & 0 & 1 & 0 & 1
+\end{pmatrix}
+\]
+$\operatorname{rank}(R(f,g)) + \dim(\operatorname{Nul}(R)) = \partial f(x) + \partial g(x)$。
+
+\textbf{法2：}根据多项式理论中的秩定理：
+\[
+\partial\gcd(f(x), g(x)) = \partial f(x) + \partial g(x) - \operatorname{rank}(R(f,g))
+\]
+解得 $\operatorname{rank}(R) = 4$。
+
+\subsection{例7：中国剩余定理+拉格朗日插值}
+设 $f(x)$ 除以 $(x-1)^2, (x-2)^2, (x-3)^2$ 的余数分别是 $4, 8, 16$，求除以 $(x-1)^2(x-2)^2(x-3)^2$ 的余式。
+
+总模：$M(x) = (x-1)^2(x-2)^2(x-3)^2$。乘子：$M_i(x) = M(x)/m_i(x)$。
+
+经过计算得：
+\[
+R(x) = -9x^5 + 88x^4 - 329x^3 + 586x^2 - 492x + 160
+\]
+
+\section{第二章 多元多项式}
+
+\subsection{字典排列法}
+
+\begin{definition}
+若 $n$ 元有序数组 $(k_1, k_2, \ldots, k_n)$ 与 $(l_1, l_2, \ldots, l_n)$ 满足 $k_1 = l_1, \ldots, k_{i-1} = l_{i-1}, k_i > l_i$，则称 $(k_1, k_2, \ldots, k_n) \succ (l_1, l_2, \ldots, l_n)$。具有传递性。
+\end{definition}
+
+\textbf{运算：}加法、数量乘法、乘法。
+
+\begin{theorem}
+积的首项是首项的积。
+\end{theorem}
+
+\begin{proposition}
+任意 $n$ 元多项式可以唯一地表示为一些 $n$ 元齐次多项式之和。
+\end{proposition}
+
+\textbf{排序2：}齐次优先排列法。
+
+\subsection{对称多项式}
+
+\begin{definition}
+设 $f(x_1, x_2, \ldots, x_n) \in P[x_1, x_2, \ldots, x_n]$，$\tau \in S_n$，定义
+$\tau(f(x_1, x_2, \ldots, x_n)) = f(x_{\tau(1)}, \ldots, x_{\tau(n)})$。
+如果对 $\forall \tau$，$\tau f = f$，则称 $f(x_1, \ldots, x_n)$ 是对称多项式。
+\end{definition}
+
+例如 $f(x, y, z) = x^4 + y^4 + z^4 + x^3 y + x^3 z + y^3 x + y^3 z + z^3 x + z^3 y + \cdots$ 是对称多项式。
+
+对称多项式可以因式分解。
+
+\textbf{韦达定理（初等对称多项式）：}
+\[
+f = (x - x_1)(x - x_2) \cdots (x - x_n) = x^n - \sigma_1 x^{n-1} + \cdots + (-1)^n \sigma_n
+\]
+其中
+\begin{align*}
+\sigma_1 &= x_1 + x_2 + \cdots + x_n \\
+\sigma_2 &= x_1 x_2 + x_1 x_3 + \cdots + x_{n-1} x_n \\
+&\;\;\vdots \\
+\sigma_n &= x_1 x_2 \cdots x_n
+\end{align*}
+这 $n$ 个多项式称为初等对称多项式。
+
+\subsection{对称多项式基本定理}
+
+\begin{theorem}
+对称多项式能唯一地表为初等对称多项式的多项式。
+\end{theorem}
+
+\textbf{求解方法：}
+\begin{enumerate}
+  \item 直接法
+  \item 待定系数法
+  \item 利用 Newton 恒等式
+\end{enumerate}
+
+\subsection{待定系数法}
+
+例如：$N_S(4,3) = \{(4,0,0), (3,1,0), (2,2,0), (2,1,1)\}$。
+
+$f(x_1, x_2, x_3) = x_1^4 + x_2^4 + x_3^4 = \sigma_1^4 + A\sigma_1^2\sigma_2 + B\sigma_2^2 + C\sigma_1\sigma_3$，代入尽量简单的数值求解系数。
+
+\subsection{Newton 恒等式}
+
+\[
+S_k = \sigma_1 S_{k-1} - \sigma_2 S_{k-2} + \cdots + (-1)^k \sigma_{k-1} S_1 + (-1)^{k+1} k \sigma_k \quad (1 \leq k \leq n)
+\]
+\[
+S_k = \sigma_1 S_{k-1} + \cdots + (-1)^{k-n+1} \sigma_{k-n} S_n \quad (k > n)
+\]
+
+\begin{center}
+\includegraphics[max width=1.0\textwidth]{images/15_25_966_1280_701_0.jpg}
+\end{center}
+
+% ============================================================
+% 第三章 行列式
+% ============================================================
+\chapter{行列式}
+
+\section{行列式的基本性质}
+
+行列式的性质：
+\begin{enumerate}
+  \item \textbf{交错性：} $\det(A, a^i \rightleftharpoons a^j) = -\det(A)$（交换两行/列，行列式变号）
+  \item \textbf{多线性：} 
+  \[
+  \det(A, a^i \leftarrow \beta + \gamma) = \det(A, a^i \leftarrow \beta) + \det(A, a^i \leftarrow \gamma)
+  \]
+  \[
+  \det(A, \alpha^i \leftarrow t\alpha^i) = t\det A
+  \]
+  \item \textbf{归一性：} $\det(I) = 1$
+\end{enumerate}
+
+\textbf{其他性质：}
+\begin{itemize}
+  \item $\det A = \det A^{T}$
+  \item $\det A = 0$ 若 $\exists \vec{x} \neq \vec{0}$ s.t. $A\vec{x} = \vec{0}$
+  \item 矩阵 $A$ 的行列式是其每一行（列）的线性函数
+  \item 上面三条性质唯一确定行列式
+\end{itemize}
+
+\section{Laplace 定理}
+
+\subsection{指标集的记号}
+
+设 $I = \{i_1, i_2, \ldots, i_k\}$，$I^{c} = \{i_{k+1}, i_{k+2}, \ldots, i_n\}$，满足
+\[
+I \cup I^{c} = \{1, 2, \ldots, n\}, \quad I \cap I^{c} = \varnothing
+\]
+
+\textbf{$k$ 阶代数余子式：}
+\[
+\widehat{A}_{IJ} = (-1)^{\sum I + \sum \mu_I} M_{IJ}
+\]
+$k$ 阶子式的余子式是 $n-k$ 阶子式：$M^{c}_{IJ} = M_{I^{c}J^{c}}$。
+
+\subsection{由解 $n$ 元方程组推导定理}
+
+\[
+\begin{cases}
+a_{11}x_1 + a_{12}x_2 = b_1 - a_{13}x_3 - a_{14}x_4 \\
+a_{21}x_1 + a_{22}x_2 = b_2 - a_{23}x_3 - a_{24}x_4
+\end{cases}
+\]
+求解：
+\[
+x_1 = \frac{1}{M\!\begin{pmatrix}1 & 2 \\ 1 & 2\end{pmatrix}} \left[ \begin{vmatrix} b_1 & a_{12} \\ b_2 & a_{22} \end{vmatrix} + x_3 M\!\begin{pmatrix}1 & 2 \\ 2 & 3\end{pmatrix} + x_4 M\!\begin{pmatrix}1 & 2 \\ 2 & 4\end{pmatrix} \right]
+\]
+
+最后得到：行列式可以按子式展开。
+
+\begin{theorem}[Laplace 展开定理]
+\[
+\det(A) = \sum_{I \in E} M_{KI} \widehat{A}_{K^{c}I^{c}} = \sum_{I \in \mathcal{I}_k} (-1)^{k+1} M_{KI} M_{K^{c}I^{c}}
+\]
+\end{theorem}
+
+\section{排列与逆序}
+
+\begin{theorem}
+（任意的）对换改变排列的奇偶性。
+在 $n!$ 个排列中奇偶排列各占一半（$n > 1$）。
+$n$ 级排列，偶排列通过偶数次对换变成 $1, 2, \ldots, n$；奇排列通过奇数次对换。
+\end{theorem}
+
+\section{矩阵的秩}
+
+矩阵的秩等于矩阵中最大非零子式的阶数。子式：矩阵中某些行和列组成的行列式。
+
+\section{Binet-Cauchy 定理}
+
+\begin{theorem}[Binet-Cauchy]
+若 $A, B \in P^{m \times n}$，$m > n$，则
+\[
+\det(AB) = \sum_{I \in P_m} \det A^{I} \det B_{I}
+= \sum_{J \in Z_m^n} \det(AE^{-1})^{J} \det(EB)_{J}
+\]
+\end{theorem}
+
+在初等变换对嵌入时，$\delta(A, B)$ 不变。
+
+\subsection{预备例题：分块矩阵行列式}
+
+\begin{example}
+设 $A, B, C, D$ 为 $n$ 阶矩阵，$AC$ 可交换，证明：
+\[
+\det\begin{pmatrix} A & B \\ C & D \end{pmatrix} = \det(AD - CB)
+\]
+\textbf{证明思路：}
+\begin{itemize}
+  \item $A$ 可逆时，令分块初等变换消去 $B$：
+  \[
+  \begin{pmatrix} I & 0 \\ -CA^{-1} & I \end{pmatrix} \begin{pmatrix} A & B \\ C & D \end{pmatrix} = \begin{pmatrix} A & B \\ 0 & D - CA^{-1}B \end{pmatrix}
+  \]
+  \item $A$ 不可逆时，用多项式证明（或 $\varepsilon$ 足够小，$A + \varepsilon I$ 可逆，再由连续性证明）。
+\end{itemize}
+\end{example}
+
+\subsection{Binet-Cauchy 公式验证示例}
+
+设 $m = 2, n = 3$（满足 $m \leq n$）。令
+\[
+A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}_{2 \times 3}, \quad
+B = \begin{bmatrix} 7 & 8 \\ 9 & 10 \\ 11 & 12 \end{bmatrix}_{3 \times 2}.
+\]
+
+\textbf{左边：直接计算 $\det(AB)$}
+\[
+AB = \begin{bmatrix} 1 \cdot 7 + 2 \cdot 9 + 3 \cdot 11 & 1 \cdot 8 + 2 \cdot 10 + 3 \cdot 12 \\ 4 \cdot 7 + 5 \cdot 9 + 6 \cdot 11 & 4 \cdot 8 + 5 \cdot 10 + 6 \cdot 12 \end{bmatrix} = \begin{bmatrix} 58 & 64 \\ 139 & 154 \end{bmatrix}.
+\]
+\[
+\det(AB) = 58 \times 154 - 64 \times 139 = 8932 - 8896 = 36.
+\]
+
+\textbf{右边：按公式求和}
+
+对所有 $1 \leq i_1 < i_2 \leq 3$ 求和，共 $\binom{3}{2} = 3$ 项：
+\begin{itemize}
+  \item 指标 $(1,2)$：$A$ 子式 $\begin{vmatrix} 1 & 2 \\ 4 & 5 \end{vmatrix} = -3$，$B$ 子式 $\begin{vmatrix} 7 & 8 \\ 9 & 10 \end{vmatrix} = -2$，乘积 $= 6$
+  \item 指标 $(1,3)$：$A$ 子式 $\begin{vmatrix} 1 & 3 \\ 4 & 6 \end{vmatrix} = -6$，$B$ 子式 $\begin{vmatrix} 7 & 8 \\ 11 & 12 \end{vmatrix} = -4$，乘积 $= 24$
+  \item 指标 $(2,3)$：$A$ 子式 $\begin{vmatrix} 2 & 3 \\ 5 & 6 \end{vmatrix} = -3$，$B$ 子式 $\begin{vmatrix} 9 & 10 \\ 11 & 12 \end{vmatrix} = -2$，乘积 $= 6$
+\end{itemize}
+
+求和：$6 + 24 + 6 = 36$，与左边一致。
+
+这就直观验证了 Binet-Cauchy 公式：
+\[
+\det(AB) = \sum_{\text{所有 } m \text{ 列组合}} (\text{对应 } A \text{ 的 } m \text{ 阶子式}) \times (\text{对应 } B \text{ 的 } m \text{ 阶子式}).
+\]
+
+% ============================================================
+% 第四章 线性空间与线性变换（一）：线性空间基础
+% ============================================================
+\chapter{线性空间与子空间}
+
+\section{线性空间的基本概念}
+
+线性空间只有一个零元：
+\[
+0_2 = 0_1 + 0_2 = 0_2 + 0_1 = 0_1
+\]
+
+初等行变换不改变行空间，改变列空间。
+
+线性方程组的系数矩阵，主元所在的列组成极大线性无关组。
+
+\subsection{过渡矩阵}
+
+\[
+(\vec{\varepsilon}_1, \vec{\varepsilon}_2, \ldots, \vec{\varepsilon}_n) = (\vec{\eta}_1, \vec{\eta}_2, \ldots, \vec{\eta}_n) T, \quad \vec{x} = T \vec{x}'
+\]
+注意左右顺序。
+
+\section{子空间的交与和}
+
+任意两个子空间的交集非空（有零向量）。两个子空间的并集不一定是子空间。两个子空间的交集是子空间。
+
+\begin{center}
+\includegraphics[max width=0.2\textwidth]{images/23_1209_1908_266_253_0.jpg}
+\end{center}
+
+任意有限个真子空间的并不是整个空间。
+
+\begin{definition}
+子空间的交：$V_1 \cap V_2 = \{\vec{\alpha} \in V_1 \text{ and } \vec{\alpha} \in V_2\}$。
+
+子空间的和：$V_1 + V_2 = \{\vec{a}_1 + \vec{a}_2 \mid \vec{a}_1 \in V_1, \vec{a}_2 \in V_2\}$。
+\end{definition}
+
+注意：$V_1 \cap (V_2 + V_3) = (V_1 \cap V_2) + (V_1 \cap V_3)$ 一般不成立。
+
+行变换改变行的线性相关性，不改变列的线性相关性。
+
+\begin{center}
+\includegraphics[max width=0.3\textwidth]{images/24_1283_421_429_267_0.jpg}
+\end{center}
+
+\section{维数公式}
+
+\[
+\dim(V_1 + V_2) = \dim V_1 + \dim V_2 - \dim(V_1 \cap V_2)
+\]
+
+\begin{proof}
+设 $\dim V_1 = s$，$\dim V_2 = t$，$\dim(V_1 + V_2) = n$，$\dim(V_1 \cap V_2) = r$。
+
+取 $V_1 \cap V_2$ 的一组基 $\vec{\varepsilon}_1, \ldots, \vec{\varepsilon}_r$（如果 $V_1 \cap V_2 = 0$，则 $r = 0$）。
+
+将此基分别扩充成 $V_1, V_2$ 的基：
+\begin{align*}
+V_1&: \vec{\varepsilon}_1, \vec{\varepsilon}_2, \ldots, \vec{\varepsilon}_r, \vec{\alpha}_1, \ldots, \vec{\alpha}_{s-r} \\
+V_2&: \vec{\varepsilon}_1, \vec{\varepsilon}_2, \ldots, \vec{\varepsilon}_r, \vec{\beta}_1, \ldots, \vec{\beta}_{t-r}
+\end{align*}
+
+只需证明 $\vec{\varepsilon}_1, \ldots, \vec{\varepsilon}_r, \vec{\alpha}_1, \ldots, \vec{\alpha}_{s-r}, \vec{\beta}_1, \ldots, \vec{\beta}_{t-r}$ 是 $V_1 + V_2$ 的一组基。
+
+\textbf{张成性：}$\forall \vec{a} \in V_1$，$\vec{a} = \{\vec{\varepsilon}\}\vec{a} + \{\vec{\alpha}\}\vec{b}$；
+$\forall \vec{\beta} \in V_2$，$\vec{\beta} = \{\vec{\varepsilon}\}\vec{c} + \{\vec{\beta}\}\vec{d}$。
+
+$\vec{\alpha} + \vec{\beta}$ 是上述向量的线性组合。
+
+\textbf{线性无关性：}反证。若线性相关，存在不全为零的系数使得
+\[
+0 = \{\vec{\varepsilon}\}\vec{a} + \{\vec{\alpha}\}\vec{b} + \{\vec{\beta}\}\vec{d}
+\]
+不妨设 $\vec{b} \neq \vec{0}$。则 $\{\vec{\beta}\}\vec{d} = \{\vec{\varepsilon}\}\vec{a} + \{\vec{\alpha}\}\vec{b} \in V_1$，同时属于 $V_2$，故属于 $V_1 \cap V_2$。从而可由 $\{\vec{\varepsilon}\}$ 表示，与扩充基的线性无关性矛盾。
+\end{proof}
+
+\section{直和}
+
+\begin{definition}
+如果对于 $V_1 + V_2$ 中每个向量的分解式 $\vec{\alpha} = \vec{\alpha}_1 + \vec{\alpha}_2$，$\vec{\alpha}_1 \in V_1, \vec{\alpha}_2 \in V_2$ 唯一，称 $V_1 + V_2$ 为直和，记作 $V_1 \oplus V_2$。
+\end{definition}
+
+\begin{theorem}[直和的等价条件]
+以下命题等价：
+\begin{enumerate}
+  \item[(1)] $\sum_{j=1}^{m} V_j$ 是直和
+  \item[(2)] $V$ 中有一个向量 $\vec{x}$ 可唯一表示为 $\sum \vec{x}_i, \; \vec{x}_i \in V_i$
+  \item[(3)] $V_i \cap \sum_{j \neq i} V_j = \{0\}$ 对所有 $i$ 成立
+  \item[(4)] $\dim(\sum V_j) = \sum \dim V_j$
+\end{enumerate}
+\end{theorem}
+
+\textbf{注：}$A$ 为 $m \times n$ 矩阵，$\operatorname{Col}A + \operatorname{Nul}A = \mathbb{R}^m$，但 $\dim\operatorname{Col}A + \dim\operatorname{Nul}A = m$ 不意味着是直和。
+
+\begin{theorem}
+设 $U$ 是有限维线性空间 $V$ 的一个子空间，那么存在 $V$ 的子空间 $W$，使得 $V = U \oplus W$。
+\end{theorem}
+
+% ============================================================
+% Class 10 — 商空间与线性映射
+% ============================================================
+\chapter{商空间与线性映射}
+
+\section{商空间}
+
+\textbf{同余类性质：}
+\begin{enumerate}
+  \item[(1)] $\vec{a}' - \vec{a} \in W \Leftrightarrow \vec{a}' \in \vec{a} + W$
+  \item[(2)] $\vec{a}' \in \vec{a} + W \Leftrightarrow \vec{a}' + W = \vec{a} + W$
+  \item[(3)] $\vec{a} + W = \vec{0} + W \Leftrightarrow \vec{a} \in W$
+  \item[(4)] 若 $\vec{a}' + W \neq \vec{a} + W$，则 $(\vec{a}' + W) \cap (\vec{a} + W) = \varnothing$
+\end{enumerate}
+
+\textbf{注：}$A\vec{x} = \vec{b}$ 有解时的解为特解 $+$ 齐次方程的通解。
+
+\begin{proposition}
+设 $V/P$ 是 $n$ 维线性空间，$W$ 是 $V$ 的一个 $m$ 维子空间，$W$ 的一组基为 $\vec{z}_1, \ldots, \vec{z}_m$，$W$ 的补空间 $U$ 的一组基向量为 $\vec{z}_{m+1}, \ldots, \vec{z}_n$，则 $\overline{\vec{z}}_{m+1}, \ldots, \overline{\vec{z}}_n$ 是 $V/W$ 的一组基。
+\end{proposition}
+
+\begin{theorem}
+$\dim V = \dim W + \dim V/W$
+\end{theorem}
+
+\section{线性映射}
+
+\subsection{单射、满射、双射}
+
+\begin{itemize}
+  \item \textbf{单射：} $\vec{a}_1 \neq \vec{a}_2 \Rightarrow \varphi(\vec{a}_1) \neq \varphi(\vec{a}_2)$，即 $\varphi(\vec{a}_1) = \varphi(\vec{a}_2) \Rightarrow \vec{a}_1 = \vec{a}_2$
+  \item \textbf{满射：} $\forall \vec{\beta} \in B, \exists \vec{a} \in A$ s.t. $\varphi(\vec{a}) = \vec{\beta}$
+  \item \textbf{双射：} 既单又满，存在逆映射
+\end{itemize}
+
+\textbf{线性映射的性质：}
+\begin{itemize}
+  \item $\vec{a}_1, \ldots, \vec{a}_m$ 线性相关 $\rightarrow$ $\varphi(\vec{a}_1), \ldots, \varphi(\vec{a}_m)$ 线性相关
+  \item $\vec{a}_1, \ldots, \vec{a}_m$ 线性无关 $\xleftarrow{\text{单射}}$ $\varphi(\vec{a}_1), \ldots, \varphi(\vec{a}_m)$ 线性无关
+\end{itemize}
+
+\begin{proposition}
+设 $\varphi: A \rightarrow B$。若存在 $\psi: B \rightarrow A$，s.t. $\psi \circ \varphi = \mathrm{id}_A$，则 $\varphi$ 是单射，$\psi$ 是满射（前像后单）。
+\end{proposition}
+
+\subsection{核与像}
+
+\begin{definition}
+$\ker\varphi = \{\vec{a} \in U \mid \varphi(\vec{a}) = 0\} = \varphi^{-1}(\vec{0})$
+
+$\operatorname{im}\varphi = \{\vec{\beta} \in V \mid \exists \vec{\alpha} \in U, \varphi(\vec{\alpha}) = \vec{\beta}\} = \varphi(U)$
+
+$\operatorname{coker}\varphi = V/\operatorname{im}\varphi$（$A\vec{x} = \vec{b}$ 中无解的情况）
+\end{definition}
+
+\begin{proposition}
+$\dim\ker\varphi + \dim\operatorname{im}\varphi = \dim U$，$\varphi: U \rightarrow V$。
+\end{proposition}
+
+\section{同态基本定理与同构定理}
+
+\begin{theorem}[同态基本定理]
+设 $\varphi: U \rightarrow V$ 是线性映射，则映射 $C: \vec{d} + \ker\varphi \mapsto \varphi(\vec{d})$ 是 $U/\ker\varphi \rightarrow \operatorname{im}\varphi$ 的同构映射。
+\end{theorem}
+
+\begin{theorem}[第二同构定理]
+设 $V_1, V_2$ 是线性空间 $V$ 的子空间，则
+\[
+V_1/(V_1 \cap V_2) \cong (V_1 + V_2)/V_2
+\]
+\end{theorem}
+
+\begin{proof}
+考虑 $\varphi: V_1 \rightarrow (V_1 + V_2)/V_2$，$\varphi(\vec{x}) = \vec{x} + V_2$。满射，$\ker\varphi = V_1 \cap V_2$。
+\end{proof}
+
+\begin{theorem}[第一同构定理]
+设 $f: U \rightarrow V$ 是线性同态映射，$W$ 是 $V$ 的子空间，则
+\[
+U/f^{-1}(W) \cong V/W
+\]
+\end{theorem}
+
+% ============================================================
+% Class 11 — 行列式计算技巧
+% ============================================================
+\chapter{行列式计算技巧}
+
+\section{特殊行列式}
+
+\subsection{箭形行列式}
+
+\[
+D_n = \begin{vmatrix}
+x_1 & b & b & \cdots & b \\
+b & x_2 & b & \cdots & b \\
+b & b & x_3 & \cdots & b \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+b & b & b & \cdots & x_n
+\end{vmatrix}
+\]
+每一行减第一行可得递推式。
+
+\subsection{三对角行列式（递推法）}
+
+\[
+\begin{vmatrix}
+x & b & b & \cdots & b \\
+a & x & b & \cdots & b \\
+a & a & x & \cdots & b \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+a & a & a & \cdots & x
+\end{vmatrix}
+\]
+可用递推法求解。
+
+\subsection{循环矩阵行列式}
+
+\[
+\begin{vmatrix}
+a_1 & a_2 & a_3 & \cdots & a_n \\
+a_n & a_1 & a_2 & \cdots & a_{n-1} \\
+a_{n-1} & a_n & a_1 & \cdots & a_{n-2} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+a_2 & a_3 & a_4 & \cdots & a_1
+\end{vmatrix}
+\]
+利用 $n$ 次单位根 $+$ Vandermonde 矩阵求解。
+
+\begin{figure}[h]
+\centering
+\includegraphics[max width=0.4\textwidth]{images/29_32_2190_620_142_0.jpg}
+\end{figure}
+
+\section{严格对角占优矩阵}
+
+\begin{definition}
+设 $A = (a_{ij}) \in P^{n \times n}$，若 $|a_{ii}| > \sum_{j \neq i}^{n} |a_{ij}| \; (i = 1, 2, \ldots, n)$，则 $\det A \neq 0$。
+\end{definition}
+
+\textbf{证明方法：}反证法/数学归纳法。令 $D = \operatorname{diag}(a_{11}, \ldots, a_{nn})$，$A(t)$ 仍严格对角占优。$f(t) = \det A(t)$ 在 $t \in [0, 1]$ 上连续且非零，故同号。
+
+\section{广义 Vandermonde 行列式}
+
+\[
+\frac{d(\det A)}{dt} = \det A_1 + \det A_2 + \cdots + \det A_n
+\]
+其中 $A_i$ 为对 $A$ 的第 $i$ 行求导，其余行不变得到的矩阵。
+
+% ============================================================
+% Class 12 — 线性变换与不变子空间
+% ============================================================
+\chapter{线性变换与不变子空间}
+
+\section{线性变换的基本概念}
+
+矩阵可对角化条件：$n$ 个线性无关的特征向量；几何重数 $=$ 代数重数。
+
+特征多项式的系数是对应的主子式之和。特征向量非零。相同的特征多项式，两个矩阵不一定相似。
+
+\begin{definition}
+设 $A$ 为线性空间 $V/P$ 内的线性变换，$W$ 是 $V$ 的一个子空间。若 $A(W) \subseteq W$，则称 $W$ 为 $V$ 的一个 $A$ 的不变子空间。
+\end{definition}
+
+\textbf{对任意线性变换：}$\operatorname{Im}A$，$\ker A$，特征子空间是不变子空间。
+\begin{itemize}
+  \item $\forall \vec{\alpha} \in V_{\lambda}$，$A\vec{\alpha} = \lambda\vec{\alpha} \in V_{\lambda}$
+  \item $\forall \vec{a} \in \ker A$，$A\vec{a} = \vec{0} \in \ker A$
+  \item $\forall \vec{a} \in \operatorname{Im}A$，$A\vec{a} \in \operatorname{Im}A$
+\end{itemize}
+
+\section{可对角化与不变子空间}
+
+\begin{proposition}
+若 $n$ 维线性空间 $V$ 上线性变换 $A$ 的矩阵相似于对角矩阵，$W$ 是 $A$ 的一个不变子空间，则限制线性变换 $A|_W$ 的矩阵相似于对角矩阵。
+\end{proposition}
+
+\begin{theorem}[可对角化等价条件]
+以下断言等价：
+\begin{enumerate}
+  \item[(1)] $A$ 在某组基下的矩阵为对角矩阵
+  \item[(2)] $\dim V_i = k_i$（几何重数等于代数重数）
+  \item[(3)] $V = \bigoplus V_{\lambda_i}$
+\end{enumerate}
+\end{theorem}
+
+\section{不变子空间的性质}
+
+\begin{itemize}
+  \item $A|_W: W \rightarrow W$（限制变换）
+  \item $A^k(W) \subseteq W$（$A$-子空间是 $A^k$-子空间，反过来未必）
+  \item $f(A)W \subseteq W$
+\end{itemize}
+
+\textbf{不变子空间的基扩充：}
+设 $\operatorname{span}(\vec{\varepsilon}_1, \ldots, \vec{\varepsilon}_m) = W$，$AW \subseteq W$，扩充到全空间：
+\[
+\operatorname{span}(\vec{\varepsilon}_1, \ldots, \vec{\varepsilon}_m, \vec{\varepsilon}_{m+1}, \ldots, \vec{\varepsilon}_n) = V
+\]
+$A$ 在上述基下的矩阵为分块上三角：
+\[
+A(\vec{\varepsilon}_1, \ldots, \vec{\varepsilon}_n) = (\vec{\varepsilon}_1, \ldots, \vec{\varepsilon}_n) \begin{pmatrix} A_{11} & A_{12} \\ 0 & A_{22} \end{pmatrix}
+\]
+
+\textbf{诱导变换：}$\overline{A}: V/W \rightarrow V/W$，$\overline{A}(\overline{\vec{z}}_{m+1}, \ldots, \overline{\vec{z}}_n) = (\overline{\vec{z}}_{m+1}, \ldots, \overline{\vec{z}}_n) A_{22}$。
+
+\subsection{主子式与子式}
+
+\begin{itemize}
+  \item \textbf{$k$ 阶主子式：}任选 $k$ 个行指标和相同的 $k$ 个列指标，交叉处元素按原顺序构成的 $k$ 阶子式
+  \item \textbf{$k$ 阶顺序主子式：}选前 $k$ 行和前 $k$ 列
+  \item \textbf{子式：}取 $k$ 行 $k$ 列交叉处元素组成的行列式
+\end{itemize}
+
+% ============================================================
+% 第五章 空间分解定理（一）：Hamilton-Cayley定理
+% ============================================================
+\chapter{Hamilton-Cayley 定理与空间第一分解定理}
+
+\section{Hamilton-Cayley 定理}
+
+\begin{theorem}[Hamilton-Cayley]
+线性变换的特征多项式是此变换的零化多项式。
+\end{theorem}
+
+\begin{definition}
+零化多项式：$h(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_0$，满足 $h(A) = 0$。
+
+关于 $A$ 的全体零化多项式中必有首一且次数最低者，称为最小（零化）多项式。
+\end{definition}
+
+最大公因式也是首一的。
+
+关于向量的最小多项式整除关于空间的最小多项式。
+
+\textbf{循环子空间与友阵：}
+$\vec{\alpha}, A\vec{\alpha}, \ldots, A^{k-1}\vec{\alpha}$ 扩充成一组基 $\vec{\alpha}, \ldots, A^{k-1}\vec{\alpha}, \vec{\varepsilon}_k, \ldots, \vec{\varepsilon}_n$。
+
+$A$ 在基下矩阵 $\begin{pmatrix} H_x & B \\ 0 & C \end{pmatrix}$，$H_x$ 是友阵：
+\[
+H_{\alpha} = \begin{bmatrix}
+0 & & & -h_0 \\
+1 & 0 & & \\
+& 1 & 0 & \\
+\cdots & & 1 & -h_{m-1}
+\end{bmatrix}
+\]
+
+$f(\lambda)$ 与 $\vec{x}$ 的选取无关。特征多项式 $f(\lambda)$ 不一定是最小多项式 $m(\lambda)$。
+
+\section{基于互素零化多项式的空间分解}
+
+\begin{proposition}
+设 $A$ 是 $n$ 维线性空间 $V/P$ 的线性变换，$B(x), C(x) \in P[x]$ 互素，且 $B(A)C(A) = 0$，则
+\[
+V = V_B \oplus V_C = \ker B(A) \oplus \ker C(A)
+\]
+且 $V_B = \ker B(A) = \operatorname{im}C(A)$，$V_C = \ker C(A) = \operatorname{im}B(A)$。
+\end{proposition}
+
+\begin{proof}
+由 $(B(x), C(x)) = 1$，存在 $u(x), v(x)$ 使 $u(x)B(x) + v(x)C(x) = 1$。
+代入 $A$ 得 $u(A)B(A) + v(A)C(A) = E$。
+
+$\forall \vec{\xi} \in \ker B(A) \cap \ker C(A)$：
+\[
+\vec{\xi} = E\vec{\xi} = u(A)B(A)\vec{\xi} + v(A)C(A)\vec{\xi} = \vec{0}
+\]
+故 $\ker B(A) \cap \ker C(A) = \{0\}$，因此是直和。
+
+又 $\forall \vec{a} \in \operatorname{im}B(A)$，$\exists \vec{\xi}$ 使 $\vec{a} = B(A)\vec{\xi}$，则 $C(A)\vec{a} = C(A)B(A)\vec{\xi} = 0$，故 $\operatorname{im}B(A) \subseteq \ker C(A)$。
+
+反向：$\forall \vec{\eta} \in \ker C(A)$，
+\[
+\vec{\eta} = B(A)u(A)\vec{\eta} + v(A)C(A)\vec{\eta} = B(A)u(A)\vec{\eta} \in \operatorname{im}B(A)
+\]
+故 $\ker C(A) = \operatorname{im}B(A)$。
+\end{proof}
+
+\textbf{推广：}设 $p_i(x) \; (i=1,\ldots,s)$ 是 $P$ 上两两互素的多项式且 $p_1(A)\cdots p_s(A)=0$，则 $V$ 是 $\ker p_i(A)$ 的直和。
+
+\section{空间第一分解定理}
+
+可对角化时，空间按特征子空间拆分：
+\[
+V = \ker(\mathcal{A} - \lambda_1 E) \oplus \cdots \oplus \ker(\mathcal{A} - \lambda_s E)
+\]
+
+不可对角化时，空间按广义特征子空间拆分：
+\[
+V = \ker(A - \lambda_1 E)^{k_1} \oplus \cdots \oplus \ker(A - \lambda_s E)^{k_s}
+\]
+其中 $V_i = \prod_{j \neq i} (A - \lambda_j E)^{k_j} = \ker(A - \lambda_i E)^{k_i}$。
+
+\begin{proposition}
+设 $\mathcal{A}$ 是 $n$ 维线性空间 $V/P$ 内的线性变换，$W$ 是 $\mathcal{A}$ 的不变子空间，则 $\mathcal{A}$ 的特征多项式等于 $\mathcal{A}|_W$ 的特征多项式与 $\mathcal{A}$ 在 $V/W$ 内的诱导变换的特征多项式的乘积。
+\end{proposition}
+
+\textbf{空间零化多项式存在性：}取 $n$ 维空间的一组基，每个基向量都有自己的零化多项式，这些"向量"零化多项式的乘积即为空间零化多项式。
+
+\subsection{应用示例}
+
+若 $(A-E)(A+E) = 0$，则
+\[
+P^n = \operatorname{Nul}(A-E) \oplus \operatorname{Nul}(A+E) = \operatorname{Col}(A+E) \oplus \operatorname{Col}(A-E)
+\]
+\[
+n = \operatorname{rank}(A+E) + \operatorname{rank}(A-E)
+\]
+
+% ============================================================
+% 第五章（续）— 幂零变换与空间第二分解定理
+% ============================================================
+\chapter{幂零变换与 Jordan 标准形}
+
+\section{幂零线性变换}
+
+\begin{definition}
+若 $B^{m-1} \neq 0$ 且 $B^m = 0$，则 $B$ 称为幂零的，$m$ 称为 $B$ 的幂零指数。
+\end{definition}
+
+幂零指数 $m \leq$ 空间维数 $n$（$\vec{\alpha}, B\vec{\alpha}, \ldots, B^{m-1}\vec{\alpha}$ 必线性无关）。
+
+$n$ 维多项式空间上形式微商变换是幂零变换。"准幂零变换" $A = 3E + D$（$D$ 幂零）。
+
+若 $J = \begin{pmatrix} J_m & \\ & J_n \end{pmatrix}$ 由两个 Jordan 块组成，幂零指数是阶数较大的。
+
+\subsection{Jordan 链与循环不变子空间}
+
+\begin{definition}
+向量 $\vec{\alpha}$ 的最小多项式的次数为 $m$，则
+\[
+A^m\vec{\alpha} \leftarrow A^{m-1}\vec{\alpha} \leftarrow \cdots \leftarrow \vec{\alpha}
+\]
+的前 $m$ 个线性无关向量形成 $\vec{\alpha}$ 的 Jordan 链。
+\end{definition}
+
+循环不变子空间：
+\[
+I(A, \vec{\alpha}, m) = \operatorname{span}\{A^{m-1}\vec{\alpha}, \ldots, \vec{\alpha}\}
+\]
+
+$B$ 在 Jordan 链基下的矩阵为 Jordan 块：
+\[
+B(\operatorname{chain}_m(\vec{\alpha})) = (\operatorname{chain}_m(\vec{\alpha})) \begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{pmatrix}
+\]
+
+一个幂零线性变换中可能有多个循环不变子空间，可能有多条独立的 Jordan 链。
+
+\section{空间第二分解定理}
+
+\begin{theorem}[空间第二分解定理]
+$B$ 是 $n$ 维线性空间 $V/\mathbb{C}$ 内的幂零线性变换，存在 $V$ 的一组以 Jordan 链的并形成的基，使 $B$ 在这组基下的矩阵为 Jordan 形矩阵。
+\end{theorem}
+
+\subsection{Jordan 块个数的确定}
+
+设 $t$ 级 Jordan 块个数为 $N(t)$，$B$ 的幂零指数为 $l$。
+
+\[
+\operatorname{rank}J_t(0) = t-1, \quad \operatorname{rank}J_t^2(0) = t-2, \quad \ldots, \quad \operatorname{rank}J_t^{t-1}(0) = 1
+\]
+
+\[
+\operatorname{rank}B = N(2) \cdot 1 + N(3) \cdot 2 + \cdots + N(l)(l-1) \tag{1}
+\]
+\[
+\dim V = N(1) \cdot 1 + N(2) \cdot 2 + \cdots + N(l) l \tag{2}
+\]
+\[
+\operatorname{rank}B^2 = N(3) \cdot 1 + N(4) \cdot 2 + \cdots + N(l)(l-2) \tag{3}
+\]
+
+从秩的差分可得：
+\[
+\operatorname{rank}B^0 - 2\operatorname{rank}B + \operatorname{rank}B^2 = N(1)
+\]
+一般地（$2 \leq t < l$）：
+\[
+\operatorname{rank}B^{t-1} - 2\operatorname{rank}B^t + \operatorname{rank}B^{t+1} = N(t)
+\]
+
+幂零矩阵最小多项式：$\lambda^m$。$m$ 阶单 Jordan 块最小多项式：$(\lambda - \lambda_0)^m$。
+
+\begin{proposition}
+$A \in P^{n \times n}$ 的 Jordan 标准形中所有 $J(\lambda_i)$ 块的最高阶数为 $k_i$，则最小多项式为 $(\lambda - \lambda_1)^{k_1} \cdots (\lambda - \lambda_r)^{k_r}$。
+\end{proposition}
+
+特征多项式和最小多项式都相同的矩阵不一定相似。充要条件：相同特征值的块只有一个时，特征多项式 $=$ 最小多项式。
+
+\section{丘维声：幂零变换的 Jordan 标准形}
+
+\begin{theorem}
+设 $B$ 是域 $F$ 上 $r$ 维线性空间 $W$ 上的一个幂零变换，幂零指数为 $l$，则 $W$ 可分解成 $\dim W_0$ 个 $B$-强循环子空间的直和，其中 $W_0$ 是 $B$ 的属于特征值 $0$ 的特征子空间。
+\end{theorem}
+
+$A$ 在强循环不变子空间上的限制在基 $A^{t-1}\vec{\alpha}, \ldots, A\vec{\alpha}, \vec{\alpha}$ 下的矩阵是主对角元为 $0$ 的 $t$ 阶 Jordan 块。
+
+\begin{theorem}
+设 $B$ 是域 $F$ 上 $r$ 维线性空间 $W$ 上的幂零变换，幂零指数为 $l$，则 $W$ 中有一个基，使 $B$ 为 Jordan 形矩阵，且 Jordan 块总数为
+\[
+\dim W_0 = \dim\ker B = \dim W - \operatorname{rank}B
+\]
+每个 Jordan 块主对角元为 $0$，阶数 $t \leq l$。
+\end{theorem}
+
+% ============================================================
+% Class 15 — Jordan 标准形例题
+% ============================================================
+\chapter{Jordan 标准形计算例题}
+
+\section{求 Jordan 标准形的方法}
+
+求 Jordan 标准型：
+\begin{enumerate}
+  \item 求特征值，求幂零矩阵各幂次的秩
+  \item 求行列式因子，不变因子，初等因子
+  \item 行列变换求 Smith 标准型
+\end{enumerate}
+
+求相似变换的矩阵：线性空间视角找合适的链根构成基。
+
+\section{典型例题}
+
+\begin{example}
+设
+\[
+B = \begin{bmatrix}
+-3 & -9 & 2 & -4 & 0 \\
+3 & -1 & 0 & 0 & -1 \\
+1 & 2 & 0 & 1 & 0 \\
+-3 & -11 & -2 & 4 & 2 \\
+-8 & -22 & 4 & -10 & 0
+\end{bmatrix}
+\]
+求 $P$ 使 $BP = PJ$。
+
+$\operatorname{rank}(B, B^2, B^3) = (3, 1, 0)$，$\dim(\ker B) = 2$。
+
+有两个 Jordan 块，因 $\operatorname{rank}B = 3$，有两种可能：$4+1$ 或 $3+2$。通过 $\operatorname{rank}B^2 = 1$ 判断为 $3+2$。
+
+\textbf{找 Jordan 链：}找一个单位向量 $\vec{e}$ 使 $\operatorname{rank}(\vec{e}, B\vec{e}, B^2\vec{e}) = 3$，得第一条链（长3）。再找一条二阶链，通过行化简得第二条链（长2）。
+
+\textbf{幂零矩阵最小多项式：}$\lambda^m$。$m$ 阶单 Jordan 块最小多项式 $(\lambda - \lambda_0)^m$。
+\end{example}
+
+\section{矩阵相似的条件}
+
+$A, B$ 相似当且仅当：
+\begin{itemize}
+  \item $\lambda E - A$ 与 $\lambda E - B$ 相抵
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的拟对角标准形相同
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的各阶行列式因子相同
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的不变因子相同
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的初等因子相同
+  \item $A$ 与 $B$ 的 Jordan 标准形相同
+\end{itemize}
+
+% ============================================================
+% Class 16 — λ-矩阵与不变因子
+% ============================================================
+\chapter{$\lambda$-矩阵与不变因子}
+
+\section{$\lambda$-矩阵的基本概念}
+
+$\lambda$-矩阵：矩阵元素为 $\lambda$ 的多项式的矩阵。
+
+可逆条件：$A(\lambda)B(\lambda) = B(\lambda)A(\lambda) = E$。注意：$\det A(\lambda) \neq 0$ 不再是矩阵 $A(\lambda)$ 可逆的充要条件；$\det A(\lambda)$ 是非零常数则可逆。
+
+\textbf{行列式秩：}存在一个 $r$ 阶子式为非零多项式，全体 $r+1$ 阶子式为 $0$。
+
+\subsection{$\lambda$-矩阵的初等变换}
+
+\begin{itemize}
+  \item 倍加：一行（列）乘一个多项式加到另一行（列）
+  \item 对换
+  \item 倍乘：一行（列）乘一个非零常数
+\end{itemize}
+
+\begin{theorem}
+矩阵 $A(\lambda)$ 相抵于唯一的标准对角形（Smith 标准形）。
+\end{theorem}
+
+\section{行列式因子与不变因子}
+
+\begin{theorem}
+$A, B \in P^{n \times n}$，$A$ 与 $B$ 相似 $\Leftrightarrow$ $\lambda E - A$ 与 $\lambda E - B$ 相抵。
+\end{theorem}
+
+\textbf{行列式因子：}$k$ 阶子式的公因式在初等变换下不变。
+
+行列式因子 $D_k$；不变因子 $d_k$。定义：$\lambda$-矩阵的标准对角形上的元素称为不变因子。$d_k = D_k / D_{k-1}$。
+
+\section{初等因子}
+
+将不变因子 $d$ 在复数域上分解为互异的一次因子 $\lambda - \lambda_i$ 的幂的乘积，$(\lambda - \lambda_i)^{p_i}$ 是初等因子。
+
+特征根数 $\preccurlyeq$ 初等因子的个数 $\leq$ 行列式因子数。
+
+\begin{example}
+$f(x) = (x-3)^3(x-1) = D_n$。不变因子可排出，初等因子为 $x-3$（出现三次）和 $x-1$。
+
+Jordan 块和初等因子一一对应。
+\end{example}
+
+\textbf{思考：}多项式次数不断下降，次数有界导致结论——在讨论什么问题时用过？
+\begin{itemize}
+  \item A. 带余除法
+  \item B. 最大公因式
+  \item C. 因式分解定理的证明
+\end{itemize}
+
+\section{矩阵相似的多重等价条件}
+
+$A, B$ 相似当且仅当以下任一条成立：
+\begin{enumerate}
+  \item $\lambda E - A$ 与 $\lambda E - B$ 相抵
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的各阶行列式因子相同
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的不变因子相同
+  \item $\lambda E - A$ 与 $\lambda E - B$ 的初等因子相同
+  \item $A$ 与 $B$ 的 Jordan 标准形相同
+\end{enumerate}
+
+% ============================================================
+% Class 17 — 初等因子、Jordan 标准形与双线性函数
+% ============================================================
+\chapter{Jordan 标准形与双线性函数初步}
+
+\section{初等因子与 Jordan 块的对应}
+
+每个初等因子对应一个 Jordan 块。
+
+\textbf{Jordan 块的 $\lambda$-矩阵变换示例：}
+\[
+\begin{pmatrix} 2 & 1 & 1 \\ & 2 & 1 \\ & & 2 \end{pmatrix} \rightarrow
+\begin{pmatrix} \lambda-2 & -1 & -1 \\ & \lambda-2 & -1 \\ & & \lambda-2 \end{pmatrix} \rightarrow
+\begin{pmatrix} 1 & & \\ & 1 & \\ & & (\lambda-2)^3 \end{pmatrix}
+\]
+初等因子为 $(\lambda-2)^3$，对应一个 $3$ 阶 Jordan 块。
+
+\[
+\begin{pmatrix} (\lambda-1)^4 \\ (\lambda-2)^3 \end{pmatrix} \rightarrow
+\begin{pmatrix} 1 & \\ & (\lambda-1)^4(\lambda-2)^3 \end{pmatrix}
+\]
+
+\section{Frobenius 有理标准形}
+
+\begin{proposition}
+$P^{n \times n}$ 上的 $A$ 与唯一的有理标准形矩阵相似。
+\end{proposition}
+
+Frobenius 有理标准形直接按最小多项式逐级分解（第二分解定理），没有前置的"不可约分解"。
+
+有理标准形的每一块对应一个非零次不变因子的友阵：
+\[
+[E_{n-s}, d_1, d_2, \ldots, d_s] \rightarrow [H_1, H_2, \ldots, H_s]
+\]
+
+\section{第六章 双线性函数}
+
+\subsection{对偶空间}
+
+定义一组函数 $l_j: V \rightarrow P \; (j = 1, 2, \ldots, n)$，$l_j(\vec{z}_i) = \delta_{ij}$。任意一个线性映射可由 $l_j$ 表示，$l_j$ 线性无关。全体 $V$ 上的线性函数构成 $n$ 维线性空间，称为 $V$ 的对偶空间，记为 $V^*$。
+
+\subsection{双线性函数}
+
+\begin{definition}
+双线性函数 $f: V \times V \rightarrow P$ 满足：
+\begin{align*}
+f(\vec{\alpha} + \vec{\gamma}, \vec{\beta}) &= f(\vec{\alpha}, \vec{\beta}) + f(\vec{\gamma}, \vec{\beta}) \\
+f(k\vec{\alpha}, \vec{\beta}) &= k f(\vec{\alpha}, \vec{\beta}) \\
+f(\vec{\alpha}, \vec{\beta} + \vec{\gamma}) &= f(\vec{\alpha}, \vec{\beta}) + f(\vec{\alpha}, \vec{\gamma}) \\
+f(\vec{\alpha}, k\vec{\beta}) &= k f(\vec{\alpha}, \vec{\beta})
+\end{align*}
+\end{definition}
+
+但 $f(\vec{\alpha}, \vec{\beta})$ 与 $f(\vec{\beta}, \vec{\alpha})$ 不一定相等。例如：$f = x_1 y_2 - y_1 x_2$（反对称）。
+
+\textbf{度量矩阵：}$(f(\vec{z}_i, \vec{z}_j))$。取定一组基，双线性函数 $\Leftrightarrow$ 度量矩阵。
+
+基变换下度量矩阵的变换：
+\[
+f(\alpha, \beta) = \vec{x}' A \vec{y} = (T\vec{x})' A (T\vec{y}) = \vec{x}' {T}' A T \vec{y}
+\]
+故 $A \rightarrow P^{\top} A P$（\textbf{相合}）。对比：$P^{-1}AP$（相似），$PAQ$（相抵）。
+
+相合保持秩不变。定义 $\operatorname{rank}f = \operatorname{rank}A$。对称/反对称性在相合下不变。
+
+\begin{proposition}
+$f: V \times V \rightarrow P$ 是 $n$ 维空间 $V/P$ 上的双线性函数。定义线性映射 $\varphi: \vec{\alpha} \mapsto l^{(\alpha)}$，则 $\varphi$ 是单射 $\Leftrightarrow$ $f$ 非退化。
+\end{proposition}
+
+同维线性空间的映射是单射 $\rightarrow$ 是满射。
+
+\begin{theorem}[Riesz 表示定理]
+$f: V \times V \rightarrow P$ 为 $V/P$ 上的非退化双线性函数，存在唯一的从 $V^*$ 到 $V$ 的线性映射 $\sigma$，满足 $l(\vec{p}) = f(\sigma(l), \vec{p})$，$\forall \vec{p} \in V$。
+\end{theorem}
+
+% ============================================================
+% Class 18 — 实对称矩阵与双线性函数
+% ============================================================
+\chapter{对称双线性函数与正定矩阵}
+
+\section{实对称矩阵}
+
+实对称矩阵的特征值是实数。
+
+\[
+\lambda_{\max} = \max_{\vec{u} \neq \vec{0}} \frac{\vec{u}^{\top} A \vec{u}}{\vec{u}^{\top} \vec{u}}, \qquad
+\lambda_{\min} = \min_{\vec{u} \neq \vec{0}} \frac{\vec{u}^{\top} A \vec{u}}{\vec{u}^{\top} \vec{u}}
+\]
+
+属于不同特征值的特征向量正交：
+\[
+A\vec{v}_2 = \lambda_2 \vec{v}_2, \quad \vec{v}_1^{\top} A \vec{v}_2 = \lambda_2 \vec{v}_1^{\top} \vec{v}_2
+\]
+\[
+= (A^{\top} \vec{v}_1)^{\top} \vec{v}_2 = \lambda_1 \vec{v}_1^{\top} \vec{v}_2
+\]
+\[
+(\lambda_1 - \lambda_2) \vec{v}_1^{\top} \vec{v}_2 = 0 \;\therefore\; \vec{v}_1 \cdot \vec{v}_2 = 0
+\]
+
+谱分解：$A = \sum \lambda_i \vec{\alpha}_i \vec{\alpha}_i^{\top}$。
+
+\section{对称与反对称双线性函数}
+
+双线性函数 $=$ 对称双线性函数 $+$ 反对称双线性函数（非线性函数不能拆）。
+
+\begin{theorem}
+$f$ 是 $V/P$ 上对称双线性函数，存在一组基 $\vec{\alpha}_1, \ldots, \vec{\alpha}_n$，使 $f$ 在此基下的度量阵为对角阵。
+\end{theorem}
+
+\section{Sylvester 惯性定理}
+
+$A$ 正定 $\Rightarrow$ 所有特征值 $> 0 \Rightarrow \det A > 0$。子二次型正定。
+
+$A$ 正定矩阵 $\Leftrightarrow$ $A$ 所有顺序主子式 $> 0$。
+
+\begin{proof}
+设 $A = \begin{pmatrix} a_{11} & \vec{\alpha}^{\top} \\ \vec{\alpha} & A_{n-1} \end{pmatrix}$，$a_{11} > 0$。令
+\[
+B = \begin{pmatrix} 1 & 0 \\ -\frac{\vec{\alpha}}{a_{11}} & E \end{pmatrix}
+\begin{pmatrix} a_{11} & \vec{\alpha}^{\top} \\ \vec{\alpha} & A_{n-1} \end{pmatrix}
+\begin{pmatrix} 1 & -\frac{\vec{\alpha}^{\top}}{a_{11}} \\ 0 & E \end{pmatrix}
+= \begin{pmatrix} a_{11} & 0 \\ 0 & A_{n-1} - \frac{\vec{\alpha}\vec{\alpha}^{\top}}{a_{11}} \end{pmatrix}
+\]
+归纳即可。
+\end{proof}
+
+正定 $\Leftrightarrow$ 顺序主子式 $> 0 \Leftrightarrow$ 主子式 $> 0$。
+
+反对称可以化为：
+\[
+\operatorname{diag}\left\{ \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \ldots, \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, 0, \ldots, 0 \right\}
+\]
+反对称整数矩阵的行列式是平方数。反对称矩阵的特征值是纯虚数。
+
+\section{正交矩阵}
+
+正交矩阵是满足 $Q^{\top}Q = QQ^{\top} = I$ 的方阵，其核心性质如下：
+\begin{enumerate}
+  \item 逆等于转置：$Q^{-1} = Q^{\top}$
+  \item 行列式：$\det(Q) = \pm 1$（$+1$ 对应旋转，$-1$ 对应反射）
+  \item 保内积与长度：$(Qx) \cdot (Qy) = x \cdot y$，$|Qx| = |x|$
+  \item 特征值：所有特征值的模长为 $1$，实特征值只能是 $\pm 1$
+  \item 行（列）向量构成 $\mathbb{R}^n$ 的一组标准正交基
+  \item 几何意义：代表欧氏空间中的等距变换（旋转、反射或它们的复合）
+  \item 封闭性：两个正交矩阵的乘积仍为正交矩阵；正交矩阵的逆也是正交矩阵
+  \item 相似标准型：实正交矩阵可正交相似于准对角矩阵，对角块为 $\pm 1$ 或 $\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$
+\end{enumerate}
+
+% ============================================================
+% Class 19 — 习题课
+% ============================================================
+\chapter{习题课：Jordan 标准形与双线性函数}
+
+\section{空间分解定理回顾}
+
+第一分解定理：将零化多项式零空间分解为互质因子的零空间。
+
+第二分解定理：找到 Jordan 链，链长的集合唯一。
+
+\section{求 Jordan 标准型的三种方法}
+
+\begin{enumerate}
+  \item 求特征值，求幂零矩阵各幂次的秩
+  \item 求行列式因子 $\to$ 不变因子 $\to$ 初等因子
+  \item 行列变换求 Smith 标准型
+\end{enumerate}
+
+\textbf{求相似变换的矩阵：}线性空间视角找合适的链根构成基。
+
+\subsection{例题：求过渡矩阵}
+
+设 $\dim(\operatorname{rank}B, \operatorname{rank}B^2, \operatorname{rank}B^3) = 1$。求 Jordan 块。
+
+在商空间中找到链长为 $2$ 的链 $[u]$，$A^2[\bar{y}] \in \operatorname{span}(\bar{x}, A\bar{x}, A^2\bar{x})$。
+
+取基 $(\vec{x}, A\vec{x}, A^2\vec{x}, \vec{y}, A\vec{y})$。设 $A^2\vec{y} = \alpha\vec{x} + \beta A\vec{x} + \gamma A^2\vec{x}$，则
+\[
+0 = A^3\vec{y} = \alpha A\vec{x} + \beta A^2\vec{x} + \gamma A^3\vec{x}
+\]
+得 $\alpha = \beta = 0$。令 $\vec{y}' = \vec{y} - \gamma\vec{x}$ 使得 $A^2\vec{y}_1 = 0$。
+
+\section{双线性函数习题要点}
+
+\begin{enumerate}
+  \item[①] $f \Leftrightarrow A$（度量矩阵），秩，非退化
+  \item[②] $f = h(x)$（对称）$+ g(x)$（反对称）
+  \item[③] $A = B + C$（对称 $+$ 反对称）
+  \item[④] 对称的 $f$ 找到一组基使 $A$ 是对角矩阵
+  \item[⑤] Sylvester 惯性定理
+  \item[⑥] 正定 $\Leftrightarrow$ 顺序主子式 $> 0 \Leftrightarrow$ 主子式 $> 0$
+\end{enumerate}
+
+反对称可以化为：
+\[
+\operatorname{diag}\left\{ \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \ldots, \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, 0, \ldots, 0 \right\} \neq 0 \neq s
+\]
+
+% ============================================================
+% Class 20 — 正规矩阵与酉空间
+% ============================================================
+\chapter{正规矩阵与酉空间}
+
+\section{正规矩阵}
+
+$A^H A = A A^H$ 的矩阵称为正规矩阵。包括：对称矩阵、反对称矩阵、正交矩阵。
+
+上三角正规矩阵必为对角矩阵：
+\[
+N = \begin{pmatrix} a & b & c \\ & d & e \\ & & f \end{pmatrix}, \quad
+N^{\top}N = N N^{\top} \Rightarrow \text{非对角元是零}
+\]
+
+\section{复内积空间（酉空间）}
+
+\subsection{实内积的复化}
+
+$\mathbb{R}^n/\mathbb{R}$ 上 $f(\vec{u}, \vec{v}) = \vec{u}^{\top} \vec{v}$。
+
+$\mathbb{C}^n/\mathbb{C}$ 上定义：
+\[
+g(\vec{u} + i\vec{v}, \vec{x} + i\vec{y}) = [f(\vec{u}, \vec{x}) + f(\vec{v}, \vec{y})] + i[f(\vec{u}, \vec{y}) - f(\vec{v}, \vec{x})]
+\]
+
+Hermite 转置：$\vec{s}^H = (\overline{\vec{s}})^{\top}$。酉空间的内积是共轭双线性函数：$(\vec{u}, \vec{v}) = \vec{u}^H \vec{v}$。
+
+酉空间没有向量的夹角。
+
+\subsection{内积公理}
+
+\begin{enumerate}
+  \item $(\vec{u}, \vec{v}) = \overline{(\vec{v}, \vec{u})}$
+  \item $(k\vec{u}, \vec{v}) = \bar{k}(\vec{u}, \vec{v})$，$(\vec{a}, k\vec{b}) = k(\vec{a}, \vec{v})$
+  \item $(\vec{u}, \vec{v} + \vec{w}) = (\vec{u}, \vec{v}) + (\vec{u}, \vec{w})$
+  \item $(\vec{u}, \vec{u}) \geq 0$，等号成立 iff $\vec{u} = \vec{0}$
+\end{enumerate}
+
+\subsection{Cauchy-Schwarz 不等式}
+
+$(\vec{\alpha} + \lambda\vec{\beta}, \vec{\alpha} + \lambda\vec{\beta}) \geq 0$，展开得 $|(\vec{\alpha}, \vec{\beta})| \leq |\vec{\alpha}| |\vec{\beta}|$。
+
+复数空间中 $|\vec{\alpha} + \vec{\beta}|^2 = |\vec{\alpha}|^2 + |\vec{\beta}|^2$ 时 $\vec{\alpha}, \vec{\beta}$ 不一定正交。
+
+\subsection{度量矩阵与正定性}
+
+度量矩阵 $G = ((\vec{z}_i, \vec{z}_j))$，满足 $G = G^H$，$(\vec{\alpha}, \vec{\beta}) \Leftrightarrow (\vec{x}, \vec{y}) = \vec{x}^H G \vec{y}$。
+
+\section*{右侧表达式为内积当且仅当 $G$ 正定}
+
+（共轭）对称矩阵 $G$ 正定的充分必要条件：
+\begin{itemize}
+  \item A. 所有主子式大于零
+  \item B. 所有顺序主子式大于零
+  \item C. 存在可逆矩阵 $T$，使 $G = T^H T$
+  \item D. $G$ 的任意真主子矩阵正定
+  \item E. $G$ 相合于单位矩阵：$P^H G P = E$
+  \item F. $G$ 的特征值全大于零
+\end{itemize}
+
+Cholesky 分解：$G = T^H T$，$T$ 为上三角矩阵。
+
+\subsection{酉空间的标准正交基}
+
+\[
+\vec{\alpha} = (\vec{\varepsilon}_1, \vec{\alpha}) \vec{\varepsilon}_1 + \cdots + (\vec{\varepsilon}_n, \vec{\alpha}) \vec{\varepsilon}_n
+\]
+
+$n$ 维酉空间已知 $n-1$ 个单位正交向量，第 $n$ 个向量有无限种可能（欧氏空间只有两种可能）。
+
+酉矩阵满足 $U^H U = E$。
+
+\section{Schur 引理}
+
+$Q^H A Q = R$（复域上 $n$ 阶矩阵 $A$ 酉相似于上三角矩阵）。
+
+正规变换的谱展开：
+\[
+A \in \mathbb{C}^{n \times n}, \; A^H A = A A^H \Rightarrow A = \sum_{k=1}^{n} \lambda_k \vec{u}_k \vec{u}_k^H
+\]
+
+设 $A = U^H R U$，$R$ 上三角。由 $A^H A = A A^H$ 得 $R^H R = R R^H$，故 $R$ 是对角矩阵。
+
+正规矩阵 $N$ 酉相似于对角阵。Hermite 对称：对角线全实；反 Hermite 对称：对角线全虚。
+
+$N$ 的特征向量也是 $N^H$ 的特征向量，复特征值差一个共轭。
+
+特征向量实部与虚部正交：设 $\vec{u} = \vec{x} + i\vec{y}$，$0 = \overline{\vec{u}}^H \vec{u} = (\overline{\vec{x}}^{\top} \vec{x} - \overline{\vec{y}}^{\top} \vec{y}) + i(\vec{x}^{\top} \vec{y} + \vec{y}^{\top} \vec{x})$。
+
+% ============================================================
+% Class 21 — 实正规矩阵与正交矩阵标准形
+% ============================================================
+\chapter{实正规矩阵与正交矩阵}
+
+\section{实正规矩阵}
+
+$A^H A = A A^H$。实正规矩阵包括：对称、反对称、正交。
+
+正交矩阵特征值模为 $1$。$A^{\top} A \overline{\vec{x}} = \overline{\mu} A^{\top} \vec{x}$，$|\mu| = 1$。
+
+\section{实正交矩阵的标准形}
+
+\[
+\operatorname{diag}\left\{ E_p, -E_q, \begin{pmatrix} \cos\theta_1 & \sin\theta_1 \\ -\sin\theta_1 & \cos\theta_1 \end{pmatrix}, \ldots, \begin{pmatrix} \cos\theta_t & \sin\theta_t \\ -\sin\theta_t & \cos\theta_t \end{pmatrix} \right\}
+\]
+
+\section{反对称变换}
+
+$\forall \vec{\alpha}, \vec{\beta} \in V$，$(A\vec{\alpha}, \vec{\beta}) = -(\vec{\alpha}, A\vec{\beta})$。
+
+$A$ 是反对称变换 $\Leftrightarrow$ $A$ 在标准正交基下的矩阵反对称。
+
+奇数阶反对称矩阵行列式为 $0$：
+\[
+A^{\top} = -A, \quad \det A^{\top} = \det(-A) = (-1)^{2m+1} \det A = -\det A, \quad \det A = 0
+\]
+
+实反对称矩阵的特征值都是纯虚数或零。
+
+\section{实对称 vs 反对称对比表}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+& 对称 & 反对称 \\
+\hline
+变换定义 & $(\mathcal{A}\alpha, \beta) = (\alpha, \mathcal{A}\beta)$ & $(\mathcal{A}\alpha, \beta) = -(\alpha, \mathcal{A}\beta)$ \\
+\hline
+正交基下的矩阵 & $A^{\top} = A$ & $A^{\top} = -A$ \\
+\hline
+行列式 & 不定 & 不小于零（奇阶为0） \\
+\hline
+特征值 & 实 & 纯虚或零 \\
+\hline
+某组基下最简形式 & $\operatorname{diag}(E_p, -E_q, O)$ & $\operatorname{diag}\left(\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \ldots, O\right)$ \\
+\hline
+正交基下最简形式 & $\operatorname{diag}(\lambda_1, \ldots, \lambda_n)$ & $\operatorname{diag}\left(\begin{pmatrix} 0 & -\lambda_k \\ \lambda_k & 0 \end{pmatrix}, \ldots, O\right)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{正规矩阵的总结}
+
+$N$ 正规 $\Rightarrow$ $N - \lambda E$ 也正规。
+
+$\overline{\vec{u}}^H [(N - \lambda E)(N - \lambda E)^H] \vec{u} = 0 \Leftrightarrow (N - \lambda E)^H \vec{u} = 0$，即 $(N^H - \overline{\lambda}E) \vec{u} = 0$。
+
+\begin{center}
+\includegraphics[max width=0.6\textwidth]{images/56_44_1268_826_174_0.jpg}
+\end{center}
+
+% ============================================================
+% Class 6.17 — 总复习
+% ============================================================
+\chapter{总复习}
+
+\section{各章核心内容回顾}
+
+\begin{enumerate}
+  \item \textbf{第一章 一元多项式：}Bezout公式，中国剩余定理 $\to$ 空间第一分解定理
+  \item \textbf{第二章 多元多项式：}对称多项式、Newton恒等式
+  \item \textbf{第三章 行列式：}Laplace展开、Binet-Cauchy定理
+  \item \textbf{第四章 线性空间与线性变换：}
+  \begin{itemize}
+    \item 子空间的交/和/维数公式
+    \item 子空间的并不是子空间
+    \item 直和及其充要条件
+    \item 线性变换，特征值与特征向量，不变子空间
+    \item 商空间，商映射
+    \item 限制线性变换与诱导线性变换
+    \item 线性变换与矩阵的关系
+  \end{itemize}
+  \[
+  \dim(V_1 + V_2) = \dim V_1 + \dim V_2 - \dim(V_1 \cap V_2)
+  \]
+  \[
+  \dim V = \dim\operatorname{im}\varphi + \dim\ker\varphi
+  \]
+
+  \item \textbf{第五章 空间分解定理与 $\lambda$-矩阵：}
+  \begin{itemize}
+    \item Cayley-Hamilton 定理
+    \item 空间第一分解定理：$f(x) = p_1(x) p_2(x)$，$(p_1, p_2) = 1 \Rightarrow V = V_1 \oplus V_2$
+    \item 空间第二分解定理 $\to$ Jordan 标准形
+    \item 幂零/准幂零变换
+    \item $\lambda$-矩阵、行列式因子、不变因子、初等因子、Smith 标准形
+    \item 不变因子集 $\to$ Frobenius 标准形
+    \item 初等因子集 $\to$ Jordan 标准形
+  \end{itemize}
+
+  \item \textbf{第六章 双线性函数：}
+  对称双线性函数 $\Rightarrow$ 标准形、Sylvester 惯性定理、正定矩阵判定
+
+  \item \textbf{第七章 内积空间：}
+  \begin{itemize}
+    \item 内积规定一个变换的共轭变换：$(\vec{\beta}, A\vec{\alpha}) = (A^* \vec{\beta}, \vec{\alpha})$
+    \item 正规矩阵上三角化得对角矩阵
+    \item 证明思路：$A A^H = A^H A$，$T = U^H A U$（$T$ 上三角），由 $T^H T = T T^H$ 逐次比较得 $T$ 对角
+  \end{itemize}
+\end{enumerate}
+
+\section{关键定理索引}
+
+\begin{itemize}
+  \item Bezout 公式 $\rightarrow$ 中国剩余定理 $\rightarrow$ 空间第一分解定理
+  \item Hamilton-Cayley 定理 $\rightarrow$ 零化多项式 $\rightarrow$ 最小多项式
+  \item 行列式因子 $\rightarrow$ 不变因子 $\rightarrow$ 初等因子 $\rightarrow$ Jordan/Smith/Frobenius 标准形
+  \item 相合（$P^{\top}AP$）vs 相似（$P^{-1}AP$）vs 相抵（$PAQ$）
+  \item 对称/反对称/正交/正规矩阵的关系与标准形
+\end{itemize}
+
+\end{document}
