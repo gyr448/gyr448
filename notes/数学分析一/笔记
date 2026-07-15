@@ -1,1 +1,4431 @@
-文件夹
+% !TeX program = xelatex
+% 使用 ElegantBook 模板
+
+\documentclass[lang=cn,        % 中文模式
+                newtx,         % 专业数学字体
+                11pt,          % 字号
+                color=blue,    % 主题色：blue/green/cyan/gray/black
+                scheme=chinese % 中文编号（第一章）
+               ]{elegantbook}
+
+\graphicspath{{images/}}
+% ========== 封面元数据 ==========
+\title{数学分析（一）学习笔记}
+\author{郭玉润}
+\institute{北京大学工学院}
+\date{\today}
+\cover{logo.jpg}   %封面大图
+
+% ========== 补充定义 ==========
+\DeclareMathOperator{\arccot}{arccot}
+
+% ========== 修复章节页无页码 ==========
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[L]{\small 数学分析（一）笔记}
+  \fancyhead[R]{\small\leftmark}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+}
+
+% ========== 导言区结束,正文开始 ==========
+\begin{document}
+\pagenumbering{arabic}
+
+% --- 生成封面 ---
+\maketitle
+
+% --- 生成目录 ---
+\tableofcontents
+\mainmatter
+
+% =============================================
+% 正文从这里开始
+% =============================================
+
+\chapter{9.16习题课}
+
+\section{集合的势}
+\subsection{定义:}
+
+1. 势,也叫基数,是描述集合元素个数概念的推广
+
+例  (1)  \(A = \{ 1,2,3\} \;\left| A\right|  = 3\)
+
+ (2)  \(N \rightarrow  {N}_{0}\)
+
+ (2)  \(\ {R \rightarrow  c}\) 连续统的势
+
+2. 记法: \(\left| A\right|  = \operatorname{card}\left| A\right|\)
+
+3. 等势: \(\left| A\right|  = \left| B\right|\) ,当且仅当 \(\exists f : A \rightarrow  B\) 且 \(f\) 是双射
+
+例: (1)  \(A = \{ 1,2,3\)  \(\cdots \} \;B = \{ 0,1,2,3\)  \(\cdots \} \;f\left( x\right)  = x - A \rightarrow  B\) 
+
+\subsection{性质}
+
+1. 等价关系
+
+ (1)  自反性 \(\left| A\right|  = \left| A\right|\)
+
+ (2) 对称性 \(\left| A\right|  = \left| B\right|\) ,有 \(\left| B\right|  = \left| A\right|\)
+
+ (3) 传递性 \(\left| A\right|  = \left| B\right| ,\left| B\right|  = \left| C\right|  \Rightarrow  \left| A\right|  = \left| C\right|\)
+
+2. 可数性
+
+ (1)  可数无限集,与 \(\mathbb{Z}\) 等势的集合 
+ 
+        例:\(\mathbb{N}, \mathbb{Q} \)
+
+ (2)  至多可数集:有限集 + 可数无限集
+
+ (3) 不可数集:比自然数更大的集合
+ 
+ 例: \(\mathbb{R},\mathbb{R} \smallsetminus  Q,\mathbb{C} \) 
+
+3. 无限集的性质
+
+如果一个集合是无限集合,它与它的一个真子集等势
+
+4. 势的比较
+
+
+
+ (1)  \(\left| A\right|  \leq  \left| B\right| ,\) if \(\exists f : A \rightarrow  B,f\) 是单射
+
+
+单射 \( s_1 \neq s_2 \Rightarrow p(s_1) \neq p(s_2) \)
+
+满射 \( \forall t \in T,\ \exists s \in S \text{ 使得 } p(s) = t \)
+
+
+ (2)  \(\left| A\right|  < \left| B\right| ,\) if \(\left| A\right|  \leq  \left| B\right|\) 且 \(\left| A\right|  \neq  \left| B\right|\)
+
+ (3)  \(\left| A\right|  = \left| B\right| ,\) if \(\left| A\right|  \geq  \left| B\right| ,\left| B\right|  \geq  \left| A\right|\)
+
+5. 思考 势有上界吗？
+
+无上界\qquad 势: 复数集> 实数集
+
+\subsection{比较势的大小}
+
+1. \( \left| \mathbb{Z} \right| \text{ 与 } \left| \mathbb{N} \cup \{0\} \right| \)
+\[
+f(x) = 
+\begin{cases} 
+\dfrac{x}{2}, & x \text{ 为偶} \\[1.2ex]
+-\dfrac{x+1}{2}, & x \text{ 为奇}
+\end{cases}
+\quad
+f \colon \mathbb{N} \to \mathbb{Z}
+\]
+
+
+2. \(\left( {a,1}\right)\) 与 \(\left( {a,b}\right) \;\left( {a < b}\right)\)
+
+\[
+f\left( x\right)  = \left( {b - a}\right) x + a
+\]
+
+3. \(\left( {0,1}\right)\) 与 \(\mathbb{R}\)
+
+\[
+f\left( x\right)  = \tan \left( {{\pi x} - \frac{\pi }{2}}\right)
+\]
+
+4. \(\left( {0,1}\right)\) 与 \(\left\lbrack  {0,1}\right\rbrack\)
+
+\[
+f(x) =
+\begin{cases}
+\dfrac12, & x=0 \\[1ex]
+\dfrac13, & x=1 \\[1ex]
+\dfrac{1}{n+2}, & x=\dfrac{1}{n},\ n\in\mathbb{N},\ n\ge 2 \\[1ex]
+x, & x\notin S
+\end{cases}
+\]
+
+\(S = \left\{  {0,1,\dfrac{1}{2},\dfrac{1}{3},\cdots \dfrac{1}{n}}\right\}\)
+
+
+\subsection{思考题}
+
+1. 证明:\(\left| a + b \right|^p \leq 2^p \max \left( \left| a \right|^p, \left| b \right|^p \right) \quad (p > 0)\)
+
+\paragraph*{证明:} \(\left| a + b \right| \leq 2 \max \{ \left| a \right|, \left| b \right| \}\)
+
+\(\Rightarrow \left| a + b \right|^p \leq 2^p \left( \max \{ \left| a \right|, \left| b \right| \} \right)^p\)
+
+\(= 2^p \max \left\{ \left| a \right|^p, \left| b \right|^p \right\}\)
+
+2.证明：\[
+\frac{1}{4n} < 
+\left( \frac{1\cdot 3\cdot 5\cdots (2n-1)}{2\cdot 4\cdot 6\cdots (2n)} \right)^2
+< \frac{1}{2n}
+\]
+
+\paragraph*{证明:}设
+\[
+A_n = \frac{1\cdot 3\cdot 5\cdots (2n-1)}{2\cdot 4\cdot 6\cdots (2n)}
+= \prod_{k=1}^{n} \frac{2k-1}{2k}.
+\]
+下面证明 \(\displaystyle \frac{1}{4n} < A_n^2 < \frac{1}{2n}\),进而由夹逼定理得 \(A_n \to 0\)。
+
+\paragraph*{方法一（不等式放缩）}
+对任意 \(k\ge 1\),有
+\[
+\frac{2k-1}{2k} < \frac{2k}{2k+1}, \qquad 
+\frac{2k-1}{2k} > \frac{2k-2}{2k-1}\ (k\ge 2).
+\]
+由第一个不等式累乘得
+\[
+A_n < B_n := \prod_{k=1}^{n} \frac{2k}{2k+1},
+\]
+于是
+\[
+A_n^2 < A_n B_n = \prod_{k=1}^{n} \frac{2k-1}{2k+1} = \frac{1}{2n+1} < \frac{1}{2n}. \tag{1}
+\]
+由第二个不等式累乘（从 \(k=2\) 到 \(n\)）得
+\[
+\prod_{k=2}^{n} \frac{2k-1}{2k} > \prod_{k=2}^{n} \frac{2k-2}{2k-1}.
+\]
+而
+\[
+A_n = \frac12 \prod_{k=2}^{n} \frac{2k-1}{2k},
+\]
+且
+\[
+A_n \cdot \prod_{k=2}^{n} \frac{2k-2}{2k-1} = \frac{1}{2n}.
+\]
+故
+\[
+A_n^2 > \frac12 \cdot \frac{1}{2n} = \frac{1}{4n}. \tag{2}
+\]
+综合 (1)(2) 得 \(\displaystyle \frac{1}{4n} < A_n^2 < \frac{1}{2n}\)。
+
+\paragraph*{方法二（乘积错位相消）}
+直接观察：
+\[
+A_n^2 = \frac{1^2\cdot 3^2\cdot 5^2\cdots (2n-1)^2}{2^2\cdot 4^2\cdot 6^2\cdots (2n)^2}.
+\]
+将分子分母错位配对,可写成
+\[
+A_n^2 = \frac{1\cdot 3}{2\cdot 2}
+\cdot \frac{3\cdot 5}{4\cdot 4}
+\cdots
+\frac{(2n-3)(2n-1)}{(2n-2)^2}
+\cdot \frac{(2n-1)^2}{(2n)^2}.
+\]
+对 \(k=2,\dots,n-1\),一般的因子为 \(\frac{(2k-3)(2k-1)}{(2k-2)^2}\),而最后单独留下 \(\frac{(2n-1)^2}{(2n)^2}\)。由于
+\[
+\frac{(2k-3)(2k-1)}{(2k-2)^2} = 1 - \frac{1}{(2k-2)^2} < 1,
+\qquad
+\frac{(2n-1)^2}{(2n)^2} < 1,
+\]
+立即得到 \(A_n^2 < 1\),但这样估计过于粗糙。为得到更精确的上界,将乘积重新组合：
+\[
+A_n^2 = \frac{1}{2n} \prod_{k=1}^{n-1} \frac{(2k-1)(2k+1)}{(2k)^2} \cdot \frac{2n-1}{2n}.
+\]
+因为对每个 \(k\) 都有 \(\frac{(2k-1)(2k+1)}{(2k)^2} < 1\) 且 \(\frac{2n-1}{2n} < 1\),故得
+\[
+A_n^2 < \frac{1}{2n},\quad \text{即}\quad A_n < \frac{1}{\sqrt{2n}}.
+\]
+这就通过乘积错位相消获得了所需的上界。
+至于下界,可尝试类似的错位缩放。
+
+综上,
+\[
+\frac{1}{2\sqrt{n}} < A_n < \frac{1}{\sqrt{2n}}.
+\]
+令 \(n\to\infty\),由夹逼定理得 \(\displaystyle \lim_{n\to\infty} A_n = 0\)。
+
+3. 设 \(R\left( x\right)\) 为一有理函数,求证:
+
+\(\left( 1\right)\) 若 \(R\left( {-x}\right)  = R\left( x\right)\) ,则 \(R\left( x\right)  = {R}_{1}\left( {x}^{2}\right)\) , \({R}_{1}\) 为某一有理函数
+
+\(\left( 2\right)\) 若 \(R\left( {-x}\right)  =  - R\left( x\right)\) ,则 \(R\left( x\right)  = x{R}_{2}\left( {x}^{2}\right) \text{ , }{R}_{2}\) 为某一有理函数 。
+
+有理函数: \( R(x) = \frac{P(x)}{Q(x)} \) \quad (其中 \(P(x)\), \(Q(x)\) 是多项式函数)
+\paragraph*{证明:}\(\text{(1) } R\left( x\right)  = \frac{P\left( x\right) }{Q\left( x\right) } = R\left( {-x}\right)  = \frac{P\left( {-x}\right) }{Q\left( {-x}\right) } = \frac{P\left( x\right)  + P\left( {-x}\right) }{Q\left( x\right)  + Q\left( {-x}\right) }\) \qquad(合分比公式)
+
+设 \(P\left( x\right)  = {a}_{0} + {a}_{1}x + {a}_{2}{x}^{2} + {a}_{3}{x}^{3} + \cdots\)
+
+\(P\left( {-x}\right)  = {a}_{0} - {a}_{1}x + {a}_{2}{x}^{2} - {a}_{3}{x}^{3} + \cdots\)
+
+\(\Rightarrow  P\left( x\right)  + P\left( {-x}\right)  = 2{a}_{0} + 2{a}_{2}{x}^{2} + \cdots  = {P}_{1}\left( {x}^{2}\right)\)
+
+同理 \(Q\left( x\right)  + Q\left( {-x}\right)  = {Q}_{1}\left( {x}^{2}\right)\)
+
+\(\therefore R\left( x\right)  = \frac{{P}_{1}\left( {x}^{2}\right) }{{Q}_{1}\left( {x}^{2}\right) } = {R}_{1}\left( {x}^{2}\right)\)
+%2026.7.7
+(2) \(R\left( x\right)  = \frac{P\left( x\right) }{Q\left( x\right) } =  - R\left( {-x}\right)  = \frac{-P\left( {-x}\right) }{Q\left( {-x}\right) } = \frac{P\left( x\right)  - P\left( {-x}\right) }{Q\left( x\right)  + Q\left( {-x}\right) } \; p\left( x\right)  - p\left( {-x}\right)  = 2{a}_{1}x + 2{a}_{3}{x}^{3} + \cdots  = x{p}_{2}\left( {x}^{2}\right) \; Q\left( x\right)  + Q\left( {-x}\right)  = {Q}_{2}\left( {x}^{2}\right) \; \therefore R\left( x\right)  = \frac{p\left( x\right) }{Q\left( x\right) } = x\frac{{p}_{2}\left( {x}^{2}\right) }{{Q}_{2}\left( {x}^{2}\right) } = x{R}_{2}\left( {x}^{2}\right)\)
+
+\section{不动点}
+
+注意：不动点不是点,是自变量的值
+
+\subsection{定义}给定函数f: \(X \rightarrow  X\) 若 \(\exists {x}^{ * } \in  X\) ,使得 \(f\left( {x}^{ * }\right)\)\(= {x}^{ * }\),则称\({x}^{ * }\)是f的一个不动点。
+
+\subsection{性质}
+
+1.存在性定理:若 \(f\) 在有界凸闭集(例如 \(\left\lbrack  {a,b}\right\rbrack\) )上连续,则 \(f\) 至少有一个不动点。
+
+2. 压缩映射原理 (lipschitz常数)
+
+\(f\) 定义在完备度量空间(例如 \(\mathbb{R}\) )上,且 \(\exists\) 常数 \(L \in [0,1)\) , 使得\(\forall x,y \in  X\) ,有 \(\left| {f\left( x\right)  - f\left( y\right) }\right|  \leq  L\left| {x - y}\right|\) ,那么 \(f\left( x\right)\) 有唯一的不动点。
+
+\subsection{例题}
+
+1. 求证 \(f\left( x\right)  = \frac{1}{3}\cos x\) 在\(\mathbb{R}\)上有唯一不动点并从 \({x}_{0}\) =0.5开始迭代逼近。
+
+\paragraph*{证明: }\(\forall x,y \in \mathbb{R}\)
+
+\(\left| {f\left( x\right)  - f\left( y\right) }\right|  = \frac{1}{3}\left| {\cos x - \cos y}\right|  \leq  \frac{1}{3}\left| {x - y}\right|\)
+
+存在 \(L = \frac{1}{3} \in [0,1)\),则对任意实数 \(x, y\),都有
+\[
+|f(x) - f(y)| \le L |x - y|.
+\]
+\(\therefore f\left( x\right)\) 有唯一的不动点
+计算略
+
+\section{课后习题}
+
+1. 设 \(f\left( x\right)\) 在实轴上有定义,若 \(f(f(x))\) 存在唯一的不动点,求证 \(f(x)\) 也存在唯一的不动点。
+
+\paragraph*{证明：}
+
+\paragraph*{方法一}
+
+设 \(f(a)=a\),则 \(f(f(a))=f(a)=a\),所以 \(a\) 是 \(f(f(x))\) 的不动点。
+
+若\(f(b)=b\),\( b \neq a \),则 \(f(f(b))=b\),与不动点唯一矛盾！
+%2026.7.8
+
+\paragraph*{方法二}
+
+设 \({x}^{ * }\) 为 \(f\) of不动点 \({\text{ 则 }f} + f\left\lbrack  {x}^{ * }\right\rbrack   = {f}_{i}f\left\lbrack  {x}^{ * }\right\rbrack   = {x}^{ * }\)
+
+几存在性 \(f\left\lbrack  {f\left\lbrack  {f\left( {x - x}\right) }\right\rbrack  }\right\rbrack   = f\left( {x}^{ * }\right)  \Rightarrow  f\) 。 \(f\left\lbrack  {-f\left( {xf}\right) }\right\rbrack   = f\left( {x}^{ * }\right) \; \Rightarrow  f\left( {x}^{ * }\right)  = {x}^{ * }\)
+
+唯一性),设 \({x}_{1},{x}_{2}\) 都是 \(f\left( x\right)\) 不动点
+
+则 \[\left\{  \begin{array}{l} {x}_{1} = f\left( {x}_{1}\right) \\  {x}_{2} = f\left( {x}_{2}\right)  \end{array}\right.  \Rightarrow  \left\{  \begin{array}{l} f\left[f\left( x\right)\right]  = f\left( {x}_{1}\right)  = {x}_{1} \\  f\left[f\left( x\right)\right]  = f\left( {x}_{2}\right)  = {x}_{2} \end{array}\right.  \Rightarrow  {x}_{1} = {x}_{2}\]
+
+% =============================================
+\chapter{9.19 数列极限}
+
+极限分为两类：
+\[
+\begin{cases}
+\text{序列/数列极限} \\[4pt]
+\text{函数极限}
+\end{cases}
+\]
+
+\subsection{一、基本概念}
+
+1. 数（序）列：\(X : \mathbb{N} \rightarrow \mathbb{R}\) 是 \(\mathbb{N}\) 到 \(\mathbb{R}\) 的映射。
+
+记作 \(n \mapsto x(n)\) 或 \(x_n\)。
+
+\[
+x_1 = x(1),\; x_2 = x(2),\; \cdots,\; x_n = x(n)
+\]
+
+这样用自然数编号的一串实数 \(\{x_n\}\)，称为一个实数序列。
+
+\textbf{注意：}
+\begin{enumerate}[label=(\arabic*)]
+\item 函数值 \(x(n)\) 与 \(n\) 不一定一一对应，即数列中可以有重复项。
+\item 元素 \(x_n\) 与 \(n\) 是一一对应的（编号！）
+\item 我们看 \(\{x_n\}\) 中的元素，即使 \(x_n = x_m,\; n \neq m\)，也视为不同元素。\(x_n\) 的值不是最关键的，下标/编号才是！
+\end{enumerate}
+
+\subsection{二、数列的性质}
+
+数列本质是一个集合，具有集合的性质。
+
+\subsubsection{有界数列}
+
+\textbf{有上界：}若 \(\exists M \in \mathbb{R}\)，s.t. 对 \(\forall n \in \mathbb{N}\)，\(x_n \leq M\)，称 \(\{x_n\}\) 有上界，\(M\) 为 \(\{x_n\}\) 的一个上界。
+
+\textbf{有下界：}若 \(\exists m \in \mathbb{R}\)，s.t. 对 \(\forall n \in \mathbb{N}\)，\(x_n \geq m\)，称 \(\{x_n\}\) 有下界，\(m\) 为 \(\{x_n\}\) 的一个下界。
+
+有界 \(\Leftrightarrow\) 同时有上界和下界 \(\Leftrightarrow\) \(\exists K \geq 0\)，s.t. \(\forall n \in \mathbb{N}\)，\(|x_n| \leq K\)。
+
+\begin{example}
+\begin{enumerate}
+\item \(x_n = (-1)^n\)，\(|x_n| = 1\)，有界。
+\item \(x_n = \dfrac{n+1}{n} = 1 + \dfrac{1}{n}\)，\(|x_n| = 1 + \dfrac{1}{n} \leq 2\)，有界。
+\item \(x_n = \left(1 + \dfrac{1}{n}\right)^n,\; n \in \mathbb{N}\)
+
+\begin{align*}
+x_n &= 1 + C_n^1 \frac{1}{n} + C_n^2 \frac{1}{n^2} + \cdots + C_n^k \frac{1}{n^k} + \cdots + \frac{1}{n^n} \\[4pt]
+C_n^k \cdot \frac{1}{n^k} &= \frac{n(n-1)\cdots(n-k+1)}{n^k} \cdot \frac{1}{k!}
+= \frac{n}{n} \cdot \frac{n-1}{n} \cdots \frac{n-k+1}{n} \cdot \frac{1}{k!} \leq \frac{1}{k!}
+\end{align*}
+
+\[
+x_n = \left(1 + \frac{1}{n}\right)^n \leq 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \cdots + \frac{1}{n!}
+\]
+
+已知：\(n! \geq 2^{n-1}\;(n \geq 2)\)，故
+
+\[
+x_n \leq 1 + 1 + \frac{1}{2} + \frac{1}{2^2} + \cdots + \frac{1}{2^{n-1}} = 3 - \frac{1}{2^{n-1}} \leq 3
+\]
+
+又 \(x_n \geq 2\)，\(\therefore\) \(\{x_n\}\) 有界。
+\end{enumerate}
+\end{example}
+
+\subsubsection{无界序列}
+
+\(\forall K \in \mathbb{R}\)，\(\exists m \in \mathbb{N}\)，\(x_m \in \{x_n\}\)，s.t. \(|x_m| > K\)。即对任意实数 \(K\)，数列中都能找到一项，其绝对值 \(> K\)。
+
+\begin{example}
+\begin{enumerate}
+\item \(a_n = n\)，无界。
+\item \(x_n = -2n\)，无界。
+\item \(d_n = n \cdot \sin^n \frac{\pi}{2}\)（\(n\) 为奇数时 \(|d_n| = n\)），无界。
+\item \(y_n = n \cdot \sin n\)：取 \(\theta \in \left[2k\pi + \frac{\pi}{3},\; 2k\pi + \frac{2\pi}{3}\right]\)，\(\sin \theta > \frac{\sqrt{3}}{2}\)，区间宽度 \(= \frac{\pi}{3} > 1\)，一定存在一个正整数记为 \(n\)，
+\(y_n \geq \frac{\sqrt{3}}{2}n > K\)（取 \(n > \frac{2}{\sqrt{3}}K\)），无界。
+\item \(x_n = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n}\;(n = 1,2,3,\cdots)\) 调和级数的部分和。
+
+\(\{x_n\}\) 是一个单调递增序列。取 \(n = 2^k,\; k \in \mathbb{N}\) 时：
+
+\begin{align*}
+x_n &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \cdots + \frac{1}{8} + \frac{1}{9} + \cdots + \frac{1}{16} + \cdots + \frac{1}{2^{k-1}} + \cdots + \frac{1}{2^k} \\[4pt]
+&\geq 1 + \frac{1}{2} + 2 \times \frac{1}{4} + 4 \times \frac{1}{8} + \cdots + 2^{k-1} \cdot \frac{1}{2^k} = 1 + \frac{k}{2}
+\end{align*}
+\end{enumerate}
+\end{example}
+
+\textbf{注意：} \(\{x_n\}\) 有界/无界，只与数列后面无穷多项有关，而与前面有限项无关。
+
+\subsection{三、无穷小数列}
+
+例如：\(x_n = \dfrac{1}{n},\; \dfrac{1}{n^2},\; \dfrac{(-1)^n}{n}\)，\(n\) 越大，\(x_n\) 的绝对值可以足够小。
+
+\subsubsection{无穷小序列的定义（\(\varepsilon\text{-}N\) 语言）}
+
+若 \(\forall \varepsilon > 0\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，都有 \(|x_n| < \varepsilon\)，则称 \(\{x_n\}\) 为\textbf{无穷小列}。
+
+\subsubsection{几何意义}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/6_142_925_540_125_0.jpg}
+\end{center}
+
+称作 \(0\) 的 \(\varepsilon\) 邻域，记作 \(O(0,\varepsilon)\)。从 \(x_{N+1}\) 起后面都落在 \(O(0,\varepsilon)\) 中。
+
+\begin{example}
+\begin{enumerate}
+\item \(x_n = \dfrac{1 + (-1)^n}{n}\)：\(x_1 = 0,\; x_2 = 1,\; \cdots,\; x_{2k} = \dfrac{1}{k},\; x_{2k+1} = 0\)
+
+\(\Rightarrow |x_n| \leq \dfrac{2}{n} < \varepsilon\)。\(\forall \varepsilon > 0\)，\(\exists N = \left[\dfrac{2}{\varepsilon}\right] + 1\)，s.t. 当 \(n > N\) 时
+\(|x_n| \leq \dfrac{2}{N} < \dfrac{2}{[\frac{2}{\varepsilon}] + 1} < \varepsilon\)。即 \(\{x_n\}\) 是无穷小序列。
+
+\item \(x_n = \dfrac{1}{a^n},\; |a| > 1,\; n = 1,2,\cdots\)
+
+\(|x_n| = \dfrac{1}{|a|^n} \leq \varepsilon\)，即 \(|a|^n \geq \dfrac{1}{\varepsilon}\)，\(n \geq \log_{|a|} \dfrac{1}{\varepsilon}\)。
+
+\(\forall \varepsilon > 0\)，\(\exists N = \left[\log_{|a|} \dfrac{1}{\varepsilon}\right] + 1\)，s.t. \(\forall n \geq N\)，\(|x_n| < \varepsilon\)。
+
+\item \(x_n = \dfrac{n}{a^n},\; |a| > 1\)，是无穷小序列。
+
+\begin{align*}
+|a|^n &= (1 + |a| - 1)^n = 1 + n(|a|-1) + \frac{n(n-1)}{2}(|a|-1)^2 + \cdots \\[4pt]
+&\geq \frac{n(n-1)}{2}(|a|-1)^2
+\end{align*}
+
+\[
+\frac{n}{|a|^n} \leq \frac{2}{(n-1)(|a|-1)^2}
+\]
+
+\(\forall \varepsilon > 0\)，取 \(N = \left[\dfrac{2}{(|a|-1)^2 \cdot \varepsilon} + 1\right]\)，则 \(\forall n > N\) 时 \(|x_n| = \dfrac{n}{|a|^n} < \varepsilon\)。
+
+\item 同理易证 \(x_n = \dfrac{n^k}{a^n}\;(k \in \mathbb{N}),\; |a| > 1\) 也是无穷小序列。
+\end{enumerate}
+\end{example}
+
+（课上证过的考试时可当作已知来用。）还能从数列推广到函数。若无法求出 \(N\)，可尝试将复杂序列与简单序列做对比。
+
+\subsubsection{引理（比较判别法）}
+
+设 \(\{a_n\},\{b_n\}\) 满足：\(\exists N_0 \in \mathbb{N}\)，对 \(\forall n > N_0\)，都有 \(|a_n| \leq |b_n|\)。若 \(\{b_n\}\) 是无穷小序列，则 \(\{a_n\}\) 也是无穷小序列。
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(|b_n| < \varepsilon\)。
+
+取 \(N = \max\{N_0, N_1\}\)，则对 \(\forall n > N\)，\(|a_n| \leq |b_n| < \varepsilon\)。故 \(\{a_n\}\) 是无穷小序列。
+\end{proof}
+
+\begin{example}
+\(a_n = \dfrac{1}{(n+1)^2} + \dfrac{1}{(n+2)^2} + \cdots + \dfrac{1}{(2n)^2} < \dfrac{1}{n^2} \cdot n = \dfrac{1}{n}\)
+
+\(\{\frac{1}{n}\}\) 是无穷小序列，则 \(\{a_n\}\) 也是。
+\end{example}
+
+\subsection{四、收敛序列与极限}
+
+\subsubsection{定义}
+
+若 \(\exists a \in \mathbb{R}\)，s.t. \(\forall \varepsilon > 0\)，\(\exists N \in \mathbb{N}\)，s.t. 对 \(\forall n > N\) 都有 \(|x_n - a| < \varepsilon\)，则称 \(a\) 为序列 \(\{x_n\}\) 的\textbf{极限}，\(\{x_n\}\) 称为收敛的序列。
+
+记作 \(\displaystyle \lim_{n \to +\infty} x_n = a\)（或 \(x_n \to a\)，当 \(n \to +\infty\) 时）。
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/7_121_1259_638_171_0.jpg}
+\end{center}
+
+\(\{x_n\}\) 有极限 \(a \;\Leftrightarrow\; \forall \varepsilon > 0\)，\(\{x_n\}\) 只有有限项在 \(O(a,\varepsilon)\) 之外。
+
+\(\Leftrightarrow \{x_n - a\}\) 是无穷小序列。\((a-\varepsilon, a+\varepsilon)\) 称为 \(a\) 的 \(\varepsilon\) 邻域，记作 \(O(a,\varepsilon)\)。
+
+\subsection{五、无穷大序列（广义极限）}
+
+\subsubsection{极限不存在/不收敛}
+
+\(\forall a \in \mathbb{R}\)，\(\exists \varepsilon > 0\)，s.t. \(\forall N \in \mathbb{N}\)，\(\exists n > N\)，s.t. \(|x_n - a| \geq \varepsilon\)。
+
+\subsubsection{无穷大序列}
+
+若 \(\forall M > 0\)，\(\exists N \in \mathbb{N}\)，对 \(\forall n > N\) 有 \(|x_n| > M\)，则称 \(\{x_n\}\) 为\textbf{无穷大序列}，记作 \(\displaystyle \lim_{n \to +\infty} x_n = \infty\)（无穷大是记号，不是数），或者 \(x_n \to \infty\)（当 \(n \to \infty\) 时）。
+
+\begin{remark}
+\begin{itemize}
+\item 无穷大序列一定无界。
+\item 无界不一定是无穷大序列。例如：
+\[
+x_{2k} = 2k,\quad x_{2k-1} = 0
+\]
+\item 还可定义 \(+\infty\)、\(-\infty\) 序列。
+\end{itemize}
+\end{remark}
+
+\subsubsection{无穷小序列与无穷大序列的性质}
+
+\begin{enumerate}
+\item 若 \(x_n \neq 0\)，则 \(\{x_n\}\) 是无穷小序列 \(\Rightarrow\) \(\{\frac{1}{x_n}\}\) 是无穷大序列。
+\item 无穷大序列与有界序列之和是无穷大序列。
+\item 同号无穷大序列之和也是无穷大序列。
+\item 若 \(\{x_n\}\) 为无穷大序列，且 \(\exists \varepsilon > 0\)，\(\forall n \in \mathbb{N}\)，\(|y_n| \geq \varepsilon > 0\)，则 \(\{x_n y_n\}\) 也是无穷大序列。
+\end{enumerate}
+
+\subsection{六、极限的性质}
+
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/8_1151_752_469_168_0.jpg}
+\end{center}
+
+\subsubsection{(1) 唯一性}
+
+若 \(\{x_n\}\) 有极限，则必唯一。
+
+\begin{proof}
+若不然，设 \(\{x_n\}\) 有两个极限 \(a < b\)。
+
+由极限定义：\(\exists N_1 \in \mathbb{N}\)，\(\forall n > N_1\) 有 \(a - \varepsilon < x_n < a + \varepsilon\)；
+
+\(\exists N_2 \in \mathbb{N}\)，\(\forall n > N_2\) 有 \(b - \varepsilon < x_n < b + \varepsilon\)。
+
+取 \(\varepsilon = \dfrac{b-a}{2}\)，\(N = \max\{N_1, N_2\}\)，\(\forall n > N\)，有
+
+\[
+x_n > b - \varepsilon = \frac{a+b}{2},\qquad x_n < a + \varepsilon = \frac{a+b}{2}
+\]
+
+矛盾。\(\therefore\) 极限若存在则唯一。
+\end{proof}
+
+\subsubsection{(2) 有界性}
+
+收敛数列是有界的。
+
+\begin{proof}
+设 \(\displaystyle \lim_{n \to \infty} x_n = a\)。取 \(\varepsilon = 1\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(|x_n - a| < 1\)。
+
+\(\therefore |x_n| < 1 + |a|\)。取 \(M = \max\{1+|a|, |x_1|, |x_2|, \cdots, |x_N|\}\)，则 \(\forall n \in \mathbb{N}\)，\(|x_n| \leq M\)。因此 \(\{x_n\}\) 有界。
+\end{proof}
+
+\subsubsection{(3) 保号性与保序性}
+
+\textbf{定理（保号性）：}若 \(\{x_n\}\) 有非零极限 \(a\)，则 \(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(|x_n| > \dfrac{|a|}{2} > 0\)。且对上述 \(n\)，若 \(a > 0\)，则 \(x_n > \dfrac{a}{2}\)；若 \(a < 0\)，则 \(x_n < \dfrac{a}{2}\)。
+
+\textbf{定理（保序性）：}若 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，\(\displaystyle \lim_{n \to +\infty} y_n = b\)，且 \(a > b\)，则 \(\exists N \in \mathbb{N}\)，\(\forall n > N\)，有 \(x_n > y_n\)。
+
+\begin{proof}
+取 \(\varepsilon = \dfrac{a-b}{2}\)。\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(|x_n - a| < \dfrac{a-b}{2}\)，即 \(x_n > \dfrac{a+b}{2}\)；
+
+\(\exists N_2 \in \mathbb{N}\)，s.t. \(\forall n > N_2\)，\(|y_n - b| < \dfrac{a-b}{2}\)，即 \(y_n < \dfrac{a+b}{2}\)。
+
+取 \(N = \max\{N_1, N_2\}\)，则 \(\forall n > N\)，\(x_n > \dfrac{a+b}{2} > y_n\)。
+\end{proof}
+
+\textbf{推论1：}若 \(\forall n \in \mathbb{N}\)，\(x_n \leq y_n\)，且 \(\displaystyle \lim_{n \to +\infty} x_n\) 及 \(\displaystyle \lim_{n \to +\infty} y_n\) 存在，则 \(\displaystyle \lim_{n \to \infty} x_n \leq \lim_{n \to \infty} y_n\)。（即使条件加强为严格不等号，结论仍为 \(\leq\)。）
+
+\textbf{推论2：}若 \(\displaystyle \lim_{n \to \infty} x_n = a > b\)，则 \(\exists N \in \mathbb{N}\)，\(\forall n > N\)，\(x_n > b\)。
+
+\textbf{推论3：}若 \(\displaystyle \lim_{n \to +\infty} x_n = a > 0\)，则 \(\exists N \in \mathbb{N}\)，\(\forall n > N\)，\(x_n > 0\)。
+
+% =============================================
+\chapter{9.23 数列极限}
+
+\subsection{回顾上节课}
+
+极限的性质： (1) 唯一性 \quad (2) 有界性 \quad (3) 保号性
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/9_1100_106_556_141_0.jpg}
+\end{center}
+
+\(O(a,\varepsilon)\) 外只有有限项。
+
+\subsection{一、保序性（续）}
+
+\textbf{定理：}若 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，\(\displaystyle \lim_{n \to +\infty} y_n = b\)，且 \(a > b\)，则 \(\exists N \in \mathbb{N}\)，\(\forall n > N\)，有 \(x_n > y_n\)。
+
+\begin{proof}
+取 \(\varepsilon = \dfrac{a-b}{2}\)。\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(|x_n - a| < \dfrac{a-b}{2}\)，即 \(x_n > \dfrac{a+b}{2}\)；
+
+\(\exists N_2 \in \mathbb{N}\)，s.t. \(\forall n > N_2\)，\(|y_n - b| < \dfrac{a-b}{2}\)，即 \(y_n < \dfrac{a+b}{2}\)。
+
+取 \(N = \max\{N_1, N_2\}\)，则 \(\forall n > N\)，\(x_n > \dfrac{a+b}{2} > y_n\)。
+\end{proof}
+
+\textbf{推论1：}若 \(\forall n \in \mathbb{N}\)，\(x_n \leq y_n\)，且 \(\displaystyle \lim_{n \to +\infty} x_n\) 及 \(\displaystyle \lim_{n \to +\infty} y_n\) 存在，则 \(\displaystyle \lim_{n \to \infty} x_n \leq \lim_{n \to \infty} y_n\)。
+
+这里即使条件加强为严格不等号，结论仍为 \(\leq\)。
+
+\textbf{推论2：}若 \(\displaystyle \lim_{n \to \infty} x_n = a > b\)，则 \(\exists N \in \mathbb{N}\)，\(\forall n > N\)，\(x_n > b\)。
+
+\textbf{推论3：}若 \(\displaystyle \lim_{n \to +\infty} x_n = a > 0\)，则 \(\exists N \in \mathbb{N}\)，\(\forall n > N\)，\(x_n > 0\)。
+
+\subsection{二、两边夹定理（迫敛性）}
+
+设 \(x_n \leq y_n \leq z_n\)。若 \(\displaystyle \lim_{n \to \infty} x_n = \lim_{n \to \infty} z_n = a\)，则 \(\{y_n\}\) 有极限，且 \(\displaystyle \lim_{n \to +\infty} y_n = a\)。
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(a - \varepsilon < x_n < a + \varepsilon\)；
+
+\(\exists N_2 \in \mathbb{N}\)，s.t. \(\forall n > N_2\)，\(a - \varepsilon < z_n < a + \varepsilon\)。
+
+取 \(N = \max\{N_1, N_2\}\)，\(\forall n > N\)，
+\[
+a - \varepsilon < x_n \leq y_n \leq z_n < a + \varepsilon
+\]
+则 \(\displaystyle \lim_{n \to \infty} y_n = a\)。
+\end{proof}
+
+\subsection{三、极限的四则运算}
+
+设 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，\(\displaystyle \lim_{n \to \infty} y_n = b\)。
+
+\subsubsection{(1) 加减法}
+
+\(\displaystyle \lim_{n \to +\infty} (x_n \pm y_n) = a \pm b\)
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(|x_n - a| < \dfrac{\varepsilon}{2}\)；
+
+\(\exists N_2 \in \mathbb{N}\)，s.t. \(\forall n > N_2\)，\(|y_n - b| < \dfrac{\varepsilon}{2}\)。
+
+取 \(N = \max\{N_1, N_2\}\)，\(\forall n > N\)，
+\[
+|(x_n \pm y_n) - (a \pm b)| \leq |x_n - a| + |y_n - b| < \varepsilon
+\]
+\(\therefore \displaystyle \lim_{n \to +\infty} (x_n + y_n) = a + b\)。
+\end{proof}
+
+\subsubsection{(2) 乘法}
+
+\(\displaystyle \lim_{n \to +\infty} x_n y_n = ab\)
+
+\begin{proof}
+若 \(a = 0\) 或 \(b = 0\)，则变为无穷小数列乘以有界数列，由之前结论成立。
+
+假设 \(a \neq 0, b \neq 0\)：
+\[
+|x_n y_n - ab| = |x_n y_n - a y_n + a y_n - ab| \leq |x_n - a| \cdot |y_n| + |a| \cdot |y_n - b|
+\]
+由 \(\{y_n\}\) 有极限，故有界，即 \(\exists M > 0\)，s.t. \(|y_n| \leq M\)。
+
+\(\forall \varepsilon > 0\)，\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(|x_n - a| < \dfrac{\varepsilon}{2M}\)；
+
+\(\exists N_2 \in \mathbb{N}\)，s.t. \(\forall n > N_2\)，\(|y_n - b| < \dfrac{\varepsilon}{2|a|}\)。
+
+取 \(N = \max\{N_1, N_2\}\)，\(\forall n > N\)，
+\[
+|x_n y_n - ab| < \frac{\varepsilon}{2M} \cdot M + |a| \cdot \frac{\varepsilon}{2|a|} = \varepsilon
+\]
+\end{proof}
+
+\subsubsection{(3) 除法}
+
+若 \(b \neq 0\)，则 \(\displaystyle \lim_{n \to \infty} \frac{x_n}{y_n} = \frac{a}{b}\)
+
+\begin{proof}
+由保号性质，\(\exists N_0 \in \mathbb{N}\)，s.t. \(\forall n > N_0\)，\(y_n\) 与 \(b\) 同号，且 \(|y_n| > \dfrac{|b|}{2}\)。
+
+由乘法法则，仅需证明：\(\displaystyle \lim_{n \to +\infty} \frac{1}{y_n} = \frac{1}{b}\)。
+
+\(\forall n > N_0\)：
+\[
+\left| \frac{1}{y_n} - \frac{1}{b} \right| = \frac{|y_n - b|}{|y_n| \cdot |b|} \leq \frac{2}{b^2} |y_n - b|
+\]
+\(\forall \varepsilon > 0\)，\(\exists N_1 \in \mathbb{N}\)，s.t. \(\forall n > N_1\)，\(|y_n - b| < \dfrac{b^2}{2} \varepsilon\)。
+
+取 \(N = \max\{N_0, N_1\}\)，则 \(\forall n > N\)，\(\left| \dfrac{1}{y_n} - \dfrac{1}{b} \right| < \varepsilon\)。
+\end{proof}
+
+极限运算与四则运算可交换次序。
+
+\subsection{四、例题}
+
+\begin{example}
+求 \(\displaystyle \lim_{n \to +\infty} \frac{n^2 - n + 2}{3n^2 + 2n + 4}\)。
+
+\textbf{解：}分子分母同除以 \(n^2\)：
+\[
+\lim_{n \to +\infty} \frac{1 - \frac{1}{n} + \frac{2}{n^2}}{3 + \frac{2}{n} + \frac{4}{n^2}} = \frac{1 - 0 + 0}{3 + 0 + 0} = \frac{1}{3}
+\]
+\end{example}
+
+\begin{example}
+设 \(a > 1\)，求证 \(\displaystyle \lim_{n \to \infty} \sqrt[n]{a} = 1\)。
+
+\begin{proof}
+设 \(a_n = \sqrt[n]{a} - 1\)，则 \(a_n > 0\)，且
+\[
+a = (a_n + 1)^n = 1 + n a_n + \frac{n(n-1)}{2} a_n^2 + \cdots > 1 + n a_n
+\]
+\(\therefore 0 < a_n < \dfrac{a-1}{n}\)。两边取极限，由夹逼定理：
+\[
+\lim_{n \to \infty} a_n = 0 \;\Longrightarrow\; \lim_{n \to \infty} \sqrt[n]{a} = 1
+\]
+\end{proof}
+\end{example}
+
+\begin{example}
+求证：\(\displaystyle \lim_{n \to \infty} \sqrt[n]{n} = 1\)。
+
+\begin{proof}
+设 \(a_n = \sqrt[n]{n} - 1 \geq 0\)，则
+\[
+n = (1 + a_n)^n = 1 + n a_n + \frac{n(n-1)}{2} a_n^2 + \cdots > \frac{n(n-1)}{2} a_n^2
+\]
+\[
+\therefore 0 \leq a_n < \sqrt{\frac{2}{n-1}}
+\]
+\(\forall \varepsilon > 0\)，取 \(N = \left[\dfrac{2}{\varepsilon^2}\right] + 1\)，则 \(\forall n > N\)，\(a_n < \varepsilon\)。
+
+由夹逼定理，\(\displaystyle \lim_{n \to \infty} \sqrt[n]{n} = 1\)。
+\end{proof}
+\end{example}
+
+\textbf{推广：}\(\forall \alpha \in \mathbb{R}\)，\(\displaystyle \lim_{n \to \infty} \sqrt[n]{n^\alpha} = 1\)。
+
+\begin{enumerate}
+\item \(\alpha\) 为正整数：\(\displaystyle \lim_{n \to +\infty} \sqrt[n]{n^k} = \left(\lim_{n \to +\infty} \sqrt[n]{n}\right)^k = 1^k = 1\)
+\item \(\alpha > 0\) 非整数：设 \(k = [\alpha]\)，则
+\[
+\lim_{n \to \infty} \sqrt[n]{n^k} < \lim_{n \to \infty} \sqrt[n]{n^\alpha} < \lim_{n \to \infty} \sqrt[n]{n^{k+1}}
+\]
+两边均为 \(1\)，由夹逼定理得 \(\displaystyle \lim_{n \to \infty} \sqrt[n]{n^\alpha} = 1\)。
+\item \(\alpha < 0\)：\(\displaystyle \lim_{n \to \infty} \sqrt[n]{n^\alpha} = \frac{1}{\lim_{n \to \infty} \sqrt[n]{n^{-\alpha}}} = 1\)
+\end{enumerate}
+
+\begin{example}
+求 \(\displaystyle \lim_{n \to +\infty} \left(\sqrt{n^2 + n} - n\right)\)。
+
+\textbf{解：}有理化：
+\begin{align*}
+\lim_{n \to +\infty} \left(\sqrt{n^2 + n} - n\right)
+&= \lim_{n \to +\infty} \frac{(n^2 + n) - n^2}{\sqrt{n^2 + n} + n}
+= \lim_{n \to +\infty} \frac{n}{\sqrt{n^2 + n} + n} \\
+&= \lim_{n \to +\infty} \frac{1}{\sqrt{1 + \frac{1}{n}} + 1} = \frac{1}{2}
+\end{align*}
+\end{example}
+
+\begin{example}
+设 \(c > 0\)，求 \(\displaystyle \lim_{n \to \infty} \sqrt[n]{c + \frac{1}{n}}\)。
+
+\begin{proof}
+当 \(n \geq 1\) 时，\(c < c + \frac{1}{n} < c + 1\)，故
+\[
+\lim_{n \to +\infty} \sqrt[n]{c} \leq \lim_{n \to +\infty} \sqrt[n]{c + \tfrac{1}{n}} \leq \lim_{n \to +\infty} \sqrt[n]{c + 1}
+\]
+由 \(\displaystyle \lim_{n \to +\infty} \sqrt[n]{c} = \lim_{n \to +\infty} \sqrt[n]{c+1} = 1\)，夹逼得原式 \(= 1\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+设 \(|q| < 1\)，求 \(\displaystyle \lim_{n \to +\infty} \sum_{k=1}^{n} q^{k-1}\)。
+
+\textbf{解：}
+\[
+\lim_{n \to +\infty} \sum_{k=1}^{n} q^{k-1} = \lim_{n \to +\infty} \frac{1 - q^n}{1 - q} = \frac{1}{1 - q}
+\]
+记作 \(\displaystyle \sum_{k=1}^{\infty} q^{k-1} = \frac{1}{1 - q}\)。
+\end{example}
+
+\begin{example}
+设 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，\(\displaystyle \lim_{n \to +\infty} y_n = b\)，\(z_n = \dfrac{1}{n}\displaystyle\sum_{k=1}^{n} x_k y_k\)。
+
+求证：\(\displaystyle \lim_{n \to +\infty} z_n = a \cdot b\)（柯西平均值定理）。
+
+\begin{proof}
+令 \(\alpha_n = x_n - a\)，\(\beta_n = y_n - b\)，则 \(\alpha_n \to 0\)，\(\beta_n \to 0\)。
+
+\begin{align*}
+z_n &= \frac{1}{n} \sum_{k=1}^{n} (a + \alpha_k)(b + \beta_k) \\
+&= ab + a \cdot \frac{1}{n}\sum_{k=1}^{n} \beta_k + b \cdot \frac{1}{n}\sum_{k=1}^{n} \alpha_k + \frac{1}{n}\sum_{k=1}^{n} \alpha_k \beta_k
+\end{align*}
+
+由 \(\{\beta_n\}\) 有界，\(\exists M > 0\)，s.t. \(|\beta_n| \leq M\)，故
+\[
+\left|\frac{1}{n}\sum_{k=1}^{n} \alpha_k \beta_k\right| \leq M \cdot \frac{1}{n}\sum_{k=1}^{n} |\alpha_k|
+\]
+
+由无穷小数列前 \(n\) 项平均值也是无穷小（见引理），\(\frac{1}{n}\sum_{k=1}^{n} |\alpha_k| \to 0\)，\(\frac{1}{n}\sum_{k=1}^{n} \beta_k \to 0\)。
+
+故 \(\displaystyle \lim_{n \to +\infty} z_n = ab\)。
+\end{proof}
+
+\textbf{特例（\(y_n \equiv 1\)）：}若 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，则 \(\displaystyle \lim_{n \to +\infty} \frac{x_1 + x_2 + \cdots + x_n}{n} = a\)。
+\end{example}
+
+\begin{example}
+设 \(\displaystyle \lim_{n \to +\infty} a_n = A\)，且 \(a_n > 0\)。求证 \(\displaystyle \lim_{n \to +\infty} \sqrt[n]{a_1 a_2 \cdots a_n} = A\)。
+
+\begin{proof}
+由均值不等式：
+\[
+\frac{n}{\frac{1}{a_1} + \cdots + \frac{1}{a_n}} \leq \sqrt[n]{a_1 \cdots a_n} \leq \frac{a_1 + \cdots + a_n}{n}
+\]
+由特例，右边 \(\to A\)。对 \(\frac{1}{a_n}\) 同理得左边 \(\to A\)。夹逼得结论。
+\end{proof}
+\end{example}
+
+\subsection{五、单调有界数列}
+
+\textbf{定义：}若 \(\forall n \in \mathbb{N}\)，\(x_n \leq x_{n+1}\)，称 \(\{x_n\}\) 为单调上升（递增）数列；若 \(x_n \geq x_{n+1}\)，称下降（递减）数列。严格上升/下降无等号。
+
+\textbf{定理：}单调有界数列必有极限。
+
+\begin{proof}
+设 \(\{x_n\}\) 单调上升有上界。记 \(E = \{x_n \mid n \in \mathbb{N}\}\)。
+
+由确界定理，\(E\) 存在上确界，记作 \(a = \sup E\)。
+
+由上确界定义：\(\forall \varepsilon > 0\)，\(\exists x_{n_0} \in E\)，s.t. \(x_{n_0} > a - \varepsilon\)。
+
+令 \(N = n_0\)，\(\forall n > N\)，由单调性：\(x_n \geq x_{n_0} > a - \varepsilon\)。
+
+另一方面，\(a = \sup E\) 是上界，故 \(x_n \leq a < a + \varepsilon\)。
+
+\(\therefore |x_n - a| < \varepsilon\)，即 \(\displaystyle \lim_{n \to \infty} x_n = a\)。
+\end{proof}
+
+% =============================================
+\chapter{9.23习题课}
+
+\section{求序列极限的方法}
+
+\subsection{(1) 直接代入法}
+
+适用于多项式、有理函数等。例：\(\displaystyle \lim_{n \to \infty} \frac{1}{n} = 0\)。
+
+\subsection{(2) 夹逼原理（迫敛性）}
+
+利用放缩，用的最多。若 \(\exists N\)，s.t. \(\forall n > N\)，有 \(a_n \leq x_n \leq b_n\)，且 \(\displaystyle \lim_{n \to \infty} a_n = \lim_{n \to \infty} b_n = A\)，则 \(\displaystyle \lim_{n \to \infty} x_n = A\)。
+
+\begin{example}
+\(\displaystyle \lim_{n \to \infty} \frac{\sin n}{n}\)
+
+\textbf{解法一：}\(-\frac{1}{n} \leq \frac{\sin n}{n} \leq \frac{1}{n}\)，两边趋于 \(0\)，故原式 \(= 0\)。
+
+\textbf{解法二：}\(0 \leq \left|\frac{\sin n}{n}\right| \leq \frac{|\sin n|}{|n|} \leq \frac{1}{n} \to 0\)（绝对收敛）。
+\end{example}
+
+\subsection{(3) 单调有界定理}
+
+证明存在性，便于求解。若 \(\{a_n\} \uparrow\) 有上界或 \(\{a_n\} \downarrow\) 有下界，则极限存在。
+
+\begin{example}
+\(a_n = 1 - \frac{1}{n}\)，求 \(\displaystyle \lim_{n \to \infty} a_n\)。
+
+单调递增，上界是 \(1\) \(\Rightarrow\) 极限存在，极限为 \(1\)。
+\end{example}
+
+\begin{example}
+\(a_1 = 1\)，\(a_{n+1} = \sqrt{2 + a_n}\)，求 \(\displaystyle \lim_{n \to +\infty} a_n\)。
+
+设 \(\displaystyle \lim_{n \to \infty} a_n = A\)，则 \(\displaystyle \lim_{n \to \infty} a_{n+1} = A > 0\)。
+
+取 \(n \to \infty\)：\(A = \sqrt{2 + A}\)，\(A^2 - A - 2 = 0\)，\(A = 2\) 或 \(-1\)（舍）。
+\end{example}
+
+\subsection{(4) 利用已知极限}
+
+\[
+\lim_{n \to \infty} \sqrt[n]{n} = 1,\quad \sqrt[n]{n^2} = \sqrt[n]{n} \cdot \sqrt[n]{n} \to 1
+\]
+
+\[
+\sqrt[n]{n!} \to \infty \quad (\text{Stirling公式}),\qquad \left(1 + \frac{1}{n}\right)^n \to e
+\]
+
+\subsection{(5) L'H\^opital 定理}
+
+适用于函数极限，可求序列极限。当 \(\frac{f(x)}{g(x)}\) 为 \(\frac{0}{0}\) 或 \(\frac{\infty}{\infty}\) 型时，\(= \frac{f'(x)}{g'(x)}\)。求序列极限时，一些情况下可转化为函数极限。
+
+\subsection{(6) 变换序列法}
+
+通过代数变换（如取对数、变量替换）简化。
+
+\[
+\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{2n} = e^2,\qquad
+\lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = \frac{1}{e}
+\]
+
+\section{思考题}
+
+\begin{enumerate}
+
+\item 求极限 \(\displaystyle \lim_{n \to \infty} \sqrt[n]{1 \cdot 3 \cdot 5 \cdots (2n-1)}\)。
+
+\textbf{解：}由 Week 2 思考题，
+\[
+\left(\frac{1}{4n}\right)^{\frac{1}{2}} < \frac{1 \cdot 3 \cdot 5 \cdots (2n-1)}{2 \cdot 4 \cdot 6 \cdots (2n)} < \left(\frac{1}{2n}\right)^{\frac{1}{2}}
+\]
+取对数，
+\[
+\lim_{n \to \infty} \frac{1}{2n} \ln\frac{1}{4n} = 0,\qquad
+\lim_{n \to \infty} \frac{\ln(2n)}{2n} = 0
+\]
+\[
+\therefore \lim_{n \to \infty} \left(\frac{1}{4n}\right)^{\frac{1}{2n}} = 1 = \lim_{n \to \infty} \left(\frac{1}{2n}\right)^{\frac{1}{2n}}
+\]
+\[
+\lim_{n \to \infty} \sqrt[n]{\frac{1 \cdot 3 \cdot 5 \cdots (2n-1)}{2 \cdot 4 \cdot 6 \cdots (2n)}} = 1
+\]
+
+\item 求极限 \(\displaystyle \lim_{n \to +\infty} \frac{1}{\sqrt[n]{n!}}\)。
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/15_995_1636_779_550_0.jpg}
+\end{center}
+
+\textbf{方法一（积分估计）：}设 \(a_n = (n!)^{-\frac{1}{n}}\)，
+\[
+\ln a_n = -\frac{1}{n} \ln(n!) = -\frac{1}{n}(\ln 1 + \ln 2 + \cdots + \ln n)
+\]
+由积分不等式：\(\displaystyle \sum_{k=1}^{n} \ln k > \int_{1}^{n} \ln x\,dx = n\ln n - n + 1\)，
+\(\displaystyle \sum_{k=1}^{n} \ln k < \int_{1}^{n+1} \ln x\,dx = (n+1)\ln(n+1) - n - 2\ln 2 + 1\)。
+
+进而可得 \(\displaystyle \lim_{n \to \infty} \ln a_n = -\infty\)，故 \(\displaystyle \lim_{n \to \infty} \frac{1}{\sqrt[n]{n!}} = 0\)。
+
+\textbf{方法二（配对放缩）：}当 \(n \geq 5\) 时：
+\[
+1 \times n > n,\quad 2 \times (n-1) > n,\quad \cdots
+\]
+\[
+(n!)^2 > n^n \;\Longrightarrow\; \sqrt[n]{n!} > \sqrt{n} \;\Longrightarrow\; \frac{1}{\sqrt[n]{n!}} < \frac{1}{\sqrt{n}} \to 0
+\]
+\end{enumerate}
+
+\textbf{补充：}Stirling公式 \(n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n\)（\(n \to \infty\)）。
+
+\subsection*{欧拉常数相关}
+
+求证：\(\displaystyle \left(1 + \frac{1}{n-1}\right)^n > \left(1 + \frac{1}{n}\right)^{n+1}\)。
+
+\begin{proof}
+\begin{align*}
+&\Leftrightarrow \left(\frac{n}{n-1}\right)^n > \left(\frac{n+1}{n}\right)^n \cdot \frac{n+1}{n} \\
+&\Leftrightarrow \left(\frac{n^2}{n^2-1}\right)^n > \frac{n+1}{n} \\
+&\Leftrightarrow \left(\frac{1}{1 - \frac{1}{n^2}}\right)^n > \frac{n+1}{n}
+\end{align*}
+由 Bernoulli 不等式：\(\left(\frac{1}{1-p}\right)^n > (1+p)^n \geq 1 + np\)（取 \(p = \frac{1}{n^2}\)），
+\[
+\left(\frac{1}{1 - \frac{1}{n^2}}\right)^n > \left(1 + \frac{1}{n^2}\right)^n \geq 1 + \frac{n}{n^2} = 1 + \frac{1}{n}
+\]
+\end{proof}
+
+\textbf{求证：}
+\begin{enumerate}
+\item \(\displaystyle \frac{1}{n+1} < \ln\left(1 + \frac{1}{n}\right) < \frac{1}{n}\)
+\item 序列 \(\displaystyle x_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n} - \ln n\) 的极限存在（欧拉常数，可在考试时使用）。
+\item \(\displaystyle \lim_{n \to \infty} \left(1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots + (-1)^{n-1}\frac{1}{n}\right) = \ln 2\)。
+\end{enumerate}
+
+\begin{proof}
+(1) 右边 \(\Leftarrow \ln\left(1 + \frac{1}{n}\right)^n < 1 \Leftrightarrow \left(1 + \frac{1}{n}\right)^n < e\)。
+
+左边 \(\Leftarrow \ln\left(\frac{n+1}{n}\right)^{n+1} > 1 \Leftarrow \left(1 + \frac{1}{n}\right)^{n+1} > e\)。
+
+(2) 极限存在 \(\Leftarrow\) 单调有界。
+
+\begin{enumerate}
+\item \(x_{n+1} - x_n = \frac{1}{n+1} - \ln(n+1) + \ln n = \frac{1}{n+1} - \ln\left(1 + \frac{1}{n}\right) < 0\)，故 \(\{x_n\}\) 单调递减。
+\item \(\{x_n\}\) 有下界：由 (1) 知 \(\frac{1}{k+1} < \ln(k+1) - \ln k < \frac{1}{k}\)，从 \(1\) 累加到 \(n\)：
+\[
+\frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n+1} < \ln(n+1) < 1 + \frac{1}{2} + \cdots + \frac{1}{n}
+\]
+\[
+\Rightarrow x_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n} - \ln n > \ln(n+1) - \ln n > 0
+\]
+\end{enumerate}
+
+\(\therefore \displaystyle \lim_{n \to \infty} x_n\) 存在，记作 \(\gamma\)（欧拉常数）。
+
+(3) 设 \(n\) 为偶数，\(n = 2m\)：
+\begin{align*}
+y_n &= 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots + \frac{1}{2m-1} - \frac{1}{2m} \\
+&= 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{2m} - 2\left(\frac{1}{2} + \frac{1}{4} + \cdots + \frac{1}{2m}\right) \\
+&= (x_{2m} + \ln 2m) - (x_m + \ln m) \\
+&= (x_{2m} - x_m) + \ln 2 \to 0 + \ln 2 = \ln 2
+\end{align*}
+
+\(n\) 为奇数同理可证。\(\displaystyle \therefore \lim_{n \to \infty} y_n = \ln 2\)。
+\end{proof}
+
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item 设 \(a_n > 0\)，且 \(\displaystyle \lim_{n \to +\infty} \frac{a_{n+1}}{a_n} = a\)，求证：\(\displaystyle \lim_{n \to +\infty} \sqrt[n]{a_n} = a\)。
+
+\item 求证：\(\displaystyle \lim_{n \to +\infty} \frac{n}{\sqrt[n]{n!}} = e\)。
+\end{enumerate}
+% =============================================
+\chapter{9.26}
+
+\section{单调有界数列例题（续）}
+
+回顾：单调有界数列必有极限。
+
+\begin{example}
+\(x_1 = 2\)，\(x_{n+1} = \dfrac{1}{2}\left(x_n + \dfrac{a}{x_n}\right)\)，\(a > 0\)。求 \(\displaystyle \lim_{n \to +\infty} x_n\)。
+
+\textbf{分析：}这是牛顿迭代法求 \(\sqrt{a}\)。
+
+先证 \(x_n\) 单调有界。当 \(a \geq 1\) 时分类讨论：
+\[
+x_{n+1} - x_n = \frac{a - x_n^2}{2x_n}
+\]
+对 \(x_{n+1} = \frac{1}{2}\left(x_n + \frac{a}{x_n}\right)\) 两边取极限，设极限为 \(A\)：
+\[
+A = \frac{1}{2}\left(A + \frac{a}{A}\right) \;\Longrightarrow\; A = \sqrt{a}
+\]
+\end{example}
+
+\begin{example}
+证明 \(e := \displaystyle \lim_{n \to +\infty} \left(1 + \frac{1}{n}\right)^n\) 存在。（此极限定义为 \(e\)。）
+
+\begin{proof}
+\textbf{Bernoulli 不等式：}\((1+x)^n \geq 1 + nx\) 对 \(x \geq -1\) 成立（归纳证明）。
+
+\textbf{(1) 令 \(x_n = \left(1 + \frac{1}{n}\right)^n\)，证单调递增：}
+\[
+\frac{x_{n+1}}{x_n} = \frac{\left(\frac{n+2}{n+1}\right)^{n+1}}{\left(\frac{n+1}{n}\right)^n}
+= \frac{n+2}{n+1}\left[\frac{n(n+2)}{(n+1)^2}\right]^n
+= \frac{n+2}{n+1}\left[1 - \frac{1}{(n+1)^2}\right]^n
+\]
+由 Bernoulli 不等式：\(\left[1 - \frac{1}{(n+1)^2}\right]^n \geq 1 - \frac{n}{(n+1)^2}\)。
+\[
+\frac{x_{n+1}}{x_n} \geq \frac{n+2}{n+1}\left(1 - \frac{n}{(n+1)^2}\right)
+= \frac{n^3 + 3n^2 + 3n + 2}{n^3 + 3n^2 + 3n + 1} > 1
+\]
+\textbf{(2) 令 \(y_n = \left(1 + \frac{1}{n}\right)^{n+1}\)，证单调递减：}
+\[
+\frac{y_{n+1}}{y_n} = \frac{n+2}{n+1}\left[\frac{n(n+2)}{(n+1)^2}\right]^{n+1}
+= \frac{n+2}{n+1}\left[\frac{(n+1)^2}{n(n+2)}\right]^{-(n+1)}
+= \frac{n+2}{n+1}\left[1 + \frac{1}{n(n+2)}\right]^{-(n+1)}
+\]
+由 Bernoulli 不等式：\(\left[1 + \frac{1}{n(n+2)}\right]^{n+1} \geq 1 + \frac{n+1}{n(n+2)}\)，故
+\[
+\frac{y_{n+1}}{y_n} \leq \frac{n+2}{n+1} \cdot \frac{1}{1 + \frac{n+1}{n(n+2)}} < 1
+\]
+
+\textbf{(3) \(x_n < y_n\) 且 \(x_n \uparrow\)，\(y_n \downarrow\)：}
+\[
+x_n \leq \lim_{n \to \infty} x_n = \lim_{n \to \infty} y_n \leq y_n
+\]
+由 \(x_n \cdot \left(1+\frac{1}{n}\right) = y_n\)，取极限得 \(\displaystyle \lim_{n \to +\infty} x_n = \lim_{n \to +\infty} y_n = e\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+\(x_1 = \sqrt{2}\)，\(x_2 = \sqrt{2 + \sqrt{2}}\)，\(x_3 = \sqrt{2 + \sqrt{2 + \sqrt{2}}}\)，\(\cdots\)，\(x_{n+1} = \sqrt{2 + x_n}\)。求 \(\displaystyle \lim_{n \to +\infty} x_n\)。
+
+\begin{proof}
+\textbf{单调性：}\(x_n = \underbrace{\sqrt{2 + \cdots + \sqrt{2}}}_{n\text{ 层}} > \underbrace{\sqrt{2 + \cdots + \sqrt{2 + 0}}}_{n-1\text{ 层}} = x_{n-1}\)，故 \(\{x_n\} \uparrow\)。
+
+\textbf{有界性：}\(x_1 = \sqrt{2} < 2\)。假设 \(x_n < 2\)，则 \(x_{n+1} = \sqrt{2 + x_n} < \sqrt{2+2} = 2\)。由归纳法，\(\forall n\)，\(x_n < 2\)。
+
+\(\therefore \{x_n\}\) 单调递增有上界，极限存在。设 \(\displaystyle \lim_{n \to +\infty} x_n = A\)，由递推式：
+\[
+A = \sqrt{2 + A} \;\Longrightarrow\; A^2 - A - 2 = 0 \;\Longrightarrow\; A = 2\text{ 或 }-1\text{（舍）}
+\]
+\end{proof}
+\end{example}
+
+\begin{example}
+\(x_1 = a\)，\(x_2 = b\)，\(x_n = \dfrac{1}{2}(x_{n-1} + x_{n-2})\)。求证 \(\displaystyle \lim_{n \to +\infty} x_n\) 存在并求其值。
+
+\begin{proof}
+\textbf{方法一（通项法）：}由递推式：
+\[
+x_{n+1} - x_n = \frac{1}{2}(x_n + x_{n-1}) - x_n = -\frac{1}{2}(x_n - x_{n-1}) = \cdots = \left(-\frac{1}{2}\right)^{n-1}(x_2 - x_1)
+\]
+累加得：\(x_{n+1} - x_2 = -\frac{1}{2}(x_n - x_1)\)。令 \(n \to \infty\)：
+\[
+\lim_{n \to \infty} x_n = c,\quad c - x_2 = -\frac{1}{2}(c - x_1) \;\Longrightarrow\; c = \frac{1}{3}(a + 2b)
+\]
+
+\textbf{方法二（构造单调子列）：}\(\{x_n\}\) 不是单调数列。构造：
+\[
+a_n = \min\{x_n, x_{n+1}\},\qquad b_n = \max\{x_n, x_{n+1}\}
+\]
+可证 \(a_n \uparrow\)，\(b_n \downarrow\)，且 \(a_n \leq b_n\)，\(|b_n - a_n| \to 0\)。由单调有界定理，\(\lim a_n = \lim b_n = c\)，夹逼得 \(\lim x_n = c = \frac{1}{3}(a+2b)\)。
+\end{proof}
+\end{example}
+
+\section{紧致性定理}
+
+回顾实数系基本定理之间的联系：
+\[\boxed{\text{闭区间套}} \longleftrightarrow \boxed{\text{确界}} \longleftrightarrow \boxed{\text{单调有界}}\longleftrightarrow \boxed{\text{极限存在}}\]
+
+\subsection{一、有限开覆盖定理（Heine--Borel）}
+
+\textbf{定理（有限开覆盖定理）：}闭区间上的开覆盖一定存在有限子覆盖。
+
+详细表述：设 \([a,b] \subseteq \mathbb{R}\)，\(\Sigma\) 为 \([a,b]\) 的一个开覆盖（即 \(\Sigma\) 是一族开区间，且 \([a,b] \subseteq \bigcup_{G \in \Sigma} G\)）。则 \(\exists \Sigma^* \subseteq \Sigma\)，s.t.
+\begin{enumerate}
+\item \(\Sigma^*\) 也是 \([a,b]\) 的开覆盖；
+\item \(\Sigma^*\) 中仅有有限个元素。
+\end{enumerate}
+
+\begin{proof}
+（反证法）假设不存在有限个 \(G_1, G_2, \ldots, G_k \in \Sigma\) 可以覆盖 \([a,b]\)。
+
+对分区间 \([a,b]\)，则两个子区间中至少有一个不能被 \(\Sigma\) 中有限个开区间覆盖，记作 \([a_1, b_1]\)。
+
+继续对分……一直做下去，形成闭区间套：
+\[
+[a_{n+1}, b_{n+1}] \subseteq [a_n, b_n],\qquad b_n - a_n = \frac{b-a}{2^n} \to 0
+\]
+由闭区间套定理，\(\exists!\, c \in \bigcap_{n=1}^{\infty} [a_n, b_n]\)。
+
+由于 \(c \in [a,b]\) 被 \(\Sigma\) 覆盖，\(\exists G^* \in \Sigma\)，s.t. \(c \in G^*\)。记 \(G^* = (\alpha, \beta)\)。
+
+令 \(\varepsilon = \min\{c - \alpha,\; \beta - c\} > 0\)。
+
+\(\{a_n\},\{b_n\}\) 均为单调有界数列，\(\displaystyle \lim_{n \to +\infty} a_n = \lim_{n \to +\infty} b_n = c\)。
+
+\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(|a_n - c| < \varepsilon\)，\(|b_n - c| < \varepsilon\)。
+
+则 \(a_n > c - \varepsilon \geq \alpha\)，\(b_n < c + \varepsilon \leq \beta\)，故 \([a_n, b_n] \subseteq G^*\)。
+
+这与 \([a_n, b_n]\) 不能被有限个开区间覆盖的取法矛盾。
+
+\(\therefore\) 存在有限个开区间覆盖 \([a,b]\)。
+\end{proof}
+
+\subsection{二、聚点与聚点原理}
+
+\textbf{定义（聚点）：}设 \(E \subseteq \mathbb{R}\) 是无穷点集。若 \(x_0 \in \mathbb{R}\) 满足：
+\[
+\forall \varepsilon > 0,\; \exists x \in E,\; 0 < |x - x_0| < \varepsilon
+\]
+则称 \(x_0\) 为 \(E\) 的一个\textbf{聚点}（即 \(x_0\) 的任意空心邻域 \(O(x_0, \varepsilon)\) 中都含有 \(E\) 中的点）。
+
+\begin{remark}
+聚点不一定在 \(E\) 中。
+
+\textbf{例：}\(E = (0,1)\)，则 \(E\) 的聚点集为 \([0,1]\)。
+\end{remark}
+
+\textbf{性质（数列刻画）：}\(x_0\) 为 \(E\) 的聚点 \(\Leftrightarrow\) 存在互异点列 \(\{x_n\} \subseteq E\)，s.t. \(x_n \to x_0\)（即 \(E\) 中存在一个收敛到 \(x_0\) 的互异数列）。
+
+\begin{proof}
+\(\Rightarrow\)：由定义，取 \(\varepsilon_1 = 1\)，\(\exists x_1 \in E\)，s.t. \(0 < |x_1 - x_0| < \varepsilon_1\)。
+
+取 \(\varepsilon_2 = \min\{\frac{1}{2}, |x_1 - x_0|\}\)，\(\exists x_2 \in E\)，s.t. \(0 < |x_2 - x_0| < \varepsilon_2\)。因 \(\varepsilon_2 \leq |x_1 - x_0|\)，故 \(x_2 \neq x_1\)。
+
+一般地，取 \(\varepsilon_n = \min\{\frac{1}{n}, |x_{n-1} - x_0|\}\)，\(\exists x_n \in E\)，s.t. \(0 < |x_n - x_0| < \varepsilon_n \leq |x_{n-1} - x_0|\)，故 \(x_n \neq x_{n-1}, \ldots, x_1\)。
+
+如此构造的 \(\{x_n\}\) 是 \(E\) 中互异数列，且 \(|x_n - x_0| < \frac{1}{n} \to 0\)，即 \(\displaystyle \lim_{n \to +\infty} x_n = x_0\)。
+
+\(\Leftarrow\)：由聚点和极限的定义易证。
+\end{proof}
+
+\textbf{聚点原理：}有界无穷点集必有聚点。
+
+\begin{proof}
+（用有限开覆盖定理反证）记 \(m\) 为 \(E\) 的下界，\(M\) 为 \(E\) 的上界。
+
+假设 \(\forall x \in [m, M]\)，\(x\) 都不是 \(E\) 的聚点，即 \(\exists \varepsilon_x > 0\)，s.t. 空心邻域 \(O(x, \varepsilon_x) \cap E\) 最多只有一个元素。
+
+注意到 \(\{O(x, \varepsilon_x) \mid x \in [m, M]\}\) 是 \([m, M]\) 的一个开覆盖。
+
+由有限开覆盖定理，存在有限子覆盖：\([m, M] \subseteq \bigcup_{i=1}^{k} O(x_i, \varepsilon_{x_i})\)。
+
+根据 \(O(x, \varepsilon_x)\) 的取法，每个空心邻域最多含 \(E\) 中一个点，故有限个这样的邻域只能覆盖 \(E\) 中有限个点。但 \(E \subseteq [m, M]\) 且 \(E\) 是无穷点集，矛盾。
+
+\(\therefore\) 有界无穷点集必有聚点。
+\end{proof}
+
+\subsection{三、闭集、开集、闭包}
+
+\begin{itemize}
+\item \textbf{闭集：}若 \(E\) 的聚点都在 \(E\) 中，则称 \(E\) 为闭集。
+\item \textbf{开集：}若 \(E\) 中任一个点 \(x\) 都有一个小邻域包含在 \(E\) 中，即 \(\forall x \in E\)，\(\exists \delta > 0\)，s.t. \(O(x, \delta) \subseteq E\)，则称 \(E\) 为开集。
+\item \textbf{闭包：}\(\overline{E} = E \cup \{E\text{ 的聚点}\}\)。闭包一定是闭集。
+\end{itemize}
+
+% =============================================
+\chapter{9.30}
+
+\section{一、聚点回顾与扩充}
+
+回顾：有界无穷点集必有聚点。
+
+聚点定义：设 \(E \subseteq \mathbb{R}\) 为无穷点集，若 \(x_0 \in \mathbb{R}\) 满足
+\[
+\forall \varepsilon > 0,\; \exists x \in E,\; 0 < |x - x_0| < \varepsilon
+\]
+则称 \(x_0\) 为 \(E\) 的聚点。
+
+\textbf{扩充定义（\(\infty\) 为聚点）：}设 \(E \subseteq \mathbb{R}\)，若 \(\forall M > 0\)，\(\exists x \in E\)，s.t. \(|x| > M\)，则称 \(\infty\) 为 \(E\) 的聚点。这等价于 \(E\) 是无界的（无界点集一定是无穷点集）。
+
+\textbf{小结：}任意无穷点集必有聚点——
+\begin{enumerate}
+\item 有界 \(\Rightarrow\) 有常规聚点；
+\item 无界 \(\Rightarrow\) \(\infty\) 为聚点。
+\end{enumerate}
+
+\textbf{闭包：}\(\overline{E} = E \cup \{E\text{ 的聚点}\}\)。闭包的聚点仍在 \(\overline{E}\) 中（即闭包是闭集）。
+
+\begin{proof}
+（反证法）若不然，设 \(x_1^*, x_2^*, \ldots\) 为 \(E\) 的聚点，\(x^{**}\) 为 \(\{x_i^*\}\) 的聚点，且 \(x^{**} \notin E\)，\(x^{**}\) 不是 \(E\) 的聚点。
+
+则 \(\exists \varepsilon_0 > 0\)，s.t. \(O(x^{**}, \varepsilon_0) \cap E = \varnothing\)。
+
+但 \(x^{**}\) 是 \(\{x_i^*\}\) 的聚点 \(\Rightarrow\) 对于 \(\varepsilon_1 = \frac{1}{3}\varepsilon_0\)，\(\exists x_m^*\)，s.t. \(0 < |x^{**} - x_m^*| < \varepsilon_1\)。
+
+又 \(x_m^*\) 是 \(E\) 的聚点 \(\Rightarrow\) 对于 \(\varepsilon_2 = \frac{1}{3}\varepsilon_0\)，\(\exists x \in E\)，s.t. \(0 < |x_m^* - x| < \varepsilon_2\)。
+
+于是 \(|x^{**} - x| \leq |x^{**} - x_m^*| + |x_m^* - x| < \frac{2}{3}\varepsilon_0 < \varepsilon_0\)，即 \(x \in O(x^{**}, \varepsilon_0) \cap E\)，矛盾。
+\end{proof}
+
+\section{二、子数列与 Bolzano--Weierstrass 定理}
+
+\subsection{子数列}
+
+\textbf{定义：}设 \(\{x_n\}\) 为数列，\(\{n_k\}\) 是严格递增的正整数列，则 \(\{x_{n_k}\}\) 称为 \(\{x_n\}\) 的一个\textbf{子数列}（保留原次序，去掉某些项）。
+
+例：\(x_1, x_3, \ldots, x_{2n+1}, \ldots\)（奇子列）；\(x_2, x_4, \ldots, x_{2n}, \ldots\)（偶子列）。
+
+\textbf{性质：}
+\begin{enumerate}
+\item \(n_k \geq k\)，且 \(n_k \to +\infty\)（当 \(k \to +\infty\) 时）。
+\item 若 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，则 \(\displaystyle \lim_{k \to +\infty} x_{n_k} = a\)（收敛数列的任意子列收敛于同一极限）。
+\end{enumerate}
+
+\subsection{Bolzano--Weierstrass 定理（列紧性）}
+
+\textbf{定理：}任意有界数列必有收敛子列。
+
+\begin{proof}
+\begin{enumerate}
+\item 若数列中有无穷项相同，则结论显然成立（取该常数子列）。
+\item 若不存在无穷项相同，记 \(E = \{x_n \mid n \in \mathbb{N}\}\)（去掉重复项后 \(E\) 仍为无穷集）。
+
+则 \(E\) 为有界无穷点集，由聚点原理，\(\exists x^* \in \mathbb{R}\) 为 \(E\) 的聚点。
+
+由聚点定义构造收敛子列：
+\begin{itemize}
+\item 取 \(\varepsilon_1 = 1\)，\(\exists x_{n_1} \in E\)，s.t. \(0 < |x_{n_1} - x^*| < \varepsilon_1\)。
+\item 取 \(\varepsilon_2 = \min\{\frac{1}{2}, \min_{k \leq n_1} |x_k - x^*|\}\)，\(\exists x_{n_2} \in E\)，s.t. \(0 < |x_{n_2} - x^*| < \varepsilon_2\)，且 \(n_2 > n_1\)。
+\item 一般地，取 \(\varepsilon_l = \min\{\frac{1}{l}, \min_{k \leq n_{l-1}} |x_k - x^*|\}\)，\(\exists x_{n_l} \in E\)，s.t. \(0 < |x_{n_l} - x^*| < \varepsilon_l\)。
+\end{itemize}
+如此构造的子列 \(\{x_{n_l}\}\) 满足 \(|x_{n_l} - x^*| < \frac{1}{l} \to 0\)，故收敛于 \(x^*\)。
+\end{enumerate}
+\end{proof}
+
+\textbf{扩充：}无界数列必有子列趋于 \(\infty\)（仿前证明）。综上，任意（广义）数列都有收敛子列。
+
+\section{三、Cauchy 收敛准则（完备性定理）}
+
+\subsection{Cauchy 列的定义}
+
+若 \(\forall \varepsilon > 0\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n, m > N\)，\(|x_n - x_m| < \varepsilon\)，则称 \(\{x_n\}\) 为\textbf{基本列}（Cauchy 列）。
+
+等价定义：\(\forall \varepsilon > 0\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(\forall p \in \mathbb{N}\)，\(|x_{n+p} - x_n| < \varepsilon\)。
+
+\subsection{Cauchy 收敛定理}
+
+\textbf{定理：}实数列 \(\{x_n\}\) 收敛 \(\Leftrightarrow\) \(\{x_n\}\) 是 Cauchy 列。
+
+\begin{proof}
+\(\Rightarrow\)：由极限定义易证。
+
+\(\Leftarrow\)：
+
+\textbf{Step 1.} 证明 \(\{x_n\}\) 有界：取 \(\varepsilon = 1\)，\(\exists N_0 \in \mathbb{N}\)，s.t. \(\forall n, m > N_0\)，\(|x_n - x_m| < 1\)。
+
+则 \(\forall n \geq N_0+1\)，\(|x_n| \leq |x_n - x_{N_0+1}| + |x_{N_0+1}| < 1 + |x_{N_0+1}|\)。
+
+取 \(M = \max\{|x_1|, \ldots, |x_{N_0}|, 1+|x_{N_0+1}|\}\)，则 \(\forall n\)，\(|x_n| \leq M\)。
+
+\textbf{Step 2.} 由 B-W 定理，\(\{x_n\}\) 有收敛子列 \(\{x_{n_k}\}\)，设 \(\displaystyle \lim_{k \to \infty} x_{n_k} = a\)。
+
+\(\forall \varepsilon > 0\)：
+\begin{itemize}
+\item 由子列收敛，\(\exists K \in \mathbb{N}\)，s.t. \(\forall k > K\)，\(|x_{n_k} - a| < \frac{\varepsilon}{2}\)。
+\item 由 Cauchy 条件，\(\exists N' \in \mathbb{N}\)，s.t. \(\forall n, m > N'\)，\(|x_n - x_m| < \frac{\varepsilon}{2}\)。
+\end{itemize}
+
+取 \(N = \max\{K, N'\}\)，选 \(k > N\)（此时 \(n_k \geq k > N\)）。对 \(\forall n > N\)：
+\[
+|x_n - a| \leq |x_n - x_{n_k}| + |x_{n_k} - a| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+\]
+由极限定义，\(\displaystyle \lim_{n \to +\infty} x_n = a\)。
+\end{proof}
+
+\textbf{逆否命题：}\(\{x_n\}\) 不是 Cauchy 列 \(\Leftrightarrow\) \(\exists \varepsilon_0 > 0\)，s.t. \(\forall N \in \mathbb{N}\)，\(\exists n, m > N\)，\(|x_n - x_m| \geq \varepsilon_0\)。
+
+\begin{example}
+\(x_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n} = \sum_{k=1}^{n} \frac{1}{k}\)（调和级数部分和）不是 Cauchy 列。
+
+取 \(\varepsilon = \frac{1}{2}\)，无论 \(N\) 多大，取 \(n > N\)：
+\[
+|x_{2n} - x_n| = \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{2n} > \frac{1}{2n} \cdot n = \frac{1}{2} = \varepsilon
+\]
+\(\therefore \{x_n\}\) 不是 Cauchy 列，故不收敛。
+\end{example}
+
+\begin{example}
+\(x_n = 1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots + \frac{1}{n^2} = \sum_{k=1}^{n} \frac{1}{k^2}\) 是 Cauchy 列。
+
+\begin{align*}
+|x_{n+p} - x_n| &= \frac{1}{(n+1)^2} + \cdots + \frac{1}{(n+p)^2} \\
+&< \frac{1}{n(n+1)} + \cdots + \frac{1}{(n+p-1)(n+p)} \\
+&= \left(\frac{1}{n} - \frac{1}{n+1}\right) + \cdots + \left(\frac{1}{n+p-1} - \frac{1}{n+p}\right) \\
+&= \frac{1}{n} - \frac{1}{n+p} < \frac{1}{n}
+\end{align*}
+
+\(\forall \varepsilon > 0\)，取 \(N = [\frac{1}{\varepsilon}]+1\)，则 \(\forall n > N\)，\(\forall p\)，\(|x_{n+p} - x_n| < \varepsilon\)。
+
+\(\therefore \{x_n\}\) 收敛。事实上 \(\displaystyle \sum_{k=1}^{\infty} \frac{1}{k^2} = \frac{\pi^2}{6}\)（数分中将证明）。
+
+\textbf{趣闻：}任意两个自然数互质的概率 \(= \left(\sum_{n=1}^{\infty} \frac{1}{n^2}\right)^{-1} = \frac{6}{\pi^2} \approx 60.8\%\)。
+\end{example}
+
+\subsection{实数完备性定理小结}
+
+以下八个定理在实数系中等价：
+\begin{enumerate}
+\item 闭区间套定理
+\item 确界定理
+\item 单调有界数列必有极限
+\item 有限开覆盖定理（Heine--Borel）
+\item 聚点原理
+\item Bolzano--Weierstrass 定理
+\item Cauchy 收敛准则（完备性定理）
+\item 戴德金分割定理
+\end{enumerate}
+
+\begin{proof}
+（用 Cauchy 收敛准则证明闭区间套定理——演示等价性）
+
+设 \(\{[a_n, b_n]\}\) 为闭区间套：\([a_{n+1}, b_{n+1}] \subseteq [a_n, b_n]\)，且 \(b_n - a_n \to 0\)。
+
+\(\forall \varepsilon > 0\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(0 \leq b_n - a_n < \varepsilon\)。
+
+\(\forall n > N\)，\(\forall p \in \mathbb{N}\)：由区间套性质，\(a_N \leq a_n \leq a_{n+p} \leq b_{n+p} \leq b_n \leq b_N\)，
+
+故 \(|a_{n+p} - a_n| \leq b_n - a_n < \varepsilon\)，同理 \(|b_{n+p} - b_n| < \varepsilon\)。
+
+\(\therefore \{a_n\}, \{b_n\}\) 均为 Cauchy 列，由 Cauchy 收敛准则，\(\exists \lim a_n = \lim b_n =: c\)。
+
+固定 \(n\)，\(\forall p\)：\(a_n \leq a_{n+p} \leq b_{n+p} \leq b_n\)。令 \(p \to +\infty\) 取极限：\(a_n \leq c \leq b_n\)，\(\forall n\)。
+
+\(\therefore c \in \bigcap_{n=1}^{\infty} [a_n, b_n]\)（存在性）。唯一性由 \(b_n - a_n \to 0\) 得证。
+\end{proof}
+
+\section{四、Stolz 定理（离散 L'H\^opital）}
+
+\textbf{定理（Stolz）：}设 \(\{x_n\}\) 严格单调且无界，\(\{y_n\}\) 为实数列。若
+\[
+\lim_{n \to +\infty} \frac{y_{n+1} - y_n}{x_{n+1} - x_n} = a \quad (\text{有限值或 }\pm\infty)
+\]
+则 \(\displaystyle \lim_{n \to +\infty} \frac{y_n}{x_n} = a\)。
+
+\begin{proof}
+（仅证 \(a\) 为有限值的情形）令 \(x_0 = 0\)，\(y_0 = 0\)。则
+\[
+\frac{y_n}{x_n} = \frac{1}{x_n} \sum_{k=1}^{n} (y_k - y_{k-1})
+= \sum_{k=1}^{n} \frac{x_k - x_{k-1}}{x_n} \cdot \frac{y_k - y_{k-1}}{x_k - x_{k-1}}
+\]
+\[
+\frac{y_n}{x_n} - a = \sum_{k=1}^{n} \frac{x_k - x_{k-1}}{x_n}\left(\frac{y_k - y_{k-1}}{x_k - x_{k-1}} - a\right)
+\]
+记 \(\alpha_k = \dfrac{y_k - y_{k-1}}{x_k - x_{k-1}} - a\)，\(\beta_{k,n} = \dfrac{x_k - x_{k-1}}{x_n}\)，则
+\[
+\frac{y_n}{x_n} - a = \sum_{k=1}^{n} \beta_{k,n} \, \alpha_k
+\]
+
+由条件 \(\alpha_k \to 0\)，\(\forall \varepsilon > 0\)，\(\exists N_0 \in \mathbb{N}\)，s.t. \(\forall k > N_0\)，\(|\alpha_k| < \frac{\varepsilon}{2}\)。
+
+又 \(\forall k\)，\(\displaystyle \lim_{n \to +\infty} \beta_{k,n} = \lim_{n \to +\infty} \frac{x_k - x_{k-1}}{x_n} = 0\)（因 \(x_n \to \infty\)），故 \(\exists N_k\)，s.t. \(\forall n > N_k\)，\(|\beta_{k,n}| < \frac{\varepsilon}{2M N_0}\)（其中 \(M = \sup |\alpha_k|\)）。
+
+取 \(N = \max\{N_0, N_1, \ldots, N_{N_0}\}\)，则 \(\forall n > N\)：
+\begin{align*}
+\left|\frac{y_n}{x_n} - a\right|
+&= \left|\sum_{k=1}^{N_0} \beta_{k,n} \alpha_k + \sum_{k=N_0+1}^{n} \beta_{k,n} \alpha_k\right| \\
+&\leq \sum_{k=1}^{N_0} |\beta_{k,n}| \cdot |\alpha_k| + \sum_{k=N_0+1}^{n} \beta_{k,n} \cdot \frac{\varepsilon}{2} \\
+&< N_0 \cdot \frac{\varepsilon}{2M N_0} \cdot M + \frac{\varepsilon}{2} \cdot \sum_{k=N_0+1}^{n} \beta_{k,n} \\
+&= \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+\end{align*}
+
+\(\therefore \displaystyle \lim_{n \to +\infty} \frac{y_n}{x_n} = a\)。
+\end{proof}
+
+\textbf{注：}Stolz 定理是数列极限的 L'H\^opital 法则，对 \(\frac{0}{0}\) 型和 \(\frac{*}{\infty}\) 型均适用（严格单调无界的 \(x_n\) 保证分母趋于 \(\infty\)）。
+
+% =============================================
+\chapter{习题课：Stolz 定理与 e}
+
+\section{一、Stolz 定理回顾}
+
+\textbf{Stolz 定理（\(\frac{*}{\infty}\) 型）：}设 \(\{x_n\}\) 严格单调递增且 \(x_n \to +\infty\)。若
+\[
+\lim_{n \to \infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}} = a \quad (\text{有限或 }\pm\infty)
+\]
+则 \(\displaystyle \lim_{n \to \infty} \frac{y_n}{x_n} = a\)。
+
+\textbf{\(\frac{0}{0}\) 型：}若 \(\{x_n\}, \{y_n\} \to 0\)，\(\{x_n\}\) 严格单调，且 \(\displaystyle \lim_{n \to +\infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}}\) 存在（有限或 \(\pm\infty\)），则 \(\displaystyle \lim_{n \to \infty} \frac{y_n}{x_n} = \lim_{n \to \infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}}\)。
+
+\begin{example}
+若 \(\displaystyle \lim_{n \to +\infty} x_n = a\)，则 \(\displaystyle \lim_{n \to +\infty} \frac{x_1 + x_2 + \cdots + x_n}{n} = a\)（算术平均值的极限）。
+
+\textbf{证：}取 \(y_n = x_1 + \cdots + x_n\)，\(x_n\) 换为 \(n\)（严格单调递增 \(\to +\infty\)），则
+\[
+\frac{y_n - y_{n-1}}{n - (n-1)} = \frac{x_n}{1} = x_n \to a
+\]
+由 Stolz 定理，\(\displaystyle \lim_{n \to \infty} \frac{y_n}{n} = a\)。
+\end{example}
+
+\begin{example}
+求 \(\displaystyle \lim_{n \to +\infty} \frac{1^2 + 2^2 + \cdots + n^2}{n^3}\) 和 \(\displaystyle \lim_{n \to +\infty} \frac{\ln n}{n}\)。
+
+\textbf{解：}由 Stolz 定理：
+\[
+\lim_{n \to +\infty} \frac{1^2 + \cdots + n^2}{n^3} = \lim_{n \to +\infty} \frac{n^2}{n^3 - (n-1)^3} = \lim_{n \to +\infty} \frac{n^2}{3n^2 - 3n + 1} = \frac{1}{3}
+\]
+\[
+\lim_{n \to +\infty} \frac{\ln n}{n} = \lim_{n \to +\infty} \frac{\ln n - \ln(n-1)}{n - (n-1)} = \lim_{n \to +\infty} \ln\left(\frac{n}{n-1}\right) = \ln 1 = 0
+\]
+\end{example}
+
+\section{二、Stolz 定理的严格证明（\(\frac{*}{\infty}\) 型）}
+
+\begin{proof}
+设 \(\displaystyle \lim_{n \to \infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}} = L\)（有限值）。\(\forall \varepsilon > 0\)，\(\exists N \in \mathbb{N}\)，s.t. 当 \(n > N\) 时：
+\[
+L - \varepsilon < \frac{y_n - y_{n-1}}{x_n - x_{n-1}} < L + \varepsilon
+\]
+
+\(\because x_n - x_{n-1} > 0\)，\(\therefore\)
+\[
+(L - \varepsilon)(x_n - x_{n-1}) < y_n - y_{n-1} < (L + \varepsilon)(x_n - x_{n-1})
+\]
+
+从 \(k = N+1\) 累加到 \(k = n\)（其中 \(n > N\)）：
+\[
+(L - \varepsilon)(x_n - x_N) < y_n - y_N < (L + \varepsilon)(x_n - x_N)
+\]
+
+两边除以 \(x_n\)：
+\[
+(L - \varepsilon)\left(1 - \frac{x_N}{x_n}\right) < \frac{y_n - y_N}{x_n} < (L + \varepsilon)\left(1 - \frac{x_N}{x_n}\right)
+\]
+
+整理得：
+\[
+(L - \varepsilon)\left(1 - \frac{x_N}{x_n}\right) + \frac{y_N}{x_n}
+< \frac{y_n}{x_n} <
+(L + \varepsilon)\left(1 - \frac{x_N}{x_n}\right) + \frac{y_N}{x_n}
+\]
+
+\(\because x_n \to +\infty\)，\(\therefore \displaystyle \lim_{n \to \infty} \frac{x_N}{x_n} = 0\)，\(\displaystyle \lim_{n \to \infty} \frac{y_N}{x_n} = 0\)。
+
+对上述不等式取下极限和上极限（或直接取 \(n \to \infty\) 的极限），得：
+\[
+L - \varepsilon \leq \liminf_{n \to \infty} \frac{y_n}{x_n} \leq \limsup_{n \to \infty} \frac{y_n}{x_n} \leq L + \varepsilon
+\]
+
+由 \(\varepsilon > 0\) 的任意性，\(\displaystyle \lim_{n \to \infty} \frac{y_n}{x_n} = L\)。
+\end{proof}
+
+\section{三、关于 \(e\) 的习题}
+
+\textbf{\(e\) 的定义与基本性质：}
+\[
+e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n
+= \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{n+1}
+= \lim_{n \to \infty} \left(1 + \frac{1}{n+1}\right)^n
+\]
+\[
+\left(1 + \frac{1}{n}\right)^n \uparrow e,\qquad
+\left(1 + \frac{1}{n}\right)^{n+1} \downarrow e
+\]
+\[
+\lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = \frac{1}{e},\qquad
+\lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{2n} = e^2
+\]
+
+\begin{example}
+求证：\(0 < e - \left(1 + \frac{1}{n}\right)^n < \frac{3}{n}\)。
+
+\begin{proof}
+由 \(\left(1 + \frac{1}{n}\right)^n < e < \left(1 + \frac{1}{n}\right)^{n+1}\)，
+\begin{align*}
+0 < e - \left(1 + \frac{1}{n}\right)^n
+&< \left(1 + \frac{1}{n}\right)^{n+1} - \left(1 + \frac{1}{n}\right)^n \\
+&= \left(1 + \frac{1}{n}\right)^n \cdot \frac{1}{n}
+< \frac{e}{n} < \frac{3}{n}
+\end{align*}
+\end{proof}
+\end{example}
+
+\begin{example}
+求证：\(e^a > 1 + a\)（\(a > 0\)），不用导数。
+
+\begin{proof}
+设 \(a = \frac{q}{p}\)（\(p, q \in \mathbb{N}\)）。由 \(e > \left(1 + \frac{1}{p}\right)^p\)，得
+\[
+e^{\frac{1}{p}} > 1 + \frac{1}{p}
+\]
+\[
+e^{a} = e^{\frac{q}{p}} = \left(e^{\frac{1}{p}}\right)^q > \left(1 + \frac{1}{p}\right)^q
+\geq 1 + \frac{q}{p} = 1 + a \quad (\text{Bernoulli 不等式})
+\]
+\end{proof}
+\end{example}
+
+\section{四、欧拉常数}
+
+欧拉常数 \(\gamma \approx 0.577\,215\,664\,9\ldots\) 定义为：
+\[
+\gamma = \lim_{n \to \infty} \left(1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} - \ln n\right)
+\]
+
+设 \(x_n = 1 + \frac{1}{2} + \cdots + \frac{1}{n} - \ln n\)，已证 \(\{x_n\}\) 单调递减有下界，故极限存在。记 \(\displaystyle \lim_{n \to \infty} x_n = \gamma\)，且 \(x_n = \gamma + \varepsilon_n\)，其中 \(\varepsilon_n \to 0\)。
+
+\begin{example}
+求 \(\displaystyle \lim_{n \to +\infty} \left(\frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{2n}\right)\)。
+
+\begin{proof}
+\begin{align*}
+a_n &= \left(1 + \frac{1}{2} + \cdots + \frac{1}{2n}\right) - \left(1 + \frac{1}{2} + \cdots + \frac{1}{n}\right) \\
+&= (x_{2n} + \ln 2n) - (x_n + \ln n) \\
+&= x_{2n} - x_n + \ln 2 \\
+&= (\gamma + \varepsilon_{2n}) - (\gamma + \varepsilon_n) + \ln 2 \\
+&= \varepsilon_{2n} - \varepsilon_n + \ln 2 \to \ln 2 \quad (n \to +\infty)
+\end{align*}
+
+\textbf{另解（Stolz 定理）：}课后易证。
+\end{proof}
+\end{example}
+
+% =============================================
+\chapter{10.10 函数极限}
+
+\section{一、初等函数回顾}
+
+初等函数：基本初等函数经过有限次加减乘除复合运算得到的函数。
+
+\textbf{基本初等函数：}
+\begin{enumerate}
+\item 常数：\(f(x) \equiv C\)
+\item 幂函数：\(f(x) = x^\alpha\;(x > 0,\; \alpha \neq 0)\)
+\item 指数函数：\(f(x) = a^x\;(x \in \mathbb{R},\; a > 0,\; a \neq 1)\)
+\item 对数函数：\(f(x) = \log_a x\;(x > 0,\; a > 0,\; a \neq 1)\)
+\item 三角函数：\(\sin, \cos, \tan, \cot, \sec, \csc\)
+\item 反三角函数：\(\arcsin, \arccos, \arctan, \arccot\)
+\end{enumerate}
+
+\section{二、函数极限的定义（\(\varepsilon\text{-}\delta\) 语言）}
+
+\(f(x) \to A\) 与 \(x\) 的变化方式有关：
+\begin{enumerate}
+\item \(x\) 与某个给定的 \(x_0\) "越来越近" — 狭义极限
+\item \(x\) 变得越来越大（正/负）— 无穷远极限
+\item 其他变化方式（如 \(x = x(t)\) 复合）
+\end{enumerate}
+
+\subsection{邻域概念回顾}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/30_6_1784_583_137_0.jpg}
+\end{center}
+
+\[
+O(x_0, h) = (x_0 - h,\; x_0 + h)
+\]
+半径不写时简记为 \(O(x_0)\)。
+
+\textbf{去心邻域：}
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/30_88_2032_477_112_0.jpg}
+\end{center}
+
+\[
+O^-(x_0, h) = (x_0 - h, x_0) \cup (x_0, x_0 + h)
+\]
+简记作 \(O^-(x_0)\)。
+
+\subsection{函数极限的 \(\varepsilon\text{-}\delta\) 定义}
+
+若 \(x\) 足够"接近" \(x_0\)（\(x \neq x_0\)），可使 \(f(x)\) 与 \(A\) 的差任意小。
+
+\textbf{定义：}设 \(f(x)\) 在 \(O^-(x_0)\) 上有定义。若
+\[
+\forall \varepsilon > 0,\; \exists \delta > 0,\; \text{s.t. } \forall x \in O^-(x_0, \delta),\; |f(x) - A| < \varepsilon
+\]
+则称 \(f(x)\) 在 \(x_0\) 处有极限 \(A\)，记作 \(\displaystyle \lim_{x \to x_0} f(x) = A\)。
+
+\textbf{等价写法：}
+\[
+x \in O^-(x_0, \delta) \;\Leftrightarrow\; 0 < |x - x_0| < \delta
+\]
+\[
+|f(x) - A| < \varepsilon \;\Leftrightarrow\; f(x) \in O(A, \varepsilon)
+\]
+
+\begin{remark}
+\(f(x)\) 可以在 \(x_0\) 处没有定义。取极限过程中 \(x \neq x_0\)，极限存在与否与是否有定义无关！
+\end{remark}
+
+\subsection{例题}
+
+\begin{example}
+求证：\(\displaystyle \lim_{x \to a} \sqrt{x} = \sqrt{a}\;(a > 0)\)。
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，取 \(\delta = \varepsilon \sqrt{a}\)。当 \(0 < |x - a| < \delta\) 时：
+\[
+|\sqrt{x} - \sqrt{a}| = \frac{|x - a|}{\sqrt{x} + \sqrt{a}} \leq \frac{|x - a|}{\sqrt{a}} < \frac{\delta}{\sqrt{a}} = \varepsilon
+\]
+由定义知 \(\displaystyle \lim_{x \to a} \sqrt{x} = \sqrt{a}\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+求证：\(\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1\)。
+
+\begin{proof}
+（几何法）对 \(x \in (0, \frac{\pi}{2})\)，由单位圆面积比较：
+\[
+\frac{1}{2}\sin x < \frac{1}{2}x < \frac{1}{2}\tan x \;\Longrightarrow\; \sin x < x < \tan x
+\]
+\[
+\cos x < \frac{\sin x}{x} < 1
+\]
+又 \(\cos x = 1 - 2\sin^2\frac{x}{2} > 1 - 2\left(\frac{x}{2}\right)^2 = 1 - \frac{x^2}{2}\)，故
+\[
+0 < 1 - \frac{\sin x}{x} < 1 - \cos x < \frac{x^2}{2}
+\]
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/31_68_974_503_280_0.jpg}
+\end{center}
+
+\(\forall \varepsilon > 0\)，取 \(\delta = \sqrt{2\varepsilon}\)。当 \(0 < |x| < \delta\) 时：
+\[
+\left|\frac{\sin x}{x} - 1\right| = 1 - \frac{\sin x}{x} < \frac{x^2}{2} < \frac{\delta^2}{2} = \varepsilon
+\]
+（\(x < 0\) 同理，\(\frac{\sin x}{x}\) 是偶函数）
+
+由定义知 \(\displaystyle \lim_{x \to 0} \frac{\sin x}{x} = 1\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+\(\displaystyle \lim_{x \to 0} x \sin\frac{1}{x} = 0\)。
+
+\begin{proof}
+\(\left|x \sin\frac{1}{x}\right| \leq |x|\)。\(\forall \varepsilon > 0\)，取 \(\delta = \varepsilon\)，当 \(0 < |x| < \delta\) 时：
+\[
+\left|x\sin\frac{1}{x} - 0\right| \leq |x| < \delta = \varepsilon
+\]
+\end{proof}
+\end{example}
+
+\begin{example}
+\(\displaystyle \lim_{x \to a} \sin x = \sin a\)。
+
+\begin{proof}
+\[
+|\sin x - \sin a| = \left|2\cos\frac{x+a}{2}\sin\frac{x-a}{2}\right|
+\leq 2\left|\sin\frac{x-a}{2}\right| \leq |x - a|
+\]
+\(\forall \varepsilon > 0\)，取 \(\delta = \varepsilon\)。当 \(0 < |x - a| < \delta\) 时，\(|\sin x - \sin a| \leq |x-a| < \varepsilon\)。
+\end{proof}
+\end{example}
+
+\section{三、函数极限的性质}
+
+\subsection{(1) 唯一性}
+
+若 \(\displaystyle \lim_{x \to x_0} f(x)\) 存在，则极限值必唯一。
+
+\begin{proof}
+（反证）若不然，设 \(a < b\) 均为极限。取 \(\varepsilon = \frac{b-a}{2}\)。
+
+\(a\) 是极限 \(\Rightarrow\) \(\exists \delta_1 > 0\)，s.t. 当 \(0 < |x - x_0| < \delta_1\) 时，\(|f(x) - a| < \varepsilon\)。
+
+\(b\) 是极限 \(\Rightarrow\) \(\exists \delta_2 > 0\)，s.t. 当 \(0 < |x - x_0| < \delta_2\) 时，\(|f(x) - b| < \varepsilon\)。
+
+取 \(\delta = \min\{\delta_1, \delta_2\}\)，则对 \(0 < |x - x_0| < \delta\)，以上两式均成立：
+\[
+|a - b| = |a - f(x) + f(x) - b| \leq |f(x) - a| + |f(x) - b| < 2\varepsilon = b - a
+\]
+矛盾。
+\end{proof}
+
+\subsection{(2) 局部有界性}
+
+若 \(\displaystyle \lim_{x \to x_0} f(x)\) 存在，则 \(\exists \delta > 0\)，s.t. \(f(x)\) 在 \(O^-(x_0, \delta)\) 上有界。
+
+\begin{proof}
+设 \(\displaystyle \lim_{x \to x_0} f(x) = A\)。取 \(\varepsilon = 1\)，\(\exists \delta > 0\)，s.t. \(\forall x \in O^-(x_0, \delta)\)，\(|f(x) - A| < 1\)。
+
+\(\Rightarrow |f(x)| < 1 + |A|\)（常数），\(\therefore f(x)\) 有界。
+\end{proof}
+
+\begin{remark}
+与数列极限不同，函数在 \(x_0\) 处极限存在并不能推出函数在整个定义域有界，因此称为"局部有界性"。
+\end{remark}
+
+\subsection{(3) 四则运算}
+
+若 \(\displaystyle \lim_{x \to x_0} f(x) = A\)，\(\displaystyle \lim_{x \to x_0} g(x) = B\)，则：
+\begin{enumerate}
+\item \(\displaystyle \lim_{x \to x_0} (f(x) \pm g(x)) = A \pm B\)
+\item \(\displaystyle \lim_{x \to x_0} f(x) \cdot g(x) = A \cdot B\)
+\item 若 \(B \neq 0\)，\(\displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = \frac{A}{B}\)
+\end{enumerate}
+
+（证明与数列四则运算相似，也可由函数极限的数列定义法证明。）
+
+\subsection{(4) 比较原则（夹逼定理）}
+
+\textbf{1)} 若 \(\displaystyle \lim_{x \to x_0} f(x) = A\)，\(\displaystyle \lim_{x \to x_0} g(x) = B\)，且 \(A < B\)，则 \(\exists \delta > 0\)，s.t. \(\forall x \in O^-(x_0, \delta)\)，\(f(x) < g(x)\)。
+
+\begin{proof}
+取 \(\varepsilon = \frac{B-A}{2}\)。\(\exists \delta_1 > 0\)，s.t. \(f(x) < A + \varepsilon = \frac{A+B}{2}\)。
+
+\(\exists \delta_2 > 0\)，s.t. \(g(x) > B - \varepsilon = \frac{A+B}{2}\)。
+
+取 \(\delta = \min\{\delta_1, \delta_2\}\)，则 \(f(x) < \frac{A+B}{2} < g(x)\)。
+\end{proof}
+
+\textbf{2)} 若 \(\forall x \in O^-(x_0)\)，\(f(x) \leq g(x)\)，且两者极限存在，则 \(\displaystyle \lim_{x \to x_0} f(x) \leq \lim_{x \to x_0} g(x)\)。
+
+\textbf{3) 夹逼定理：}若 \(\forall x \in O^-(x_0)\)，\(f(x) \leq g(x) \leq h(x)\)，且 \(\displaystyle \lim_{x \to x_0} f(x) = \lim_{x \to x_0} h(x) = A\)，则 \(\displaystyle \lim_{x \to x_0} g(x) = A\)。
+
+\section{四、数列极限与函数极限的联系（Heine 定理）}
+
+\textbf{定理：}\(\displaystyle \lim_{x \to x_0} f(x) = A\)
+\[
+\Leftrightarrow \forall \{x_n\} \subseteq O^-(x_0) \text{ 且 } \lim_{n \to +\infty} x_n = x_0,\; \text{均有 } \lim_{n \to +\infty} f(x_n) = A
+\]
+
+\begin{proof}
+\(\Rightarrow\)：由 \(\displaystyle \lim_{x \to x_0} f(x) = A\)，\(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，s.t. \(\forall x \in O^-(x_0, \delta)\)，\(|f(x) - A| < \varepsilon\)。
+
+对取定的 \(\delta\)，由 \(x_n \to x_0\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(0 < |x_n - x_0| < \delta\)。
+
+从而 \(|f(x_n) - A| < \varepsilon\)，由数列极限定义知 \(f(x_n) \to A\)。
+
+\(\Leftarrow\)：（反证法）假设 \(\displaystyle \lim_{x \to x_0} f(x) \neq A\)，即
+\[
+\exists \varepsilon_0 > 0,\; \forall \delta > 0,\; \exists x \in O^-(x_0, \delta),\; |f(x) - A| \geq \varepsilon_0
+\]
+
+取 \(\delta_1 = 1\)，\(\exists x_1 \in O^-(x_0, 1)\)，s.t. \(|f(x_1) - A| \geq \varepsilon_0\)。
+
+取 \(\delta_2 = \min\{\frac{1}{2}, |x_1 - x_0|\}\)，\(\exists x_2 \in O^-(x_0, \delta_2)\)，s.t. \(|f(x_2) - A| \geq \varepsilon_0\)（\(x_2 \neq x_1\)）。
+
+一般地，取 \(\delta_n = \min\{\frac{1}{n}, |x_{n-1} - x_0|\}\)，\(\exists x_n \in O^-(x_0, \delta_n)\)，s.t. \(|f(x_n) - A| \geq \varepsilon_0\)。
+
+构造的 \(\{x_n\}\) 互异，\(x_n \neq x_0\)，且 \(|x_n - x_0| < \frac{1}{n} \to 0\)，故 \(x_n \to x_0\)。
+
+由条件应有 \(f(x_n) \to A\)，但构造保证 \(|f(x_n) - A| \geq \varepsilon_0\)，矛盾。
+\end{proof}
+
+\begin{remark}
+Heine 定理将函数极限转化为数列极限，是连接两者的桥梁。特别地，若要证明 \(\displaystyle \lim_{x \to x_0} f(x)\) 不存在，只需找到两个趋于 \(x_0\) 的数列 \(\{x_n^{(1)}\}, \{x_n^{(2)}\}\) 使得 \(f(x_n^{(1)})\) 和 \(f(x_n^{(2)})\) 的极限不同即可。
+\end{remark}
+
+% =============================================
+\chapter{10.14}
+
+\section{一、函数极限的 Cauchy 收敛准则}
+
+\textbf{定理：}\(\displaystyle \lim_{x \to x_0} f(x) = A\)
+\[
+\Leftrightarrow \forall \varepsilon > 0,\; \exists \delta > 0,\; \text{s.t. } \forall x', x'' \in O^-(x_0, \delta),\; |f(x') - f(x'')| < \varepsilon
+\]
+
+\begin{proof}
+\(\Rightarrow\)：由极限定义易证。
+
+\(\Leftarrow\)：只需证 \(\forall \{x_n\} \subseteq O^-(x_0)\) 且 \(x_n \to x_0\)，\(\{f(x_n)\}\) 收敛。
+
+由 \(x_n \to x_0\)，\(\forall \delta > 0\)，\(\exists N \in \mathbb{N}\)，s.t. \(\forall n > N\)，\(0 < |x_n - x_0| < \delta\)。
+
+当 \(n, m > N\) 时，\(x_n, x_m \in O^-(x_0, \delta)\)，由条件：\(|f(x_n) - f(x_m)| < \varepsilon\)。
+
+\(\therefore \{f(x_n)\}\) 为 Cauchy 列 \(\Rightarrow\) 收敛。由 Heine 定理，\(\displaystyle \lim_{x \to x_0} f(x)\) 存在。
+\end{proof}
+
+\section{二、函数极限的推广}
+
+\subsection{1. 无穷大极限（\(x \to a,\; f(x) \to \infty\)）}
+
+\textbf{\(\varepsilon\text{-}\delta\) 定义：}\(\forall M > 0\)，\(\exists \delta > 0\)，s.t. \(\forall x \in O^-(a, \delta)\)，\(|f(x)| > M\)（或 \(f(x) > M\) 为 \(+\infty\)，\(f(x) < -M\) 为 \(-\infty\)）。
+
+\textbf{序列定义：}\(\forall \{x_n\} \subseteq O^-(x_0)\) 且 \(x_n \to x_0\)，有 \(f(x_n) \to \infty\)。
+
+\subsection{2. 自变量趋于无穷（\(x \to \infty\)）}
+
+\(f(x)\) 在 \(|x| > M\) 上有定义。
+
+\textbf{\(\varepsilon\text{-}\delta\) 定义：}\(\forall \varepsilon > 0\)，\(\exists X > 0\)，s.t. \(\forall |x| > X\)，\(|f(x) - A| < \varepsilon\)。记作 \(\displaystyle \lim_{x \to \infty} f(x) = A\)。
+
+\textbf{序列定义：}\(\forall \{x_n\}\) 且 \(x_n \to \infty\)，有 \(f(x_n) \to A\)。
+
+也可有 \(\lim_{x \to \infty} f(x) = \infty\)、\(\lim_{x \to +\infty}\)、\(\lim_{x \to -\infty}\) 等变体。
+
+\subsection{3. 单侧极限}
+
+对 \(x\) 接近 \(x_0\) 的方式加以限制：
+
+\begin{center}
+\includegraphics[width=0.2\textwidth]{images/35_91_1684_369_165_0.jpg}
+\end{center}
+
+\textbf{左/右邻域：}
+\begin{itemize}
+\item 右邻域：\([x_0, x_0 + h)\)，记作 \(O_+(x_0, h)\)
+\item 右去心邻域：\((x_0, x_0 + h)\)，记作 \(O_+^-(x_0, h)\)
+\item 左邻域：\((x_0 - h, x_0]\)，记作 \(O_-(x_0, h)\)
+\item 左去心邻域：\((x_0 - h, x_0)\)，记作 \(O_-^-(x_0, h)\)
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/35_590_1676_392_168_0.jpg}
+\end{center}
+
+\textbf{右极限定义：}若 \(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，s.t. \(\forall x \in O_+^-(x_0, \delta)\)，\(|f(x) - A| < \varepsilon\)，称 \(A\) 为 \(f(x)\) 在 \(x \to x_0^+\) 的右极限，记作 \(\displaystyle \lim_{x \to x_0^+} f(x) = A\)。
+
+同理定义左极限 \(\displaystyle \lim_{x \to x_0^-} f(x) = A\)。
+
+\begin{example}
+\begin{enumerate}
+\item \(\displaystyle \lim_{x \to 0^+} \arctan\frac{1}{x} = \frac{\pi}{2}\)，\(\displaystyle \lim_{x \to 0^-} \arctan\frac{1}{x} = -\frac{\pi}{2}\)（利用单调性），故 \(\displaystyle \lim_{x \to 0} \arctan\frac{1}{x}\) 不存在。
+\item 取整函数 \(y = [x]\)：\(\displaystyle \lim_{x \to n^+} [x] = n\)，\(\displaystyle \lim_{x \to n^-} [x] = n-1\)。
+\end{enumerate}
+\end{example}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/36_5_1224_791_466_0.jpg}
+\end{center}
+
+\section{三、单侧极限与极限的关系}
+
+\textbf{定理：}设 \(f(x)\) 在 \(O^-(x_0)\) 有定义，则
+\[
+\lim_{x \to x_0} f(x) = A \;\Leftrightarrow\; \lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = A
+\]
+
+\begin{proof}
+\(\Rightarrow\)：显然（去心邻域同时包含左右两侧）。
+
+\(\Leftarrow\)：由左极限 \(\exists \delta_1 > 0\)，s.t. \(x_0 - \delta_1 < x < x_0\) 时 \(|f(x)-A| < \varepsilon\)；由右极限 \(\exists \delta_2 > 0\)，s.t. \(x_0 < x < x_0 + \delta_2\) 时 \(|f(x)-A| < \varepsilon\)。取 \(\delta = \min\{\delta_1, \delta_2\}\) 即可。
+\end{proof}
+
+\section{四、单调函数的单侧极限}
+
+\textbf{定理：}若 \(f(x)\) 在 \(O_-^-(x_0, h)\) 上有定义且单调，则 \(\displaystyle \lim_{x \to x_0^-} f(x)\) 存在（有限或 \(\pm\infty\)），且等于 \(\displaystyle \sup_{x \in O_-^-(x_0,h)} f(x)\)（单调增）或 \(\inf\)（单调减）。
+
+\begin{proof}
+（以单调增为例）记 \(F = \{f(x) \mid x \in O_-^-(x_0, h)\}\)，设 \(A = \sup F\)。
+
+\textbf{情形1：}\(A\) 有限（即 \(F\) 有上界）。由上确界定义，\(\forall \varepsilon > 0\)，\(\exists x' \in O_-^-(x_0, h)\)，s.t. \(f(x') > A - \varepsilon\)。
+
+取 \(\delta = x_0 - x'\)，当 \(x \in O_-^-(x_0, \delta)\) 时，\(x > x'\)。由单调性 \(f(x) \geq f(x')\)，故
+\[
+A - \varepsilon < f(x') \leq f(x) \leq A < A + \varepsilon
+\]
+即 \(|f(x) - A| < \varepsilon\)，\(\therefore \lim_{x \to x_0^-} f(x) = A\)。
+
+\textbf{情形2：}\(A = +\infty\)（即 \(F\) 无上界）。\(\forall M > 0\)，\(\exists x' \in O_-^-(x_0, h)\)，s.t. \(f(x') > M\)。同理，当 \(x \in O_-^-(x_0, x_0 - x')\) 时 \(f(x) \geq f(x') > M\)，故 \(\lim f(x) = +\infty\)。
+\end{proof}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/37_9_1922_1071_387_0.jpg}
+\end{center}
+
+\textbf{单侧极限的性质：}(1)唯一性 (2)局部有界性 (3)不等式性质 (4)Cauchy 收敛原理（均与双侧极限类似）。
+
+\section{五、复合函数求极限}
+
+\textbf{定理：}设 \(f(t)\) 在 \(O^-(t_0)\) 上有定义且 \(\displaystyle \lim_{t \to t_0} f(t) = A\)；\(t = g(x)\) 在 \(O^-(x_0)\) 上有定义，\(\forall x \in O^-(x_0)\)，\(g(x) \in O^-(t_0)\)，且 \(\displaystyle \lim_{x \to x_0} g(x) = t_0\)。则
+\[
+\lim_{x \to x_0} f(g(x)) = A
+\]
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，\(\exists \delta' > 0\)，s.t. \(\forall 0 < |t - t_0| < \delta'\)，\(|f(t) - A| < \varepsilon\)。
+
+对取定的 \(\delta'\)，\(\exists \delta > 0\)，s.t. \(\forall 0 < |x - x_0| < \delta\)，\(|g(x) - t_0| < \delta'\)。
+
+由条件 \(g(x) \in O^-(t_0)\)，故 \(g(x) \neq t_0\)。从而 \(|f(g(x)) - A| < \varepsilon\)。
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+\item \(\displaystyle \lim_{x \to 0} \frac{\sin(\sin x)}{\sin x}\)：令 \(y = \sin x\)，\(x \to 0\) 时 \(y \to 0\)，\(= \lim_{y \to 0} \frac{\sin y}{y} = 1\)。
+\item \(\displaystyle \lim_{x \to 0} \frac{1 - \cos x}{x^2} = \lim_{x \to 0} \frac{2\sin^2\frac{x}{2}}{x^2} = \frac{1}{2} \lim_{x \to 0} \left(\frac{\sin\frac{x}{2}}{\frac{x}{2}}\right)^2 = \frac{1}{2}\)。
+\item \(\displaystyle \lim_{x \to 0} \frac{\tan x - \sin x}{x^3} = \lim_{x \to 0} \frac{\sin x}{x} \cdot \frac{1}{\cos x} \cdot \frac{1 - \cos x}{x^2} = 1 \cdot 1 \cdot \frac{1}{2} = \frac{1}{2}\)。
+\end{enumerate}
+\end{example}
+
+\section{六、两个重要极限}
+
+\[
+\boxed{\lim_{x \to 0} \frac{\sin x}{x} = 1},\qquad
+\boxed{\lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e}
+\]
+
+\begin{proof}
+\textbf{(2) 的证明（从数列推广到函数）：}
+
+\textbf{\(x \to +\infty\)：}利用 \([x] \leq x < [x] + 1\)：
+\[
+\left(1 + \frac{1}{[x]+1}\right)^{[x]} \leq \left(1 + \frac{1}{x}\right)^x \leq \left(1 + \frac{1}{[x]}\right)^{[x]+1}
+\]
+两边取极限（利用数列极限 \(\lim_{n\to\infty}(1+\frac1n)^n = e\)），由夹逼定理得 \(\displaystyle \lim_{x \to +\infty} \left(1 + \frac{1}{x}\right)^x = e\)。
+
+\textbf{\(x \to -\infty\)：}令 \(y = -x \to +\infty\)：
+\[
+\left(1 + \frac{1}{x}\right)^x = \left(1 - \frac{1}{y}\right)^{-y}
+= \left(\frac{y}{y-1}\right)^y
+= \left(1 + \frac{1}{y-1}\right)^y \to e
+\]
+综上 \(\displaystyle \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e\)。
+\end{proof}
+
+\textbf{等价形式：}\(\displaystyle \lim_{\alpha \to 0} (1 + \alpha)^{\frac{1}{\alpha}} = e\)。
+
+\section{七、无穷小量的比较（变量的阶）}
+
+设 \(f(x), g(x)\) 在 \(O^-(x_0)\) 上有定义，当 \(x \to x_0\) 时 \(f(x) \to 0\)，\(g(x) \to 0\)。
+
+\begin{enumerate}
+\item \textbf{同阶无穷小：}若 \(\displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = A \neq 0\)（有限），称 \(f(x)\) 与 \(g(x)\) 为同阶无穷小量，记作 \(f(x) \sim A \cdot g(x)\)。
+\item \textbf{高阶无穷小：}若 \(\displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = 0\)，称 \(f(x)\) 为 \(g(x)\) 的高阶无穷小量，记作 \(f(x) = o(g(x))\)。
+\item \textbf{有界量记号：}若 \(\exists M > 0\)，s.t. 在 \(O^-(x_0)\) 上 \(|f(x)| \leq M|g(x)|\)，记作 \(f(x) = O(g(x))\)（此时 \(f/g\) 可以没有极限）。
+\end{enumerate}
+
+特别地，若 \(g(x) = x^a\) 且 \(f(x) \sim C x^a\)（\(C \neq 0\)），称 \(a\) 为 \(f(x)\) 的\textbf{阶}。
+
+\section{八、渐近线}
+
+若点 \((x, f(x))\) 到直线 \(y = kx + b\) 的距离趋于 \(0\)（\(x \to +\infty\) 或 \(x \to -\infty\)），称该直线为 \(f(x)\) 的\textbf{渐近线}。
+
+\[
+\text{距离} = \frac{|f(x) - (kx + b)|}{\sqrt{1 + k^2}} \to 0 \;\Longleftrightarrow\; \lim_{x \to \infty} [f(x) - (kx + b)] = 0
+\]
+
+\textbf{求法：}
+\[
+k = \lim_{x \to +\infty} \frac{f(x)}{x},\qquad
+b = \lim_{x \to +\infty} (f(x) - kx)
+\]
+（先求 \(k\)，再求 \(b\)。）
+
+\begin{example}
+\(y = \sqrt{1 + x^2}\)，求 \(x \to \pm\infty\) 的渐近线。
+
+\textbf{\(x \to +\infty\)：}
+\[
+k = \lim_{x \to +\infty} \frac{\sqrt{1+x^2}}{x} = \lim_{x \to +\infty} \sqrt{1 + \frac{1}{x^2}} = 1
+\]
+\[
+b = \lim_{x \to +\infty} \left(\sqrt{1+x^2} - x\right)
+= \lim_{x \to +\infty} \frac{1}{\sqrt{1+x^2} + x} = 0
+\]
+渐近线：\(y = x\)。
+
+\textbf{\(x \to -\infty\)：}\(k = -1\)，\(b = 0\)，渐近线：\(y = -x\)。
+\end{example}
+
+% =============================================
+\chapter{10.14 习题课}
+
+\section{一、Stolz 定理（\(\frac{\infty}{\infty}\) 型）回顾}
+
+条件：分母序列 \(\{x_n\}\) 严格单调递增且 \(x_n \to +\infty\)，极限 \(\displaystyle \lim_{n \to \infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}}\) 存在（有限或 \(\pm\infty\)）。结论：\(\displaystyle \lim_{n \to \infty} \frac{y_n}{x_n} = \lim_{n \to \infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}}\)。
+
+\begin{example}
+\(\displaystyle \lim_{n \to \infty} \frac{1 + \sqrt{2} + \cdots + \sqrt{n}}{\frac{2}{3}n^{3/2}}\)
+
+\textbf{解：}令 \(y_n = \sum_{k=1}^{n} \sqrt{k}\)，\(x_n = \frac{2}{3}n^{3/2}\)（严格递增 \(\to +\infty\)）。
+\[
+\frac{y_n - y_{n-1}}{x_n - x_{n-1}} = \frac{\sqrt{n}}{\frac{2}{3}n^{3/2} - \frac{2}{3}(n-1)^{3/2}}
+= \frac{\sqrt{n}}{\frac{2}{3}n^{3/2}\left[1 - \left(1 - \frac{1}{n}\right)^{3/2}\right]}
+\]
+利用 \((1 - \frac{1}{n})^{3/2} \sim 1 - \frac{3}{2n}\)（\(n \to \infty\)），分母 \(\sim \frac{2}{3}n^{3/2} \cdot \frac{3}{2n} = n^{1/2}\)，故
+\[
+\lim_{n \to \infty} \frac{y_n - y_{n-1}}{x_n - x_{n-1}} = \lim_{n \to \infty} \frac{\sqrt{n}}{n^{1/2}} = 1
+\]
+由 Stolz 定理，原式 \(= 1\)。
+\end{example}
+
+\section{二、函数极限复习}
+
+\textbf{1. 定义：}\(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，s.t. \(\forall 0 < |x - a| < \delta\)，\(|f(x) - A| < \varepsilon\)，则 \(\displaystyle \lim_{x \to a} f(x) = A\)。\(a, A\) 为常数，\(\delta = \delta(\varepsilon)\) 一般与 \(\varepsilon\) 有关。
+
+\begin{example}
+用 \(\varepsilon\text{-}\delta\) 证明 \(\displaystyle \lim_{x \to a} x^2 = a^2\)。
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，取 \(\delta = \min\left\{\dfrac{\varepsilon}{2|a| + 1},\; 1\right\}\)。
+
+当 \(0 < |x - a| < \delta\) 时，\(|x| < |a| + \delta \leq |a| + 1\)，故
+\[
+|x^2 - a^2| = |x - a| \cdot |x + a| \leq |x - a| \cdot (|x| + |a|)
+< \delta \cdot (|a| + 1 + |a|) < \frac{\varepsilon}{2|a| + 1} \cdot (2|a| + 1) = \varepsilon
+\]
+\end{proof}
+\end{example}
+
+\textbf{2. 归结原则（Heine 定理）：}\(\displaystyle \lim_{x \to a} f(x) = A\)
+\(\Leftrightarrow\) 对任一序列 \(\{x_n\} \subseteq O^-(a)\) 且 \(x_n \to a\)，都有 \(f(x_n) \to A\)。
+
+\textbf{应用：}证 \(\displaystyle \lim_{x \to \infty} \sin x\) 不存在。取 \(x_n = \frac{\pi}{2} + 2n\pi\)（\(f = 1\)）和 \(x_n = 2n\pi\)（\(f = 0\)），两子列极限不同。
+
+\textbf{3--6. 极限性质：}唯一性、局部有界性、保号性、四则运算（拆分后需确保极限存在）。
+
+\textbf{7. 线性性：}\(\displaystyle \lim_{x \to a} [\lambda f(x) + \mu g(x)] = \lambda \lim_{x \to a} f(x) + \mu \lim_{x \to a} g(x)\)。
+
+\textbf{有理函数的极限：}\(\displaystyle \lim_{x \to a} \frac{P(x)}{Q(x)} = \frac{P(a)}{Q(a)}\)（若 \(Q(a) \neq 0\)），极限与函数运算可交换次序。
+
+\section{三、渐近线}
+
+\[
+\lim_{x \to \infty} \frac{|kx + b - f(x)|}{\sqrt{1 + k^2}} = 0
+\]
+
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/41_0_1838_496_365_0.jpg}
+\end{center}
+
+\textbf{分类：}
+\begin{enumerate}
+\item \textbf{水平渐近线：}若 \(\displaystyle \lim_{x \to \infty} f(x) = b\)，则 \(y = b\) 为水平渐近线。
+\item \textbf{垂直渐近线：}若 \(\displaystyle \lim_{x \to a^+} f(x) = \infty\)（或 \(a^-\)），则 \(x = a\) 为垂直渐近线。
+\item \textbf{斜渐近线：}\(y = kx + b\)，其中
+\[
+k = \lim_{x \to +\infty} \frac{f(x)}{x},\qquad b = \lim_{x \to +\infty} [f(x) - kx]
+\]
+\end{enumerate}
+
+\begin{remark}
+\begin{enumerate}
+\item 若 \(f(x)\) 在每一点都有定义，则无垂直渐近线。
+\item 水平/斜渐近线最多有 2 条（水平 + 斜 \(\leq 2\)）。
+\item 垂直渐近线可以有无数条。
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\(y = \sqrt{x^2 + 1}\) 的渐近线：\(k = \lim_{x \to +\infty} \frac{\sqrt{x^2+1}}{x} = 1\)，\(b = \lim_{x \to +\infty} (\sqrt{x^2+1} - x) = 0\)，\(\therefore y = x\)（\(x \to +\infty\)）；同理 \(x \to -\infty\) 时 \(y = -x\)。
+\end{example}
+
+\section{四、思考题}
+
+\begin{enumerate}
+\item 求 \(\displaystyle \lim_{x \to +\infty} \left(1 + \frac{2}{x}\right)^{-x} = \lim_{x \to +\infty} \left[\left(1 + \frac{2}{x}\right)^{\frac{x}{2}}\right]^{-2} = e^{-2} = \frac{1}{e^2}\)。
+
+\item 求 \(\displaystyle \lim_{x \to +\infty} \left(\cos\frac{1}{x}\right)^{x^2}\)。
+
+\textbf{解：}令 \(t = \frac{1}{x} \to 0^+\)：
+\[
+\lim_{t \to 0^+} (\cos t)^{\frac{1}{t^2}} = \lim_{t \to 0^+} \left(1 - \sin^2 t\right)^{\frac{1}{t^2}}
+= \lim_{t \to 0^+} \left[\left(1 - \sin^2 t\right)^{-\frac{1}{\sin^2 t}}\right]^{-\frac{\sin^2 t}{t^2}} = e^{-1/2}
+\]
+（其中 \(\frac{\sin^2 t}{t^2} \to 1\)，\(\left(1 - \sin^2 t\right)^{-\frac{1}{\sin^2 t}} \to e\)，故指数 \(= -\frac{1}{2}\)。）
+
+\item 设 \(f(x)\) 在 \([a, +\infty)\) 上单调递增，\(\{x_n\}\) 满足 \(x_n \to +\infty\) 且 \(\displaystyle \lim_{n \to +\infty} f(x_n) = A\)。
+\begin{enumerate}
+\item 求证：\(\displaystyle \lim_{x \to +\infty} f(x) = A\)（\(A\) 可为 \(+\infty\)）。
+\item 若另有 \(\displaystyle \lim_{n \to +\infty} f(y_n) = \lim_{x \to +\infty} f(x)\)，求证 \(y_n \to +\infty\)。
+\end{enumerate}
+
+\begin{proof}
+先考虑 \(A\) 有限。先证 \(f(x) < A\)（\(\forall x \in [a, +\infty)\)）：否则 \(\exists x_0\)，s.t. \(f(x_0) \geq A\)。当 \(x_n > x_0\) 时 \(f(x_n) \geq f(x_0) \geq A\)，与 \(f(x_n) \to A\) 矛盾（因 \(f(x_n)\) 还可取 \(>A\) 的值）。
+
+\(\forall \varepsilon > 0\)，\(\exists N\)，s.t. \(n > N\) 时 \(A - f(x_n) < \varepsilon\)。取 \(X = x_{N+1}\)，当 \(x > X\) 时，由单调性 \(A - f(x) \leq A - f(x_{N+1}) < \varepsilon\)。又 \(f(x) < A\)，故 \(|f(x) - A| = A - f(x) < \varepsilon\)。\(\therefore \lim_{x \to +\infty} f(x) = A\)。
+
+\(A = +\infty\) 时类似可证。
+\end{proof}
+\end{enumerate}
+
+% =============================================
+\chapter{10.17 连续函数}
+
+\section{一、连续与间断}
+
+\subsection{定义}
+
+设 \(f(x)\) 在 \(O(x_0)\) 上有定义。若
+\[
+\lim_{x \to x_0} f(x) = f(x_0)
+\]
+则称 \(f(x)\) 在 \(x_0\) 点处\textbf{连续}，\(x_0\) 称为连续点。否则称 \(f(x)\) 在 \(x_0\) 点处\textbf{间断}，\(x_0\) 称为间断点。
+
+\textbf{\(\varepsilon\text{-}\delta\) 语言：}\(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，s.t. \(\forall x \in O(x_0, \delta)\)，\(|f(x) - f(x_0)| < \varepsilon\)。
+
+\subsection{区间上的连续性}
+
+\begin{itemize}
+\item \textbf{开区间：}若 \(\forall x_0 \in (a,b)\)，\(f(x)\) 在 \(x_0\) 处连续，则称 \(f(x)\) 在 \((a,b)\) 上连续，记作 \(f(x) \in C(a,b)\)。
+\item \textbf{左右连续：}若 \(\displaystyle \lim_{x \to x_0^-} f(x) = f(x_0)\)，称左连续；若 \(\displaystyle \lim_{x \to x_0^+} f(x) = f(x_0)\)，称右连续。
+\item \textbf{闭区间：}若 \(f(x)\) 在 \((a,b)\) 连续，且在 \(a\) 处右连续、\(b\) 处左连续，则称 \(f(x)\) 在 \([a,b]\) 上连续，记作 \(f(x) \in C[a,b]\)。
+\end{itemize}
+
+\textbf{核心：}\(\displaystyle \lim_{x \to x_0} f(x) = f(x_0) = f\!\left(\lim_{x \to x_0} x\right)\)——对连续函数，极限运算和 \(f\) 可交换次序。
+
+\textbf{数列形式（Heine）：}若 \(f \in C[a,b]\)，则对任意 \(\{x_n\} \subseteq [a,b]\) 且 \(x_n \to x_0\)，\(\displaystyle \lim_{n \to \infty} f(x_n) = f\!\left(\lim_{n \to \infty} x_n\right)\)。
+
+\subsection{例题}
+
+\begin{example}
+Dirichlet 型函数 \(f(x) = \begin{cases} x, & x \in \mathbb{Q} \\ 0, & x \notin \mathbb{Q} \end{cases}\)。\(x=0\) 处连续（\(\lim_{x\to 0} f(x) = 0 = f(0)\)），其余点均间断。
+\end{example}
+
+\begin{example}
+Riemann 函数 \(f(x) = \begin{cases} \frac{1}{q}, & x = \frac{p}{q}\text{（既约）} \\ 0, & x \notin \mathbb{Q} \end{cases}\)。\(\forall x_0 \in \mathbb{R}\)，\(\displaystyle \lim_{x \to x_0} f(x) = 0\)。\(f(x)\) 在 \(0\) 和无理数点连续，在非零有理数点间断。
+
+\begin{proof}
+设 \(x_0 \in (k-1, k+1)\)（\(k\) 为最近整数）。\(\forall \varepsilon > 0\)，取 \(N\) 使 \(\frac{1}{N} < \varepsilon\)。
+
+\((k-1, k+1)\) 中满足 \(1 \leq q \leq N\) 的有理数 \(\frac{p}{q}\) 仅有有限个。取其中距 \(x_0\) 最近者 \(x^* \neq x_0\)，令 \(\delta = |x^* - x_0|\)。
+
+当 \(0 < |x - x_0| < \delta\) 时，\(|f(x)| < \frac{1}{N} < \varepsilon\)（有理数分母 \(> N\)，或为无理数取 \(0\)）。\(\therefore \lim_{x \to x_0} f(x) = 0\)。
+\end{proof}
+\end{example}
+
+\subsection{间断点的分类}
+
+\begin{enumerate}
+\item \textbf{可去间断点：}\(\displaystyle \lim_{x \to x_0} f(x)\) 存在，但 \(\neq f(x_0)\)（或 \(f(x_0)\) 未定义）。可通过重定义 \(f(x_0)\) 使其连续。
+\item \textbf{第一类间断点：}左右极限均存在但不相等（跳跃间断点）。
+\item \textbf{第二类间断点：}左右极限至少有一个不存在（如振荡间断）。
+\end{enumerate}
+
+\begin{example}
+\begin{enumerate}
+\item \(f(x) = \sin\frac{1}{x}\)，\(x=0\)：\(\lim_{x\to 0} \sin\frac{1}{x}\) 不存在，第二类间断点。
+\item \(f(x) = x \sin\frac{1}{x}\)，\(x=0\)：\(\lim_{x\to 0} x\sin\frac{1}{x} = 0\)，可去间断点（补充定义 \(f(0)=0\) 即连续）。
+\item \(f(x) = [x]\)，\(x=n\)：左右极限分别为 \(n-1\) 和 \(n\)，第一类间断点。
+\end{enumerate}
+\end{example}
+
+\textbf{定理（单调函数的间断）：}单调函数不存在第二类间断点，仅有连续点或第一类间断点。
+
+若 \(f \uparrow\)，则 \(\displaystyle \lim_{x \to x_0^-} f(x) =: f(x_0^-) \leq f(x_0) \leq f(x_0^+) := \lim_{x \to x_0^+} f(x)\)（记号表示极限值，非函数值）。
+
+\section{二、连续函数的运算}
+
+\begin{enumerate}
+\item \textbf{四则运算：}连续函数的加减乘除（除数非零）仍连续。
+\item \textbf{复合：}若 \(g(x)\) 在 \(x_0\) 连续，\(f(t)\) 在 \(t_0 = g(x_0)\) 连续，则 \(f \circ g(x)\) 在 \(x_0\) 连续。
+
+\begin{proof}
+由极限运算性质：\(\displaystyle \lim_{x \to x_0} f(g(x)) = f\!\left(\lim_{x \to x_0} g(x)\right) = f(g(x_0))\)。
+\end{proof}
+\end{enumerate}
+
+\section{三、介值定理（零点存在定理）}
+
+\textbf{引理（零点存在定理）：}若 \(f(x) \in C[a,b]\)，且 \(f(a) \cdot f(b) < 0\)，则 \(\exists \xi \in (a,b)\)，s.t. \(f(\xi) = 0\)。
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/46_1079_899_689_471_0.jpg}
+\end{center}
+
+\begin{proof}
+不妨设 \(f(a) < 0\)，\(f(b) > 0\)。用二分法（闭区间套）：
+
+记 \([a_1, b_1] = [a, b]\)，令 \(x_1 = \frac{a_1 + b_1}{2}\)。
+\begin{itemize}
+\item 若 \(f(x_1) = 0\)，取 \(\xi = x_1\)，证毕。
+\item 若 \(f(x_1) > 0\)，令 \([a_2, b_2] = [a_1, x_1]\)；
+\item 若 \(f(x_1) < 0\)，令 \([a_2, b_2] = [x_1, b_1]\)。
+\end{itemize}
+重复操作。若某步找到零点则止；否则构造出闭区间套 \(\{[a_n, b_n]\}\)：
+\[
+b_n - a_n = \frac{b-a}{2^{n-1}} \to 0,\qquad f(a_n) < 0,\; f(b_n) > 0
+\]
+设 \(\displaystyle \lim a_n = \lim b_n = \xi\)。由连续性：
+\[
+0 \geq \lim_{n \to +\infty} f(a_n) = f(\xi) = \lim_{n \to +\infty} f(b_n) \geq 0 \;\Longrightarrow\; f(\xi) = 0
+\]
+\end{proof}
+
+\textbf{介值定理：}若 \(f(x) \in C[a,b]\)，则 \(f(x)\) 在 \([a,b]\) 上可取到 \(f(a)\) 与 \(f(b)\) 之间的任意值。
+
+\begin{proof}
+\(\forall \eta \in [f(a), f(b)]\)（或 \([f(b), f(a)]\)），令 \(g(x) = f(x) - \eta\)。则 \(g \in C[a,b]\) 且 \(g(a) \cdot g(b) = (f(a)-\eta)(f(b)-\eta) < 0\)（若 \(\eta\) 严格在之间）。由零点定理，\(\exists \xi\)，s.t. \(g(\xi) = 0 \Rightarrow f(\xi) = \eta\)。
+\end{proof}
+
+\section{四、闭区间上连续函数的性质}
+
+\subsection{1. 有界性}
+
+\textbf{定理：}若 \(f(x) \in C[a,b]\)，则 \(f(x)\) 在 \([a,b]\) 上有界。
+
+\begin{proof}
+（三种证法：有限覆盖 / B-W 反证 / 区间套反证。此处用有限覆盖。）
+
+先向左右延拓：令 \(\widetilde{f}(x) = f(a)\)（\(x < a\)），\(\widetilde{f}(x) = f(b)\)（\(x > b\)），使 \(\widetilde{f}\) 在 \((a-\eta, b+\eta)\) 上连续。
+
+\(\forall x_0 \in (a-\eta, b+\eta)\)，由连续性 \(\exists \delta_{x_0} > 0\)，s.t. \(\forall x \in O(x_0, \delta_{x_0})\)，\(|\widetilde{f}(x) - \widetilde{f}(x_0)| < 1\)，即 \(|\widetilde{f}(x)| < 1 + |\widetilde{f}(x_0)|\)。
+
+\(\{O(x_0, \delta_{x_0}) \mid x_0 \in (a-\eta, b+\eta)\}\) 是 \([a,b]\) 的开覆盖。由有限覆盖定理，存在有限子覆盖覆盖 \([a,b]\)。
+
+取 \(M = \max_{1 \leq i \leq n} (1 + |\widetilde{f}(x_0^{(i)})|)\)，则 \(\forall x \in [a,b]\)，\(|f(x)| < M\)。
+\end{proof}
+
+\subsection{2. 最大最小值}
+
+\textbf{定理：}闭区间上的连续函数可以取到最大最小值（即上确界和下确界也是函数值）。
+
+\begin{proof}
+（反证法）设 \(M = \sup_{x \in [a,b]} f(x)\)。假设 \(\forall x \in [a,b]\)，\(f(x) < M\)。
+
+令 \(\varphi(x) = \dfrac{1}{M - f(x)}\)。由连续函数四则运算，\(\varphi(x) \in C[a,b]\)，故 \(\varphi(x)\) 有界：\(\exists \mu > 0\)，s.t. \(\varphi(x) \leq \mu\)。
+
+即 \(\dfrac{1}{M - f(x)} \leq \mu \Rightarrow f(x) \leq M - \dfrac{1}{\mu} < M\)，与 \(M = \sup f\) 矛盾。
+
+\(\therefore \exists x^* \in [a,b]\)，s.t. \(f(x^*) = M\)。同理可证最小值。
+\end{proof}
+
+\subsection{3. 一致连续性（Cantor 定理）}
+
+\textbf{定义：}设 \(f(x)\) 在 \(X\) 上有定义。若 \(\forall \varepsilon > 0\)，\(\exists \delta = \delta(\varepsilon) > 0\)，s.t. \(\forall x', x'' \in X\) 且 \(|x' - x''| < \delta\)，有 \(|f(x') - f(x'')| < \varepsilon\)，则称 \(f(x)\) 在 \(X\) 上\textbf{一致连续}。
+
+\begin{remark}
+区别于普通连续：普通连续的 \(\delta\) 依赖于 \(\varepsilon\) 和点 \(x_0\)；一致连续的 \(\delta\) 仅依赖于 \(\varepsilon\)（对整个 \(X\) 统一）。
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+\item \(f(x) = \sqrt{x}\) 在 \([0, +\infty)\) 上一致连续。\(\forall \varepsilon > 0\)，取 \(\delta = \varepsilon^2\)。
+\item \(f(x) = \frac{1}{x}\) 在 \((0, +\infty)\) 上不一致连续。取 \(\varepsilon_0 = 1\)，\(\forall \delta > 0\)，取 \(x_1 = \frac{\delta}{2}\)，\(x_2 = \delta\)，则 \(|f(x_1) - f(x_2)| = \frac{1}{\delta} \geq 1\)。
+\item \(f(x) = x^2\) 在 \(\mathbb{R}\) 上不一致连续，但在 \([0,1]\) 上一致连续（是否一致连续与区间选取有关！）。
+\end{enumerate}
+\end{example}
+
+\textbf{Cantor 定理：}闭区间上连续函数必一致连续。
+
+\begin{proof}
+（反证法 + B-W 定理）假设 \(f(x)\) 在 \([a,b]\) 上不一致连续，则
+\[
+\exists \varepsilon_0 > 0,\; \forall \delta > 0,\; \exists x', x'' \in [a,b] \text{ 且 } |x' - x''| < \delta,\; |f(x') - f(x'')| \geq \varepsilon_0
+\]
+取 \(\delta = 1\)：\(\exists \alpha_1, \beta_1\)，\(|\alpha_1 - \beta_1| < 1\)，\(|f(\alpha_1) - f(\beta_1)| \geq \varepsilon_0\)。
+
+取 \(\delta = \frac{1}{2}\)：\(\exists \alpha_2, \beta_2\)，\(|\alpha_2 - \beta_2| < \frac{1}{2}\)，\(|f(\alpha_2) - f(\beta_2)| \geq \varepsilon_0\)。
+
+一般地，取 \(\delta = \frac{1}{n}\)：\(\exists \alpha_n, \beta_n \in [a,b]\)，\(|\alpha_n - \beta_n| < \frac{1}{n}\)，\(|f(\alpha_n) - f(\beta_n)| \geq \varepsilon_0\)。
+
+\(\{\alpha_n\} \subseteq [a,b]\) 有界，由 B-W 定理有收敛子列 \(\{\alpha_{n_k}\}\)：\(\displaystyle \lim_{k \to +\infty} \alpha_{n_k} = x^* \in [a,b]\)。
+
+由 \(|\alpha_n - \beta_n| < \frac{1}{n}\)，\(\displaystyle \lim_{k \to +\infty} \beta_{n_k} = x^*\) 亦然。
+
+由连续性：\(\displaystyle \lim_{k \to +\infty} |f(\alpha_{n_k}) - f(\beta_{n_k})| = |f(x^*) - f(x^*)| = 0\)。
+
+但这与构造中 \(|f(\alpha_n) - f(\beta_n)| \geq \varepsilon_0\)（\(\forall n\)）矛盾。
+\end{proof}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/51_1182_1583_552_166_0.jpg}
+\end{center}
+
+（另一种证法：有限覆盖定理，与有界性证明类似，利用局部连续性 + 有限覆盖得到全局一致连续性。）
+
+% =============================================
+\chapter{10.21 习题课}
+
+\section{思考题}
+
+\begin{enumerate}
+
+\item 设 \(f(x)\) 在 \([0, +\infty)\) 上连续，且满足 \(f(x^2) = f(x)\)。求证：\(f(x)\) 为常数。
+
+\begin{proof}
+对 \(x > 0\)：\(f(x) = f(x^{\frac{1}{2}}) = f(x^{\frac{1}{4}}) = \cdots = f(x^{\frac{1}{2^n}})\)。
+
+由连续性：\(\displaystyle f(x) = \lim_{n \to \infty} f(x^{\frac{1}{2^n}}) = f\!\left(\lim_{n \to \infty} x^{\frac{1}{2^n}}\right) = f(1)\)。
+
+\(f(0) = \lim_{x \to 0^+} f(x) = f(1)\)。\(\therefore f(x) \equiv f(1)\)（常数）。
+\end{proof}
+
+\item 设 \(f(x)\) 在 \([0, +\infty)\) 上连续，且 \(0 \leq f(x) \leq x\)（\(x \geq 0\)）。若 \(a_1 \geq 0\)，\(a_{n+1} = f(a_n)\)（\(n = 1,2,\ldots\)）。求证：
+\begin{enumerate}
+\item \(\displaystyle \lim_{n \to +\infty} a_n\) 存在；
+\item 设极限为 \(l\)，则 \(f(l) = l\)；
+\item 若条件改为 \(0 \leq f(x) < x\;(x > 0)\)，则 \(l = 0\)。
+\end{enumerate}
+
+\begin{proof}
+(1) \(a_{n+1} = f(a_n) \leq a_n\)，又 \(a_n \geq 0\)，故 \(\{a_n\}\) 单调递减有下界 \(\Rightarrow\) 极限存在。
+
+(2) 由连续性：\(l = \lim a_{n+1} = \lim f(a_n) = f(\lim a_n) = f(l)\)。
+
+(3) 若 \(l > 0\)，则 \(f(l) = l\)，与 \(f(x) < x\;(x > 0)\) 矛盾。\(\therefore l = 0\)。
+\end{proof}
+
+\item 设 \(f(x)\) 在 \((a,b)\) 上只有第一类间断点，且对 \(\forall x,y \in (a,b)\)，有 \(f\!\left(\frac{x+y}{2}\right) \leq \frac{f(x) + f(y)}{2}\)（中点凸性）。求证：\(f(x)\) 在 \((a,b)\) 上连续。
+
+\begin{proof}
+（反证）假设 \(\exists x_0\) 为间断点，由于只有第一类间断点，\(f(x_0^-) \neq f(x_0^+)\)。
+
+取 \(\varepsilon > 0\) 充分小，由中点凸性迭代可得：
+\[
+f\!\left(x_0 \pm \frac{\varepsilon}{2}\right) \leq \frac{1}{2}\left(f(x_0 \pm \varepsilon) + f(x_0)\right)
+\]
+反复应用可导出 \(f(x_0^+) \leq f(x_0^-)\) 且 \(f(x_0^-) \leq f(x_0^+)\)，故 \(f(x_0^+) = f(x_0^-)\)，矛盾。
+
+\(\therefore f(x)\) 在 \((a,b)\) 连续。
+\end{proof}
+
+\item 求证：\(x^3 + px + q = 0\)（\(p,q \in \mathbb{R}\)）至少有一个实根。
+
+\begin{proof}
+令 \(f(x) = x^3 + px + q\)，则 \(f \in C(\mathbb{R})\)。\(\displaystyle \lim_{x \to -\infty} f(x) = -\infty\)，\(\displaystyle \lim_{x \to +\infty} f(x) = +\infty\)。由介值定理，\(\exists \xi\)，s.t. \(f(\xi) = 0\)。
+\end{proof}
+
+\item 设 \(f(x) \in C(-\infty, +\infty)\)，且 \(\forall x,y\)，\(|f(x) - f(y)| \leq k|x - y|\)（\(0 \leq k < 1\)，Lipschitz 条件）。求证：
+\begin{enumerate}
+\item \(g(x) = kx - f(x)\) 单调上升；
+\item \(\exists \xi \in (-\infty, +\infty)\)，s.t. \(f(\xi) = \xi\)（不动点）。
+\end{enumerate}
+
+\begin{proof}
+(1) 设 \(x < y\)：\(g(y) - g(x) = k(y-x) - (f(y) - f(x)) \geq k|y-x| - k|y-x| = 0\)。\(\therefore g \uparrow\)。
+
+(2) 任取 \(x_0\)，定义 \(x_{n+1} = f(x_n)\)。可证 \(\{x_n\}\) 为 Cauchy 列（压缩映射），极限 \(\xi\) 满足 \(f(\xi) = \xi\)。
+\end{proof}
+
+\end{enumerate}
+
+% =============================================
+\chapter{10.24 反函数与指数函数}
+
+\section{一、区间上连续函数的性质}
+
+\textbf{区间的刻画：}\(J \subseteq \mathbb{R}\) 是一个区间 \(\Leftrightarrow\) \(\forall \alpha, \beta \in J\)（\(\alpha \leq \beta\)），\(\forall \gamma \in [\alpha, \beta]\)，有 \(\gamma \in J\)（即区间中任意两点之间的点均属于该区间）。
+
+\begin{proof}
+\(\Rightarrow\)：显然。
+
+\(\Leftarrow\)：令 \(A = \inf J\)，\(B = \sup J\)。由确界定义，\(\forall y \in (A,B)\)，\(\exists \alpha, \beta \in J\)，s.t. \(A \leq \alpha < y < \beta \leq B\)。由条件 \(y \in J\)。由 \(y\) 的任意性，\([A,B] \subseteq J \subseteq [A,B]\)，故 \(J\) 是一个区间。
+\end{proof}
+
+\textbf{定理1：}若 \(f(x)\) 在区间 \(I\) 上连续，则 \(J = f(I) = \{f(x) \mid x \in I\}\) 也是一个区间。
+
+\begin{proof}
+\(\forall A, B \in J\)（设 \(A < B\)），\(\exists a, b \in I\)，s.t. \(f(a) = A\)，\(f(b) = B\)。由介值定理，\(\forall y \in (A,B)\)，\(\exists c\) 介于 \(a,b\) 之间，s.t. \(f(c) = y\)。由区间刻画引理，\(J\) 是一个区间。
+\end{proof}
+
+\textbf{注：}逆命题不成立。例：\(f(x) = \begin{cases} \sin\frac{1}{x}, & x \neq 0 \\ 0, & x = 0 \end{cases}\)，\(I = [-1,1]\)，\(f(I) = [-1,1]\) 是区间，但 \(f(x)\) 在 \(x=0\) 处不连续。
+
+\textbf{定理2：}设 \(f(x)\) 在区间 \(I\) 上单调，则 \(f \in C(I) \Leftrightarrow f(I)\) 也是一个区间。
+
+\begin{proof}
+\(\Rightarrow\)：由定理1即得。
+
+\(\Leftarrow\)：不妨设 \(f \uparrow\)。反证，若 \(f\) 在 \(x_0\) 不连续，由于单调，左右极限 \(f(x_0^-), f(x_0^+)\) 存在。若 \(f(x_0^-) < f(x_0)\)，由单调性：\(\forall a < x_0\)，\(f(a) \leq f(x_0^-)\)；\(\forall b > x_0\)，\(f(b) \geq f(x_0)\)。故 \((f(x_0^-), f(x_0))\) 中的值无法取到，与 \(f(I)\) 是区间矛盾。
+\end{proof}
+
+\section{二、反函数的连续性}
+
+\textbf{定理3：}设 \(f(x) \in C(a,b)\) 且严格单调上升。记 \(\alpha = \inf f\)，\(\beta = \sup f\)，则 \(f\) 在 \((a,b)\) 上存在反函数 \(\varphi(y)\)，且 \(\varphi(y)\) 在 \((\alpha, \beta)\) 上严格单调上升且连续。
+
+\begin{proof}
+由严格单调性和介值定理，\(f: (a,b) \to (\alpha, \beta)\) 是双射，故反函数 \(\varphi(y)\) 存在。\(\forall y \in (\alpha, \beta)\)，\(\exists x \in (a,b)\)，s.t. \(f(x) = y\)，即 \(x = \varphi(y)\)。
+
+由 \(y\) 的任意性和 \(\varphi\) 的单调性，\(\varphi((\alpha, \beta)) = (a,b)\) 是一个区间。由定理2（单调 + 像为区间 \(\Rightarrow\) 连续），\(\varphi(y) \in C(\alpha, \beta)\)。
+\end{proof}
+
+\textbf{注：}(1) 可推广到闭区间；(2) 严格单调下降也成立；(3) \(a,b\) 可以是 \(\pm\infty\)。
+
+\textbf{结论：}区间上严格单调的连续函数存在严格单调且连续的反函数。
+
+\section{三、指数函数与对数函数}
+
+\subsection{1. 幂函数的拓展}
+
+\textbf{整数次幂：}\(n \in \mathbb{N}^*\)，\(y = x^n\) 在 \([0, +\infty)\) 上严格上升，将 \([0, +\infty)\) 映射到 \([0, +\infty)\)。反函数 \(y = x^{1/n}\) 在 \([0, +\infty)\) 上严格上升且连续。
+
+\textbf{分数次幂：}对 \(a \geq 0\)，\(m,n \in \mathbb{N}\)，定义 \(a^{m/n} := (a^{1/n})^m\)，\(a^{-m/n} := 1 / (a^{1/n})^m\;(a \neq 0)\)，\(a^0 = 1\)。
+
+\textbf{有理次幂的性质：}对 \(a > 0\)，\(p,q \in \mathbb{Q}\)：\(a^{p+q} = a^p \cdot a^q\)；若 \(a > 1\)，\(p > q \Leftrightarrow a^p > a^q\)。
+
+\subsection{2. 实数次幂的定义}
+
+\[
+a^x := \sup\{a^r \mid r \in \mathbb{Q},\; r \leq x\} \quad (a > 0,\; x \in \mathbb{R})
+\]
+
+\textbf{引理1：}设 \(a > 1\)，\(\forall r \in \mathbb{Q}\) 且 \(|r| < 1\)，有 \(|a^r - 1| \leq |r|(a-1)\)。
+
+\textbf{引理2：}设 \(a > 0\)，\(\{p_n\}, \{q_n\} \subseteq \mathbb{Q}\) 且 \(p_n, q_n \to x\)，则 \(\{a^{p_n}\}\) 收敛，且 \(\lim a^{p_n} = \lim a^{q_n}\)。
+
+\begin{proof}
+仅证 \(a > 1\) 情形。\(\{p_n\}\) 是 Cauchy 列且有界（设 \(p_n \leq M\)）。\(\forall \varepsilon \in (0,1)\)，\(\exists N\)，s.t. \(\forall m,n > N\)，\(|p_m - p_n| < \varepsilon < 1\)。
+
+由引理1：\(|a^{p_m} - a^{p_n}| = a^{p_n} |a^{p_m - p_n} - 1| \leq a^M (a-1)|p_m - p_n| < a^M(a-1)\varepsilon\)。故 \(\{a^{p_n}\}\) 为 Cauchy 列，收敛。
+
+同理可证 \(\lim a^{p_n} = \lim a^{q_n}\)（利用 \(p_n - q_n \to 0\)）。
+\end{proof}
+
+由此，对 \(\forall x \in \mathbb{R}\)，取任一有理数列 \(\{q_n\} \to x\)，可定义 \(a^x := \displaystyle \lim_{n \to +\infty} a^{q_n}\)（存在且唯一）。
+
+\textbf{实数次幂的性质：}对 \(a > 0\)，\(\forall x,y \in \mathbb{R}\)：
+\begin{enumerate}
+\item \(a^{x+y} = a^x \cdot a^y\)；
+\item \(a > 1\) 时 \(x > y \Leftrightarrow a^x > a^y\)；\(a \in (0,1)\) 时 \(x > y \Leftrightarrow a^x < a^y\)。
+\end{enumerate}
+
+\subsection{3. 指数函数的连续性}
+
+\textbf{引理3：}对 \(a > 1\)，\(\forall x,y \in \mathbb{R}\) 且 \(|x-y| < 1\)，\(|a^x - a^y| \leq a^y (a-1)|x-y|\)。
+
+\textbf{定理4：}\(a^x\) 在 \((-\infty, +\infty)\) 上连续。\(a > 1\) 时严格上升，\(\displaystyle \lim_{x \to +\infty} a^x = +\infty\)，\(\displaystyle \lim_{x \to -\infty} a^x = 0\)；\(a \in (0,1)\) 时严格下降。
+
+\begin{proof}
+\(\forall x_0 \in \mathbb{R}\)，\(\forall \{x_n\} \to x_0\)。\(n\) 充分大时 \(|x_n - x_0| < 1\)，由引理3：\(|a^{x_n} - a^{x_0}| \leq a^{x_0}(a-1)|x_n - x_0| \to 0\)。\(\therefore a^x \in C(\mathbb{R})\)。
+\end{proof}
+
+\subsection{4. 对数函数}
+
+\(a^x\)（\(a > 0, a \neq 1\)）严格单调且连续，故存在反函数，记作 \(\log_a y\)（\(y > 0\)），也是严格单调且连续的。
+
+幂函数：\(x^a = e^{a \ln x}\)。
+
+\textbf{结论：}基本初等函数在其定义域上连续，初等函数在其定义域上连续。
+
+% =============================================
+\chapter{10.28}
+
+\section{一、重要极限的推论}
+
+由 \(\displaystyle \lim_{x \to 0} (1+x)^{\frac{1}{x}} = e\)，取对数：
+\[
+\lim_{x \to 0} \frac{\ln(1+x)}{x} = 1
+\]
+
+对其他底数：\(\displaystyle \lim_{x \to 0} \frac{\log_b(1+x)}{x} = \frac{1}{\ln b}\)。
+
+令 \(\beta = \ln(1+\alpha)\)，则 \(\alpha \to 0\) 时 \(\beta \to 0\)，\(e^{\beta} = 1+\alpha\)，得：
+\[
+\lim_{\alpha \to 0} \frac{e^{\alpha} - 1}{\alpha} = 1
+\]
+
+对其他底数：\(\displaystyle \lim_{x \to 0} \frac{b^x - 1}{x} = \ln b\)。
+
+推广到幂函数：
+\[
+\lim_{\alpha \to 0} \frac{(1+\alpha)^{\mu} - 1}{\alpha}
+= \lim_{\alpha \to 0} \frac{e^{\mu\ln(1+\alpha)} - 1}{\mu\ln(1+\alpha)} \cdot \frac{\mu\ln(1+\alpha)}{\alpha} = \mu
+\]
+
+\textbf{总结——三个基本极限：}
+\[
+\boxed{\lim_{x \to 0} \frac{\ln(1+x)}{x} = 1},\qquad
+\boxed{\lim_{x \to 0} \frac{e^x - 1}{x} = 1},\qquad
+\boxed{\lim_{x \to 0} \frac{(1+x)^{\mu} - 1}{x} = \mu}
+\]
+
+\section{二、变量的阶（无穷小比较）}
+
+设 \(f(x), g(x) \to 0\)（\(x \to x_0\)）。
+
+\begin{itemize}
+\item \textbf{等价无穷小：}若 \(\displaystyle \lim_{x \to x_0} \frac{f(x)}{g(x)} = 1\)，记作 \(f(x) \sim g(x)\)（\(x \to x_0\)）。
+\item \textbf{同阶无穷小：}若极限为 \(A \neq 0\)，记作 \(f(x) \sim A \cdot g(x)\)。
+\item \textbf{高阶无穷小：}若极限为 \(0\)，记作 \(f(x) = o(g(x))\)。
+\end{itemize}
+
+\textbf{常见等价无穷小（\(x \to 0\)）：}
+\[
+\begin{aligned}
+\sin x &\sim x, &
+\tan x &\sim x, \\
+1 - \cos x &\sim \frac{x^2}{2}, &
+\ln(1+x) &\sim x, \\
+e^x - 1 &\sim x, &
+(1+x)^{\mu} - 1 &\sim \mu x
+\end{aligned}
+\]
+
+更精确的估计：
+\[
+\begin{aligned}
+\sin x &= x + o(x), &
+\tan x &= x + o(x), \\
+\cos x &= 1 - \frac{x^2}{2} + o(x^2), &
+e^x &= 1 + x + o(x), \\
+\ln(1+x) &= x + o(x), &
+(1+x)^{\mu} &= 1 + \mu x + o(x)
+\end{aligned}
+\]
+
+\textbf{无穷小量的四则运算：}若 \(f(x) \to 0\)，\(g(x) \to 0\)，则 \(f \pm g, f \cdot g\) 仍是无穷小。等价无穷小可在乘除极限中替换，但加减运算中需谨慎（除非是高阶无穷小加减）。
+
+\begin{example}
+\(\displaystyle \lim_{x \to 0} \frac{\cos[(1+x)^{\mu} - 1] - 1}{x^2}\)：
+
+\((1+x)^{\mu} - 1 \sim \mu x \to 0\)，故 \(\cos[(1+x)^{\mu} - 1] = 1 - \frac{1}{2}[(1+x)^{\mu} - 1]^2 + o(((1+x)^{\mu} - 1)^2)\)。
+
+\((1+x)^{\mu} - 1 = \mu x + o(x)\)，故 \([(1+x)^{\mu} - 1]^2 = \mu^2 x^2 + o(x^2)\)。
+
+\(\cos[(1+x)^{\mu} - 1] - 1 = -\frac{1}{2}\mu^2 x^2 + o(x^2)\)。\(\therefore\) 原式 \(= -\frac{1}{2}\mu^2\)。
+\end{example}
+
+% =============================================
+\section{三、导数与微分}
+
+\subsection{导数的定义}
+
+设 \(f(x)\) 在 \(O(x_0)\) 有定义。若
+\[
+\lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+\]
+存在（有限），称 \(f(x)\) 在 \(x_0\) 处\textbf{可导}，极限值称为 \(f(x)\) 在 \(x_0\) 处的\textbf{导数}，记作 \(f'(x_0)\) 或 \(\left.\frac{df}{dx}\right|_{x=x_0}\)。
+
+\textbf{几何意义：}曲线 \(y = f(x)\) 在 \(x_0\) 处的切线斜率。
+
+\textbf{物理意义：}\(s = s(t)\) 为位移，\(s'(t_0) = \displaystyle \lim_{h \to 0} \frac{s(t_0+h) - s(t_0)}{h}\) 为 \(t_0\) 时刻的瞬时速度。\(v'(t_0)\) 为瞬时加速度。
+
+\subsection{区间上的可导性}
+
+\begin{itemize}
+\item \textbf{开区间：}若 \(\forall x \in (a,b)\)，\(f\) 在 \(x\) 处可导，称 \(f\) 在 \((a,b)\) 上可导。
+\item \textbf{闭区间：}若 \(f\) 在 \((a,b)\) 可导，且在 \(a\) 处右导数存在、\(b\) 处左导数存在，称 \(f\) 在 \([a,b]\) 上可导。
+\end{itemize}
+
+导数是一种由极限定义的运算：\(x \mapsto f'(x)\)，由此定义\textbf{导函数} \(f'(x)\)。\(f(x)\) 称为 \(f'(x)\) 的\textbf{原函数}。
+
+\subsection{基本初等函数的导数}
+
+\begin{enumerate}
+\item \(f(x) \equiv C\)（常数）：\(f'(x) = \displaystyle \lim_{h \to 0} \frac{C - C}{h} = 0\)。
+
+\item \(f(x) = x^n\)（\(n \in \mathbb{N}\)）：
+\[
+f'(x) = \lim_{h \to 0} \frac{(x+h)^n - x^n}{h} = \lim_{h \to 0} \frac{nx^{n-1}h + \cdots}{h} = nx^{n-1}
+\]
+
+\item \(f(x) = \sin x\)：\(f'(x) = \displaystyle \lim_{h \to 0} \frac{\sin(x+h) - \sin x}{h} = \cos x\)。
+
+\item \(f(x) = \cos x\)：\(f'(x) = \displaystyle \lim_{h \to 0} \frac{\cos(x+h) - \cos x}{h} = -\sin x\)。
+
+\item \(f(x) = e^x\)：\(f'(x) = \displaystyle \lim_{h \to 0} \frac{e^{x+h} - e^x}{h} = e^x \lim_{h \to 0} \frac{e^h - 1}{h} = e^x\)。
+
+\textbf{推广：}\(f(x) = e^{\lambda x}\)：\(f'(x) = \lambda e^{\lambda x}\)。即若 \(f'(x) = \lambda f(x)\)，\(f\) 为指数函数（微分方程）。
+
+\item \(f(x) = a^x\)（\(a > 0\)）：
+\[
+f'(x) = \lim_{h \to 0} \frac{a^{x+h} - a^x}{h} = a^x \lim_{h \to 0} \frac{a^h - 1}{h} = a^x \ln a
+\]
+
+\item \(f(x) = \ln x\)：
+\[
+f'(x) = \lim_{h \to 0} \frac{\ln(x+h) - \ln x}{h} = \lim_{h \to 0} \frac{\ln(1 + \frac{h}{x})}{h} = \frac{1}{x}
+\]
+
+\textbf{推广：}\(f(x) = \log_a x = \frac{\ln x}{\ln a}\)：\(f'(x) = \dfrac{1}{x \ln a}\)。
+
+\item \(f(x) = x^{\alpha}\)（\(\alpha \in \mathbb{R}\)，\(x > 0\)）：
+\[
+f'(x) = \lim_{h \to 0} \frac{(x+h)^{\alpha} - x^{\alpha}}{h}
+= x^{\alpha} \lim_{h \to 0} \frac{(1 + \frac{h}{x})^{\alpha} - 1}{h} = \alpha x^{\alpha - 1}
+\]
+
+\textbf{例：}\((\sqrt{x})' = \frac{1}{2}x^{-1/2} = \frac{1}{2\sqrt{x}}\)，\((\frac{1}{\sqrt{x}})' = -\frac{1}{2}x^{-3/2}\)。
+\end{enumerate}
+
+\subsection{求导法则}
+
+\textbf{线性性：}若 \(f, g\) 在 \(x_0\) 处可导，则
+\[
+(cf)' = c f',\qquad (f \pm g)' = f' \pm g'
+\]
+
+\textbf{定理（可导 \(\Rightarrow\) 连续）：}若 \(f(x)\) 在 \(x_0\) 处可导，则 \(f(x)\) 在 \(x_0\) 处连续。逆不成立（如 \(|x|\) 在 \(x=0\)）。
+
+\begin{proof}
+\(f(x_0 + \Delta x) = f(x_0) + \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x} \cdot \Delta x\)。
+
+令 \(\Delta x \to 0\)：\(\lim f(x_0 + \Delta x) = f(x_0) + f'(x_0) \cdot 0 = f(x_0)\)。
+\end{proof}
+
+\subsection{单侧导数}
+
+\textbf{左导数：}\(\displaystyle f_-'(x_0) = \lim_{h \to 0^-} \frac{f(x_0 + h) - f(x_0)}{h}\)。
+
+\textbf{右导数：}\(\displaystyle f_+'(x_0) = \lim_{h \to 0^+} \frac{f(x_0 + h) - f(x_0)}{h}\)。
+
+\(f\) 在 \(x_0\) 可导 \(\Leftrightarrow\) \(f_-'(x_0), f_+'(x_0)\) 存在且相等。
+
+\begin{example}
+\(f(x) = \begin{cases} x\sin\frac{1}{x}, & x \neq 0 \\ 0, & x = 0 \end{cases}\) 在 \(x=0\) 处连续，但 \(\lim_{h \to 0} \frac{h\sin\frac{1}{h}}{h} = \lim_{h \to 0} \sin\frac{1}{h}\) 不存在，故不可导。
+\end{example}
+
+\subsection{微分}
+
+\textbf{定义（可微性）：}若 \(\exists A \in \mathbb{R}\)，s.t.
+\[
+f(x) - f(x_0) = A(x - x_0) + o(x - x_0) \quad (x \to x_0)
+\]
+则称 \(f\) 在 \(x_0\) 处\textbf{可微}。线性主部 \(A(x-x_0)\) 称为 \(f\) 在 \(x_0\) 处的\textbf{微分}，记作 \(dy = A\,dx\)。
+
+\textbf{定理：}对一元函数，\(f\) 在 \(x_0\) 处可微 \(\Leftrightarrow\) \(f\) 在 \(x_0\) 处可导，且 \(A = f'(x_0)\)。
+
+\begin{proof}
+\(\Rightarrow\)：\(\frac{f(x) - f(x_0)}{x - x_0} = A + \frac{o(x-x_0)}{x-x_0} \to A\)，故 \(f'(x_0) = A\)。
+
+\(\Leftarrow\)：由 \(f'(x_0) = \lim \frac{f(x)-f(x_0)}{x-x_0}\) 得 \(\frac{f(x)-f(x_0)}{x-x_0} - f'(x_0) \to 0\)，即 \(f(x)-f(x_0) - f'(x_0)(x-x_0) = o(x-x_0)\)。
+\end{proof}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/63_11_1146_748_555_0.jpg}
+\end{center}
+
+\textbf{微分的几何意义：}\(\Delta f = f(x) - f(x_0) = dy + o(\Delta x)\)。\(dy = f'(x_0)\,dx\) 是切线上的增量。\(f'(x_0) = \frac{dy}{dx}\)，故导数又称\textbf{微商}。
+
+% =============================================
+\chapter{习题课：期中复习与求导法则}
+
+\section{一、期中复习建议}
+
+\begin{enumerate}
+\item 掌握老师上课讲的内容，不要心存侥幸。
+\item 掌握作业题——是考试难度的下界。
+\item 二级结论（欧拉常数、Stolz 定理等）可以直接使用。自己整理。
+\item 往年题，不要"过拟合"。
+\end{enumerate}
+
+\section{二、无穷小量的阶——运算规则}
+
+\begin{itemize}
+\item \(f(x) \to 0\)（\(x \to a\)）称无穷小量。
+\item \(f(x) = O(g(x))\)：\(f/g\) 有界。
+\item \(f(x) = o(g(x))\)：\(f/g \to 0\)（高阶无穷小）。
+\item \(f(x) \sim g(x)\)：\(f/g \to 1\)（等价无穷小）。
+\end{itemize}
+
+\textbf{运算规则：}
+\[
+\begin{aligned}
+f(x) = O(1) &\;\Longleftrightarrow\; f\text{ 有界}, &
+f(x) = o(1) &\;\Longleftrightarrow\; f\text{ 是无穷小}, \\
+o(f(x)) &= O(f(x)) \quad (\text{高阶也是同阶有界}), \\
+O(f) + O(f) &= O(f), &
+o(1) \cdot O(f) &= o(f), \\
+\frac{o(f)}{g} &= O\!\left(\frac{f}{g}\right), &
+\frac{O(f)}{g} &= O\!\left(\frac{f}{g}\right)
+\end{aligned}
+\]
+
+\textbf{等价定义：}\(f = \beta \cdot g\)，若 \(\beta\) 有界则 \(f = O(g)\)；\(\beta \to 0\) 则 \(f = o(g)\)；\(\beta \to 1\) 则 \(f \sim g\)。
+
+\section{三、思考题}
+
+\begin{enumerate}
+\item 设 \(f(x) \in C(-\infty, +\infty)\)，且 \(\displaystyle \lim_{x \to \pm\infty} f(x) = +\infty\)。证明：\(f(x)\) 在 \((-\infty, +\infty)\) 上取到最小值。
+
+\begin{proof}
+任取 \(x^*\)，记 \(M_0 = f(x^*)\)。由 \(\lim_{x\to\pm\infty} f = +\infty\)，\(\exists X > 0\)，s.t. \(\forall |x| > X\)，\(f(x) > M_0 + 1\)。
+
+在闭区间 \([-X, X]\) 上，\(f\) 连续 \(\Rightarrow\) 取到最小值 \(m\)。而 \(m \leq f(x^*) = M_0 < M_0 + 1\)，故 \(m\) 就是全局最小值。
+\end{proof}
+
+\item 设 \(f(x) \in C[a,b]\)，\(\forall x \in [a,b]\)，\(\exists y \in [a,b]\)，s.t. \(|f(y)| \leq \frac{1}{2}|f(x)|\)。求证：\(\exists \xi \in [a,b]\)，s.t. \(f(\xi) = 0\)。
+
+\begin{proof}
+任取 \(x_0 \in [a,b]\)。反复应用条件构造序列：\(|f(x_n)| \leq \frac{1}{2^n}|f(x_0)|\)。\(\{x_n\} \subseteq [a,b]\) 有界，由 B-W 定理有收敛子列 \(x_{n_k} \to \xi\)。由连续性 \(|f(\xi)| = \lim |f(x_{n_k})| = 0\)，故 \(f(\xi) = 0\)。
+\end{proof}
+
+\item 分别用单调性和 Cauchy 收敛原理证明 \(\displaystyle x_n = \sum_{k=1}^{n} \frac{1}{(1+k)^2}\) 收敛。
+
+\begin{proof}
+\textbf{单调有界法：}\(x_{n+1} - x_n = \frac{1}{(n+2)^2} > 0\)，\(\{x_n\} \uparrow\)。
+\[
+x_n = \sum_{k=1}^{n} \frac{1}{(1+k)^2} < \sum_{k=1}^{n} \frac{1}{k(k+1)} = 1 - \frac{1}{n+1} < 1
+\]
+有上界 \(\Rightarrow\) 收敛。
+
+\textbf{Cauchy 法：}\(\forall m > n\)：
+\[
+|x_m - x_n| = \sum_{k=n+1}^{m} \frac{1}{(1+k)^2} < \sum_{k=n+1}^{m} \left(\frac{1}{k} - \frac{1}{k+1}\right) = \frac{1}{n+1} - \frac{1}{m+1} < \frac{1}{n+1}
+\]
+\(\forall \varepsilon > 0\)，取 \(N = [\frac{1}{\varepsilon}]\)，\(\forall m > n > N\)，\(|x_m - x_n| < \varepsilon\)。
+\end{proof}
+\end{enumerate}
+
+\section{四、计算题}
+
+\begin{enumerate}
+\item \(\displaystyle \lim_{n \to +\infty} \frac{n^6 + \sin n}{2002n^6 + \ln^2 n + 28n} = \frac{1}{2002}\)。
+\item \(\displaystyle \lim_{n \to +\infty} n\sin\frac{1}{n} = 1\)。
+\item \(\displaystyle \lim_{h \to 0} \frac{\cos(x+h) - \cos x}{h} = -\sin x\)（导数定义）。
+\item \(\displaystyle \lim_{x \to +\infty} \left(1 + \frac{1}{\sin x}\right)^x\) 不存在（取 \(x_n = \frac{\pi}{2} + 2n\pi\) 和 \(x_n = -\frac{\pi}{2} + 2n\pi\) 得不同极限）。
+\item \(\displaystyle \lim_{x \to 10} \frac{e^x - e^{10}}{\sin(x-10) + \ln(x^2 - 20x + 101)}\)：令 \(t = x - 10 \to 0\)，
+\[
+= \lim_{t \to 0} \frac{e^{10}(e^t - 1)}{\sin t + \ln(t^2 + 1)}
+= e^{10} \lim_{t \to 0} \frac{t + o(t)}{t + o(t) + t^2 + o(t^2)} = e^{10}
+\]
+\end{enumerate}
+
+\textbf{常见等价无穷小（\(x \to 0\)）补充：}
+\[
+\sin x \sim \tan x \sim \arctan x \sim \arcsin x \sim \ln(1+x) \sim e^x - 1 \sim x
+\]
+\[
+(1+x)^\alpha - 1 \sim \alpha x,\qquad 1 - \cos x \sim \frac{x^2}{2}
+\]
+
+\section{五、求导法则}
+
+\subsection{1. 乘法与除法}
+
+\[
+(uv)' = u'v + uv',\qquad \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}\;(v \neq 0)
+\]
+
+\begin{proof}
+（乘法）\(\displaystyle (uv)' = \lim_{\Delta x \to 0} \frac{u(x+\Delta)v(x+\Delta) - u(x)v(x+\Delta) + u(x)v(x+\Delta) - u(x)v(x)}{\Delta x} = u'v + uv'\)。
+
+（除法）先证 \((1/v)' = -v'/v^2\)：\(\displaystyle \lim_{\Delta x \to 0} \frac{1}{\Delta x}\left[\frac{1}{v(x+\Delta)} - \frac{1}{v(x)}\right] = -\frac{v'}{v^2}\)。再用乘法。
+\end{proof}
+
+\subsection{2. 反函数求导}
+
+\textbf{定理：}若 \(f(x)\) 在 \(O(x_0)\) 上严格单调连续，在 \(x_0\) 处可导且 \(f'(x_0) \neq 0\)，则 \(y = f(x)\) 在 \(O(x_0)\) 中存在反函数 \(x = \varphi(y)\)，且
+\[
+\varphi'(y_0) = \frac{1}{f'(x_0)},\qquad y_0 = f(x_0)
+\]
+即 \(\displaystyle \frac{dx}{dy} = 1/\frac{dy}{dx}\)。
+
+\begin{proof}
+\(\displaystyle \varphi'(y_0) = \lim_{y \to y_0} \frac{\varphi(y) - \varphi(y_0)}{y - y_0} = \lim_{x \to x_0} \frac{x - x_0}{f(x) - f(x_0)} = \frac{1}{f'(x_0)}\)。
+\end{proof}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/67_1_2048_609_284_0.jpg}
+\end{center}
+
+\begin{example}
+\begin{align*}
+(\arcsin x)' &\overset{x=\sin y}{=} \frac{1}{(\sin y)'} = \frac{1}{\cos y} = \frac{1}{\sqrt{1-x^2}} \\
+(\arccos x)' &\overset{x=\cos y}{=} \frac{1}{(\cos y)'} = -\frac{1}{\sin y} = -\frac{1}{\sqrt{1-x^2}} \\
+(\arctan x)' &\overset{x=\tan y}{=} \frac{1}{(\tan y)'} = \cos^2 y = \frac{1}{1+x^2} \\
+(e^x)' &\overset{x=\ln y}{=} \frac{1}{(\ln y)'} = y = e^x
+\end{align*}
+\end{example}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/68_0_0_591_298_0.jpg}
+\end{center}
+
+\textbf{注意：}(1) 严格单调不能保证 \(f'(x_0) \neq 0\)（反例 \(f(x) = x^3\) 在 \(x=0\)）；(2) 邻域连续条件不能去掉。
+
+\subsection{3. 复合函数求导（链式法则）}
+
+\textbf{定理：}若 \(u = g(x)\) 在 \(x_0\) 可导，\(y = f(u)\) 在 \(u_0 = g(x_0)\) 可导，且 \(f(g(x))\) 在 \(O(x_0)\) 有定义，则 \(F(x) = f(g(x))\) 在 \(x_0\) 可导，且
+\[
+F'(x_0) = f'(u_0) \cdot g'(x_0)
+\]
+即 \(\displaystyle \frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}\)。
+
+\begin{proof}
+（构造连续函数法）定义 \(H(u) = \begin{cases} \frac{f(u)-f(u_0)}{u-u_0}, & u \neq u_0 \\ f'(u_0), & u = u_0 \end{cases}\)，则 \(H(u)\) 在 \(u_0\) 连续。
+
+\(f(u) - f(u_0) = H(u)(u - u_0)\)。令 \(u = g(x)\)：
+\[
+\frac{F(x) - F(x_0)}{x - x_0} = H(g(x)) \cdot \frac{g(x) - g(x_0)}{x - x_0} \to f'(u_0) \cdot g'(x_0)
+\]
+\end{proof}
+
+\textbf{一阶微分形式不变性：}无论 \(u\) 是自变量还是中间变量，\(dy = f'(u)\,du\) 始终成立。
+
+\begin{example}
+\begin{align*}
+(e^{cx})' &= e^{cx} \cdot c = c e^{cx} \\
+(\sin x^2)' &= \cos(x^2) \cdot 2x \\
+\left[\ln\left(x + \sqrt{x^2 + a^2}\right)\right]' &= \frac{1}{\sqrt{x^2 + a^2}} \\
+(u(x)^{v(x)})' &= \left(e^{v\ln u}\right)' = u^v\left(v'\ln u + \frac{v}{u}u'\right) \quad (u>0)
+\end{align*}
+\end{example}
+
+\subsection{4. 参数方程求导}
+
+\textbf{定理：}若 \(x(t), y(t)\) 可导且 \(x'(t) \neq 0\)（从而 \(x(t)\) 严格单调），则
+\[
+\frac{dy}{dx} = \frac{dy/dt}{dx/dt} = \frac{y'(t)}{x'(t)}
+\]
+
+\textbf{极坐标应用：}\(r = r(\theta)\)，\(x = r\cos\theta\)，\(y = r\sin\theta\)，
+\[
+\frac{dy}{dx} = \frac{r'\sin\theta + r\cos\theta}{r'\cos\theta - r\sin\theta}
+\]
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/70_10_2113_605_219_0.jpg}
+\end{center}
+
+\textbf{例（抛物线）：}\(y^2 = 2p(x + \frac{p}{2})\) 的极坐标方程 \(r = \frac{p}{1 - \cos\theta}\)。
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/71_0_0_509_224_0.jpg}
+\end{center}
+
+\textbf{抛物面反射性质：}平行于对称轴的光线经抛物线反射后汇聚于焦点。
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/71_4_302_597_498_0.jpg}
+\end{center}
+
+% =============================================
+\chapter{11.4 隐函数与高阶导数}
+
+\section{一、上节课回顾}
+
+\begin{itemize}
+\item \textbf{反函数求导：}若 \(f'(x_0) \neq 0\) 且 \(f\) 在邻域严格单调连续，则 \(\varphi'(y_0) = \frac{1}{f'(x_0)}\)。
+\item \textbf{链式法则：}\(F'(x) = f'(g(x)) \cdot g'(x)\)，\(\frac{dy}{dx} = \frac{dy}{du}\frac{du}{dx}\)。
+\item \textbf{参数求导：}\(\frac{dy}{dx} = \frac{y'(t)}{x'(t)}\)。
+\end{itemize}
+
+\section{二、隐函数求导}
+
+方程 \(F(x,y) = 0\)，若给定 \(x\) 可唯一解出 \(y\)，则 \(y\) 是由方程确定的\textbf{隐函数}。
+
+\begin{example}
+上半圆周 \(x^2 + y^2 = 1\)（\(y > 0\)），求 \(y'(x)\)。
+
+两边对 \(x\) 求导：\(2x + 2y \cdot y' = 0\)，\(\therefore y' = -\frac{x}{y} = -\frac{x}{\sqrt{1-x^2}}\)。
+\end{example}
+
+\begin{example}
+\(x = y - \varepsilon \sin y\)（\(\varepsilon \in (0,1)\)），判断隐函数存在性并求导。
+
+\textbf{存在性：}令 \(\varphi(y) = y - \varepsilon \sin y\)，\(\varphi'(y) = 1 - \varepsilon \cos y > 0\)，故 \(\varphi\) 严格单调上升。又 \(\lim_{y\to\pm\infty} \varphi(y) = \pm\infty\)，由介值定理 \(\forall x \in \mathbb{R}\)，\(\exists! y\)，s.t. \(x = \varphi(y)\)。\(\therefore\) 确定隐函数 \(y(x)\)。
+
+\textbf{求导：}由 \(\Delta x = \Delta y - \varepsilon[\sin(y+\Delta y) - \sin y] = (1 - \varepsilon\cos y)\Delta y + o(\Delta y)\)，
+\[
+\frac{dy}{dx} = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \frac{1}{1 - \varepsilon\cos y}
+\]
+
+\textbf{简便方法：}直接对 \(x = y - \varepsilon\sin y\) 两边求导：\(1 = y' - \varepsilon\cos y \cdot y'\)，\(\therefore y' = \frac{1}{1 - \varepsilon\cos y}\)。
+\end{example}
+
+\subsection{对数求导法则}
+
+对形如 \(y = u(x)^{v(x)}\)（\(u > 0\)）的幂指函数，取对数再求导：
+\[
+\ln y = v(x)\ln u(x) \;\Longrightarrow\; \frac{y'}{y} = v'\ln u + \frac{v}{u}u' \;\Longrightarrow\; y' = u^v\left(v'\ln u + \frac{v}{u}u'\right)
+\]
+
+\begin{example}
+\(y = \sqrt{\frac{x^3}{x-a}}\)，求 \(y'\)。
+
+\(\ln y = \frac{3}{2}\ln x - \frac{1}{2}\ln(x-a)\)，\(\frac{y'}{y} = \frac{3}{2x} - \frac{1}{2(x-a)}\)，\(\therefore y' = \frac{1}{2}\sqrt{\frac{x^3}{x-a}}\left(\frac{3}{x} - \frac{1}{x-a}\right)\)。
+\end{example}
+
+\section{三、高阶导数}
+
+\textbf{定义：}\(f''(x) = (f')'(x)\) 为二阶导数，记作 \(f^{(2)}(x)\) 或 \(\frac{d^2f}{dx^2}\)。归纳定义 \(n\) 阶导数：\(f^{(n)}(x) := (f^{(n-1)}(x))'\)。
+
+\textbf{物理意义：}位移 \(s(t)\)：\(s'(t) = v(t)\)（速度），\(s''(t) = a(t)\)（加速度），\(a'(t) = j(t)\)（加加速度/jerk）。
+
+\textbf{例（弹簧振子）：}由 \(m x''(t) = -kx\)，假设解 \(x(t) = A\cos(\omega t + \varphi)\)，求导得 \(x'' = -A\omega^2\cos(\omega t + \varphi)\)，代入得 \(\omega = \sqrt{k/m}\)。
+
+\subsection{常见函数的高阶导数}
+
+\begin{enumerate}
+\item \(y = x^\alpha\)：\(y^{(n)} = \alpha(\alpha-1)\cdots(\alpha-n+1)x^{\alpha-n}\)。
+
+特例：\(\alpha = n \in \mathbb{N}\) 时 \((x^n)^{(n)} = n!\)，\((x^n)^{(m)} = 0\)（\(m > n\)）。
+
+\item \(y = \sin x\)：\(y' = \cos x = \sin(x + \frac{\pi}{2})\)，归纳得 \(y^{(n)} = \sin(x + \frac{n\pi}{2})\)。
+
+\(y = \cos x\)：\(y^{(n)} = \cos(x + \frac{n\pi}{2})\)。
+
+\item \((e^x)^{(n)} = e^x\)，\((a^x)^{(n)} = a^x(\ln a)^n\)。
+
+\item \([(1+x)^\alpha]^{(n)} = \alpha(\alpha-1)\cdots(\alpha-n+1)(1+x)^{\alpha-n}\)。
+
+特例：\([\ln(1+x)]^{(n)} = \left(\frac{1}{1+x}\right)^{(n-1)} = (-1)^{n-1}(n-1)!(1+x)^{-n}\)。
+\end{enumerate}
+
+\subsection{Leibniz 公式（乘法的高阶导数）}
+
+\[
+(uv)^{(n)} = \sum_{k=0}^{n} C_n^k \, u^{(k)} v^{(n-k)}
+\]
+（与二项式定理形式相同。）
+
+\begin{proof}
+（归纳法）\(n=1\) 时 \((uv)' = u'v + uv'\) 成立。假设 \(n\) 成立，则
+\begin{align*}
+(uv)^{(n+1)} &= \left[\sum_{k=0}^{n} C_n^k u^{(k)} v^{(n-k)}\right]' \\
+&= \sum_{k=0}^{n} C_n^k \left[u^{(k+1)}v^{(n-k)} + u^{(k)}v^{(n-k+1)}\right] \\
+&= \sum_{j=1}^{n+1} C_n^{j-1} u^{(j)}v^{(n+1-j)} + \sum_{j=0}^{n} C_n^j u^{(j)}v^{(n+1-j)} \\
+&= \sum_{j=0}^{n+1} (C_n^{j-1} + C_n^j) u^{(j)}v^{(n+1-j)} = \sum_{j=0}^{n+1} C_{n+1}^j u^{(j)}v^{(n+1-j)}
+\end{align*}
+\end{proof}
+
+\subsection{参数形式的二阶导数}
+
+\[
+\frac{d^2y}{dx^2} = \frac{d}{dx}\left(\frac{dy}{dx}\right) = \frac{d}{dt}\left(\frac{y'(t)}{x'(t)}\right) \cdot \frac{dt}{dx}
+= \frac{y''(t)x'(t) - y'(t)x''(t)}{[x'(t)]^3}
+\]
+
+\subsection{复合函数的高阶导数}
+
+\(h(x) = f(g(x))\)：\(h'(x) = f'(g(x)) \cdot g'(x)\)，
+\[
+h''(x) = f''(g(x))[g'(x)]^2 + f'(g(x))g''(x)
+\]
+即 \(\frac{d^2f}{dx^2} = \frac{d^2f}{dg^2}\left(\frac{dg}{dx}\right)^2 + \frac{df}{dg}\frac{d^2g}{dx^2}\)。
+
+\begin{remark}
+一阶微分具有形式不变性（\(df = f'(u)du\) 无论 \(u\) 是自变量还是中间变量），但\textbf{高阶微分不满足}形式不变性。
+\end{remark}
+
+% =============================================
+\chapter{习题课：期中复习}
+
+\section{一、期中考试复习大纲}
+
+\begin{enumerate}
+\item 实数公理（概念 + 等价互推）
+\item 序列极限（判断 + 计算）
+\item 函数极限与不动点
+\item 函数连续及性质（证明）
+\item 函数的一致连续（区分）
+\item 函数可微与求导（计算）
+\end{enumerate}
+
+\section{二、典型例题}
+
+\begin{example}
+极限计算：
+\begin{enumerate}
+\item \(\displaystyle \lim_{n \to +\infty} \sqrt{n}(\sqrt{n+1} - \sqrt{n}) = \frac{1}{2}\)
+\item \(\displaystyle \lim_{n \to +\infty} \sum_{k=n}^{n^2} \frac{1}{\sqrt{k}} = 2\)（夹逼：\(\frac{2n+1}{n+1} < \text{原式} < \frac{2n+1}{n}\)）
+\item \(\displaystyle \lim_{n \to +\infty} \sum_{k=1}^{n} \frac{k}{2^k} = 2\)（错位相减法：\(S_n = 2 - \frac{1}{2^{n-1}} - \frac{n}{2^n}\)）
+\item \(\displaystyle \lim_{n \to +\infty} \left(\frac{1}{n+1} + \cdots + \frac{1}{2n}\right) = \ln 2\)（积分估计：\(\int_{n+k}^{n+k+1}\frac{dx}{x} < \frac{1}{n+k} < \int_{n+k-1}^{n+k}\frac{dx}{x}\)）
+\end{enumerate}
+\end{example}
+
+\begin{example}
+函数极限：
+\begin{enumerate}
+\item \(\displaystyle \lim_{x \to +\infty} \left(\cos\frac{1}{x} + \sin\frac{1}{x^2}\right)^{x^2} = \sqrt{e}\)（Taylor：\(\cos\frac1x = 1 - \frac{1}{2x^2} + o(\frac1{x^2})\)）
+\item \(\displaystyle \lim_{x \to +\infty} \left(1 + \frac{1}{x+2}\right)^{\frac{x^2}{x+2}} = e\)
+\item 求 \(a,b,c\) 使 \(\displaystyle \lim_{x \to +\infty} x\left(ax + \sqrt{2 + bx + cx^2}\right) = 2\)。答：\(a = -\frac12, b = 0, c = \frac14\)。
+\item \(\displaystyle \lim_{x \to +\infty} x^2\left(\sqrt[7]{\frac{x^3+x}{x^3+1}} - \cos\frac{1}{x}\right) = \frac{1}{2}\)
+\end{enumerate}
+\end{example}
+
+\begin{example}
+\(a_1 = \sqrt{2}\)，\(a_{n+1} = (\sqrt{2})^{a_n}\)。证明 \(\displaystyle \lim_{n \to +\infty} a_n\) 存在并求值。
+
+\begin{proof}
+归纳证 \(a_n \uparrow\) 且 \(a_n < 2\)。单增有上界 \(\Rightarrow\) 极限存在。设极限为 \(A\)，由 \(a_{n+1} = (\sqrt{2})^{a_n}\) 取极限：\(A = (\sqrt{2})^A\)，解得 \(A = 2\) 或 \(A = 4\)。由 \(a_n < 2\) 知 \(A = 2\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+已知 \(x \to 0\) 时 \(5^{x^2} - 4^{x^2}\) 与 \(x^p\) 同阶无穷小，求 \(p\)。
+
+\textbf{解：}\(\displaystyle \lim_{x\to 0}\frac{5^{x^2} - 4^{x^2}}{x^p} = \lim_{x\to 0}\frac{x^2(\ln 5 - \ln 4) + o(x^2)}{x^p}\)，故 \(p = 2\)。
+\end{example}
+
+\begin{example}
+设 \(f(x)\) 在 \(I = [a,b]\) 上满足 \(|f(x) - f(y)| \leq k|x-y|\)（\(k < 1\)）且 \(f(I) \subseteq I\)。
+\begin{enumerate}
+\item 证明 \(f \in C(I)\) 且 \(\exists! c \in I\)，s.t. \(c = f(c)\)。
+\item \(\forall x_0 \in I\)，令 \(x_n = f(x_{n-1})\)，证明 \(x_n \to c\)。
+\end{enumerate}
+
+\begin{proof}
+(1) \(\forall \varepsilon > 0\)，取 \(\delta = \varepsilon/k\)，则 \(|x-y| < \delta \Rightarrow |f(x)-f(y)| < \varepsilon\)，故 \(f \in C(I)\)（甚至 Lipschitz 连续）。
+
+令 \(g(x) = x - f(x)\)，\(g \in C(I)\)。\(g(a) = a - f(a) \leq 0\)，\(g(b) = b - f(b) \geq 0\)。若等号成立则取端点；否则由介值定理 \(\exists c\)，s.t. \(g(c) = 0 \Rightarrow c = f(c)\)。唯一性：若 \(c_1 \neq c_2\) 均为不动点，则 \(|c_1 - c_2| = |f(c_1) - f(c_2)| \leq k|c_1 - c_2| < |c_1 - c_2|\)，矛盾。
+
+(2) \(|x_n - c| = |f(x_{n-1}) - f(c)| \leq k|x_{n-1} - c| \leq \cdots \leq k^n|x_0 - c| \to 0\)（压缩映射原理）。
+\end{proof}
+\end{example}
+
+\begin{example}
+\begin{enumerate}
+\item \(f \in C[a, +\infty)\)，若 \(\displaystyle \lim_{x \to +\infty} f(x) = L\) 存在有限，证明 \(f\) 在 \([a, +\infty)\) 上一致连续。
+\item \(f(x)\) 在有界区间 \((a,b)\) 上一致连续，证明 \(f(x)\) 在 \((a,b)\) 上有界。
+\end{enumerate}
+
+\begin{proof}
+(1) \(\forall \varepsilon > 0\)，由 \(f \to L\)，\(\exists N\)，s.t. \(\forall x > N\)，\(|f(x) - L| < \varepsilon/2\)。在 \([N+1, +\infty)\) 上，\(\forall x_1,x_2 > N+1\)：\(|f(x_1)-f(x_2)| \leq |f(x_1)-L| + |L-f(x_2)| < \varepsilon\)（一致连续）。在 \([a, N+2]\) 上由 Cantor 定理一致连续。取公共 \(\delta\) 即得全局一致连续。
+
+(2) 取 \(a < a' < b' < b\)，在 \([a',b']\) 上有界 \(M_1\)。将 \((a,a')\) 和 \((b',b)\) 用一致连续性分别分为有限段，每段上 \(|f(x) - f(x_i)| < 1\)，故均有界。取三部分上界的最大值为全局界。
+\end{proof}
+\end{example}
+
+
+% =============================================
+\chapter{11.11 中值定理}
+
+\section{一、高阶导数补充}
+
+\subsection{反函数的高阶导数}
+
+\(y = f(x)\)，\(x = \varphi(y)\)：
+\[
+\varphi'(y) = \frac{1}{f'(x)},\qquad
+\varphi''(y) = -\frac{f''(x)}{[f'(x)]^3}
+\]
+
+\begin{example}
+\(y = \arctan x\)。可归纳证明
+\[
+y^{(n)}(x) = (n-1)! \cdot \cos^n y \cdot \sin\!\left[n\!\left(y + \frac{\pi}{2}\right)\right]
+\]
+\end{example}
+
+\begin{example}
+\(y = \arcsin x\)，求 \(y^{(n)}(0)\)。
+
+由 \(y'\sqrt{1-x^2} = 1\) 求导得 \((1-x^2)y'' = xy'\)。Leibniz 公式代入 \(x=0\) 得 \(y^{(n+2)}(0) = n^2 y^{(n)}(0)\)。结合 \(y(0)=0, y'(0)=1\)：
+\[
+y^{(2k)}(0) = 0,\qquad y^{(2k+1)}(0) = [(2k-1)!!]^2
+\]
+\end{example}
+
+\section{二、中值定理}
+
+\subsection{1. Fermat（费马）定理}
+
+\textbf{极值：}设 \(f(x)\) 在 \(O(x_0)\) 有定义。若 \(\forall x \in O(x_0)\)，\(f(x) \geq f(x_0)\)，称 \(f(x_0)\) 为极小值；\(\forall x \in O^-(x_0)\)，\(f(x) > f(x_0)\) 为严格极小值。类似定义极大值。极值是局部性质。
+
+\textbf{Fermat 定理：}若 \(f(x)\) 在 \(x_0\) 可导且取极值，则 \(f'(x_0) = 0\)。
+
+\begin{proof}
+不妨设 \(f(x_0)\) 为极大值。\(\forall h \neq 0\)，\(f(x_0+h)-f(x_0) \leq 0\)。
+\[
+f'(x_0) = \lim_{h \to 0^+} \frac{f(x_0+h)-f(x_0)}{h} \leq 0,\quad
+f'(x_0) = \lim_{h \to 0^-} \frac{f(x_0+h)-f(x_0)}{h} \geq 0 \;\Longrightarrow\; f'(x_0)=0
+\]
+\end{proof}
+
+\begin{remark}
+\(f'(x_0)=0\) 是极值的必要不充分条件（反例 \(f(x)=x^3\)）。
+\end{remark}
+
+\subsection{2. Rolle 中值定理}
+
+若 \(f \in C[a,b]\)，在 \((a,b)\) 可导，且 \(f(a)=f(b)\)，则 \(\exists \xi \in (a,b)\)，s.t. \(f'(\xi)=0\)。
+
+\begin{proof}
+\(f \in C[a,b]\) \(\Rightarrow\) 取到最大/最小值 \(M,m\)。若 \(M=m\) 则 \(f\) 为常数。否则 \(M,m\) 至少有一个在内部取到 \(\Rightarrow\) 极值点，由 Fermat 定理导数为 \(0\)。
+\end{proof}
+
+\subsection{3. Lagrange 中值定理}
+
+若 \(f \in C[a,b]\)，在 \((a,b)\) 可导，则 \(\exists \xi \in (a,b)\)，s.t.
+\[
+f'(\xi) = \frac{f(b)-f(a)}{b-a}
+\]
+
+\begin{proof}
+构造 \(F(x) = f(x) - \frac{f(b)-f(a)}{b-a}(x-a)\)，\(F(a)=F(b)=f(a)\)。由 Rolle 定理 \(\exists \xi\)，s.t. \(F'(\xi)=0\)。
+\end{proof}
+
+\subsection{4. Cauchy 中值定理}
+
+若 \(f,g \in C[a,b]\)，在 \((a,b)\) 可导且 \(g'(x) \neq 0\)，则 \(\exists \xi \in (a,b)\)，s.t.
+\[
+\frac{f'(\xi)}{g'(\xi)} = \frac{f(b)-f(a)}{g(b)-g(a)}
+\]
+
+\begin{proof}
+构造 \(F(x) = f(x) - \frac{f(b)-f(a)}{g(b)-g(a)}[g(x)-g(a)]\)。\(F(a)=F(b)\)，由 Rolle 定理即得。
+\end{proof}
+
+\subsection{中值定理的推论}
+
+\begin{enumerate}
+\item 若 \(f'(x) \equiv 0\)，则 \(f(x) \equiv C\)（由 Lagrange）。
+\item 若 \(f' = g'\)，则 \(g = f + C\)。
+\item 若 \(f'' \equiv 0\)，则 \(f(x) = C_0 + C_1 x\)。
+\item 若 \(f^{(n+1)} \equiv 0\)，则 \(f(x) = C_0 + C_1 x + \cdots + C_n x^n\)（归纳法）。
+\end{enumerate}
+
+\section{三、导数与函数的单调性}
+
+\textbf{定理1：}设 \(f \in C[a,b]\)，在 \((a,b)\) 可导。\(f \uparrow\) \(\Leftrightarrow\) \(f' \geq 0\)；\(f \downarrow\) \(\Leftrightarrow\) \(f' \leq 0\)。
+
+\textbf{定理2（严格单调）：}\(f \uparrow\uparrow\) \(\Leftrightarrow\) \(f' \geq 0\) 且 \(f'\) 不在任一开子区间恒为零。
+
+\section{四、极值的充分条件}
+
+\textbf{定理3（一阶判别法）：}设 \(f\) 在 \(O(x_0)\) 连续，在 \(O^-(x_0)\) 可导。若 \(f'(x)(x-x_0) > 0\)（左负右正），则 \(f(x_0)\) 为严格极小值；反之 \(< 0\) 为严格极大值。不要求 \(f\) 在 \(x_0\) 可导。
+
+\textbf{定理4（二阶判别法）：}设 \(f'(x_0) = 0\) 且 \(f''(x_0)\) 存在。\(f''(x_0) > 0 \Rightarrow\) 严格极小；\(f''(x_0) < 0 \Rightarrow\) 严格极大。
+
+\begin{proof}
+\(f''(x_0) = \lim_{x \to x_0} \frac{f'(x)}{x-x_0} > 0\) \(\Rightarrow\) \(\exists \eta\)，s.t. \(f'(x)(x-x_0) > 0\)，由定理3得证。
+\end{proof}
+
+% =============================================
+\chapter{习题课：期中考试题解析}
+
+\begin{enumerate}
+
+\item 求 \(\displaystyle \lim_{n \to +\infty} \sin\!\left(\pi\sqrt{n^2+n}\right)\)。
+
+\textbf{解：}\(\sin(\pi\sqrt{n^2+n}) = \sin\!\left[(\sqrt{n^2+n}-n)\pi + n\pi\right]\)。
+
+\(n\) 为奇数（\(n=2k-1\)）：原式 \(= -\sin[(\sqrt{n^2+n}-n)\pi] \to -\sin\frac{\pi}{2} = -1\)。
+
+\(n\) 为偶数（\(n=2k\)）：原式 \(= \sin[(\sqrt{n^2+n}-n)\pi] \to \sin\frac{\pi}{2} = 1\)。
+
+子列极限不同 \(\Rightarrow\) 原极限不存在。
+
+\item 求 \(\displaystyle \lim_{x \to 0} \left(\frac{1+e^x}{2}\right)^{\frac{e}{x}}\)。
+
+\textbf{解：}取对数：\(\displaystyle \lim_{x \to 0} \frac{e\ln\frac{1+e^x}{2}}{x} = e \cdot \lim_{x \to 0} \frac{e^x}{1+e^x} = \frac{e}{2}\)，\(\therefore\) 原式 \(= e^{e/2}\)。
+
+\item 求 \(\displaystyle \lim_{x \to +\infty} \left(\frac{2}{\pi}\arctan x\right)^x\)。
+
+\textbf{解：}取对数后用 L'H\^opital：\(\displaystyle \lim_{x \to +\infty} x\ln\!\left(\frac{2}{\pi}\arctan x\right) = -\frac{2}{\pi}\)，\(\therefore\) 原式 \(= e^{-2/\pi}\)。
+
+\item 若 \(f(x)\) 在有限区间 \((a,b)\) 上一致连续，求证 \(f(a^+), f(b^-)\) 均存在。无穷区间结论是否成立？
+
+\begin{proof}
+\(\forall \{x_n\} \to a^+\)。由一致连续：\(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，s.t. \(|x_1-x_2| < \delta \Rightarrow |f(x_1)-f(x_2)| < \varepsilon\)。\(\exists N\)，当 \(m,n > N\) 时 \(x_m,x_n \in (a, a+\delta)\)，故 \(|f(x_m)-f(x_n)| < \varepsilon\)。\(\{f(x_n)\}\) 为 Cauchy 列 \(\Rightarrow\) 收敛。由归结原则 \(f(a^+)\) 存在。同理 \(f(b^-)\) 存在。
+
+无穷区间不成立（反例 \(f(x) = \sin x\) 在 \((-\infty,+\infty)\) 一致连续但无穷远处极限不存在）。
+\end{proof}
+
+\item \(x_0 > 1\)，\(x_{n+1} = \frac{2x_n^2}{1+x_n^2}\)。判断 \(\displaystyle \lim_{n \to +\infty} x_n\) 是否存在。
+
+\textbf{解：}\(x_n > 0\)，\(\frac{x_{n+1}}{x_n} = \frac{2x_n}{1+x_n^2} \leq 1\)（均值不等式），故 \(\{x_n\} \downarrow\) 有下界 \(0 \Rightarrow\) 极限存在。设极限为 \(A\)，代入递推得 \(A = \frac{2A^2}{1+A^2} \Rightarrow A=0\) 或 \(A=1\)。由 \(x_0 > 1\) 且单调递减知 \(A = 1\)。
+
+\item 设 \(f(x)\) 是 \(\mathbb{R}\) 上以 \(1\) 为周期的连续函数。求证：\(\forall n \in \mathbb{N}\)，\(\exists c \in [0,1)\)，满足 \(f(c) = f(c + \frac{1}{n})\)。
+
+\begin{proof}
+若 \(f\) 为常数则显然。否则在 \([0,1]\) 上取极大值点 \(M\)。令 \(g(x) = f(x) - f(x + \frac{1}{n})\)，\(g\) 连续。\(g(M) = f(M) - f(M+\frac{1}{n}) > 0\)，\(g(M-\frac{1}{n}) = f(M-\frac{1}{n}) - f(M) < 0\)。由介值定理 \(\exists \eta\)，s.t. \(g(\eta) = 0\)。取 \(c = \eta\)（若 \(\eta \geq 0\)）或 \(c = \eta+1\)（若 \(\eta < 0\)）。
+\end{proof}
+
+\item 求证心脏线 \(r = a(1-\cos\theta)\) 向径与切线的夹角等于极角的一半。
+
+\textbf{解：}\(\displaystyle \tan\beta = \frac{r(\theta)}{r'(\theta)} = \frac{a(1-\cos\theta)}{a\sin\theta} = \tan\frac{\theta}{2}\)，\(\therefore \beta = \frac{\theta}{2}\)。
+
+\item 设 \(f(x)\) 在 \(x=0\) 处有二阶导数，且 \(\displaystyle \lim_{x \to 0} \frac{f(x)}{x} = 0\)。求证 \(\displaystyle \sum_{k=1}^{\infty} f\!\left(\frac{1}{k}\right)\) 收敛。
+
+\begin{proof}
+由条件 \(f(0)=0\)，\(f'(0)=0\)。\(f''(0) = \lim_{h \to 0} \frac{f'(h)}{h}\) 存在 \(\Rightarrow\) \(\exists O^-(0)\)，s.t. \(|f'(x)| \leq A|x|\)。
+
+\(\forall h\) 充分小：\(|f(h)| = |f(h)-f(0)| = |f'(\xi)|\,h \leq A\,\xi\,h \leq A h^2\)（Lagrange 中值定理）。
+
+\(\displaystyle \left|\sum_{k=m+1}^{n} f\!\left(\frac{1}{k}\right)\right| \leq A\sum_{k=m+1}^{n} \frac{1}{k^2}\)，而 \(\sum \frac{1}{k^2}\) 收敛。由 Cauchy 收敛准则，级数收敛。
+\end{proof}
+
+\end{enumerate}
+
+\section*{拓展：反三角函数的加减关系}
+
+\[
+\arcsin x + \arccos x = \frac{\pi}{2} \quad (x \in [-1,1]),\qquad
+\arctan x + \operatorname{arccot} x = \frac{\pi}{2} \quad (x \in \mathbb{R})
+\]
+
+当 \(xy < 1\) 时：\(\displaystyle \arctan x + \arctan y = \arctan\!\left(\frac{x+y}{1-xy}\right)\)。
+
+当 \(xy > 1\)：\(\arctan x + \arctan y = \pi + \arctan\!\left(\frac{x+y}{1-xy}\right)\)（\(x,y>0\)）或 \(-\pi + \cdots\)（\(x,y<0\)）。
+
+\(\displaystyle \arctan x - \arctan y = \arctan\!\left(\frac{x-y}{1+xy}\right)\;(xy > -1)\)。
+
+\(x > 0\) 时 \(\arctan x + \arctan\frac{1}{x} = \frac{\pi}{2}\)；\(x < 0\) 时 \(= -\frac{\pi}{2}\)。
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{images/88_933_1768_816_426_0.jpg}
+\end{center}
+
+% =============================================
+\chapter{11.14}
+
+\section{一、Darboux 定理（导函数的介值定理）}
+
+\textbf{定理：}若 \(f(x)\) 在 \([a,b]\) 上可导，则 \(\forall \eta\) 介于 \(f'(a)\) 与 \(f'(b)\) 之间，\(\exists \xi \in [a,b]\)，s.t. \(f'(\xi) = \eta\)（对 \(f'\) 无连续性要求！）。
+
+\begin{proof}
+\textbf{引理：}若 \(f'(a) \cdot f'(b) < 0\)，则 \(\exists \xi \in (a,b)\)，s.t. \(f'(\xi) = 0\)。
+
+不妨设 \(f'(a) < 0, f'(b) > 0\)。由导数定义，\(\exists x_1 > a\)，s.t. \(\forall x \in (a,x_1)\)，\(f(x) < f(a)\)；\(\exists x_2 < b\)，s.t. \(\forall x \in (x_2,b)\)，\(f(x) < f(b)\)。故 \(f(a),f(b)\) 不是最小值。\(f \in C[a,b]\) 在 \([x_1,x_2]\) 上取最小值 \(f(\xi)\)，\(\xi \in (a,b)\)。由 Fermat 定理，\(f'(\xi) = 0\)。
+
+\textbf{回证 Darboux 定理：}若 \(f'(a) = f'(b)\) 显然。若 \(f'(a) < \eta < f'(b)\)，令 \(F(x) = f(x) - \eta x\)，则 \(F'(a) < 0, F'(b) > 0\)。由引理 \(\exists \xi\)，s.t. \(F'(\xi) = 0 \Rightarrow f'(\xi) = \eta\)。
+\end{proof}
+
+\textbf{推论：}导函数若有间断，只能是第二类间断点（不能有可去或第一类间断，否则违反介值性）。
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/90_27_617_513_401_0.jpg}
+\end{center}
+
+\textbf{重要辨析：}导函数的单侧极限 \(\displaystyle \lim_{x \to x_0^-} f'(x)\) 与单侧导数 \(\displaystyle f_-'(x_0) = \lim_{x \to x_0^-} \frac{f(x)-f(x_0)}{x-x_0}\) 是两个不同的概念！前者是导函数的极限，后者是差商的极限。
+
+\textbf{推论：}若 \(f(x)\) 在 \([a,b]\) 上可导且 \(f'(x) \neq 0\)，则 \(f(x)\) 严格单调。
+
+\begin{proof}
+若不然，\(\exists x_1 < x_2 < x_3\)，s.t. \([f(x_2)-f(x_1)][f(x_3)-f(x_2)] \leq 0\)。由 Lagrange 定理 \(\exists \xi_1,\xi_2\) 使 \(f'(\xi_1)f'(\xi_2) \leq 0\)。若积为 \(0\) 则与 \(f' \neq 0\) 矛盾；若积 \(< 0\) 由 Darboux 定理 \(\exists f'(\xi)=0\) 也矛盾。
+\end{proof}
+
+\textbf{定理（唯一驻点即最值点）：}设 \(f \in C[a,b]\)，在 \((a,b)\) 二阶可导，\(x_0\) 是 \(f'(x)\) 在 \((a,b)\) 中唯一零点。若 \(f''(x_0) > 0\)，则 \(f(x_0)\) 是最小值；若 \(f''(x_0) < 0\)，则是最大值。
+
+\section{二、L'H\^opital 法则}
+
+\subsection{1. \(\frac{0}{0}\) 待定型}
+
+设 \(f,g \in C(a, a+\delta)\)：\(\lim_{x \to a^+} f = \lim_{x \to a^+} g = 0\)；在 \((a, a+\delta)\) 可导且 \(g' \neq 0\)；\(\displaystyle \lim_{x \to a^+} \frac{f'(x)}{g'(x)} = A\)（有限或 \(\pm\infty\)），则
+\[
+\lim_{x \to a^+} \frac{f(x)}{g(x)} = A
+\]
+
+\begin{proof}
+补充定义 \(F(a)=0, G(a)=0\)。\(\forall x \in (a, a+\delta)\)，由 Cauchy 中值定理 \(\exists \xi \in (a,x)\)：\(\frac{f(x)}{g(x)} = \frac{F(x)-F(a)}{G(x)-G(a)} = \frac{f'(\xi)}{g'(\xi)}\)。\(x \to a^+\) 时 \(\xi \to a^+\)，取极限即得。
+\end{proof}
+
+\subsection{2. \(\frac{\infty}{\infty}\) 待定型}
+
+条件放宽：仅需 \(\lim g = \infty\)（不要求 \(\lim f = \infty\)！）。其余条件同上，结论仍成立。
+
+\begin{proof}
+\(\forall \varepsilon > 0\)，\(\exists \delta_1 > 0\)，s.t. \(\forall x \in (a, a+\delta_1)\)，\(|f'/g' - A| < \varepsilon/3\)。
+
+\(\forall x \in (a, a+\delta_1)\)，由 Cauchy 定理：\(\frac{f(x)-f(a+\delta_1)}{g(x)-g(a+\delta_1)} = \frac{f'(\xi)}{g'(\xi)}\)，\(\xi \in (x, a+\delta_1)\)。
+
+利用恒等变形：\(\frac{f}{g} - A = \frac{g - g(a+\delta_1)}{g}\left[\frac{f - f(a+\delta_1)}{g - g(a+\delta_1)} - A\right] + \frac{f(a+\delta_1) - A \cdot g(a+\delta_1)}{g}\)。
+
+由 \(g \to \infty\)，\(\exists \delta_2\)，s.t. 后两项分别 \(< \varepsilon/2\)。综上 \(|f/g - A| < \varepsilon\)。
+\end{proof}
+
+\subsection{推广到 \(x \to +\infty\)}
+
+令 \(t = 1/x\) 转化为 \(t \to 0^+\) 的情形。
+
+\begin{example}
+\begin{enumerate}
+\item \(\displaystyle \lim_{x \to +\infty} x\!\left(\frac{\pi}{2} - \arctan x\right) = \lim_{x \to +\infty} \frac{\frac{\pi}{2} - \arctan x}{1/x} = \lim_{x \to +\infty} \frac{-1/(1+x^2)}{-1/x^2} = 1\)。
+\item \(\displaystyle \lim_{x \to +\infty} \frac{\ln x}{x^\alpha} = 0\)（\(\alpha > 0\)）——对数增长慢于任何幂函数。
+\item \(\displaystyle \lim_{x \to +\infty} \frac{x^k}{e^x} = 0\)（\(k \in \mathbb{R}\)）——指数增长快于任何幂函数。
+\item 二阶导数估计：\(\displaystyle \lim_{h \to 0} \frac{f(a+h) + f(a-h) - 2f(a)}{h^2} = f''(a)\)（L'H\^opital 两次或导数定义）。
+\item 光滑函数例：\(f(x) = \begin{cases} e^{-1/x}, & x > 0 \\ 0, & x \leq 0 \end{cases}\) 无穷次可导，且 \(f^{(k)}(0) = 0\)（\(\forall k\)）。
+\end{enumerate}
+\end{example}
+
+\subsection{其他待定型}
+
+\begin{itemize}
+\item \(0 \cdot \infty\) 型：\(f \cdot g = \frac{f}{1/g}\) 化为 \(\frac{0}{0}\)。
+\item \(\infty - \infty\) 型：\(f - g = \frac{1/g - 1/f}{1/(fg)}\) 化为 \(\frac{0}{0}\)。
+\end{itemize}
+
+\begin{example}
+\(\displaystyle \lim_{x \to 0} \left(\frac{1}{x} - \frac{1}{\tan^2 x}\right) = \lim_{x \to 0} \frac{\sin^2 x - x^2\cos^2 x}{x^2\sin^2 x} = \frac{2}{3}\)。
+\end{example}
+
+\begin{example}
+\(M_t = \left(\frac{1}{n}\sum x_i^t\right)^{1/t}\)（\(x_i > 0\)）。求 \(\lim_{t \to 0, +\infty, -\infty} M_t\)。
+
+\textbf{解：}取对数后用 L'H\^opital：\(\lim_{t \to 0} M_t = \sqrt[n]{x_1 \cdots x_n}\)（几何平均）；\(\lim_{t \to +\infty} M_t = \max\{x_i\}\)；\(\lim_{t \to -\infty} M_t = \min\{x_i\}\)。
+\end{example}
+
+\begin{remark}
+L'H\^opital 法则是充分非必要条件。例：\(\displaystyle \lim_{x \to +\infty} \frac{x + \sin x}{x - \sin x} = 1\)，但 \(\lim \frac{1+\cos x}{1-\cos x}\) 不存在。必须是 \(\frac{0}{0}\) 或 \(\frac{\infty}{\infty}\) 型，且求导后极限存在才成立。
+\end{remark}
+
+% =============================================
+\chapter{11.18 习题课}
+
+\section{一、三大微分中值定理回顾}
+
+\begin{enumerate}
+\item \textbf{Rolle 定理：}\(f \in C[a,b]\)，在 \((a,b)\) 可导，\(f(a)=f(b)\) \(\Rightarrow\) \(\exists \xi \in (a,b)\)，\(f'(\xi)=0\)。
+\item \textbf{Lagrange 中值定理：}\(f \in C[a,b]\)，在 \((a,b)\) 可导 \(\Rightarrow\) \(\exists \xi \in (a,b)\)，\(f'(\xi) = \frac{f(b)-f(a)}{b-a}\)。
+\item \textbf{Cauchy 中值定理：}\(f,g \in C[a,b]\)，在 \((a,b)\) 可导，\(g' \neq 0\) \(\Rightarrow\) \(\exists \xi \in (a,b)\)，\(\frac{f'(\xi)}{g'(\xi)} = \frac{f(b)-f(a)}{g(b)-g(a)}\)。
+\end{enumerate}
+
+\section{二、思考题}
+
+\begin{enumerate}
+
+\item 求证 \(f(x) = \sqrt{x}\ln x\) 在 \((0, +\infty)\) 上一致连续。
+
+\begin{proof}
+\(f'(x) = \frac{\ln x + 2}{2\sqrt{x}}\)，\(f''(x) = \frac{-\ln x}{4x\sqrt{x}}\)。
+
+在 \((0,1)\) 上：\(\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} \frac{\ln x}{x^{-1/2}} = 0\)（L'H\^opital），延拓 \(f(0)=0\) 后 \(f \in C[0,1]\)，由 Cantor 定理一致连续。
+
+在 \((\frac12, +\infty)\) 上：\(f'(x) \to 0\)（\(x \to +\infty\)）\(\Rightarrow\) \(f'\) 有界 \(\Rightarrow\) \(f\) Lipschitz 连续 \(\Rightarrow\) 一致连续。
+
+两区间重叠，故 \(f\) 在 \((0,+\infty)\) 一致连续。
+\end{proof}
+
+\item 求 \(y = \dfrac{1}{1-x^2}\) 的 \(n\) 阶导数。
+
+\textbf{方法一（分解）：}\(y = \frac12\!\left(\frac{1}{1-x} + \frac{1}{1+x}\right)\)。
+\[
+\left(\frac{1}{1-x}\right)^{(n)} = \frac{n!}{(1-x)^{n+1}},\qquad
+\left(\frac{1}{1+x}\right)^{(n)} = \frac{(-1)^n n!}{(1+x)^{n+1}}
+\]
+\[
+y^{(n)} = \frac{n!}{2}\left(\frac{1}{(1-x)^{n+1}} + \frac{(-1)^n}{(1+x)^{n+1}}\right)
+\]
+
+\textbf{方法二（递推）：}由 \((1-x^2)y = 1\)，Leibniz 求 \(n\) 阶导：\(\left(1-x^2\right)y^{(n)} = 2nx\,y^{(n-1)} + n(n-1)y^{(n-2)}\)。设 \(a_n = y^{(n)}/n!\) 得二阶递推，可用特征方程求解。
+\end{enumerate}
+
+% =============================================
+\chapter{11.21 Taylor 展开}
+
+\section{一、带 Peano 余项的 Taylor 公式}
+
+设 \(f(x)\) 在 \(x_0\) 处 \(n\) 阶可导，则存在唯一的 \(n\) 次多项式 \(P_n(x)\) 满足
+\[
+f(x) - P_n(x) = o(|x-x_0|^n) \quad (x \to x_0)
+\]
+该多项式为
+\[
+P_n(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+\]
+
+\textbf{唯一性：}若两多项式均满足条件，差为 \(n\) 次多项式且为 \(o((x-x_0)^n)\) \(\Rightarrow\) 所有系数为零。
+
+\textbf{Maclaurin 公式（\(x_0=0\)）：}\(\displaystyle f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!}x^k + o(x^n)\)。
+
+\section{二、常见函数的 Maclaurin 展开}
+
+\[
+\begin{aligned}
+e^x &= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} + o(x^n) \\
+\sin x &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots + (-1)^{n-1}\frac{x^{2n-1}}{(2n-1)!} + o(x^{2n}) \\
+\cos x &= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots + (-1)^n\frac{x^{2n}}{(2n)!} + o(x^{2n}) \\
+\ln(1+x) &= x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots + (-1)^{n-1}\frac{x^n}{n} + o(x^n) \\
+(1+x)^\alpha &= 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots + C_\alpha^n x^n + o(x^n) \\
+\arctan x &= x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots + (-1)^n\frac{x^{2n+1}}{2n+1} + o(x^{2n+2}) \\
+\arcsin x &= x + \frac{x^3}{6} + \frac{3x^5}{40} + \cdots + \frac{(2n-1)!!}{(2n)!!}\frac{x^{2n+1}}{2n+1} + o(x^{2n+1}) \\
+\tan x &= x + \frac{x^3}{3} + \frac{2}{15}x^5 + o(x^5)
+\end{aligned}
+\]
+
+\begin{remark}
+\(e^{ix} = \cos x + i\sin x\)（Euler 公式）可从展开式形式上得到。
+\end{remark}
+
+\section{三、展开技巧}
+
+\textbf{引理（逐项积分）：}若 \(f'(x) = A_0 + A_1 x + \cdots + A_{n-1}x^{n-1} + o(x^{n-1})\) 且 \(f(0)\) 已知，则
+\[
+f(x) = f(0) + A_0 x + \frac{A_1}{2}x^2 + \cdots + \frac{A_{n-1}}{n}x^n + o(x^n)
+\]
+（用于 \(\arctan x\)：由 \(\frac{1}{1+x^2} = 1 - x^2 + x^4 - \cdots\) 积分即得展开。）
+
+\textbf{复合展开：}将内层函数展开后代入外层展开式，截断至所需阶数。
+
+\begin{example}
+\begin{enumerate}
+\item \(e^{\cos x} = e\left(1 - \frac{x^2}{2} + \frac{x^4}{6}\right) + o(x^4)\)（\(\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4)\)，代入 \(e^{1+t}\)）。
+\item \(\ln(1+\sin^2 x) = x^2 - \frac{5}{6}x^4 + o(x^4)\)。
+\end{enumerate}
+\end{example}
+
+\section{四、Taylor 展开求极限}
+
+\begin{example}
+\begin{enumerate}
+\item \(\displaystyle \lim_{x \to +\infty} x\!\left(\sqrt[3]{1+3/x^2} - \sqrt{1-2/x}\right) = 1\)（令 \(t=1/x\)，展开到一阶）。
+\item \(a_n = 1 - n\sin\frac{1}{n}\)：\(\sin\frac{1}{n} = \frac{1}{n} - \frac{1}{6n^3} + o(\frac{1}{n^4})\) \(\Rightarrow\) \(a_n \sim \frac{1}{6n^2}\)。
+\item \(\displaystyle \lim_{x \to 0} \frac{\sin x - \arctan x}{\tan x - \arcsin x} = 1\)（展开至 \(x^3\)）。
+\end{enumerate}
+\end{example}
+
+\section{五、极值的第三个充分条件}
+
+设 \(f'(x_0) = f''(x_0) = \cdots = f^{(n-1)}(x_0) = 0\)，\(f^{(n)}(x_0) \neq 0\)。
+\begin{enumerate}
+\item \(n\) 为偶数：\(f^{(n)}(x_0) > 0 \Rightarrow\) 极小；\(f^{(n)}(x_0) < 0 \Rightarrow\) 极大。
+\item \(n\) 为奇数：\(x_0\) 不是极值点。
+\end{enumerate}
+（将 \(f'\) 展开至 \(n-1\) 阶，分析符号变化。）
+
+\section{六、带 Lagrange 余项的 Taylor 公式}
+
+\textbf{定理：}设 \(f\) 在 \([a,b]\) 上 \(n\) 次可导，在 \((a,b)\) 上 \(n+1\) 次可导，则 \(\forall x \neq x_0\)，\(\exists \xi\) 介于 \(x_0,x\) 之间：
+\[
+f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}
+\]
+
+\begin{proof}
+（Cauchy 中值定理法）构造函数 \(F(t) = f(x) - \sum_{k=0}^{n} \frac{f^{(k)}(t)}{k!}(x-t)^k\)，\(G(t) = (x-t)^{n+1}\)。\(F(x)=G(x)=0\)，\(F(x_0) = f(x)-P_n(x)\)，\(G(x_0) = (x-x_0)^{n+1}\)。
+
+由 Cauchy 定理 \(\exists \xi\)：\(\frac{F(x_0)-F(x)}{G(x_0)-G(x)} = \frac{F'(\xi)}{G'(\xi)}\)。计算得 \(F'(\xi) = -\frac{1}{n!}f^{(n+1)}(\xi)(x-\xi)^n\)，\(G'(\xi) = -(n+1)(x-\xi)^n\)，代入即得。
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+\item 不等式：\(\forall x \geq 0\)，\(\frac{x}{1+x} \leq \ln(1+x) \leq x\)（\(n=0\) Lagrange 余项）。
+\item \(e\) 是无理数：反证，若 \(e = m/N\)，取 \(n > \max\{N,3\}\) 代入展开式导出矛盾。
+\item 估计 \(\sqrt[5]{30}\)：利用 \((1-\frac{1}{16})^{1/5}\) 展开。
+\end{enumerate}
+\end{example}
+
+\section{七、Taylor 级数与解析函数}
+
+若 \(f\) 任意次可导且 \(\forall x \in O(a)\)，Lagrange 余项 \(R_{n+1}(x) \to 0\)，则
+\[
+f(x) = \sum_{k=0}^{\infty} \frac{f^{(k)}(a)}{k!}(x-a)^k
+\]
+称 \(f\) 在 \(a\) 处\textbf{解析}。
+
+\begin{remark}
+任意次可导 \(\nRightarrow\) 解析。反例：\(f(x) = \begin{cases} e^{-1/x}, & x>0 \\ 0, & x\leq 0 \end{cases}\)，\(f^{(k)}(0)=0\) \(\forall k\)，Taylor 级数 \(\equiv 0 \neq f(x)\)（\(x>0\)）。
+\end{remark}
+
+% =============================================
+\chapter{11.25 习题课}
+
+\section{一、Taylor 展开复习}
+
+常用展开（\(x=0\)）：
+\[
+\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots,\quad
+\tan x = x + \frac{x^3}{3} + o(x^4)
+\]
+\[
+(1+x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots,\quad
+\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots
+\]
+
+\begin{example}
+\begin{enumerate}
+\item \textbf{arctan}：\(y' = \frac{1}{1+x^2} = 1 - x^2 + x^4 - \cdots\)，积分得 \(y = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots\)。
+\item \textbf{arcsin}：\(y' = (1-x^2)^{-1/2} = 1 + \frac12 x^2 + \frac{3}{8}x^4 + \cdots\)，积分得 \(y = x + \frac{x^3}{6} + \frac{3x^5}{40} + \cdots\)。
+\item \textbf{极限：}\(\displaystyle \lim_{x \to +\infty} \left(\sqrt[3]{x^3+3x} - \sqrt{x^2-2x}\right) = 1\)（令 \(t=1/x\)，展开）。
+\end{enumerate}
+\end{example}
+
+\section{二、思考题}
+
+\begin{enumerate}
+
+\item 用定义求 \(f'(0)\)：
+\begin{enumerate}
+\item \(f(x) = \begin{cases} x^2\sin\frac{1}{x}, & x \neq 0 \\ 0, & x = 0 \end{cases}\)：\(f'(0) = \lim_{x\to 0} x\sin\frac{1}{x} = 0\)。
+\item \(f(x) = \begin{cases} e^{-1/x^2}, & x \neq 0 \\ 0, & x = 0 \end{cases}\)：\(f'(0) = \lim_{t\to\infty} \frac{t}{e^{t^2}} = 0\)。
+\end{enumerate}
+
+\item \(f'(x_0)\) 存在，求证 \(\displaystyle \lim_{h \to 0} \frac{f(x_0+h) - f(x_0-h)}{2h} = f'(x_0)\)。
+
+\begin{proof}
+\(= \frac12\!\left(\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h} + \lim_{h\to 0}\frac{f(x_0)-f(x_0-h)}{h}\right) = f'(x_0)\)。
+\end{proof}
+
+\item 求和 \(S_n = 1 + 2x + 3x^2 + \cdots + nx^{n-1}\)。
+
+\textbf{解：}\(S_n = (x + x^2 + \cdots + x^n)' = \left(\frac{x(1-x^n)}{1-x}\right)' = \frac{1 - (n+1)x^n + nx^{n+1}}{(1-x)^2}\)。
+
+\item 求证：实轴上不存在可微函数 \(f\) 满足 \(f(f(x)) = x^2 - 3x + 3\)。
+
+\begin{proof}
+（反证）若存在，两边求导：\(f'(f(x)) \cdot f'(x) = 2x - 3\)。
+
+解 \(f(x) = x^2-3x+3\) 的不动点：\(x = x^2-3x+3 \Rightarrow x=1\) 或 \(x=3\)。
+
+当 \(x=1\)：\(f(1)=1\)，代入导数式 \([f'(1)]^2 = -1\)，矛盾。
+\end{proof}
+
+\item 求证：\(4ax^3 + 3bx^2 + 2cx = a + b + c\) 在 \((0,1)\) 上至少有一个根。
+
+\begin{proof}
+令 \(F(x) = ax^4 + bx^3 + cx^2 - (a+b+c)x\)。\(F(0) = F(1) = 0\)，由 Rolle 定理 \(\exists \xi \in (0,1)\)，s.t. \(F'(\xi) = 0\)，即原方程成立。
+\end{proof}
+
+\item 设 \(f\) 可导，求证 \(f\) 的两个零点之间一定有 \(f(x) + f'(x)\) 的零点。
+
+\begin{proof}
+令 \(F(x) = e^x f(x)\)。设 \(f(a) = f(b) = 0\)，则 \(F(a) = F(b) = 0\)。由 Rolle 定理 \(\exists \xi\)，s.t. \(F'(\xi) = 0\)，即 \(e^\xi(f(\xi) + f'(\xi)) = 0\)。\(\therefore f(\xi) + f'(\xi) = 0\)。
+\end{proof}
+
+\item 设 \(f\) 在 \((a,b)\) 可导且 \(f'\) 单调，求证 \(f'\) 在 \((a,b)\) 连续。
+
+\begin{proof}
+不妨设 \(f' \uparrow\)。\(\forall x_0\)，\(\forall x > x_0\)，由 Lagrange 定理 \(\exists \xi \in (x_0,x)\)：\(\frac{f(x)-f(x_0)}{x-x_0} = f'(\xi) \geq f'(x_0)\)。令 \(x \to x_0^+\) 得 \(f_+'(x_0) \geq f'(x_0)\)。同理 \(f_-'(x_0) \leq f'(x_0)\)。而 \(f_+'(x_0) = f_-'(x_0) = f'(x_0)\)，故 \(\lim_{x\to x_0} f'(x) = f'(x_0)\)。
+\end{proof}
+
+\end{enumerate}
+
+% =============================================
+\chapter{11.28 凸函数}
+
+\section{一、凸函数的定义}
+
+\textbf{定义：}设 \(f(x)\) 在 \([a,b]\) 上有定义。若 \(\forall x_1,x_2 \in [a,b]\)，\(\forall t \in (0,1)\)，有
+\[
+f(tx_1 + (1-t)x_2) \leq tf(x_1) + (1-t)f(x_2)
+\]
+则称 \(f\) 为 \([a,b]\) 上的\textbf{凸函数}（下凸）。不等号反向则为凹函数（上凸）。严格不等号为严格凸。
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/110_1045_382_661_428_0.jpg}
+\end{center}
+
+\textbf{等价定义（割线斜率）：}\(f\) 是凸函数 \(\Leftrightarrow\) \(\forall x_1 < x_2 < x_3\)，
+\[
+\frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}
+\]
+（割线斜率单调递增。）
+
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/110_0_1676_405_328_0.jpg}
+\end{center}
+
+\textbf{行列式等价：}\(\begin{vmatrix} 1 & x_1 & f(x_1) \\ 1 & x_2 & f(x_2) \\ 1 & x_3 & f(x_3) \end{vmatrix} \geq 0\)（三点逆时针排列）。
+
+\section{二、凸函数的性质}
+
+\subsection{1. 单侧可导性}
+
+\textbf{定理：}凸函数在内部点处左右导数均存在。
+
+\begin{proof}
+由割线斜率单调性，固定 \(x_0\)，当 \(h \to 0^+\) 时 \(\frac{f(x_0-h)-f(x_0)}{-h}\) 单调上升且有上界（被 \(\frac{f(x_1)-f(x_0)}{x_1-x_0}\) 控制，\(x_1 > x_0\)），故左导数存在。右导数同理。
+\end{proof}
+
+\textbf{推论：}凸函数在开区间上连续。
+
+\subsection{2. 凸性与一阶导数}
+
+\textbf{定理：}设 \(f\) 在 \((a,b)\) 可导，则 \(f\) 是凸函数 \(\Leftrightarrow\) \(f'(x)\) 单调递增。
+
+\begin{proof}
+\(\Rightarrow\)：\(\forall x_1 < x_2\)，由割线斜率单调性和 Lagrange 定理，\(\exists \xi_1,\xi_2\)，s.t. \(f'(\xi_1) \leq f'(\xi_2)\)。
+
+\(\Leftarrow\)：由 \(f'\) 单调，用 Lagrange 定理可导出割线斜率单调 \(\Rightarrow\) 凸。
+\end{proof}
+
+\textbf{切线刻画：}\(f\) 是凸函数 \(\Leftrightarrow\) \(\forall x_0\)，\(f(x) \geq f(x_0) + f'(x_0)(x-x_0)\)（曲线在切线上方）。
+
+\subsection{3. 凸性与二阶导数}
+
+\textbf{定理：}设 \(f \in C[a,b]\)，在 \((a,b)\) 二阶可导。\(f\) 凸 \(\Leftrightarrow\) \(f''(x) \geq 0\)。严格凸 \(\Leftrightarrow\) \(f'' \geq 0\) 且不在任一开子区间恒为零。
+
+\section{三、Jensen 不等式}
+
+设 \(f\) 在 \([a,b]\) 上为凸函数，\(x_i \in [a,b]\)，\(t_i > 0\)，\(\sum_{i=1}^{n} t_i = 1\)，则
+\[
+f\!\left(\sum_{i=1}^{n} t_i x_i\right) \leq \sum_{i=1}^{n} t_i f(x_i)
+\]
+
+\begin{proof}
+（归纳法）\(n=2\) 即凸函数定义。假设 \(n=k\) 成立，证 \(n=k+1\)。
+
+令 \(\lambda_i = \frac{t_i}{1-t_{k+1}}\)（\(i=1,\ldots,k\)），则 \(\sum \lambda_i = 1\)。
+\[
+f\!\left(\sum_{i=1}^{k+1} t_i x_i\right) = f\!\left((1-t_{k+1})\sum_{i=1}^{k} \lambda_i x_i + t_{k+1}x_{k+1}\right) \\
+\leq (1-t_{k+1})f\!\left(\sum \lambda_i x_i\right) + t_{k+1}f(x_{k+1}) \leq \sum_{i=1}^{k+1} t_i f(x_i)
+\]
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+\item \(f(x) = \ln x\) 是凹函数（\(f'' < 0\)）。取 \(t_i = 1/n\) 得 \(\frac{x_1+\cdots+x_n}{n} \geq \sqrt[n]{x_1\cdots x_n}\)（均值不等式）。
+\item \(f(x) = x\ln x\)（\(f'' = 1/x > 0\)，凸函数）\(\Rightarrow\) \(\frac{1}{n}\sum a_i^x \ln a_i^x \geq \left(\frac{1}{n}\sum a_i^x\right)\ln\!\left(\frac{1}{n}\sum a_i^x\right)\)。
+\end{enumerate}
+\end{example}
+
+
+\% =============================================
+\chapter{12.2}
+
+\section{一、拐点}
+
+\textbf{定义：}若 \(f\) 在 \(O(x_0)\) 连续，在 \(x_0\) 两侧凹凸性相反，称 \(x_0\) 为\textbf{拐点}。
+
+\textbf{定理：}若 \(x_0\) 是拐点且 \(f''(x_0)\) 存在，则 \(f''(x_0) = 0\)（\(f''(x_0)=0\) 是拐点的必要不充分条件，例 \(f(x)=x^4\) 在 \(x=0\)）。
+
+\section{二、Newton 迭代法}
+
+方程 \(f(x) = 0\) 求根：\(x_{n+1} = x_n - \dfrac{f(x_n)}{f'(x_n)}\)。
+
+\textbf{几何意义：}在 \((x_n, f(x_n))\) 处作切线，与 \(x\) 轴交点即 \(x_{n+1}\)。
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/114_982_1770_656_518_0.jpg}
+\end{center}
+
+\textbf{收敛性定理：}设 \(f',f''\) 在 \((a,b)\) 有定义且不为零，\(\exists c \in (a,b)\)，s.t. \(f(c) = 0\)。取 \(x_1 \in (a,b)\) 满足 \(f(x_1)f''(x_1) > 0\)，则 \(\{x_n\}\) 单调收敛于 \(c\)。
+
+\section{三、不定积分}
+
+\subsection{1. 定义与基本概念}
+
+若 \(\exists F(x)\)，s.t. \(\forall x \in I\)，\(F'(x) = f(x)\)，称 \(F(x)\) 为 \(f(x)\) 的一个\textbf{原函数}。\(f(x)\) 的所有原函数称为\textbf{不定积分}，记作 \(\int f(x)\,dx\)。
+
+\textbf{定理：}若 \(F(x)\) 是一个原函数，则 \(\int f(x)\,dx = F(x) + C\)（\(C\) 为任意常数）。即原函数之间仅差常数。
+（证：若 \(F',G' = f\)，则 \((F-G)' = 0 \Rightarrow F-G \equiv C\)。）
+
+\textbf{线性性质：}\(\int [\alpha f + \beta g]\,dx = \alpha\int f\,dx + \beta\int g\,dx\)。
+
+\subsection{2. 基本积分公式与例题}
+
+\begin{example}
+\begin{enumerate}
+\item \(\int \tan^2 x\,dx = \int (\sec^2 x - 1)\,dx = \tan x - x + C\)
+\item \(\int \frac{dx}{x} = \ln|x| + C\)
+\item \(\int \frac{dx}{(x-\alpha)(x-\beta)} = \frac{1}{\alpha-\beta}\ln\left|\frac{x-\alpha}{x-\beta}\right| + C\)（\(\alpha \neq \beta\)，部分分式）
+\item \(\int \frac{x^2}{1+x^2}\,dx = \int\!\left(1 - \frac{1}{1+x^2}\right)\!dx = x - \arctan x + C\)
+\item \(\int \frac{dx}{x^4-1} = \frac14\ln\left|\frac{x-1}{x+1}\right| - \frac12\arctan x + C\)
+\end{enumerate}
+\end{example}
+
+\subsection{3. 第一类换元法（凑微分法）}
+
+\textbf{定理：}若 \(\int f(u)\,du = F(u) + C\)，则 \(\int f(u(x))\,u'(x)\,dx = F(u(x)) + C\)。
+
+\begin{example}
+\begin{enumerate}
+\item \(\int \frac{x}{1+x^2}\,dx = \frac12\int \frac{d(x^2)}{1+x^2} = \frac12\ln(1+x^2) + C\)
+\item \(\int \frac{dx}{a^2+x^2} = \frac1a\arctan\frac{x}{a} + C\)
+\item \(\int \frac{dx}{\sqrt{a^2-x^2}} = \arcsin\frac{x}{a} + C\)
+\item \(\int \frac{dx}{\sqrt{x(1-x)}} = 2\arcsin\sqrt{x} + C\)（令 \(u=\sqrt{x}\)）
+\item \(\int \sin^3 x\,dx = -\int (1-\cos^2 x)\,d\cos x = -\cos x + \frac13\cos^3 x + C\)
+\item \(\int \sin^2 x\,dx = \int \frac{1-\cos 2x}{2}\,dx = \frac{x}{2} - \frac14\sin 2x + C\)
+\item \(\int \tan x\,dx = -\int \frac{d\cos x}{\cos x} = -\ln|\cos x| + C\)
+\end{enumerate}
+\end{example}
+
+\begin{remark}
+同一不定积分可有不同表达形式，但一定等价（求导判断）。
+\end{remark}
+
+% =============================================
+\chapter{12.2 习题课}
+
+\section{一、凸函数复习总结}
+
+\begin{enumerate}
+\item \textbf{定义：}\(f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)\)，\(\lambda \in (0,1)\)。几何：弦在函数上方。
+
+\item \textbf{三点形式：}\(\forall x_1 < x < x_2\)，\(\frac{f(x)-f(x_1)}{x-x_1} \leq \frac{f(x_2)-f(x_1)}{x_2-x_1} \leq \frac{f(x_2)-f(x)}{x_2-x}\)。
+
+\item \textbf{中点凸性：}若 \(f \in C(I)\)，下凸 \(\Leftrightarrow\) \(f(\frac{x_1+x_2}{2}) \leq \frac{f(x_1)+f(x_2)}{2}\)。
+
+\item \textbf{分析性质：}(1) 凸函数在内部连续；(2) 内部处处存在左右导数；(3) \(f'\!\uparrow\) \(\Leftrightarrow\) 下凸；\(f'' \geq 0\) \(\Leftrightarrow\) 下凸。
+
+\item \textbf{支撑线：}凸函数 \(\forall x_0\) 在内部，\(\exists k\)，s.t. \(f(x) \geq f(x_0) + k(x-x_0)\)（可导时 \(k = f'(x_0)\)）。
+
+\item \textbf{经典不等式：}
+\begin{itemize}
+\item Jensen：\(f(\sum \lambda_i x_i) \leq \sum \lambda_i f(x_i)\)
+\item 均值不等式：\(\sqrt[n]{a_1\cdots a_n} \leq \frac{a_1+\cdots+a_n}{n}\)（取 \(f=-\ln x\)）
+\item Hermite--Hadamard：\(f(\frac{a+b}{2}) \leq \frac{1}{b-a}\int_a^b f(x)\,dx \leq \frac{f(a)+f(b)}{2}\)
+\end{itemize}
+
+\item \textbf{极值：}下凸函数局部极小值 \(\Rightarrow\) 全局最小值。
+\end{enumerate}
+
+\section{二、习题}
+
+\begin{enumerate}
+
+\item 设 \(f(x)\) 在 \((a,b)\) 上取正值，已知 \(-f(x)\) 是凸函数，求证 \(\frac{1}{f(x)}\) 也是凸函数。
+
+\begin{proof}
+\(\varphi(t) = 1/t\)（\(t > 0\)），\(\varphi''(t) = 2/t^3 > 0\)，故 \(\varphi\) 下凸。
+
+由 \(-f\) 凸 \(\Rightarrow\) \(f(\lambda x_1 + (1-\lambda)x_2) \geq \lambda f(x_1) + (1-\lambda)f(x_2)\)。
+
+\(\frac{1}{f(\lambda x_1 + (1-\lambda)x_2)} \leq \frac{1}{\lambda f(x_1) + (1-\lambda)f(x_2)} \leq \frac{\lambda}{f(x_1)} + \frac{1-\lambda}{f(x_2)}\)（后一不等号由 \(\varphi\) 下凸）。
+\end{proof}
+
+\item 设 \(f(x)\) 在 \([a,b]\) 上 \(n(>2)\) 次可微，\(\exists x_0 \in (a,b)\) 使 \(f'(x_0) = \cdots = f^{(n-1)}(x_0) = 0\)，且 \(\forall x\)，\(f^{(n)}(x) > 0\)。求证：
+\begin{enumerate}
+\item \(n\) 为奇数时，\(f(x)\) 在 \((a,b)\) 上严格单调上升；
+\item \(n\) 为偶数时，\(f(x)\) 在 \((a,b)\) 上为严格凸函数。
+\end{enumerate}
+
+\begin{proof}
+(1) 将 \(f'(x)\) 在 \(x_0\) 处 Taylor 展开至 \(n-1\) 阶：\(f'(x) = \frac{f^{(n)}(\xi)}{(n-1)!}(x-x_0)^{n-1}\)。\(n\) 为奇数 \(\Rightarrow\) \(n-1\) 为偶数，\((x-x_0)^{n-1} > 0\)（\(x \neq x_0\)），又 \(f^{(n)} > 0\)，故 \(f'(x) > 0\) \(\Rightarrow\) 严格单调上升。
+
+(2) 将 \(f''(x)\) 展开：\(f''(x) = \frac{f^{(n)}(\xi)}{(n-2)!}(x-x_0)^{n-2}\)。\(n\) 为偶数 \(\Rightarrow\) \(n-2\) 为偶数，同理 \(f''(x) > 0\) \(\Rightarrow\) 严格凸。
+\end{proof}
+
+\item 设 \(f(x)\) 在 \([0,a]\) 上二次可导，\(f(0)=0\)，\(f''(x) < 0\)。求证 \(\frac{f(x)}{x}\) 严格单调下降。
+
+\begin{proof}
+令 \(g(x) = f(x)/x\)，延拓 \(g(0) = f'(0)\)。\(g'(x) = \frac{xf'(x) - f(x)}{x^2}\)。令 \(h(x) = xf'(x) - f(x)\)，\(h(0)=0\)，\(h'(x) = xf''(x) < 0\)，故 \(h(x) < 0\)，\(g'(x) < 0\) \(\Rightarrow\) \(g\) 严格单调下降。
+\end{proof}
+
+\item 设 \(f(x)\) 在 \((0,+\infty)\) 上可导。证明 \(f'(x)\) 单调上升 \(\Leftrightarrow\) \(f(x) - xf'(x)\) 单调下降。
+
+\begin{proof}
+令 \(g(x) = f(x) - xf'(x)\)。\(g'(x) = -xf''(x)\)。\(f'\!\uparrow\) \(\Leftrightarrow\) \(f'' \geq 0\) \(\Leftrightarrow\) \(g' \leq 0\) \(\Leftrightarrow\) \(g \downarrow\)。
+\end{proof}
+
+\end{enumerate}
+
+% =============================================
+\chapter{12.5 不定积分}
+
+\section{一、第一类换元法（续）}
+
+\begin{example}
+\begin{enumerate}
+\setcounter{enumi}{8}
+\item \(I_n = \int \tan^n x\,dx\)：\begin{align*}
+I_n &= \int \tan^{n-2}x(\sec^2 x - 1)\,dx = \int \tan^{n-2}x\,d(\tan x) - I_{n-2} \\
+&= \frac{1}{n-1}\tan^{n-1}x - I_{n-2} + C
+\end{align*}
+\(I_1 = -\ln|\cos x| + C\)，\(I_2 = \tan x - x + C\)。
+
+\item \(\int \frac{dx}{1+\cos^2 x} = \int \frac{\sec^2 x}{\sec^2 x + 1}\,dx = \int \frac{d(\tan x)}{\tan^2 x + 2} = \frac{1}{\sqrt{2}}\arctan\!\left(\frac{\tan x}{\sqrt{2}}\right) + C\)。
+
+\item \(\int \frac{dx}{\cos x} = \int \frac{d\sin x}{1-\sin^2 x} = \frac12\ln\left|\frac{1+\sin x}{1-\sin x}\right| + C = \ln\left|\frac{1+\sin x}{\cos x}\right| + C\)。
+
+\item \(\int \frac{dx}{1+x^3}\) 与 \(\int \frac{x\,dx}{1+x^3}\)（对偶法）：令 \(F = \int\frac{dx}{1+x^3}\)，\(G = \int\frac{x\,dx}{1+x^3}\)。
+\[
+F+G = \int\frac{1+x}{1+x^3}dx = \int\frac{dx}{x^2-x+1} = \frac{2}{\sqrt{3}}\arctan\!\left(\frac{2x-1}{\sqrt{3}}\right) + C
+\]
+\[
+F-G = \int\frac{1-x}{1+x^3}dx = \cdots
+\]
+解得 \(F,G\)（略）。
+
+\item \(\int \frac{dx}{1+x^4}\) 与 \(\int \frac{x^2\,dx}{1+x^4}\)（同法）：令 \(F+G = \int\frac{1+x^2}{1+x^4}dx\)，\(F-G = \int\frac{1-x^2}{1+x^4}dx\)。
+\[
+F+G = \frac{1}{\sqrt{2}}\arctan\!\left(\frac{x^2-1}{\sqrt{2}\,x}\right) + C
+\]
+\[
+F-G = \frac{1}{2\sqrt{2}}\ln\left|\frac{x^2+\sqrt{2}x+1}{x^2-\sqrt{2}x+1}\right| + C
+\]
+\end{enumerate}
+\end{example}
+
+\section{二、第二类换元法}
+
+\textbf{定理：}令 \(x = x(t)\)（\(x'(t) \neq 0\)），若 \(\int f(x(t))\,x'(t)\,dt = G(t) + C\)，则 \(\int f(x)\,dx = G(t) + C\)（代回 \(t = x^{-1}(x)\)）。
+
+\begin{example}
+\begin{enumerate}
+\item \(\int \sqrt{a^2 - x^2}\,dx\)：令 \(x = a\sin t\)，\(dx = a\cos t\,dt\)，\(t \in [-\frac{\pi}{2},\frac{\pi}{2}]\)。
+\[
+= \int a^2\cos^2 t\,dt = \frac{a^2}{2}t + \frac{a^2}{4}\sin 2t + C = \frac{a^2}{2}\arcsin\frac{x}{a} + \frac12 x\sqrt{a^2-x^2} + C
+\]
+
+\item \(\int \frac{dx}{\sqrt{x^2 - a^2}}\)（\(a > 0\)，\(|x| > a\)）：令 \(x = a\sec t\)，\(= \ln|x + \sqrt{x^2-a^2}| + C\)。
+
+\item \(\int \frac{dx}{\sqrt{x^2 + a^2}}\)：令 \(x = a\tan t\)，\(= \ln|x + \sqrt{x^2+a^2}| + C\)。
+
+\item \(\int \frac{dx}{\sqrt{x} + \sqrt[3]{x}}\)：令 \(x = t^6\)，\(dx = 6t^5\,dt\)，\(= 2x^{1/2} - 3x^{1/3} + 6x^{1/6} - 6\ln|x^{1/6}+1| + C\)。
+\end{enumerate}
+\end{example}
+
+\section{三、分部积分法}
+
+\textbf{定理：}\(\int u\,dv = uv - \int v\,du\)，即 \(\int u(x)v'(x)\,dx = u(x)v(x) - \int u'(x)v(x)\,dx\)。
+
+\begin{example}
+\begin{enumerate}
+\item \(\int xe^{-x}\,dx = -xe^{-x} + \int e^{-x}\,dx = -xe^{-x} - e^{-x} + C\)。
+\item \(\int x^2\sin x\,dx = -x^2\cos x + 2x\sin x + 2\cos x + C\)（分部两次）。
+\item \(\int \ln x\,dx = x\ln x - x + C\)。
+\item \(\int \sqrt{x^2-1}\,dx = \frac12 x\sqrt{x^2-1} - \frac12\ln|x+\sqrt{x^2-1}| + C\)（分部 + 回代）。
+\item \(\int e^{ax}\cos bx\,dx\) 与 \(\int e^{ax}\sin bx\,dx\)：解方程组。
+\[
+aI_1 - bI_2 = e^{ax}\cos bx,\qquad bI_1 + aI_2 = e^{ax}\sin bx
+\]
+\(\Rightarrow I_1 = \frac{e^{ax}(a\cos bx + b\sin bx)}{a^2+b^2} + C\)，\(I_2 = \frac{e^{ax}(a\sin bx - b\cos bx)}{a^2+b^2} + C\)。
+\end{enumerate}
+\end{example}
+
+% =============================================
+\chapter{12.9 有理函数与特殊函数积分}
+
+\section{一、有理函数的积分}
+
+有理函数 \(R(x) = \frac{P_n(x)}{Q_m(x)}\) 的原函数均为初等函数。
+
+\textbf{步骤：}长除法化为多项式 + 真分式 → 分母因式分解 → 部分分式分解 → 逐项积分。
+
+\subsection{部分分式分解（待定系数法）}
+
+\begin{example}
+\(\displaystyle \frac{x+3}{(x+2)(x^2-1)} = \frac{A}{x+2} + \frac{B}{x+1} + \frac{C}{x-1}\)。
+
+\textbf{方法一（通分比较系数）：}解得 \(A = \frac13, B = -1, C = \frac23\)。
+
+\textbf{方法二（极限法）：}同乘 \(x+2\) 令 \(x \to -2\)：\(A = \frac13\)。同乘 \(x+1\) 令 \(x \to -1\)：\(B = -1\)。同理 \(C = \frac23\)。
+\end{example}
+
+\begin{example}
+重根情形：\(\displaystyle \frac{x+3}{(x+1)(x-2)^2} = \frac{A}{x+1} + \frac{B}{x-2} + \frac{C}{(x-2)^2}\)。
+
+\(A = \lim_{x\to-1}\frac{x+3}{(x-2)^2} = \frac{2}{9}\)，\(C = \lim_{x\to2}\frac{x+3}{x+1} = \frac{5}{3}\)。\(B\) 通过求导：\(B = \lim_{x\to2}\frac{d}{dx}\!\left(\frac{x+3}{x+1}\right) = -\frac{2}{9}\)。
+\end{example}
+
+\begin{example}
+复根重根：\(\displaystyle \frac{2(x+1)}{(x-1)(x^2+1)^2} = \frac{A}{x-1} + \frac{Bx+C}{x^2+1} + \frac{Dx+E}{(x^2+1)^2}\)。
+
+\(A = \lim_{x\to1}\frac{2(x+1)}{(x^2+1)^2} = 1\)。令 \(x \to i\)：\(Di+E = -2i \Rightarrow D=-2, E=0\)。令 \(x\to\infty\)：\(A+B=0 \Rightarrow B=-1\)。\(x=0\)：\(C=-1\)。
+\end{example}
+
+\section{二、三角有理函数的积分}
+
+\(\int R(\sin x, \cos x)\,dx\)，万能代换 \(t = \tan\frac{x}{2}\)：
+\[
+\sin x = \frac{2t}{1+t^2},\; \cos x = \frac{1-t^2}{1+t^2},\; dx = \frac{2}{1+t^2}\,dt
+\]
+化为 \(t\) 的有理函数积分。
+
+\textbf{简化代换（根据对称性）：}
+\begin{enumerate}
+\item 若 \(R(-u,v) = -R(u,v)\)（关于 \(\sin\) 奇）：令 \(t = \cos x\)。
+\item 若 \(R(u,-v) = -R(u,v)\)（关于 \(\cos\) 奇）：令 \(t = \sin x\)。
+\item 若 \(R(-u,-v) = R(u,v)\)（偶函数）：令 \(t = \tan x\)。
+\end{enumerate}
+
+\section{三、可积无理函数}
+
+\subsection{1. 线性分式的根式}
+
+\(\int R\!\left(\sqrt[m]{\frac{ax+b}{cx+d}},\,x\right)dx\)（\(ad \neq bc\)），令 \(t = \sqrt[m]{\frac{ax+b}{cx+d}}\) 化为有理函数。
+
+\begin{example}
+\(\int \frac{1-\sqrt{t}}{1+\sqrt[3]{t}}\,dt\)：令 \(s = \sqrt[6]{t}\)。
+\end{example}
+
+\subsection{2. 二次根式 \(\sqrt{ax^2+bx+c}\)}
+
+\begin{itemize}
+\item 有实根：化为 \(\sqrt{\frac{x-\beta}{x-\alpha}}\) 线性分式根式。
+\item 无实根（\(a>0\)）：Euler 代换 \(\sqrt{ax^2+bx+c} = \sqrt{a}\,x + t\) 或 \(= xt + \sqrt{c}\)。
+\end{itemize}
+
+\subsection{3. Chebyshev 积分}
+
+\(\int x^m(a+bx^n)^p\,dx\)（\(m,n,p \in \mathbb{Q}\)）。令 \(t = x^n\) 化为 \(\frac1n\int (a+bt)^p t^{\frac{m+1}{n}-1}\,dt\)。可积的三种情形：
+\begin{enumerate}
+\item \(p \in \mathbb{Z}\)：二项展开。
+\item \(\frac{m+1}{n} \in \mathbb{Z}\)：令 \(s = a+bt\)。
+\item \(\frac{m+1}{n} + p \in \mathbb{Z}\)：令 \(s = \frac{a+bt}{t}\)。
+\end{enumerate}
+除此三种情形外，原函数非初等（群论可证）。
+
+% =============================================
+\chapter{12.9 习题课}
+
+\section{一、基本积分公式表}
+
+\[
+\begin{aligned}
+\int k\,dx &= kx + C &
+\int x^n\,dx &= \frac{x^{n+1}}{n+1} + C \;(n \neq -1) \\
+\int \frac{dx}{x} &= \ln|x| + C &
+\int a^x\,dx &= \frac{a^x}{\ln a} + C \\
+\int e^x\,dx &= e^x + C &
+\int \sin x\,dx &= -\cos x + C \\
+\int \cos x\,dx &= \sin x + C &
+\int \sec^2 x\,dx &= \tan x + C \\
+\int \csc^2 x\,dx &= -\cot x + C &
+\int \sec x\tan x\,dx &= \sec x + C \\
+\int \csc x\cot x\,dx &= -\csc x + C &
+\int \frac{dx}{\sqrt{1-x^2}} &= \arcsin x + C \\
+\int \frac{dx}{1+x^2} &= \arctan x + C &
+\int \frac{dx}{a^2+x^2} &= \frac1a\arctan\frac{x}{a} + C \\
+\int \frac{dx}{\sqrt{a^2-x^2}} &= \arcsin\frac{x}{a} + C &
+\int \frac{dx}{x^2-a^2} &= \frac1{2a}\ln\left|\frac{x-a}{x+a}\right| + C \\
+\int \frac{dx}{\sqrt{x^2 \pm a^2}} &= \ln|x + \sqrt{x^2\pm a^2}| + C
+\end{aligned}
+\]
+
+\section{二、常用进阶积分}
+
+\[
+\begin{aligned}
+\int \tan x\,dx &= -\ln|\cos x| + C &
+\int \cot x\,dx &= \ln|\sin x| + C \\
+\int \sec x\,dx &= \ln|\sec x + \tan x| + C &
+\int \csc x\,dx &= \ln|\csc x - \cot x| + C \\
+\int \sqrt{a^2-x^2}\,dx &= \frac{x}{2}\sqrt{a^2-x^2} + \frac{a^2}{2}\arcsin\frac{x}{a} + C \\
+\int \sqrt{x^2\pm a^2}\,dx &= \frac{x}{2}\sqrt{x^2\pm a^2} \pm \frac{a^2}{2}\ln|x+\sqrt{x^2\pm a^2}| + C
+\end{aligned}
+\]
+
+\section{三、积分方法总结}
+
+\subsection{1. 凑微分法}
+
+\(\int f[\varphi(x)]\,\varphi'(x)\,dx = \int f[\varphi(x)]\,d\varphi(x)\)。
+
+常见凑微分：\(f(ax+b)dx = \frac1a f(ax+b)d(ax+b)\)、\(f(\ln x)\frac{dx}{x} = f(\ln x)d\ln x\)、\(f(\sin x)\cos x\,dx = f(\sin x)d\sin x\)。
+
+\subsection{2. 变量代换法（换元法）}
+
+\begin{itemize}
+\item 三角代换：\(\sqrt{1-x^2}\) 令 \(x = \cos t\)；\(\sqrt{x^2\pm a^2}\) 令 \(x = a\tan t\) 或 \(a\sec t\)。
+\item 根式代换：\(\sqrt[n]{ax+b} = t\)。
+\item 倒代换：\(t = 1/x\)。
+\end{itemize}
+
+\subsection{3. 分部积分法}
+
+\(\int u\,dv = uv - \int v\,du\)。口诀："反对幂指三"（按此顺序优先选 \(u\)）。
+
+\subsection{4. 检验方法}
+
+求导验证结果是否正确。注意积分常数和定义区间。
+
+\section{四、思考题}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item 利用几何意义求下列积分：
+\begin{enumerate}
+\item \(\int_a^b x\,dx = \frac{(a+b)(b-a)}{2}\)（梯形面积）。
+\item \(\int_a^b \sqrt{(x-a)(b-x)}\,dx = \frac{\pi}{2}\!\left(\frac{b-a}{2}\right)^2\)（上半圆面积，半径 \(\frac{b-a}{2}\)）。
+\item \(\int_a^b \left|x - \frac{a+b}{2}\right|dx = \frac{(b-a)^2}{4}\)（两个三角形面积之和）。
+\end{enumerate}
+
+\item 设 \(f(x)\) 在 \([a,b]\) 上可积且为凸函数，求证：
+\[
+(b-a)\,f\!\left(\frac{a+b}{2}\right) \leq \int_a^b f(x)\,dx
+\]
+\begin{proof}
+将 \([a,b]\) \(2n\) 等分，分点 \(a = x_0 < x_1 < \cdots < x_{2n} = b\)，中点 \(x_n = \frac{a+b}{2}\)。
+
+由凸函数的中点凸性：\(f\!\left(\frac{a+b}{2}\right) \leq \frac{1}{2}[f(x_{n+k}) + f(x_{n-k})]\)（\(k = 1,\ldots,n\)）。
+
+平均得 \(f\!\left(\frac{a+b}{2}\right) \leq \frac{1}{2n}\sum_{i=0}^{2n} f(x_i)\)。令 \(n \to \infty\)，右边 \(\to \frac{1}{b-a}\int_a^b f(x)\,dx\)（积分平均值），即得证。
+\end{proof}
+
+\item 判断 \(\int \frac{dx}{\sqrt{1-\sin^2 x}}\) 是否可用 Chebyshev 形式积分。
+
+令 \(t = \sin x\)，原式 \(= \int \frac{dt}{\sqrt{1-t^4}} = \int (1-t^4)^{-1/2}\,dt\)。Chebyshev 形式：\(m=0\), \(n=4\), \(p=-\frac12\)。\(\frac{m+1}{n} = \frac14 \notin \mathbb{Z}\)，\(\frac{m+1}{n}+p = -\frac14 \notin \mathbb{Z}\)，\(p \notin \mathbb{Z}\)，故非初等。
+\end{enumerate}
+
+% =============================================
+\chapter{12.12 定积分}
+
+\section{一、定积分的概念}
+
+\textbf{问题：}求 \(y = x^2\)（\(x \in [0,1]\)）与 \(x\) 轴围成的面积。将 \([0,1]\) \(n\) 等分：
+\[
+\sum_{i=1}^{n}\frac1n\!\left(\frac{i-1}{n}\right)^2 \leq S \leq \sum_{i=1}^{n}\frac1n\!\left(\frac{i}{n}\right)^2
+\]
+两边极限均为 \(\frac13\)，故 \(S = \frac13\)（夹逼）。
+
+\subsection{Riemann 积分的定义}
+
+设 \(f(x)\) 在 \([a,b]\) 上有定义。对分割 \(\Delta: a = x_0 < x_1 < \cdots < x_n = b\)，记 \(\Delta x_i = x_i - x_{i-1}\)，模 \(\|\Delta\| = \max_i \Delta x_i\)。
+
+任取 \(\xi_i \in [x_{i-1}, x_i]\)，\textbf{Riemann 和}：\(\sigma(f,\Delta,\xi) = \sum_{i=1}^{n} f(\xi_i)\Delta x_i\)。
+
+若 \(\forall\) 分割 \(\Delta\) 和 \(\forall\) 取点 \(\xi\)，只要 \(\|\Delta\| \to 0\)，\(\sigma(f,\Delta,\xi)\) 的极限存在且唯一，则称 \(f\) 在 \([a,b]\) 上\textbf{Riemann 可积}（\(f \in R[a,b]\)），极限值称为定积分：\(\displaystyle \int_a^b f(x)\,dx\)。
+
+\textbf{\(\varepsilon\text{-}\delta\) 表述：}\(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，s.t. \(\forall\) 分割 \(\Delta\) 满足 \(\|\Delta\| < \delta\)，\(\forall\) 取点 \(\xi\)：\(|\sigma(f,\Delta,\xi) - I| < \varepsilon\)。
+
+\begin{remark}
+定积分与不定积分本质不同：不定积分是原函数（局部性质），定积分是 Riemann 和的极限（整体性质）。
+\end{remark}
+
+\subsection{可积的必要条件}
+
+\textbf{定理：}若 \(f \in R[a,b]\)，则 \(f\) 在 \([a,b]\) 上有界。
+
+\begin{proof}
+（反证）假设无界。对任意分割，\(\exists [x_{k-1},x_k]\) 上 \(f\) 无界。取 \(\xi_k\) 使 \(|f(\xi_k)|\) 任意大，则 Riemann 和无界，不可能有极限。
+\end{proof}
+
+\section{二、微积分学基本定理（Newton-Leibniz 公式）}
+
+\textbf{定理：}若 \(f \in N[a,b] \cap R[a,b]\)（即 \(f\) 有原函数且 Riemann 可积），则
+\[
+(R)\int_a^b f(x)\,dx = (N)\int_a^b f(x)\,dx = F(b) - F(a)
+\]
+其中 \(F'(x) = f(x)\)。
+
+\begin{proof}
+对分割 \(\Delta\)：\(F(b)-F(a) = \sum_{k=1}^{n}[F(x_k)-F(x_{k-1})]\)。由 Lagrange 中值定理 \(\exists \eta_k \in [x_{k-1},x_k]\)，s.t. \(F(x_k)-F(x_{k-1}) = f(\eta_k)\Delta x_k\)。
+
+\(\therefore F(b)-F(a) = \sum f(\eta_k)\Delta x_k = \sigma(f,\Delta,\eta)\)。令 \(\|\Delta\| \to 0\)，由 Riemann 可积性即得。
+\end{proof}
+
+\begin{remark}
+\(N[a,b]\) 与 \(R[a,b]\) 不存在包含关系。例：\(f(x) = \operatorname{sgn}(x)\) 在 \([-1,1]\) Riemann 可积但无原函数（有第一类间断点）。反之，\(F(x) = x^2\sin\frac{1}{x^2}\)（补 \(F(0)=0\)）的导函数无界 \(\Rightarrow\) 非 Riemann 可积但有原函数。
+\end{remark}
+
+% =============================================
+\chapter{12.16 可积性理论}
+
+\section{一、Darboux 和}
+
+设 \(f\) 在 \([a,b]\) 上有界，对分割 \(\Delta\)：\(m_k = \inf_{[x_{k-1},x_k]} f\)，\(M_k = \sup_{[x_{k-1},x_k]} f\)。
+
+\textbf{Darboux 下和：}\(s(f,\Delta) = \sum m_k \Delta x_k\)。\textbf{Darboux 上和：}\(S(f,\Delta) = \sum M_k \Delta x_k\)。
+
+\textbf{性质：}增加分点，下和不减，上和不增。\(s(f,\Delta) \leq \sigma(f,\Delta,\xi) \leq S(f,\Delta)\)。
+
+设 \(w = \sup f - \inf f\)，增加一个分点使下和增加 \(\leq w\|\Delta\|\)。
+
+\textbf{引理：}若 \(f\) 有界，则 \(\displaystyle \lim_{\|\Delta\| \to 0} s(f,\Delta)\) 和 \(\displaystyle \lim_{\|\Delta\| \to 0} S(f,\Delta)\) 均存在，且
+\[
+\lim_{\|\Delta\| \to 0} s(f,\Delta) = \sup_{\Delta} s(f,\Delta) =: \underline{I} \quad (\text{下积分}),\qquad
+\lim_{\|\Delta\| \to 0} S(f,\Delta) = \inf_{\Delta} S(f,\Delta) =: \overline{I} \quad (\text{上积分})
+\]
+
+\section{二、可积的充要条件}
+
+\textbf{定理（三个等价条件）：}\(f \in R[a,b]\) \(\Leftrightarrow\) \(\underline{I} = \overline{I}\)。
+
+记振幅 \(w_k = M_k - m_k = \sup_{[x_{k-1},x_k]} |f(x') - f(x'')|\)，则等价于：
+\[
+\lim_{\|\Delta\| \to 0} \sum_{k=1}^{n} w_k \Delta x_k = 0
+\]
+
+几何意义：曲线可以被总面积 \(\to 0\) 的小矩形盖住。
+
+\textbf{等价条件三：}\(\forall \varepsilon > 0, \eta > 0\)，\(\exists \delta > 0\)，s.t. \(\forall \Delta\) 满足 \(\|\Delta\| < \delta\)，振幅 \(w_k \geq \varepsilon\) 的小区间总长度 \(< \eta\)。
+
+\begin{example}
+\begin{enumerate}
+\item Dirichlet 函数 \(D(x) = \begin{cases} 1, & x \in \mathbb{Q} \\ 0, & x \notin \mathbb{Q} \end{cases}\) 在任何区间上 \(w_k = 1\)，\(\sum w_k\Delta x_k = b-a \nrightarrow 0\)，不可积。
+\item Riemann 函数 \(f(x) = \begin{cases} 1/q, & x = p/q \\ 0, & x \notin \mathbb{Q} \end{cases}\) 在 \([0,1]\) 可积（\(\forall \varepsilon > 0\)，\(1/q \geq \varepsilon\) 的有理数仅有有限个）。
+\end{enumerate}
+\end{example}
+
+\section{三、可积的充分条件}
+
+\begin{enumerate}
+\item \textbf{闭区间上的连续函数必可积。}（由一致连续性，\(\forall \varepsilon > 0\)，\(\exists \delta\) 使 \(w_k < \varepsilon\)，\(\sum w_k\Delta x_k < \varepsilon(b-a)\)。）\(\therefore C[a,b] \subseteq R[a,b]\)。
+
+\item \textbf{有界且至多有有限个间断点的函数必可积。}（间断点可被总长度 \(\to 0\) 的小区间覆盖。）
+
+\item \textbf{闭区间上的单调函数必可积。}（\(\sum w_k \leq |f(b)-f(a)|\)，\(\sum w_k\Delta x_k \leq |f(b)-f(a)|\|\Delta\| \to 0\)。）
+\end{enumerate}
+
+\textbf{推论（有界变差函数）：}若 \(\sup_{\Delta} \sum_{k=1}^{n} w_k < +\infty\)（对所有分割一致有界），则 \(f\) 为有界变差函数，必 Riemann 可积。
+
+\section{四、可积函数的性质}
+
+\begin{enumerate}
+\item \textbf{线性性：}\(R[a,b]\) 是线性空间，\(\int (c_1f_1 + c_2f_2) = c_1\int f_1 + c_2\int f_2\)。
+\item \textbf{乘法封闭：}若 \(f_1,f_2 \in R[a,b]\)，则 \(f_1 \cdot f_2 \in R[a,b]\)。
+\end{enumerate}
+
+% =============================================
+\chapter{12.16 习题课}
+
+\section{一、双曲函数}
+
+\subsection{1. 定义与几何}
+
+三角函数来自单位圆 \(x^2 + y^2 = 1\)，双曲函数来自单位双曲线 \(x^2 - y^2 = 1\)：
+\[
+\cosh t = \frac{e^t + e^{-t}}{2} \;(\text{偶}),\qquad
+\sinh t = \frac{e^t - e^{-t}}{2} \;(\text{奇}),\qquad
+\tanh t = \frac{\sinh t}{\cosh t}
+\]
+
+\textbf{与三角函数对比：}\(e^{i\theta} = \cos\theta + i\sin\theta\)，\(\cos\theta = \frac{e^{i\theta}+e^{-i\theta}}{2}\)，\(\sin\theta = \frac{e^{i\theta}-e^{-i\theta}}{2i}\)。
+
+\subsection{2. 恒等式}
+
+\[
+\begin{aligned}
+\cosh^2 t - \sinh^2 t &= 1 &
+1 - \tanh^2 t &= \frac{1}{\cosh^2 t} \\
+\sinh(2t) &= 2\sinh t\cosh t &
+\cosh(2t) &= \cosh^2 t + \sinh^2 t \\
+\cosh(x+y) &= \cosh x\cosh y + \sinh x\sinh y
+\end{aligned}
+\]
+
+\subsection{3. 微积分}
+
+\[
+(\sinh t)' = \cosh t,\quad (\cosh t)' = \sinh t,\quad (\tanh t)' = \frac{1}{\cosh^2 t}
+\]
+\[
+\int \sinh t\,dt = \cosh t + C,\qquad \int \cosh t\,dt = \sinh t + C
+\]
+
+\subsection{4. 反双曲函数}
+
+\[
+\begin{aligned}
+\operatorname{arsinh}\,x &= \ln(x + \sqrt{x^2+1}), &
+(\operatorname{arsinh}\,x)' &= \frac{1}{\sqrt{x^2+1}} \\
+\operatorname{arcosh}\,x &= \ln(x + \sqrt{x^2-1})\;(x \geq 1), &
+(\operatorname{arcosh}\,x)' &= \frac{1}{\sqrt{x^2-1}} \\
+\operatorname{artanh}\,x &= \frac12\ln\frac{1+x}{1-x}\;(|x|<1), &
+(\operatorname{artanh}\,x)' &= \frac{1}{1-x^2}
+\end{aligned}
+\]
+
+\section{二、双曲代换求积分}
+
+处理 \(\sqrt{x^2 \pm a^2}\) 时可用双曲代换代替三角代换：
+
+\begin{example}
+\begin{enumerate}
+\item \(\int \frac{dx}{x^2\sqrt{x^2+1}}\)：令 \(x = \sinh t\)，\(= \int \frac{\cosh t\,dt}{\sinh^2 t\cosh t} = -\frac{1}{\tanh t} + C = -\frac{\sqrt{1+x^2}}{x} + C\)。
+
+\item \(\int \frac{dx}{x\sqrt{x^2+1}}\)：令 \(x = \sinh t\)，\(= -\ln\frac{1+\sqrt{1+x^2}}{x} + C\)。
+
+\item \(\int \frac{\sqrt{x^2-a^2}}{x}\,dx\)（\(x \geq a\)）：令 \(x = a\cosh t\)，\(= \sqrt{x^2-a^2} - a\arctan\frac{\sqrt{x^2-a^2}}{a} + C\)。
+\end{enumerate}
+\end{example}
+
+% =============================================
+\chapter{12.19 定积分性质与计算}
+
+\section{一、定积分的基本性质}
+
+\subsection{1. 区间可加性}
+
+\(f \in R[a,c]\) \(\Leftrightarrow\) \(f \in R[a,b]\) 且 \(f \in R[b,c]\)（\(a < b < c\)），且
+\[
+\int_a^c f(x)\,dx = \int_a^b f(x)\,dx + \int_b^c f(x)\,dx
+\]
+规定：\(\int_a^b f = -\int_b^a f\)，\(\int_a^a f = 0\)，则上述公式对任意次序的 \(a,b,c\) 成立。
+
+\subsection{2. 不等式性质}
+
+\begin{enumerate}
+\item 若 \(f \geq 0\)，\(b > a\)，则 \(\int_a^b f \geq 0\)。推论：\(f \geq g\) \(\Rightarrow\) \(\int f \geq \int g\)。
+\item \(|f| \in R[a,b]\)，且 \(\left|\int_a^b f\right| \leq \int_a^b |f|\)。
+\end{enumerate}
+
+\subsection{3. 积分第一中值定理}
+
+设 \(f,g \in R[a,b]\)，\(g\) 在 \([a,b]\) 上不变号，则 \(\exists \mu \in [m,M]\)（\(m = \inf f, M = \sup f\)），s.t.
+\[
+\int_a^b f(x)g(x)\,dx = \mu \int_a^b g(x)\,dx
+\]
+\textbf{推论：}若 \(f \in C[a,b]\)，则 \(\exists \xi \in [a,b]\)，s.t. \(\int_a^b fg = f(\xi)\int_a^b g\)。
+
+特别地（\(g \equiv 1\)）：\(\exists \xi \in [a,b]\)，\(f(\xi) = \frac{1}{b-a}\int_a^b f(x)\,dx\)（积分平均值）。
+
+\section{二、变上限积分}
+
+设 \(f \in R[a,b]\)，定义变上限积分 \(F(x) = \int_a^x f(t)\,dt\)（\(x \in [a,b]\)）。
+
+\textbf{定理1（连续性）：}\(F(x) \in C[a,b]\)（且 Lipschitz 连续：\(|F(x_1)-F(x_2)| \leq M|x_1-x_2|\)，\(M = \sup|f|\)）。
+
+\textbf{定理2（原函数存在定理）：}若 \(f \in R[a,b]\) 且在 \(x_0\) 处连续，则 \(F(x)\) 在 \(x_0\) 处可导，且 \(F'(x_0) = f(x_0)\)。
+
+\begin{proof}
+\(\left|\frac{F(x)-F(x_0)}{x-x_0} - f(x_0)\right| = \left|\frac{1}{x-x_0}\int_{x_0}^{x}[f(t)-f(x_0)]\,dt\right| \leq \sup_{t \in [x_0,x]}|f(t)-f(x_0)| \to 0\)（由连续性）。
+\end{proof}
+
+\textbf{推论：}若 \(f \in C[a,b]\)，则 \(F'(x) = f(x)\)（\(\forall x\)），即连续函数必有原函数。\(\therefore C[a,b] \subseteq N[a,b] \cap R[a,b]\)。
+
+\textbf{求导公式：}
+\[
+\frac{d}{dx}\int_a^x f(t)\,dt = f(x),\quad
+\frac{d}{dx}\int_a^{\varphi(x)} f(t)\,dt = f(\varphi(x))\,\varphi'(x)
+\]
+\[
+\frac{d}{dx}\int_{\psi(x)}^{\varphi(x)} f(t)\,dt = f(\varphi(x))\varphi'(x) - f(\psi(x))\psi'(x)
+\]
+
+\section{三、定积分的计算}
+
+\subsection{1. Newton-Leibniz 公式}
+
+\(f \in C[a,b]\)，\(F\) 为其原函数，则 \(\int_a^b f(x)\,dx = F(b) - F(a) = F(x)\big|_a^b\)。
+
+\begin{example}
+\begin{enumerate}
+\item \(\int_a^b e^x\,dx = e^b - e^a\)
+\item \(\int_a^b \frac{dx}{x} = \ln\frac{b}{a}\)（\(b > a > 0\)）
+\item \(\int_0^\pi \sin x\,dx = 2\)，\(\int_0^\pi \cos x\,dx = 0\)
+\end{enumerate}
+\end{example}
+
+\subsection{2. 用 Riemann 和求极限}
+
+\[
+\lim_{n\to+\infty}\frac{1}{n}\sum_{k=1}^{n} f\!\left(\frac{k}{n}\right) = \int_0^1 f(x)\,dx
+\]
+
+\begin{example}
+\begin{enumerate}
+\item \(\displaystyle \lim_{n\to+\infty}\left(\frac{1}{n+1}+\cdots+\frac{1}{2n}\right) = \int_0^1\frac{dx}{1+x} = \ln 2\)
+\item \(\displaystyle \lim_{n\to+\infty}\sum_{k=1}^{n}\frac{n}{n^2+k^2} = \int_0^1\frac{dx}{1+x^2} = \frac{\pi}{4}\)
+\item \(\displaystyle \lim_{n\to+\infty}\frac{1^p+\cdots+n^p}{n^{p+1}} = \int_0^1 x^p\,dx = \frac{1}{p+1}\)（\(p > -1\)）
+\end{enumerate}
+\end{example}
+
+\subsection{3. 定积分换元法}
+
+\(f \in C[a,b]\)，\(x = \varphi(t)\) 在 \([\alpha,\beta]\) 可导且 \(\varphi' \in R[\alpha,\beta]\)，\(\varphi(\alpha)=a, \varphi(\beta)=b\)，则
+\[
+\int_a^b f(x)\,dx = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,dt
+\]
+
+\begin{example}
+椭圆 \(\frac{x^2}{a^2}+\frac{y^2}{b^2}=1\) 面积：\(S = 4\int_0^a b\sqrt{1-\frac{x^2}{a^2}}\,dx\)，令 \(x = a\cos t\)，\(= 4ab\int_0^{\pi/2}\sin^2 t\,dt = \pi ab\)。
+\end{example}
+
+% =============================================
+\chapter{12.23 定积分的应用}
+
+\section{一、平面图形的面积}
+
+\subsection{1. 直角坐标}
+
+\(S = \int_a^b [f(x) - g(x)]\,dx\)（上减下），或 \(S = \int_c^d [\psi(y) - \varphi(y)]\,dy\)（右减左）。
+
+\subsection{2. 极坐标}
+
+\(S = \int_\alpha^\beta \frac12 r^2(\theta)\,d\theta\)。
+
+\begin{example}
+\begin{enumerate}
+\item 心形线 \(r = a(1+\cos\theta)\)（\(a > 0\)）的面积：\(S = \frac{a^2}{2}\int_0^{2\pi}(1+\cos\theta)^2\,d\theta = \frac{3}{2}\pi a^2\)。
+\item 双纽线 \(r^2 = a^2\cos 2\theta\) 的面积：\(S = 2\int_{-\pi/4}^{\pi/4} \frac12 a^2\cos 2\theta\,d\theta = a^2\)。
+\end{enumerate}
+\end{example}
+
+\section{二、旋转体的体积}
+
+曲线 \(y = f(x)\)（\(x \in [a,b]\)）绕 \(x\) 轴旋转：\(V = \int_a^b \pi [f(x)]^2\,dx\)。
+
+\section{三、曲线的弧长}
+
+\(f \in C^1[a,b]\)：弧微分 \(ds = \sqrt{1 + [f'(x)]^2}\,dx\)。
+\[
+L = \int_a^b \sqrt{1 + [f'(x)]^2}\,dx
+\]
+
+\section{四、旋转体的表面积}
+
+绕 \(x\) 轴旋转：\(S = 2\pi \int_a^b f(x)\sqrt{1 + [f'(x)]^2}\,dx\)。
+
+\section{五、物理应用}
+
+变力做功：\(W = \int_a^b F(x)\,dx\)。
+
+\textbf{弹簧：}\(F = kx\)，\(W = \int_0^L kx\,dx = \frac12 kL^2\)。
+
+\textbf{万有引力：}\(F = G\frac{Mm}{r^2}\)，\(W = \int_R^{R'} G\frac{Mm}{r^2}\,dr = GMm(\frac1R - \frac1{R'})\)。\(R' \to +\infty\) 时 \(W_0 = \frac{GM}{R}m\)（逃逸功）。
+
+\textbf{液体压强：}\(p = \rho gx\)，总压力 \(P = \int_a^b \rho gx\,f(x)\,dx\)。
+
+\section{六、定积分的分部积分}
+
+\(\int_a^b f(x)g'(x)\,dx = f(x)g(x)\big|_a^b - \int_a^b f'(x)g(x)\,dx\)。
+
+\begin{example}
+Wallis 公式：\(I_n = \int_0^{\pi/2} \sin^n x\,dx = \int_0^{\pi/2} \cos^n x\,dx\)。
+
+\(I_0 = \frac{\pi}{2}\)，\(I_1 = 1\)。分部积分得 \(I_n = \frac{n-1}{n}I_{n-2}\)。
+
+\[
+I_{2k} = \frac{(2k-1)!!}{(2k)!!}\frac{\pi}{2},\qquad
+I_{2k+1} = \frac{(2k)!!}{(2k+1)!!}
+\]
+
+由 \(I_{n+1} \leq I_n \leq I_{n-1}\) 得 \(\displaystyle \lim_{n\to+\infty} \frac{1}{2n+1}\!\left[\frac{(2n)!!}{(2n-1)!!}\right]^2 = \frac{\pi}{2}\)（Wallis 乘积）。
+\end{example}
+
+% =============================================
+\chapter{12.23 习题课}
+
+\section{期末复习大纲}
+
+\begin{enumerate}
+\item 导数与可微（计算）
+\item 微分中值定理（证明）
+\item Taylor 公式（计算 + 证明）
+\item 余项（Peano / Lagrange / 积分余项）
+\item L'H\^opital 法则（计算）
+\item 凹凸性 \(f(tx+(1-t)y) \gtreqqless tf(x)+(1-t)f(y)\)
+\item 不定积分
+\item 定积分（基本概念和应用）
+\item 双曲函数
+\end{enumerate}
+
+% =============================================
+\chapter{12.26}
+
+\section{一、Legendre 多项式}
+
+\[
+P_n(x) = C_n \frac{d^n}{dx^n}\!\left[(x^2-1)^n\right],\qquad C_n = \frac{\sqrt{n+\frac12}}{2^n \cdot n!}
+\]
+
+\textbf{正交性：}\(\displaystyle \int_{-1}^{1} P_m(x)P_n(x)\,dx = \delta_{mn} = \begin{cases} 1, & m = n \\ 0, & m \neq n \end{cases}\)。
+
+\begin{proof}
+（分部积分法）\(I(m,n) = \int_{-1}^{1} \frac{d^m}{dx^m}[(x^2-1)^m] \cdot \frac{d^n}{dx^n}[(x^2-1)^n]\,dx\)。
+
+不断分部积分：\(I(m,n) = -I(m+1,n-1) = \cdots = (-1)^n I(m+n,0)\)。
+
+设 \(m \geq n\)，若 \(m > n\) 则 \((x^2-1)^m\) 求 \(m+n > 2m\) 阶导数为 \(0\) \(\Rightarrow\) \(I(m,n)=0\)。若 \(m=n\)，
+\[
+I(n,n) = (-1)^n (2n)! \int_{-1}^{1} (1-x^2)^n\,dx = \frac{2^{2n}(n!)^2}{n+\frac12}
+\]
+乘以 \(C_n^2\) 即得 \(1\)。
+\end{proof}
+
+\section{二、带积分余项的 Taylor 展开}
+
+\textbf{引理：}若 \(f \in C^{n+1}[0,1]\)，则
+\[
+f(1) = \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!} + \frac{1}{n!}\int_0^1 f^{(n+1)}(t)(1-t)^n\,dt
+\]
+\begin{proof}
+反复分部积分：\(f(1)-f(0) = \int_0^1 f'(t)\,dt = -\int_0^1 f'(t)\,d(1-t) = f'(0) + \int_0^1 (1-t)f''(t)\,dt = \cdots\)。
+\end{proof}
+
+\textbf{一般形式：}令 \(g(t) = f(a + t(x-a))\)，代入引理即得带积分余项的 Taylor 公式。
+
+\section{三、Stirling 公式}
+
+\[
+n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n \quad (n \to +\infty)
+\]
+
+更精确的形式：\(n! = \sqrt{2\pi n}\left(\frac{n}{e}\right)^n e^{\frac{\theta_n}{12n}}\)，\(\theta_n \in (0,1)\)。
+
+\textbf{证明思路：}令 \(a_n = \frac{n!}{\sqrt{n}(n/e)^n}\)。证 \(\{a_n\}\) 单调有界 \(\Rightarrow\) \(\lim a_n = a\) 存在。用 Wallis 公式确定 \(a = \sqrt{2\pi}\)。
+
+\section{四、课程总结}
+
+实数 \(\Rightarrow\) 极限（数列 + 函数）\(\Rightarrow\) 连续 \(\Rightarrow\) 可导/可微 \(\Rightarrow\) 不定积分/定积分。
+
+实数系基本定理的等价关系链：
+\[
+\text{闭区间套} \to \text{确界} \to \text{单调有界} \to \text{Cauchy} \leftarrow \text{B-W} \leftarrow \text{聚点} \leftarrow \text{有限开覆盖}
+\]
+
+% =============================================
+\chapter{12.27 学业辅导}
+
+\section{一、例题选讲}
+
+\begin{example}
+\(f \in C[a,b]\)，\(\forall x \in (a,b)\)，\(f^{(n)}(x)\) 存在且 \(f^{(n)}(x) \geq 0\)。证明：\(\forall x \in (a,b)\)，\(\forall r > 0\) 使 \(x+r \in [a,b]\)，有 \(f^{(n)}(x) \leq \frac{M \cdot n!}{r^n}\)（\(M = \sup|f|\)）。
+
+\begin{proof}
+Taylor 展开：\(f(x+r) - f(x) = \sum_{k=1}^{n-1} \frac{f^{(k)}(x)}{k!}r^k + \frac{f^{(n)}(\xi)}{n!}r^n \geq \frac{f^{(n)}(x)}{n!}r^n\)（\(f^{(n)} \geq 0\)）。\(\therefore f^{(n)}(x) \leq \frac{n!}{r^n}[f(x+r)-f(x)] \leq \frac{M \cdot n!}{r^n}\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+\(f\) 在 \(a\) 点二阶可导，\(f''(a) \neq 0\)，\(f(a+h)-f(a) = f'(a+\theta h)h\)（Lagrange 中值）。求证 \(\displaystyle \lim_{h \to 0} \theta = \frac12\)。
+
+\begin{proof}
+Taylor 展开：\(f(a+h)-f(a) = f'(a)h + \frac12 f''(a)h^2 + o(h^2)\)。
+
+\(f'(a+\theta h) = f'(a) + f''(a)\theta h + o(h)\)。
+
+代入得 \(f'(a)h + \frac12 f''(a)h^2 = f'(a)h + f''(a)\theta h^2 + o(h^2)\)。
+
+\(\therefore f''(a)(\theta - \frac12) + \frac{o(h^2)}{h^2} = 0\)，令 \(h \to 0\) 得 \(\theta \to \frac12\)。
+\end{proof}
+\end{example}
+
+\begin{example}
+\(f \in C[0,+\infty)\)，在 \((0,+\infty)\) 可导，\(f(0)=0\)，\(|f(x) + \sqrt{x}f'(x)| \leq M\sqrt{x}|f(x)|\)（\(x > 0\)）。求所有满足条件的 \(f\)。
+
+\begin{proof}
+令 \(F(x) = e^{2\sqrt{x}}f(x)\)，则 \(f(x) = e^{-2\sqrt{x}}F(x)\)。
+
+\(F'(x) = e^{2\sqrt{x}}[f'(x) + \frac{1}{\sqrt{x}}f(x)] = \frac{e^{2\sqrt{x}}}{\sqrt{x}}[f(x) + \sqrt{x}f'(x)]\)。
+
+\(\therefore |F'(x)| \leq M|F(x)|\)。令 \(H(x) = F(x)^2\)，\(|H'(x)| \leq 2M H(x)\)。
+
+令 \(\varphi(x) = e^{-2Mx}H(x)\)，\(\varphi'(x) \leq 0\) 且 \(\varphi(0)=0\)，\(\therefore \varphi \equiv 0 \Rightarrow H \equiv 0 \Rightarrow F \equiv 0 \Rightarrow f \equiv 0\)。
+\end{proof}
+\end{example}
+
+\textbf{Gronwall 不等式：}若 \(u,g \in C[t_0,t_1]\)，\(u,g > 0\)，\(\exists c,k \geq 0\)，s.t. \(u(t) \leq c + \int_{t_0}^{t}(g(s)u(s) + k)\,ds\)，则 \(u(t) \leq [c + k(t-t_0)]\exp\!\left(\int_{t_0}^{t} g(s)\,ds\right)\)。
+
+\section{二、往年题选}
+
+\begin{enumerate}
+\item \(\displaystyle y = \int_0^{x^2} t\sin x\,dt = \sin x \cdot \frac{x^4}{2}\)，\(y' = 2x^3\sin x + \frac12 x^4\cos x\)。
+（一般公式：\(\frac{d}{dx}\int_a^{g(x)} f(t)\,dt = f(g(x))\,g'(x)\)。）
+
+\item \(\displaystyle \lim_{x \to +\infty} \int_2^x \frac{dt}{t^4-1}\) 收敛（部分分式可求精确值）。
+
+\item \(\displaystyle \lim_{n \to +\infty} \sum_{k=1}^{n} \frac{n+k}{(n+k)^2+n^2} = \int_0^1 \frac{1+x}{(1+x)^2+1}\,dx = \int_1^2 \frac{u\,du}{1+u^2}\)。
+
+\item 严格凸函数的最小值唯一。\(f\) 在 \((a,b)\) 严格凸 \(\Rightarrow\) 在 \([\alpha,\beta] \subset (a,b)\) 上 Lipschitz 连续。
+
+\item \(f\) 在 \(\mathbb{R}\) 三阶可导，\(f'''\) 有界：
+\begin{enumerate}
+\item \(f(x) = O(x^3)\)（\(x \to +\infty\)）；
+\item 若 \(f\) 有界，则 \(f',f''\) 也有界（用 Lagrange 余项差分估计）。
+\end{enumerate}
+\end{enumerate}
+
+\section{三、函数空间与内积}
+
+\(C[0,\pi]\) 上定义内积 \(\langle f,g \rangle = \int_0^{\pi} f(x)g(x)\,dx\)，范数 \(\|f\| = \sqrt{\langle f,f \rangle}\)。
+
+\begin{enumerate}
+\item 勾股定理：若 \(\langle f,g \rangle = 0\)，则 \(\|f\|^2 + \|g\|^2 = \|f+g\|^2\)。
+\item \(\{\sin x, \cos x, \sin 2x, \cos 2x, \ldots, \sin nx, \cos nx\}\) 线性无关。
+\item 投影：求 \(f(x) = e^x\) 在 \(W = \operatorname{span}\{\sin x,\cos x,\sin 2x,\cos 2x\}\) 中的投影 \(Pf = \sum a_k v_k\)。
+
+由 \(\langle f - Pf, v_k \rangle = 0\) 得正规方程 \(\sum_i \langle v_k, v_i \rangle a_i = \langle f, v_k \rangle\)，即 Gram 矩阵方程 \(G\mathbf{a} = \mathbf{b}\)，其中 \(G_{ij} = \langle v_i, v_j \rangle\)，\(b_i = \langle f, v_i \rangle\)。
+\end{enumerate}
+
+\end{document}
+
