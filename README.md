@@ -1,4 +1,4 @@
-<img src="./images/avatar.jpg" width="110" height="110" style="border-radius: 50%;" alt="头像" align="left">
+<img src="./images/个人.png" width="95" height="108" style="border-radius: 50%;" alt="头像" align="left">
 
 # &nbsp; Hi, I'm 郭玉润
 
