@@ -1,9 +1,6 @@
 <table>
   <tr>
-    <td width="150" valign="middle" align="center">
-      <img src="./images/个人.png" width="130" height="147" style="border-radius: 50%;" alt="头像">
-    </td>
-    <td valign="middle">
+    <td valign="middle" colspan="2">
       <h1 style="border-bottom: none;">Hi, I'm 郭玉润</h1>
       <blockquote>北京大学 · 理论与应用力学专业 · 本科生</blockquote>
       <blockquote>一个很菜但在努力变强的普通学生</blockquote>
